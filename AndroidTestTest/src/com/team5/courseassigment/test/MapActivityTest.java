@@ -28,7 +28,9 @@ public class MapActivityTest {
 
 	@Test
 	public void testOnCreateBundle() {
-		fail("Not yet implemented");
+		/*
+		 * nothing to be tested (only GUI stuff)
+		 */
 	}
 
 }
