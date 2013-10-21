@@ -1,4 +1,4 @@
-package com.team5.courseassigment;
+package com.team5.courseassignment;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -6,6 +6,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.team5.courseassigment.R;
 
 import android.os.Bundle;
 import android.app.Activity;
