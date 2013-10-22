@@ -10,12 +10,12 @@ import android.app.Activity;
  */
 
 
-public class LoginActivity extends Activity {
+public class RegistrationActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.login);	        
+        setContentView(R.layout.registration);	        
     }   
 }

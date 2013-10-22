@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+	
+    <EditText
+        android:id="@+id/first_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/last_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/white"
+        android:ems="10" 
+        android:inputType="textPersonName" 
+        android:paddingLeft="10dp"
+        android:hint="@string/first_name"/>
+
+    <EditText
+        android:id="@+id/last_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/email_box"
+        android:layout_below="@+id/first_name"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:ems="10" 
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:hint="@string/last_name" />
+    
+    <EditText
+        android:id="@+id/email_box"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/last_name"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:hint="@string/email_address" />
+
+    <EditText
+        android:id="@+id/password_box"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/email_box"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:inputType="textPassword" 
+        android:paddingLeft="10dp"
+        android:hint="@string/password"/>
+
+    <EditText
+        android:id="@+id/retype_password_box"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/password_box"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:inputType="textPassword" 
+        android:paddingLeft="10dp"
+        android:hint="@string/retype_password"/>
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/retype_password_box"
+        android:layout_below="@+id/retype_password_box"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/actionbar"
+        android:text="@string/continue_button" />
+
+</RelativeLayout>
