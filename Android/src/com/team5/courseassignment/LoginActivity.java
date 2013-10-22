@@ -1,6 +1,6 @@
 package com.team5.courseassignment;
 
-import com.team5.courseassigment.R;
+import com.team5.courseassignment.R;
 
 import android.os.Bundle;
 import android.app.Activity;
