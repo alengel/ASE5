@@ -17,4 +17,6 @@
 	<string name="password">Password</string>
 	<string name="retype_password">Retype Password</string>
 	
+	<string name="email_address_2">Please enter your e-mail</string>
+	
 </resources>
