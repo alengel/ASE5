@@ -73,6 +73,11 @@
     		android:name="com.google.android.maps.v2.API_KEY"
     		android:value="AIzaSyCly2bHB8M2cKf1U02Oc25tKyk_A8PCrIk" />
         
+        <!-- Shamil's key -->
+         <meta-data
+ 		    android:name="com.google.android.maps.v2.API_KEY"
+ 		    android:value="AIzaSyCyD-Vi2CxxSNdIkGBQh7J6xISrc9OaZSE"/>
+        
     </application>
 
 </manifest>
