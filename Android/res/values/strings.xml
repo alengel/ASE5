@@ -37,6 +37,11 @@
 	<string name="pref_summary_version">Help, Terms of Service, Licenses</string>
 	
 	
+	<!-- Strings for Bussiness logic -->
+	<string name="errorMessage">Error!</string>
+	<string name="ok">OK</string>
+	<string name="passwords_not_equal">Invalid input! Your entered passwords are not the same!</string>
+	<string name="invalid_input_generic">Invalid input! Please try again!</string>
 	
 	
 </resources>
