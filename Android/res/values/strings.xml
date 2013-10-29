@@ -42,6 +42,7 @@
 	<string name="ok">OK</string>
 	<string name="passwords_not_equal">Invalid input! Your entered passwords are not the same!</string>
 	<string name="invalid_input_generic">Invalid input! Please try again!</string>
+	<string name="key_not_retrieved">Server answer was incorrect! Please try again!</string>
 	
 	
 </resources>
