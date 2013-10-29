@@ -49,7 +49,7 @@ public class LoginActivity extends Activity {
 	
 	//variables for the POST answer
 	private final static String SUCCESS_JSON = "success";
-	private final static String KEY_JSON ="key";
+	private final static String KEY_JSON ="key";  
 		
 		
 
