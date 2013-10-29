@@ -93,7 +93,7 @@ public class RegistrationActivity extends Activity {
 				data.add(new BasicNameValuePair(PASSWORD_KEY, Utilies.encryptString(password)));
 				
 
-				
+				//make POST call
 				new RegisterAsyncTask().execute(data);
 				
 
