@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -7,34 +8,45 @@
         android:title="@string/pref_general_title"
         android:key="pref_key_general_settings"
         android:textColor="@android:color/white" >
-        <EditTextPreference
+        <com.team5.courseassignment.NumberPickerDialogPreference
             android:key="pref_key_interval"
-            android:dependency="pref_key_general_settings"
-            android:summary="@string/pref_summary_interval"
             android:title="@string/pref_title_interval"
-            android:selectable="true"
-            android:inputType="number" 
-            android:defaultValue="10" />
-        <Preference 
+	        android:summary="@string/pref_summary_interval"
+	        android:dialogMessage="@string/pref_summary_interval"
+	        custom:min="5" 
+	        android:defaultValue="30"
+	        android:max="300" />
+        <com.team5.courseassignment.NumberPickerDialogPreference
             android:key="pref_key_logging_period"
-            android:dependency="pref_key_general_settings"
             android:summary="@string/pref_summary_logging_period"
-            android:title="@string/pref_title_logging_period" />
+            android:title="@string/pref_title_logging_period"
+	        android:dialogMessage="@string/pref_summary_logging_period"
+	        custom:min="1" 
+	        android:defaultValue="30"
+	        android:max="120" />
     </PreferenceCategory>
+    
     <PreferenceCategory 
         android:title="@string/pref_advanced_title"
         android:key="pref_key_advanced_settings">
-        <Preference
+        <com.team5.courseassignment.NumberPickerDialogPreference
             android:key="pref_key_distance"
-            android:dependency="pref_key_advanced_settings"
             android:summary="@string/pref_summary_distance"
-            android:title="@string/pref_title_distance" />
-        <Preference 
+            android:title="@string/pref_title_distance"
+	        android:dialogMessage="@string/pref_summary_distance"
+	        custom:min="1" 
+	        android:defaultValue="100"
+	        android:max="1000" />
+        <com.team5.courseassignment.NumberPickerDialogPreference
             android:key="pref_key_storage_limit"
-            android:dependency="pref_key_advanced_settings"
             android:summary="@string/pref_summary_storage_limit"
-            android:title="@string/pref_title_storage_limit" />
+            android:title="@string/pref_title_storage_limit"
+	        android:dialogMessage="@string/pref_summary_storage_limit"
+	        custom:min="1" 
+	        android:defaultValue="5"
+	        android:max="30" />
     </PreferenceCategory>
+    
     <PreferenceCategory 
         android:title="@string/pref_about_title"
         android:key="pref_key_about">
