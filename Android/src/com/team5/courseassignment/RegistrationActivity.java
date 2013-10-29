@@ -67,7 +67,6 @@ public class RegistrationActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				
 				//TODO: show the user that progress is happening and set text fields to be unchangeable!
 				
@@ -143,7 +142,7 @@ public class RegistrationActivity extends Activity {
 			
 			try {
 				
-				HttpEntity entity = new UrlEncodedFormEntity(data, "UTF-8");   //TODO: maybe: new UrlEncodedFormEntity(params, "UTF-8")
+				HttpEntity entity = new UrlEncodedFormEntity(data, "UTF-8");   
 				post.setEntity(entity);
 				
 				
