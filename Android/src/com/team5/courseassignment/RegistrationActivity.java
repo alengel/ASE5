@@ -48,7 +48,7 @@ public class RegistrationActivity extends Activity {
 	
 	
 	//variables for the POST answer
-	private final String SUCCESS_JSON = "success";
+	private final static String SUCCESS_JSON = "success";
 	
 	
 	
