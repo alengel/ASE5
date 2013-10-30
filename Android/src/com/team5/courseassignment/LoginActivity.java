@@ -64,6 +64,18 @@ public class LoginActivity extends Activity {
         
         
         //set Button actions
+        TextView newToAppTextView = (TextView) findViewById(R.id.register_here_login);
+        newToAppTextView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent i = new Intent(getApplicationContext(), RegistrationActivity.class);
+				startActivity(i);
+				
+			}
+		});
+        
         Button loginButton = (Button) findViewById(R.id.login_button_login);
         loginButton.setOnClickListener(new OnClickListener() {
 			
