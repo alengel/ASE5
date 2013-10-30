@@ -43,6 +43,7 @@
 	<string name="passwords_not_equal">Invalid input! Your entered passwords are not the same!</string>
 	<string name="invalid_input_generic">Invalid input! Please try again!</string>
 	<string name="key_not_retrieved">Server answer was incorrect! Please try again!</string>
+	<string name="play_services_missing">Google Play services not available. Make sure that your device has access to Google Play Services if you like to use this application! SevLogger will be closed...</string>
 	
 	
 </resources>
