@@ -53,10 +53,9 @@ public class MapActivity extends Activity {
         	UiSettings settings = map.getUiSettings();
         	settings.setZoomControlsEnabled(false);
         	
-        	// service must be started
-			Intent i = new Intent(getApplicationContext(), LogService.class);
-			startService(i);
-			//TODO: call onStartCommand, what to do if already created?
+        	//TODO: user should enable as many GPS, WLAN etc as possible
+        	
+
         	
         } else {
         	
@@ -66,7 +65,23 @@ public class MapActivity extends Activity {
         }
     }
     
+    
+    
     @Override
+	protected void onResume() {
+		
+		super.onResume();
+		
+		// service must be started
+		Intent i = new Intent(getApplicationContext(), LogService.class);
+		i.putExtra(KEY_JSON, kKey);
+		startService(i);
+		//TODO: call onStartCommand, what to do if already created?
+	}
+
+
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
