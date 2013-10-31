@@ -1,18 +1,41 @@
 package com.team5.courseassignment;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -21,18 +44,33 @@ import android.widget.Toast;
  * @author Pascal
  *
  */
-public class LogService extends Service implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
+public class LogService extends Service implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
 	
 	//for logic of behaviour
-	private int kInterval;
-	private int kLoggingPeriod;
-	private int kDistance;
-	private int kLocalStorageLimit;
+	private int kInterval; //in seconds
+	private int kLoggingPeriod; //in seconds
+	private int kDistance; //in meters
+	private int kLocalStorageLimit; //in MB (MeBiByte)
 	private int startTime; //time when the service started logging
+	private LocationRequest kLocationRequest;
+	private boolean kLocationRequestsRunning; //are request running currently?
+	private Location kLastSentLocation;
 	
 	//key of user for connecting to the Webserver
 	private String kKey;
 	private final static String KEY_JSON ="key";
+	
+	//variables for the POST call
+	private final static String PUSH_GEO_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/geo-push/";
+	private final static String REQUEST_KEY = "request";
+	private final static String REQUEST_VALUE = "put";
+	private final static String LATITUDE = "latitude";
+	private final static String LONGITUDE = "longitude";
+		
+		
+	//variables for the POST answer
+	private final static String SUCCESS_JSON = "success";
+	
 	
 	//
 	private LocationClient kLocationClient;
@@ -61,7 +99,7 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 		kSharedPreferencesEditor = new SharedPreferencesEditor(this, kKey);
 		kLocationClient = new LocationClient(this, this, this);  //GooglePlayServices availability is already checked in MapActivity
 		
-		
+		kLocationRequestsRunning = false;
 		
 		
 		
@@ -76,11 +114,14 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 		if(intent != null) {
 			kKey = intent.getStringExtra(KEY_JSON);
 			
-			getSettings();
-			
 			showNotification();
 			
-			kLocationClient.connect();
+			
+			getSettings();
+			
+			
+			
+			
 		}
 		
 		
@@ -124,13 +165,27 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 		mNotificationManager.notify(NOTIFICATION, noti);
 	}
 	
-	void getSettings() {
+	private void getSettings() {
 		
 		kDistance = kSharedPreferencesEditor.getDistance();
 		kInterval = kSharedPreferencesEditor.getInterval();
-		kLocalStorageLimit = kSharedPreferencesEditor.getLocalStorageLimit();
+//		kLocalStorageLimit = kSharedPreferencesEditor.getLocalStorageLimit();
 		kLoggingPeriod = kSharedPreferencesEditor.getLoggingPeriod();
-		
+	
+		if(!kLocationRequestsRunning && kInterval != SharedPreferencesEditor.DEFAULT_VALUE && kLoggingPeriod != SharedPreferencesEditor.DEFAULT_VALUE) {
+			
+			kLocationRequest = LocationRequest.create();
+			kLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+			kLocationRequest.setInterval(1000 * kInterval);
+			kLocationRequest.setExpirationDuration(kLoggingPeriod * 1000);
+			
+			
+			kLocationClient.connect();
+			
+			
+		} else {
+			//TODO: error handling!
+		}
 	}
 
 	
@@ -154,7 +209,12 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 
 	@Override
 	public void onConnected(Bundle arg) {
-		// TODO Auto-generated method stub
+		// request Location updates
+		
+		if(kLocationRequest != null && !kLocationRequestsRunning) {
+			kLocationClient.requestLocationUpdates(kLocationRequest, this);
+			kLocationRequestsRunning = true;
+		}
 		
 	}
 
@@ -163,7 +223,139 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 
+	@Override
+	public void onLocationChanged(Location newLocation) {
+		// send the data to the server if the distance is high enough. If sending fails, it should be stored later
+		if(kLastSentLocation != null && kDistance != SharedPreferencesEditor.DEFAULT_VALUE) {
+			double distance = Utilies.calculateDistanceInM(newLocation.getLatitude(), newLocation.getLongitude(), kLastSentLocation.getLatitude(), kLastSentLocation.getLongitude());
+			if(distance < kDistance) {
+				//this location is not interesting
+				return;
+			}
+		}
+		
+		//send the new location
+		List<NameValuePair> data = new ArrayList<NameValuePair>(4);
+		data.add(new BasicNameValuePair(KEY_JSON, kKey));
+		data.add(new BasicNameValuePair(REQUEST_KEY, REQUEST_VALUE));
+		data.add(new BasicNameValuePair(LATITUDE, Double.valueOf(newLocation.getLatitude()).toString()));
+		data.add(new BasicNameValuePair(LONGITUDE, Double.valueOf(newLocation.getLongitude()).toString()));
+		
+		//make POST call
+		new SendGeoAsyncTask().execute(data);
+		kLastSentLocation = newLocation;
+	}
+	
+	
+	
+	
+	
+	private class SendGeoAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+		
+		List<NameValuePair> data;
+		
+		@Override
+		protected JSONObject doInBackground(List<NameValuePair>... params) {
+			
+			
+			data = params[0];
+			
+			HttpClient client =new DefaultHttpClient();
+			HttpPost post = new HttpPost(PUSH_GEO_URL);
+			
+			HttpResponse response = null;
+			
+			try {
+				
+				HttpEntity entity = new UrlEncodedFormEntity(data, "UTF-8");   
+				post.setEntity(entity);
+				
+				
+				Log.d("b_logic", "post: " + post);
+				
+				response = client.execute(post);
+				
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			JSONObject resultJson = null;
+			
+			if(response != null) {
+				try {
+					
+					Log.d("b_logic", "response: " + response);
+					
+					String resultString = EntityUtils.toString(response.getEntity());
+					
+					Log.d("b_logic", "resultString: " + resultString);
+					
+					resultJson = new JSONObject(resultString);
+					
+					Log.d("b_logic", "resultJson: " + resultJson.toString());
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+			
+			return resultJson;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			
+			super.onPostExecute(result);
+			
+			if(result != null) {
+				
+				try {
+					
+					String success = result.getString(SUCCESS_JSON);
+					
+					if(success.equals("true")) {
+						
+						//TODO
+						
+					} else {
+						//TODO find better solution!
+						Thread t = new Thread(new Runnable() {
+							
+							@Override
+							public void run() {
+								
+								if (data != null) {
+									//make POST call
+									new SendGeoAsyncTask().execute(data);
+								}
+								
+								
+							}
+						});
+						t.start();
+						
+					} 
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+			} 
+		}
+    	
+    }
+	
+	
+	
 }
