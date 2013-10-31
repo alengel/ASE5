@@ -84,13 +84,13 @@ public class RegistrationActivity extends Activity {
 				
 				//TODO: maybe more user input checking
 				
-
+				String encryptedPassword = Utilies.encryptString(password);
 				
 				List<NameValuePair> data = new ArrayList<NameValuePair>(4);
 				data.add(new BasicNameValuePair(FIRSTNAME_KEY, firstName));
 				data.add(new BasicNameValuePair(LASTNAME_KEY, lastName));
 				data.add(new BasicNameValuePair(EMAIL_KEY, email));
-				data.add(new BasicNameValuePair(PASSWORD_KEY, Utilies.encryptString(password)));
+				data.add(new BasicNameValuePair(PASSWORD_KEY, encryptedPassword));
 				
 
 				//make POST call

@@ -88,9 +88,12 @@ public class LoginActivity extends Activity {
 				String password = ((EditText) findViewById(R.id.password_box_login)).getEditableText().toString();
 				
 				//TODO: maybe user input checking
+				
+				String encryptedPassword = Utilies.encryptString(password);
+				
 				List<NameValuePair> data = new ArrayList<NameValuePair>(2);
 				data.add(new BasicNameValuePair(EMAIL_KEY, email));
-				data.add(new BasicNameValuePair(PASSWORD_KEY, password));
+				data.add(new BasicNameValuePair(PASSWORD_KEY, encryptedPassword));
 				
 				//make POST call
 				new LoginAsyncTask().execute(data);
