@@ -22,15 +22,15 @@
 	
 	<string name="pref_general_title">General</string>
 	<string name="pref_title_interval">Interval</string>
-	<string name="pref_summary_interval">Set how often the app logs locations</string>
+	<string name="pref_summary_interval">Set how often the app logs your location (in seconds)</string>
 	<string name="pref_title_logging_period">Logging Period</string>
-	<string name="pref_summary_logging_period">Set how long the app should log</string>
+	<string name="pref_summary_logging_period">Set how long the app should log (in minutes)</string>
 	
 	<string name="pref_advanced_title">Advanced</string>
 	<string name="pref_title_distance">Distance</string>
-	<string name="pref_summary_distance">Set distance between each log</string>
-	<string name="pref_title_storage_limit">Local storage limit</string>
-	<string name="pref_summary_storage_limit">Set the storage limit for logs when there is no data connection</string>
+	<string name="pref_summary_distance">Set distance between each log (in mts)</string>
+	<string name="pref_title_logout_limit">Logout limit</string>
+	<string name="pref_summary_logout_limit">Set how long the app should stay logged in to the server (in mins)</string>
 	
 	<string name="pref_about_title">About</string>
 	<string name="pref_title_version">Version 1.0</string>
