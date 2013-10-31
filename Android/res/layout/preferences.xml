@@ -38,22 +38,12 @@
 	        android:defaultValue="100"
 	        android:max="1000" />
         <com.team5.courseassignment.NumberPickerDialogPreference
-            android:key="pref_key_storage_limit"
-            android:summary="@string/pref_summary_storage_limit"
-            android:title="@string/pref_title_storage_limit"
-	        android:dialogMessage="@string/pref_summary_storage_limit"
+            android:key="pref_key_logout_limit"
+            android:summary="@string/pref_summary_logout_limit"
+            android:title="@string/pref_title_logout_limit"
+	        android:dialogMessage="@string/pref_summary_logout_limit"
 	        custom:min="1" 
-	        android:defaultValue="5"
-	        android:max="30" />
-    </PreferenceCategory>
-    
-    <PreferenceCategory 
-        android:title="@string/pref_about_title"
-        android:key="pref_key_about">
-        <Preference
-            android:key="pref_key_auto_delete"
-            android:dependency="pref_key_about"
-            android:summary="@string/pref_summary_version"
-            android:title="@string/pref_title_version" />
+	        android:defaultValue="30"
+	        android:max="120" />
     </PreferenceCategory>
 </PreferenceScreen>
