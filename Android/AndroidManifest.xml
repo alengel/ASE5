@@ -30,15 +30,26 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        <service android:name=".LogService"></service>
        
 		<activity
             android:name="com.team5.courseassignment.RegistrationActivity"
             android:label="@string/app_name" >
+            
+		    
+            
         </activity>
         
         <activity
             android:name="com.team5.courseassignment.LoginActivity"
             android:label="@string/app_name" > 
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
         </activity> 
         
         <activity
@@ -56,10 +67,7 @@
             android:label="@string/settings_title" 
             android:theme="@style/PreferencesThemeText" >
             
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
         
         

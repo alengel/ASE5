@@ -9,7 +9,7 @@ import android.view.MenuInflater;
  * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !!!
  */
 
-
+//TODO: show licensing info in the Settings!!!
 public class SettingsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
