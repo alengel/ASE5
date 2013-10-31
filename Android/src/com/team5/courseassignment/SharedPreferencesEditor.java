@@ -43,7 +43,7 @@ public class SharedPreferencesEditor {
 	
 	
 	//variables for logic
-	private final int DEFAULT_VALUE = -1;
+	public static final int DEFAULT_VALUE = -1;
 	private boolean kWebserverAccess; //determines wheter an Async Task is currently connecting to the server
 	
 	
@@ -185,40 +185,40 @@ public class SharedPreferencesEditor {
 		return;
 	}
 	
-	public int getLocalStorageLimit() {
-		
-		int result = kSharedPreferences.getInt(LOCAL_STORAGE_LIMIT, DEFAULT_VALUE);
-		
-		if(result == DEFAULT_VALUE) {
-			List<NameValuePair> data = new ArrayList<NameValuePair>(2);
-			data.add(new BasicNameValuePair(REQUEST_KEY, REQUEST_GET_VALUE));
-			data.add(new BasicNameValuePair(KEY_JSON, kKey));
-			//TODO: change according to new API!!!
-			
-			//make POST call in order to get current Settings
-			new GetSettingsAsyncTask().execute(data);
-		}
-		
-		return result;
-	}
-	
-	public void setLocalStorageLimit(int newLocalStorageLimit) {
-		//TODO
-		
-		Editor editor = kSharedPreferences.edit();
-		editor.putInt(LOCAL_STORAGE_LIMIT, newLocalStorageLimit);
-		editor.commit();
-		
-		List<NameValuePair> data = new ArrayList<NameValuePair>(2);
-		data.add(new BasicNameValuePair(REQUEST_KEY, REQUEST_UPDATE_VALUE));
-		data.add(new BasicNameValuePair(KEY_JSON, kKey));
-		//TODO: change according to new API!!!
-		
-		//make POST call
-		new SetSettingsAsyncTask().execute(data);
-		
-		return;
-	}
+//	public int getLocalStorageLimit() {
+//		
+//		int result = kSharedPreferences.getInt(LOCAL_STORAGE_LIMIT, DEFAULT_VALUE);
+//		
+//		if(result == DEFAULT_VALUE) {
+//			List<NameValuePair> data = new ArrayList<NameValuePair>(2);
+//			data.add(new BasicNameValuePair(REQUEST_KEY, REQUEST_GET_VALUE));
+//			data.add(new BasicNameValuePair(KEY_JSON, kKey));
+//			//TODO: change according to new API!!!
+//			
+//			//make POST call in order to get current Settings
+//			new GetSettingsAsyncTask().execute(data);
+//		}
+//		
+//		return result;
+//	}
+//	
+//	public void setLocalStorageLimit(int newLocalStorageLimit) {
+//		//TODO
+//		
+//		Editor editor = kSharedPreferences.edit();
+//		editor.putInt(LOCAL_STORAGE_LIMIT, newLocalStorageLimit);
+//		editor.commit();
+//		
+//		List<NameValuePair> data = new ArrayList<NameValuePair>(2);
+//		data.add(new BasicNameValuePair(REQUEST_KEY, REQUEST_UPDATE_VALUE));
+//		data.add(new BasicNameValuePair(KEY_JSON, kKey));
+//		//TODO: change according to new API!!!
+//		
+//		//make POST call
+//		new SetSettingsAsyncTask().execute(data);
+//		
+//		return;
+//	}
 	
 	
 	
