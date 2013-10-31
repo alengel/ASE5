@@ -41,7 +41,6 @@ import android.widget.Toast;
 
 /**
  * this class logs the position of the user automatically in the background and sends the data to the server (plus: stores it locally) 
- * @author Pascal
  *
  */
 public class LogService extends Service implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
@@ -228,7 +227,7 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 	public void onLocationChanged(Location newLocation) {
 		// send the data to the server if the distance is high enough. If sending fails, it should be stored later
 		if(kLastSentLocation != null && kDistance != SharedPreferencesEditor.DEFAULT_VALUE) {
-			double distance = Utilies.calculateDistanceInM(newLocation.getLatitude(), newLocation.getLongitude(), kLastSentLocation.getLatitude(), kLastSentLocation.getLongitude());
+			double distance = Utilities.calculateDistanceInM(newLocation.getLatitude(), newLocation.getLongitude(), kLastSentLocation.getLatitude(), kLastSentLocation.getLongitude());
 			if(distance < kDistance) {
 				//this location is not interesting
 				return;

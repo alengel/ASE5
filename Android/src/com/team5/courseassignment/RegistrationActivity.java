@@ -62,7 +62,7 @@ public class RegistrationActivity extends Activity {
         
         
         //set button actions
-        Button continueButton = (Button) findViewById(R.id.register_button_Registration);
+        Button continueButton = (Button) findViewById(R.id.register_button_registration);
         continueButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -71,11 +71,11 @@ public class RegistrationActivity extends Activity {
 				//TODO: show the user that progress is happening and set text fields to be unchangeable!
 				
 				//get Strings from the EditText fields
-				String firstName = ((EditText) findViewById(R.id.first_name_Registration)).getEditableText().toString();
-				String lastName = ((EditText) findViewById(R.id.last_name_Registration)).getEditableText().toString();
-				String email = ((EditText) findViewById(R.id.email_box_Registration)).getEditableText().toString();
-				String password = ((EditText) findViewById(R.id.password_box_Registration)).getEditableText().toString();
-				String retypePassword = ((EditText) findViewById(R.id.retype_password_box_Registration)).getEditableText().toString();
+				String firstName = ((EditText) findViewById(R.id.first_name_registration)).getEditableText().toString();
+				String lastName = ((EditText) findViewById(R.id.last_name_registration)).getEditableText().toString();
+				String email = ((EditText) findViewById(R.id.email_box_registration)).getEditableText().toString();
+				String password = ((EditText) findViewById(R.id.password_box_registration)).getEditableText().toString();
+				String retypePassword = ((EditText) findViewById(R.id.retype_password_box_registration)).getEditableText().toString();
 				
 				//ensure that the password Strings are equal
 				if(! password.equals(retypePassword)) {
@@ -84,7 +84,7 @@ public class RegistrationActivity extends Activity {
 				
 				//TODO: maybe more user input checking
 				
-				String encryptedPassword = Utilies.encryptString(password);
+				String encryptedPassword = Utilities.encryptString(password);
 				
 				List<NameValuePair> data = new ArrayList<NameValuePair>(4);
 				data.add(new BasicNameValuePair(FIRSTNAME_KEY, firstName));

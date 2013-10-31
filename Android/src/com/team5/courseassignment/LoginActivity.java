@@ -89,7 +89,7 @@ public class LoginActivity extends Activity {
 				
 				//TODO: maybe user input checking
 				
-				String encryptedPassword = Utilies.encryptString(password);
+				String encryptedPassword = Utilities.encryptString(password);
 				
 				List<NameValuePair> data = new ArrayList<NameValuePair>(2);
 				data.add(new BasicNameValuePair(EMAIL_KEY, email));

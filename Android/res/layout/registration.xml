@@ -4,10 +4,10 @@
     android:layout_height="match_parent" >
 	
     <EditText
-        android:id="@+id/first_name_Registration"
+        android:id="@+id/first_name_registration"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_alignLeft="@+id/last_name_Registration"
+        android:layout_alignLeft="@+id/last_name_registration"
         android:layout_alignParentTop="true"
         android:layout_marginRight="40dp"
         android:layout_marginTop="40dp"
@@ -18,11 +18,11 @@
         android:hint="@string/first_name"/>
 
     <EditText
-        android:id="@+id/last_name_Registration"
+        android:id="@+id/last_name_registration"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_alignLeft="@+id/email_box_Registration"
-        android:layout_below="@+id/first_name_Registration"
+        android:layout_alignLeft="@+id/email_box_registration"
+        android:layout_below="@+id/first_name_registration"
         android:layout_marginRight="40dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/white"
@@ -32,11 +32,11 @@
         android:hint="@string/last_name" />
     
     <EditText
-        android:id="@+id/email_box_Registration"
+        android:id="@+id/email_box_registration"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/last_name_Registration"
+        android:layout_below="@+id/last_name_registration"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
@@ -47,11 +47,11 @@
         android:hint="@string/email_address" />
 
     <EditText
-        android:id="@+id/password_box_Registration"
+        android:id="@+id/password_box_registration"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/email_box_Registration"
+        android:layout_below="@+id/email_box_registration"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
@@ -62,11 +62,11 @@
         android:hint="@string/password"/>
 
     <EditText
-        android:id="@+id/retype_password_box_Registration"
+        android:id="@+id/retype_password_box_registration"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/password_box_Registration"
+        android:layout_below="@+id/password_box_registration"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
@@ -77,11 +77,11 @@
         android:hint="@string/retype_password"/>
 
     <Button
-        android:id="@+id/register_button_Registration"
+        android:id="@+id/register_button_registration"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/retype_password_box_Registration"
-        android:layout_below="@+id/retype_password_box_Registration"
+        android:layout_alignRight="@+id/retype_password_box_registration"
+        android:layout_below="@+id/retype_password_box_registration"
         android:layout_marginTop="40dp"
         android:background="@drawable/actionbar"
         android:text="@string/continue_button" />
