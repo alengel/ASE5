@@ -10,6 +10,10 @@ import com.team5.courseassignment.R;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 import android.content.Intent;
@@ -55,7 +59,7 @@ public class MapActivity extends Activity {
         	
         	//TODO: user should enable as many GPS, WLAN etc as possible
         	
-
+        	
         	
         } else {
         	
@@ -88,4 +92,13 @@ public class MapActivity extends Activity {
         inflater.inflate(R.menu.map_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+	
+	//set settings icon actions
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+		startActivity(i);
+		
+		return true;
+    } 
 }
