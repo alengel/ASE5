@@ -7,7 +7,7 @@
     <PreferenceCategory 
         android:title="@string/pref_general_title"
         android:key="pref_key_general_settings"
-        android:textColor="@android:color/white" >
+        android:textColor="@android:color/black" >
         <com.team5.courseassignment.NumberPickerDialogPreference
             android:key="pref_key_interval"
             android:title="@string/pref_title_interval"
