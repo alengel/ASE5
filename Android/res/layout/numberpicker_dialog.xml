@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dip"
         android:paddingLeft="12dip"
-        android:paddingRight="12dip" >
+        android:paddingRight="12dip"
+        android:textColor="@android:color/black" >
     </TextView>
  
     <NumberPicker
