@@ -97,6 +97,7 @@ public class MapActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+		i.putExtra(KEY_JSON, kKey);
 		startActivity(i);
 		
 		return true;
