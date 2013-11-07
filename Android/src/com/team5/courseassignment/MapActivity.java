@@ -11,9 +11,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,15 +24,9 @@ import android.content.Intent;
 public class MapActivity extends Activity {
 	
 	//variables for the POST call
-	private final static String GEO_PUSH_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/geo-push/";
 	private final static String KEY_JSON ="key";
-	private final static String REQUEST_KEY = "request";
-	private final static String REQUEST_VALUE = "put";
-	private final static String LATITUDE_KEY = "latitude";
-	private final static String LONGITUDE_KEY = "longitude";
 	
-	
-	//key of user for connecting to the Webserver
+	//key of user for connecting to the server
 	private String kKey;
 
     @Override

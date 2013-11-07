@@ -3,7 +3,6 @@ package com.team5.courseassignment;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -49,13 +48,11 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 	private int kInterval; //in seconds
 	private int kLoggingPeriod; //in seconds
 	private int kDistance; //in meters
-	private int kLocalStorageLimit; //in MB (MeBiByte)
-	private int startTime; //time when the service started logging
 	private LocationRequest kLocationRequest;
 	private boolean kLocationRequestsRunning; //are request running currently?
 	private Location kLastSentLocation;
 	
-	//key of user for connecting to the Webserver
+	//key of user for connecting to the server
 	private String kKey;
 	private final static String KEY_JSON ="key";
 	
@@ -81,7 +78,7 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 	
 	/*
 	 * ----------------------------------------------------------------------------
-	 * methods beloging to Service
+	 * methods belonging to Service
 	 * ----------------------------------------------------------------------------
 	 */
 	
@@ -142,6 +139,7 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 	 * ----------------------------------------------------------------------------
 	 */
 	
+	@SuppressWarnings("deprecation")
 	private void showNotification() {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		
@@ -194,7 +192,7 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 	
 	/*
 	 * ----------------------------------------------------------------------------
-	 * methods beloging to GooglePlayServicesClient implementation
+	 * methods belonging to GooglePlayServicesClient implementation
 	 * ----------------------------------------------------------------------------
 	 */
 
@@ -223,6 +221,7 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onLocationChanged(Location newLocation) {
 		// send the data to the server if the distance is high enough. If sending fails, it should be stored later
@@ -271,7 +270,7 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 				post.setEntity(entity);
 				
 				
-				Log.d("b_logic", "post: " + post);
+				Log.d("log_service", "post: " + post);
 				
 				response = client.execute(post);
 				
@@ -288,15 +287,15 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 			if(response != null) {
 				try {
 					
-					Log.d("b_logic", "response: " + response);
+					Log.d("log_service", "response: " + response);
 					
 					String resultString = EntityUtils.toString(response.getEntity());
 					
-					Log.d("b_logic", "resultString: " + resultString);
+					Log.d("log_service", "resultString: " + resultString);
 					
 					resultJson = new JSONObject(resultString);
 					
-					Log.d("b_logic", "resultJson: " + resultJson.toString());
+					Log.d("log_service", "resultJson: " + resultJson.toString());
 					
 				} catch (ParseException e) {
 					e.printStackTrace();
@@ -331,6 +330,7 @@ public class LogService extends Service implements GooglePlayServicesClient.Conn
 						//TODO find better solution!
 						Thread t = new Thread(new Runnable() {
 							
+							@SuppressWarnings("unchecked")
 							@Override
 							public void run() {
 								

@@ -79,6 +79,7 @@ public class LoginActivity extends Activity {
         Button loginButton = (Button) findViewById(R.id.login_button_login);
         loginButton.setOnClickListener(new OnClickListener() {
 			
+			@SuppressWarnings("unchecked")
 			@Override
 			public void onClick(View v) {
 				// TODO connect to server to login
@@ -118,7 +119,7 @@ public class LoginActivity extends Activity {
     
 private void showInvalidInput(String message) {
 		
-		Log.d("b_logic", "Login.showInvalidInput() with argument: " + message);
+		Log.d("login", "Login.showInvalidInput() with argument: " + message);
 		
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setTitle(getResources().getString(R.string.errorMessage));
@@ -155,7 +156,7 @@ private void showInvalidInput(String message) {
 				post.setEntity(entity);
 				
 				
-				Log.d("b_logic", "post: " + post);
+				Log.d("login", "post: " + post);
 				
 				response = client.execute(post);
 				
@@ -172,15 +173,15 @@ private void showInvalidInput(String message) {
 			if(response != null) {
 				try {
 					
-					Log.d("b_logic", "response: " + response);
+					Log.d("login", "response: " + response);
 					
 					String resultString = EntityUtils.toString(response.getEntity());
 					
-					Log.d("b_logic", "resultString: " + resultString);
+					Log.d("login", "resultString: " + resultString);
 					
 					resultJson = new JSONObject(resultString);
 					
-					Log.d("b_logic", "resultJson: " + resultJson.toString());
+					Log.d("login", "resultJson: " + resultJson.toString());
 					
 				} catch (ParseException e) {
 					e.printStackTrace();
