@@ -28,15 +28,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.view.ViewGroup.LayoutParams;
 
 
 /*
@@ -69,7 +64,8 @@ public class RegistrationActivity extends Activity{
         Button continueButton = (Button) findViewById(R.id.register_button_registration);
         continueButton.setOnClickListener(new OnClickListener() {
 			
-        	 @Override
+        	 @SuppressWarnings("unchecked")
+			@Override
         		public void onClick(View v) {
         		
         	//TODO: show the user that progress is happening and set text fields to be unchangeable!
@@ -160,7 +156,7 @@ public class RegistrationActivity extends Activity{
 				post.setEntity(entity);
 				
 				
-				Log.d("b_logic", "post: " + post);
+				Log.d("registration", "post: " + post);
 				
 				response = client.execute(post);
 				
@@ -177,15 +173,15 @@ public class RegistrationActivity extends Activity{
 			if(response != null) {
 				try {
 					
-					Log.d("b_logic", "response: " + response);
+					Log.d("registration", "response: " + response);
 					
 					String resultString = EntityUtils.toString(response.getEntity());
 					
-					Log.d("b_logic", "resultString: " + resultString);
+					Log.d("registration", "resultString: " + resultString);
 					
 					resultJson = new JSONObject(resultString);
 					
-					Log.d("b_logic", "resultJson: " + resultJson.toString());
+					Log.d("registration", "resultJson: " + resultJson.toString());
 					
 				} catch (ParseException e) {
 					e.printStackTrace();

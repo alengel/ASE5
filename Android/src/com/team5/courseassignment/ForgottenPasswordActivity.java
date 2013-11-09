@@ -61,6 +61,7 @@ public class ForgottenPasswordActivity extends Activity {
 	        Button continueButton = (Button) findViewById(R.id.login_button_forgottenPassword);
 	        continueButton.setOnClickListener(new OnClickListener() {
 				
+				@SuppressWarnings("unchecked")
 				@Override
 				public void onClick(View v) {
 					

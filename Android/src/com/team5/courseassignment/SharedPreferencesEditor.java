@@ -20,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
@@ -44,9 +43,7 @@ public class SharedPreferencesEditor {
 	
 	//variables for logic
 	public static final int DEFAULT_VALUE = -1;
-	private boolean kWebserverAccess; //determines wheter an Async Task is currently connecting to the server
-	
-	
+		
 	//unique name for the SharedPreferences
 	private final static String kSHARED_PREFERENCES_NAME = "DEFAULT_PREFERENCES";
 	
@@ -54,32 +51,30 @@ public class SharedPreferencesEditor {
 	private final static String INTERVAL = "interval";
 	private final static String LOGGING_PERIOD = "logging_period";
 	private final static String DISTANCE = "distance";
-	private final static String LOCAL_STORAGE_LIMIT = "local_storage_limit";
 	
 	
 	//store the access to the SharedPreferences
 	private SharedPreferences kSharedPreferences;
 	
-	//key of user for connecting to the Webserver
+	//key of user for connecting to the server
 	private String kKey;
 		
 		
 	/**
-	 * IMPORTANT: Ensure that only once instantiated during runtime!!!!!!!!
+	 * IMPORTANT: Ensure that only once instantiated during runtime!
 	 * @param context 
-	 * @param key the key that is needed to contact the server (authentication)
+	 * @param the key that is needed to contact the server (authentication)
 	 */
 	public SharedPreferencesEditor(Context context, String key) {
 		super();
 		this.kSharedPreferences = context.getSharedPreferences(kSHARED_PREFERENCES_NAME, 0);
 		
 		kKey = key;
-		
-		kWebserverAccess = false;
 	}
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public int getInterval() {
 		
 		int result = kSharedPreferences.getInt(INTERVAL, DEFAULT_VALUE);
@@ -97,6 +92,7 @@ public class SharedPreferencesEditor {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setInterval(int newInterval) {
 		//TODO
 		
@@ -115,6 +111,7 @@ public class SharedPreferencesEditor {
 		return;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public int getLoggingPeriod() {
 		
 		int result = kSharedPreferences.getInt(LOGGING_PERIOD, DEFAULT_VALUE);
@@ -132,6 +129,7 @@ public class SharedPreferencesEditor {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setLoggingPeriod(int newLoggingPeriod) {
 		//TODO
 		
@@ -150,6 +148,7 @@ public class SharedPreferencesEditor {
 		return;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public int getDistance() {
 		
 		int result = kSharedPreferences.getInt(DISTANCE, DEFAULT_VALUE);
@@ -167,6 +166,7 @@ public class SharedPreferencesEditor {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setDistance(int newDistance) {
 		//TODO
 		
@@ -184,47 +184,6 @@ public class SharedPreferencesEditor {
 		
 		return;
 	}
-	
-//	public int getLocalStorageLimit() {
-//		
-//		int result = kSharedPreferences.getInt(LOCAL_STORAGE_LIMIT, DEFAULT_VALUE);
-//		
-//		if(result == DEFAULT_VALUE) {
-//			List<NameValuePair> data = new ArrayList<NameValuePair>(2);
-//			data.add(new BasicNameValuePair(REQUEST_KEY, REQUEST_GET_VALUE));
-//			data.add(new BasicNameValuePair(KEY_JSON, kKey));
-//			//TODO: change according to new API!!!
-//			
-//			//make POST call in order to get current Settings
-//			new GetSettingsAsyncTask().execute(data);
-//		}
-//		
-//		return result;
-//	}
-//	
-//	public void setLocalStorageLimit(int newLocalStorageLimit) {
-//		//TODO
-//		
-//		Editor editor = kSharedPreferences.edit();
-//		editor.putInt(LOCAL_STORAGE_LIMIT, newLocalStorageLimit);
-//		editor.commit();
-//		
-//		List<NameValuePair> data = new ArrayList<NameValuePair>(2);
-//		data.add(new BasicNameValuePair(REQUEST_KEY, REQUEST_UPDATE_VALUE));
-//		data.add(new BasicNameValuePair(KEY_JSON, kKey));
-//		//TODO: change according to new API!!!
-//		
-//		//make POST call
-//		new SetSettingsAsyncTask().execute(data);
-//		
-//		return;
-//	}
-	
-	
-	
-	
-	
-	
 	
 	private class GetSettingsAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
