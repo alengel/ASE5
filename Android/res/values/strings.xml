@@ -46,6 +46,8 @@
 	<string name="play_services_missing">Google Play services not available. Make sure that your device has access to Google Play Services if you like to use this application! SevLogger will be closed.</string>
 	<string name="log_service_running">Log Service is running!</string>
 	<string name="log_service_stopped">Sorry! An error occurred in LogService! It has been stopped.</string>
-	
+	<string name="successMessageRegistration">You are now registered! Please login with your details.</string>
+	<string name="popupTitle1">Congratulations!</string>
+	<string name="popupTitle2">ERROR!</string>
 	
 </resources>
