@@ -127,7 +127,7 @@ private void showInvalidInput(String message) {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				//TODO: maybe delete content of some fields
+				//TODO: update the api to handle the wrong password|email.
 				
 			}
 		});

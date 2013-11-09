@@ -56,7 +56,7 @@ public class RegistrationActivity extends Activity{
 	
 	//variables for the POST answer
 	private final static String SUCCESS_JSON = "success";
-	public String popupTitle;
+	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +83,8 @@ public class RegistrationActivity extends Activity{
 			
 			//ensure that the password Strings are equal
 			if(! password.equals(retypePassword)) {
-				popupTitle="ERROR";
-				showAlertMessage(popupTitle,getResources().getString(R.string.passwords_not_equal));
+				
+				showAlertMessage((getResources().getString(R.string.errorMessage)),getResources().getString(R.string.passwords_not_equal));
 			}
 			
 			//TODO: maybe more user input checking
@@ -215,14 +215,15 @@ public class RegistrationActivity extends Activity{
 					if(success.equals("true")) {
 						
 						//alert.setTitle("m'OK?");
-						popupTitle="Congratulations!";
-						showAlertMessage(popupTitle,getResources().getString(R.string.successMessageRegistration));
+						
+						showAlertMessage((getResources().getString(R.string.popupTitle1)),getResources().getString(R.string.successMessageRegistration));
 						
 						
 					} else {
-						//alert.setTitle("m'Kay?");
-						popupTitle="ERROR!";
-						showAlertMessage(popupTitle,getResources().getString(R.string.invalid_input_generic));
+						
+						showAlertMessage((getResources().getString(R.string.popupTitle2)),getResources().getString(R.string.invalid_input_generic));
+
+						
 					} //TODO: do more error checking stuff when Sandeep has extended his API
 					
 				} catch (JSONException e) {
