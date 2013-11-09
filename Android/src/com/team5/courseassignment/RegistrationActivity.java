@@ -214,7 +214,6 @@ public class RegistrationActivity extends Activity{
 					
 					if(success.equals("true")) {
 						
-						//alert.setTitle("m'OK?");
 						
 						showAlertMessage((getResources().getString(R.string.popupTitle1)),getResources().getString(R.string.successMessageRegistration));
 						
