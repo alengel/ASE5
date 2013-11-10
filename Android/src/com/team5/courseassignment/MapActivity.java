@@ -14,9 +14,11 @@ import org.json.JSONObject;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.LatLng;
 import com.team5.courseassignment.R;
 
 import android.location.Location;
@@ -42,6 +44,8 @@ import android.content.Intent;
 
 
 public class MapActivity extends Activity {
+	
+	private GoogleMap map;
 	
 	// variables for the GET call to FourSquare API
 	private final static String RETRIEVE_VENUE_URL = "https://api.foursquare.com/v2/venues/explore?client_id=K3Y020Y1OPD2PPOMSJVTD3TSBQOK3X4SQR3XR12DD4SH554W&client_secret=KLUIFTDOXY2QK20W0LYKPPY1KBE1PKO1ZLRS45R4CL0Q3NBN&v=20131016&";
@@ -71,7 +75,7 @@ public class MapActivity extends Activity {
         	//set layout
         	setContentView(R.layout.activity_map);
         	
-        	GoogleMap map = ( (MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        	map = ( (MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         	map.setMyLocationEnabled(true);
         	UiSettings settings = map.getUiSettings();
         	settings.setZoomControlsEnabled(false);
@@ -122,14 +126,22 @@ public class MapActivity extends Activity {
 
         mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5*1000,
                 0, mLocationListener);
+        
+        mLastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
     }
     
 	@SuppressLint("DefaultLocale")
 	private void onLocateMe()
     {
 		// get the new location
-    	String data = String.format("ll=%f,%f", mLastLocation.getLatitude(), mLastLocation.getLongitude());
-
+		Double latitude = mLastLocation.getLatitude();
+		Double longitude = mLastLocation.getLongitude();
+		Integer zoom = 15;
+    	String data = String.format("ll=%f,%f", latitude, longitude);
+		
+    	//zoom map into user's current location
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), zoom));
+		
 		// make POST call to FourSquare API
 		new GetFourSquareVenue().execute(data);
     }
