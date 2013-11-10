@@ -18,6 +18,7 @@
 	<string name="email_address_2">Please enter your e-mail</string>
 	
 	<string name="settings_title">Settings</string>
+	<string name="locate_me_button">Locate Me</string>
 	<string name="logout_title">Logout</string>
 	
 	<string name="pref_general_title">General</string>
