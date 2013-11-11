@@ -230,14 +230,6 @@ private void showInvalidInput(String message) {
 				}
 				
 			} 
-		}
-
-
-		
-		
-
-    	
-    }
-    
-    
+		}	
+    } 
 }

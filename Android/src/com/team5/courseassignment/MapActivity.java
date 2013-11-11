@@ -35,6 +35,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -49,7 +51,7 @@ import android.content.Intent;
  */
 
 
-public class MapActivity extends Activity {
+public class MapActivity extends Activity implements OnItemClickListener {
 	
 	private GoogleMap map;
 	
@@ -65,6 +67,11 @@ public class MapActivity extends Activity {
 	// Location variables required to get the current location.
 	private LocationListener mLocationListener;
 	private Location mLastLocation;
+	
+	// Popup variables
+	ListPopupWindow popup;
+	private final static String VENUE_NAME ="name";
+	private final static String VENUE_ID ="id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +83,7 @@ public class MapActivity extends Activity {
         	kKey = this.getIntent().getStringExtra(KEY_JSON);
         	
         	//set layout
-        	setContentView(R.layout.activity_map);
+        	setContentView(R.layout.map_activity);
         	
         	map = ( (MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         	map.setMyLocationEnabled(true);
@@ -152,14 +159,35 @@ public class MapActivity extends Activity {
 	
 	private void showList(List<FourSquareVenue> venues)
 	{
-		ListPopupWindow popup = new ListPopupWindow(this);
+		popup = new ListPopupWindow(this);
         popup.setAnchorView(findViewById(R.id.anchor));
         ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
         popup.setAdapter(adapter);
-
+        popup.setOnItemClickListener(this);
+        
         popup.show();
 	}
-    
+	
+
+	
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+		Intent i = new Intent(getApplicationContext(), CheckinActivity.class);
+		
+		@SuppressWarnings("unchecked")
+		ArrayAdapter<FourSquareVenue> adapter = (ArrayAdapter<FourSquareVenue>) arg0.getAdapter();
+		FourSquareVenue venue = adapter.getItem(position);
+		
+		i.putExtra(KEY_JSON, kKey);
+		i.putExtra(VENUE_NAME, venue.name);
+		i.putExtra(VENUE_ID, venue.id);
+		
+		startActivity(i);
+		
+        popup.dismiss();
+    }
+   
 	private class GetFourSquareVenue extends AsyncTask<String, Void, JSONObject> {
 		
     	String data;
@@ -259,5 +287,5 @@ public class MapActivity extends Activity {
 		startActivity(i);
 		
 		return true;
-    } 
+    }
 }
