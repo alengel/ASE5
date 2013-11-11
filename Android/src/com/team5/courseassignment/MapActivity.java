@@ -2,6 +2,9 @@ package com.team5.courseassignment;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -32,7 +35,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListPopupWindow;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -49,9 +55,6 @@ public class MapActivity extends Activity {
 	
 	// variables for the GET call to FourSquare API
 	private final static String RETRIEVE_VENUE_URL = "https://api.foursquare.com/v2/venues/explore?client_id=K3Y020Y1OPD2PPOMSJVTD3TSBQOK3X4SQR3XR12DD4SH554W&client_secret=KLUIFTDOXY2QK20W0LYKPPY1KBE1PKO1ZLRS45R4CL0Q3NBN&v=20131016&";
-	
-	// variables for the POST answer
-	private final static String SUCCESS_JSON = "success";
 
 	//variables for the POST call
 	private final static String KEY_JSON ="key";
@@ -79,6 +82,7 @@ public class MapActivity extends Activity {
         	map.setMyLocationEnabled(true);
         	UiSettings settings = map.getUiSettings();
         	settings.setZoomControlsEnabled(false);
+        	settings.setMyLocationButtonEnabled(false);
         	
         	//Setting up locate me button.
         	Button loginButton = (Button) findViewById(R.id.locate_me_button);
@@ -145,8 +149,18 @@ public class MapActivity extends Activity {
 		// make POST call to FourSquare API
 		new GetFourSquareVenue().execute(data);
     }
+	
+	private void showList(List<FourSquareVenue> venues)
+	{
+		ListPopupWindow popup = new ListPopupWindow(this);
+        popup.setAnchorView(findViewById(R.id.anchor));
+        ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
+        popup.setAdapter(adapter);
+
+        popup.show();
+	}
     
-private class GetFourSquareVenue extends AsyncTask<String, Void, JSONObject> {
+	private class GetFourSquareVenue extends AsyncTask<String, Void, JSONObject> {
 		
     	String data;
     	
@@ -203,37 +217,26 @@ private class GetFourSquareVenue extends AsyncTask<String, Void, JSONObject> {
 		
 		@Override
 		protected void onPostExecute(JSONObject result) {
-		
 			super.onPostExecute(result);
 		
 			if (result != null) {
-		
 				try {
-		
-					String success = result.getString(SUCCESS_JSON);
-		
-					if (success.equals("true")) {
-		
-					// TODO: 
-					} else {
-						// TODO find better solution!
-						Thread t = new Thread(new Runnable() {
-		
-							@Override
-							public void run() {
-		
-								if (data != null) {
-									// make GET call
-									new GetFourSquareVenue().execute(data);
-								}
-		
-							}
-						});
-						t.start();
-		
+					final List<FourSquareVenue> venues = new FourSquareJsonParser().parseJSON(result);
+					for(Iterator<FourSquareVenue> i = venues.iterator(); i.hasNext(); ) {
+						FourSquareVenue item = i.next();
+						Log.d("Venue: ", item.name + " " + item.id);
+						
 					}
-		
+					runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                        	showList(venues);
+                        }
+                    });
+					
 				} catch (JSONException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

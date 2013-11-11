@@ -4,11 +4,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    
+
 <fragment
     android:id="@+id/map"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="100dp"
     android:name="com.google.android.gms.maps.MapFragment" />
 
 <Button
@@ -18,5 +18,11 @@
     android:layout_alignParentBottom="true"
     android:background="@drawable/actionbar"
     android:text="@string/locate_me_button" />
+
+<View
+        android:id="@+id/anchor"
+        android:layout_above="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
 
 </RelativeLayout>
