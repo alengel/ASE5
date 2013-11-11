@@ -103,60 +103,12 @@ public class ForgottenPasswordActivity extends Activity {
 	    
 	    private class ForgottenPasswordAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
-			@Override
+	    	@Override
 			protected JSONObject doInBackground(List<NameValuePair>... params) {
-				
-				
+			
 				List<NameValuePair> data = params[0];
 				
-				HttpClient client =new DefaultHttpClient();
-				HttpPost post = new HttpPost(FORGOTTEN_PASSWORD_URL);
-				
-				HttpResponse response = null;
-				
-				try {
-					
-					HttpEntity entity = new UrlEncodedFormEntity(data, "UTF-8");   
-					post.setEntity(entity);
-					
-					
-					Log.d("b_logic", "post: " + post);
-					
-					response = client.execute(post);
-					
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				} catch (ClientProtocolException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				JSONObject resultJson = null;
-				
-				if(response != null) {
-					try {
-						
-						Log.d("b_logic", "response: " + response);
-						
-						String resultString = EntityUtils.toString(response.getEntity());
-						
-						Log.d("b_logic", "resultString: " + resultString);
-						
-						resultJson = new JSONObject(resultString);
-						
-						Log.d("b_logic", "resultJson: " + resultJson.toString());
-						
-					} catch (ParseException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				
+				JSONObject resultJson = HttpPostRequest.makePostRequest(FORGOTTEN_PASSWORD_URL, data);
 				
 				return resultJson;
 			}
