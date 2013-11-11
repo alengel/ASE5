@@ -211,12 +211,12 @@ public class RegistrationActivity extends Activity{
 					if(success.equals("true")) {
 						
 						
-						showAlertMessage((getResources().getString(R.string.popupTitle1)),getResources().getString(R.string.successMessageRegistration));
+						showAlertMessage((getResources().getString(R.string.congratulations)),getResources().getString(R.string.successMessageRegistration));
 						
 						
 					} else {
 						
-						showAlertMessage((getResources().getString(R.string.popupTitle2)),getResources().getString(R.string.invalid_input_generic));
+						showAlertMessage((getResources().getString(R.string.errorMessage)),getResources().getString(R.string.invalid_input_generic));
 
 						
 					} //TODO: do more error checking stuff when Sandeep has extended his API
