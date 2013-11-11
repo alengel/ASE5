@@ -81,9 +81,7 @@ public class LoginActivity extends Activity {
 			
 			@SuppressWarnings("unchecked")
 			@Override
-			public void onClick(View v) {
-				// TODO connect to server to login
-				
+			public void onClick(View v) {				
 				//get data for call
 				String email = ((EditText) findViewById(R.id.email_box_login)).getEditableText().toString();
 				String password = ((EditText) findViewById(R.id.password_box_login)).getEditableText().toString();
@@ -98,7 +96,6 @@ public class LoginActivity extends Activity {
 				
 				//make POST call
 				new LoginAsyncTask().execute(data);
-				
 			}
 		});
         
@@ -145,54 +142,7 @@ private void showInvalidInput(String message) {
 			
 			List<NameValuePair> data = params[0];
 			
-			HttpClient client =new DefaultHttpClient();
-			HttpPost post = new HttpPost(LOGIN_URL);
-			
-			HttpResponse response = null;
-			
-			try {
-				
-				HttpEntity entity = new UrlEncodedFormEntity(data, "UTF-8");   
-				post.setEntity(entity);
-				
-				
-				Log.d("login", "post: " + post);
-				
-				response = client.execute(post);
-				
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			JSONObject resultJson = null;
-			
-			if(response != null) {
-				try {
-					
-					Log.d("login", "response: " + response);
-					
-					String resultString = EntityUtils.toString(response.getEntity());
-					
-					Log.d("login", "resultString: " + resultString);
-					
-					resultJson = new JSONObject(resultString);
-					
-					Log.d("login", "resultJson: " + resultJson.toString());
-					
-				} catch (ParseException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			
+			JSONObject resultJson = HttpPostRequest.makePostRequest(LOGIN_URL, data);
 			
 			return resultJson;
 		}

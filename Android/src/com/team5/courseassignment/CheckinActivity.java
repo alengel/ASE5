@@ -1,5 +1,11 @@
 package com.team5.courseassignment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,11 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-/*
- * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !!!
- */
-
-//TODO: show licensing info in the Settings!!!
 public class CheckinActivity extends Activity {
 	
 	//key of user for connecting to the server
@@ -29,12 +30,12 @@ public class CheckinActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        //get the key and venue details
+        //Get the key and venue details
     	kKey = this.getIntent().getStringExtra(KEY_JSON);
     	venueName = this.getIntent().getStringExtra(VENUE_NAME);
     	venueId = this.getIntent().getStringExtra(VENUE_ID);
     	
-    	//set layout
+    	//Set layout
     	setContentView(R.layout.checkin_activity);
     	TextView name = (TextView) findViewById(R.id.venue_name);
     	name.setText(venueName);
@@ -49,6 +50,12 @@ public class CheckinActivity extends Activity {
     }
     
     private void checkIn() {
-    	Log.d("check", "in here!!");
+    	
+    	List<NameValuePair> data = new ArrayList<NameValuePair>(2);
+		data.add(new BasicNameValuePair(VENUE_NAME, venueName));
+		data.add(new BasicNameValuePair(VENUE_ID, venueId));
+    	
+    	//make POST call
+//		new CheckinAsyncTask().execute(data);
     }
 }
