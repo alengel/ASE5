@@ -128,10 +128,9 @@ private void showInvalidInput(String message) {
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
-			
 			List<NameValuePair> data = params[0];
 			
-			JSONObject resultJson = HttpPostRequest.makePostRequest(LOGIN_URL, data);
+			JSONObject resultJson = HttpRequest.makePostRequest(LOGIN_URL, data);
 			
 			return resultJson;
 		}

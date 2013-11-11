@@ -1,20 +1,9 @@
 package com.team5.courseassignment;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -108,7 +97,7 @@ public class ForgottenPasswordActivity extends Activity {
 			
 				List<NameValuePair> data = params[0];
 				
-				JSONObject resultJson = HttpPostRequest.makePostRequest(FORGOTTEN_PASSWORD_URL, data);
+				JSONObject resultJson = HttpRequest.makePostRequest(FORGOTTEN_PASSWORD_URL, data);
 				
 				return resultJson;
 			}

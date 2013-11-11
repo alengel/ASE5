@@ -81,7 +81,7 @@ public class CheckinActivity extends Activity {
 			
 			List<NameValuePair> data = params[0];
 			
-			JSONObject resultJson = HttpPostRequest.makePostRequest(CHECK_IN_URL, data);
+			JSONObject resultJson = HttpRequest.makePostRequest(CHECK_IN_URL, data);
 			
 			return resultJson;
 		}
