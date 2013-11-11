@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -98,12 +97,17 @@ public class CheckinActivity extends Activity {
 					
 					String success = result.getString(SUCCESS_JSON);
 					
-					if(success.equals("true")) {
+					if(success.equals("false")) {
 						
 						// launch ReviewActivity
 						Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
+						
 						i.putExtra(KEY_JSON, kKey);
+						i.putExtra(VENUE_NAME, venueName);
+						i.putExtra(VENUE_ID, venueId);
+						
 						startActivity(i);
+						
 					} else {
 						//TODO: if the server responds with error, display message
 					} 

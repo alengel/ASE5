@@ -56,6 +56,11 @@
             android:name="com.team5.courseassignment.CheckinActivity"
             android:label="@string/check_in_title" >
         </activity>
+
+        <activity
+            android:name="com.team5.courseassignment.ReviewActivity"
+            android:label="@string/review_title" >
+        </activity>
         
         <activity
             android:name="com.team5.courseassignment.ForgottenPasswordActivity"

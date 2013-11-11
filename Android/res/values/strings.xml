@@ -61,4 +61,8 @@
 	<string name="check_in_button">Pin Me</string>
 	<string name="pin_description">Pin Image</string>
 	
+	<!-- Review Activity -->
+	<string name="review_title">Review Venue</string>
+	<string name="review_button">Submit Review</string>
+		
 </resources>
