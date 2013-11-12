@@ -10,16 +10,23 @@ import org.json.JSONObject;
 
 import com.team5.courseassignment.R;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 
 
 /*
@@ -39,7 +46,9 @@ public class RegistrationActivity extends Activity{
 	
 	//variables for the POST answer
 	private final static String SUCCESS_JSON = "success";
+	private final static String MSG_JSON = "message";
 	
+	private static int RESULT_LOAD_IMAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,23 @@ public class RegistrationActivity extends Activity{
         setContentView(R.layout.registration);	 
         
         //set button actions
+        
+        Button chooseExisting = (Button) findViewById(R.id.chooseExisting);
+        chooseExisting.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Intent i = new Intent(
+						Intent.ACTION_PICK,
+						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				
+				startActivityForResult(i, RESULT_LOAD_IMAGE);
+			}
+		});
+        
+        
+        
         Button continueButton = (Button) findViewById(R.id.register_button_registration);
         continueButton.setOnClickListener(new OnClickListener() {
 			
@@ -92,7 +118,37 @@ public class RegistrationActivity extends Activity{
         
     } 
     
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
+		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+			Uri selectedImage = data.getData();
+			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+			Cursor cursor = getContentResolver().query(selectedImage,
+					filePathColumn, null, null, null);
+			cursor.moveToFirst();
+
+			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+			String picturePath = cursor.getString(columnIndex);
+			cursor.close();
+			
+			ImageView imageView = (ImageView) findViewById(R.id.imgView);
+			
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inSampleSize=8;      // 1/8 of original image
+			Bitmap b = BitmapFactory.decodeFile(picturePath,options);
+			imageView.setImageBitmap(b);
+           
+			
+			//imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+			
+		
+		}
     
+    
+    }
     
     private void showAlertMessage(final String title,final String message) {
 		
@@ -146,34 +202,18 @@ public class RegistrationActivity extends Activity{
 					
 					if(success.equals("true")) {
 						
-						
 						showAlertMessage((getResources().getString(R.string.congratulations)),getResources().getString(R.string.successMessageRegistration));
-						
 						
 					} else {
 						
-						showAlertMessage((getResources().getString(R.string.errorMessage)),getResources().getString(R.string.invalid_input_generic));
-
+						showAlertMessage((getResources().getString(R.string.errorMessage)),MSG_JSON);
 						
-					} //TODO: do more error checking stuff when Sandeep has extended his API
+					}//TODO: do more error checking stuff when Sandeep has extended his API
 					
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				
 			} 
 		}
-
-    	
     }
-
-
-
-    
-   
-
-    
-
-
-
 }
