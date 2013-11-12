@@ -12,6 +12,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -97,7 +100,7 @@ public class CheckinActivity extends Activity {
 					
 					String success = result.getString(SUCCESS_JSON);
 					
-					if(success.equals("false")) {
+					if(success.equals("true")) {
 						
 						// launch ReviewActivity
 						Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
@@ -118,5 +121,23 @@ public class CheckinActivity extends Activity {
 				
 			} 
 		}	
-    } 
+    }
+    
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.map_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+	
+	//set settings icon actions
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+		i.putExtra(KEY_JSON, kKey);
+		startActivity(i);
+		
+		return true;
+    }
 }

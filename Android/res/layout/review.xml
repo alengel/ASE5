@@ -3,6 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
+    <TextView
+        android:id="@+id/venue_name_review"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#80FFFFFF"
+        android:gravity="center"
+        android:textSize="20sp" />
+    
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/venue_name_review"
+        android:layout_centerInParent="true"
+        android:numStars="5"
+        android:stepSize="1.0"
+        android:rating="0" />
+    
+   <EditText
+        android:id="@+id/venue_review"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="#80FFFFFF"
+        android:layout_below="@+id/rating_bar"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/enter_review"
+        android:inputType="textMultiLine" >
+        <requestFocus />
+    </EditText>
+    
     <Button
 	    android:id="@+id/review_button"
 	    android:layout_width="match_parent"
@@ -11,16 +47,5 @@
 	    android:background="@drawable/actionbar"
 	    android:gravity="center"
 	    android:text="@string/review_button" />
-
-    <TextView
-        android:id="@+id/venue_name_review"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:background="@android:color/white"
-        android:layout_marginLeft="10dp"
-        android:gravity="center"
-        android:textSize="20sp" />
 
 </RelativeLayout>
