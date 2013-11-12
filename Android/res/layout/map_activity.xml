@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+<fragment
+    android:id="@+id/map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:name="com.google.android.gms.maps.MapFragment" />
+
+<Button
+    android:id="@+id/locate_me_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/actionbar"
+    android:text="@string/locate_me_button" />
+
+<View
+        android:id="@+id/anchor"
+        android:layout_above="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
+
+</RelativeLayout>

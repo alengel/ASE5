@@ -1,21 +1,10 @@
 package com.team5.courseassignment;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -139,60 +128,12 @@ public class RegistrationActivity extends Activity{
     
     private class RegisterAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
-		@Override
+    	@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
-			
 			
 			List<NameValuePair> data = params[0];
 			
-			HttpClient client =new DefaultHttpClient();
-			HttpPost post = new HttpPost(REGISTER_URL);
-			
-			HttpResponse response = null;
-			
-			try {
-				
-				HttpEntity entity = new UrlEncodedFormEntity(data, "UTF-8");   
-				post.setEntity(entity);
-				
-				
-				Log.d("registration", "post: " + post);
-				
-				response = client.execute(post);
-				
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			JSONObject resultJson = null;
-			
-			if(response != null) {
-				try {
-					
-					Log.d("registration", "response: " + response);
-					
-					String resultString = EntityUtils.toString(response.getEntity());
-					
-					Log.d("registration", "resultString: " + resultString);
-					
-					resultJson = new JSONObject(resultString);
-					
-					Log.d("registration", "resultJson: " + resultJson.toString());
-					
-				} catch (ParseException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			
+			JSONObject resultJson = HttpRequest.makePostRequest(REGISTER_URL, data);
 			
 			return resultJson;
 		}
@@ -211,12 +152,12 @@ public class RegistrationActivity extends Activity{
 					if(success.equals("true")) {
 						
 						
-						showAlertMessage((getResources().getString(R.string.popupTitle1)),getResources().getString(R.string.successMessageRegistration));
+						showAlertMessage((getResources().getString(R.string.congratulations)),getResources().getString(R.string.successMessageRegistration));
 						
 						
 					} else {
 						
-						showAlertMessage((getResources().getString(R.string.popupTitle2)),getResources().getString(R.string.invalid_input_generic));
+						showAlertMessage((getResources().getString(R.string.errorMessage)),getResources().getString(R.string.invalid_input_generic));
 
 						
 					} //TODO: do more error checking stuff when Sandeep has extended his API

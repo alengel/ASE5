@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CourseAssignment</string>
+    <string name="app_name">PinMe</string>
     
+    <!-- Generic Strings -->
+	<string name="errorMessage">Error!</string>
+	<string name="ok">OK</string>
+	<string name="invalid_input_generic">Invalid input! Please try again!</string>
+	<string name="congratulations">Congratulations!</string>
+	
+    <!-- Login & Registration Activity -->
     <string name="email_address">Email</string>
     <string name="password">Password</string>
     
+    <!-- Login Activity -->
     <string name="login_button">Login</string>
     <string name="forgotten_password">Forgotten Password</string>
     <string name="register">New to App? Register Here</string>
+    <string name="key_not_retrieved">Couldn\'t connect to the server. Please try again.</string>
     
+    <!-- Registration Activity -->
     <string name="continue_button">Continue</string>
 	<string name="first_name">First Name</string>
 	<string name="last_name">Last Name</string>
 	<string name="retype_password">Retype Password</string>
+	<string name="passwords_not_equal">Invalid input! Your entered passwords are not the same!</string>
+	<string name="successMessageRegistration">You are now registered! Please login with your details.</string>
 	
+	<!-- Forgotten Password Activity -->
 	<string name="email_address_2">Please enter your e-mail</string>
 	
+	<!-- Settings Activity -->
 	<string name="settings_title">Settings</string>
+	<string name="locate_me_button">Locate Me</string>
 	<string name="logout_title">Logout</string>
 	
 	<string name="pref_general_title">General</string>
@@ -36,18 +51,18 @@
 	<string name="pref_title_version">Version 1.0</string>
 	<string name="pref_summary_version">Help, Terms of Service, Licenses</string>
 	
-	
-	<!-- Strings for Business logic -->
-	<string name="errorMessage">Error!</string>
-	<string name="ok">OK</string>
-	<string name="passwords_not_equal">Invalid input! Your entered passwords are not the same!</string>
-	<string name="invalid_input_generic">Invalid input! Please try again!</string>
-	<string name="key_not_retrieved">Server answer was incorrect! Please try again!</string>
+	<!-- Map Activity -->
 	<string name="play_services_missing">Google Play services not available. Make sure that your device has access to Google Play Services if you like to use this application! SevLogger will be closed.</string>
 	<string name="log_service_running">Log Service is running!</string>
 	<string name="log_service_stopped">Sorry! An error occurred in LogService! It has been stopped.</string>
-	<string name="successMessageRegistration">You are now registered! Please login with your details.</string>
-	<string name="popupTitle1">Congratulations!</string>
-	<string name="popupTitle2">ERROR!</string>
 	
+	<!-- Check In Activity -->
+	<string name="check_in_title">Venue</string>
+	<string name="check_in_button">Pin Me</string>
+	<string name="pin_description">Pin Image</string>
+	
+	<!-- Review Activity -->
+	<string name="review_title">Review Venue</string>
+	<string name="review_button">Submit Review</string>
+		
 </resources>

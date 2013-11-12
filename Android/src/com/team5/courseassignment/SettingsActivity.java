@@ -1,21 +1,10 @@
 package com.team5.courseassignment;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +12,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -83,59 +71,12 @@ public class SettingsActivity extends Activity {
   	
 private class LogoutAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		
-		List<NameValuePair> data;
-	
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
-			data = params[0];
+			List<NameValuePair> data = params[0];
 			
-			HttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost(LOGOUT_URL);
-			
-			HttpResponse response = null;
-			
-			try {
-				
-				HttpEntity entity = new UrlEncodedFormEntity(data, "UTF-8");   
-				post.setEntity(entity);
-				
-				
-				Log.d("b_logic", "post: " + post);
-				
-				response = client.execute(post);
-				
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			JSONObject resultJson = null;
-			
-			if(response != null) {
-				try {
-					
-					Log.d("b_logic", "response: " + response);
-					
-					String resultString = EntityUtils.toString(response.getEntity());
-					
-					Log.d("b_logic", "resultString: " + resultString);
-					
-					resultJson = new JSONObject(resultString);
-					
-					Log.d("b_logic", "resultJson: " + resultJson.toString());
-					
-				} catch (ParseException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
+			JSONObject resultJson = HttpRequest.makePostRequest(LOGOUT_URL, data);
 			
 			return resultJson;
 		}
