@@ -1,17 +1,8 @@
 package com.team5.courseassignment;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -197,49 +188,8 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		
 			data = params[0];
 			
-			HttpClient client = new DefaultHttpClient();
-			String createUrl = RETRIEVE_VENUE_URL + data;
-			HttpGet get = new HttpGet(createUrl);
-			HttpResponse response = null;
-		
-			try {
-		
-				Log.d("map_activity", "get: " + get);
-		
-				response = client.execute(get);
-		
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		
-			JSONObject resultJson = null;
-		
-			if (response != null) {
-				try {
-		
-					Log.d("map_activity", "response: " + response);
-		
-					String resultString = EntityUtils.toString(response
-							.getEntity());
-		
-					Log.d("map_activity", "resultString: " + resultString);
-		
-					resultJson = new JSONObject(resultString);
-		
-					Log.d("map_activity", "resultJson: " + resultJson.toString());
-		
-				} catch (ParseException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
+			JSONObject resultJson = HttpRequest.makeGetRequest(RETRIEVE_VENUE_URL, data);
+			
 			return resultJson;
 		}
 		
