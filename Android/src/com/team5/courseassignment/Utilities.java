@@ -40,7 +40,7 @@ public class Utilities {
 	    return sha1;
 	}
 
-	private static String convertByteArrayToString(final byte[] hash) {
+	public static String convertByteArrayToString(final byte[] hash) {
 	    
 		Formatter formatter = new Formatter();
 		
