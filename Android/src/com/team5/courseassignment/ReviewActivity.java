@@ -34,7 +34,7 @@ public class ReviewActivity extends Activity {
     	venueId = this.getIntent().getStringExtra(VENUE_ID);
     	
     	//Set layout
-    	setContentView(R.layout.review_activity);
+    	setContentView(R.layout.review);
     	TextView name = (TextView) findViewById(R.id.venue_name_review);
     	name.setText(venueName);
     	

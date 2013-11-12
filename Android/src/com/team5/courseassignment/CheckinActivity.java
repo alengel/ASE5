@@ -44,7 +44,7 @@ public class CheckinActivity extends Activity {
     	venueId = this.getIntent().getStringExtra(VENUE_ID);
     	
     	//Set layout
-    	setContentView(R.layout.checkin_activity);
+    	setContentView(R.layout.checkin);
     	TextView name = (TextView) findViewById(R.id.venue_name);
     	name.setText(venueName);
     	

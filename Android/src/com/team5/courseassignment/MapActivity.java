@@ -74,7 +74,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
         	kKey = this.getIntent().getStringExtra(KEY_JSON);
         	
         	//set layout
-        	setContentView(R.layout.map_activity);
+        	setContentView(R.layout.map);
         	
         	map = ( (MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         	map.setMyLocationEnabled(true);
