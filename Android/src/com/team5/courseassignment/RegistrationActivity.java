@@ -1,5 +1,6 @@
 package com.team5.courseassignment;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -42,6 +44,7 @@ public class RegistrationActivity extends Activity{
 	private final static String PASSWORD_KEY = "passwd";
 	private final static String FIRSTNAME_KEY = "first_name";
 	private final static String LASTNAME_KEY = "last_name";
+	private final static String IMAGE = "profile_image";
 	
 	
 	//variables for the POST answer
@@ -102,6 +105,14 @@ public class RegistrationActivity extends Activity{
 			String password = ((EditText) findViewById(R.id.password_box_registration)).getEditableText().toString();
 			String retypePassword = ((EditText) findViewById(R.id.retype_password_box_registration)).getEditableText().toString();
 			
+			imageView.buildDrawingCache();
+			Bitmap profilePicture = imageView.getDrawingCache();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+			profilePicture.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object   
+			byte[] b = baos.toByteArray();
+
+			String encodedImage = Base64.encodeToString(b , Base64.DEFAULT);
+			
 			//ensure that the password Strings are equal
 			if(! password.equals(retypePassword)) {
 				
@@ -115,6 +126,7 @@ public class RegistrationActivity extends Activity{
 			List<NameValuePair> data = new ArrayList<NameValuePair>(4);
 			data.add(new BasicNameValuePair(FIRSTNAME_KEY, firstName));
 			data.add(new BasicNameValuePair(LASTNAME_KEY, lastName));
+			data.add(new BasicNameValuePair(IMAGE, encodedImage));
 			data.add(new BasicNameValuePair(EMAIL_KEY, email));
 			data.add(new BasicNameValuePair(PASSWORD_KEY, encryptedPassword));
 			
@@ -145,14 +157,13 @@ public class RegistrationActivity extends Activity{
 			String picturePath = cursor.getString(columnIndex);
 			cursor.close();
 			
-			ImageView imageView = (ImageView) findViewById(R.id.imgView);
+			imageView = (ImageView) findViewById(R.id.imgView);
 			
 			BitmapFactory.Options options = new BitmapFactory.Options();
 			options.inSampleSize=8;      // 1/8 of original image
 			Bitmap b = BitmapFactory.decodeFile(picturePath,options);
 			imageView.setImageBitmap(b);
-			
-		
+
 		}
 		
 		if (requestCode == CAMERA_REQUEST) {  
