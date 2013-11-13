@@ -49,6 +49,8 @@ public class RegistrationActivity extends Activity{
 	private final static String MSG_JSON = "message";
 	
 	private static int RESULT_LOAD_IMAGE = 1;
+	private static final int CAMERA_REQUEST = 1888; 
+	private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,16 @@ public class RegistrationActivity extends Activity{
 			}
 		});
         
-        
+        this.imageView = (ImageView)this.findViewById(R.id.imgView);
+        Button photoButton = (Button) this.findViewById(R.id.takeAphoto);
+        photoButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE); 
+                startActivityForResult(cameraIntent, CAMERA_REQUEST); 
+            }
+        });
         
         Button continueButton = (Button) findViewById(R.id.register_button_registration);
         continueButton.setOnClickListener(new OnClickListener() {
@@ -140,12 +151,14 @@ public class RegistrationActivity extends Activity{
 			options.inSampleSize=8;      // 1/8 of original image
 			Bitmap b = BitmapFactory.decodeFile(picturePath,options);
 			imageView.setImageBitmap(b);
-           
-			
-			//imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 			
 		
 		}
+		
+		if (requestCode == CAMERA_REQUEST) {  
+            Bitmap photo = (Bitmap) data.getExtras().get("data"); 
+            imageView.setImageBitmap(photo);
+        } 
     
     
     }
