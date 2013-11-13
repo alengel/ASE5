@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-	
+    android:layout_height="match_parent"
+    >
+
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
     <EditText
         android:id="@+id/first_name_registration"
         android:layout_width="match_parent"
@@ -10,7 +15,7 @@
         android:layout_alignLeft="@+id/last_name_registration"
         android:layout_alignParentTop="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="260dp"
         android:background="@android:color/white"
         android:ems="10" 
         android:inputType="textPersonName" 
@@ -26,10 +31,10 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/white"
-        android:ems="10" 
+        android:ems="10"
+        android:hint="@string/last_name"
         android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:hint="@string/last_name" />
+        android:paddingLeft="10dp" />
     
     <EditText
         android:id="@+id/email_box_registration"
@@ -86,4 +91,39 @@
         android:background="@drawable/actionbar"
         android:text="@string/continue_button" />
 
+    <Button
+        android:id="@+id/chooseExisting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/first_name_registration"
+        android:layout_below="@+id/imgView"
+        android:layout_toLeftOf="@+id/register_button_registration"
+        android:background="@color/lightorange"
+        android:layout_weight="0"
+        android:layout_marginTop="10dp"
+        android:text="Choose Existing." />
+
+    <Button
+        android:id="@+id/takeAphoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/register_button_registration"
+        android:layout_alignRight="@+id/first_name_registration"
+        android:layout_below="@+id/imgView"
+        android:background="@color/lightorange"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Take a photo." />
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="200dp"
+        android:layout_height="179dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/profile_picture" />
+
 </RelativeLayout>
+</ScrollView>
