@@ -17,13 +17,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class CheckinActivity extends Activity {
 	
 	//variables for the POST call
 	private final static String CHECK_IN_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/geo-push";
+	private final static String RETRIEVE_VENUE_REVIEW_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/get-by-venue/venue_id/";
 	private final static String TIMESTAMP = "timestamp";
 	
 	//key of user for connecting to the server
@@ -57,8 +61,58 @@ public class CheckinActivity extends Activity {
 			public void onClick(View v) {
 				checkIn();
 			}
-		});	
+		});
+    	
+    	//make GET request to retrieve existing user reviews for venue
+    	String data = venueId;
+    	new VenueReviewsAsyncTask().execute(data);
     }
+    
+    private class VenueReviewsAsyncTask extends AsyncTask<String, Void, JSONObject> {
+		
+    	String data;
+    	
+		@Override
+		protected JSONObject doInBackground(String... params) {
+		
+			data = params[0];
+			
+			JSONObject resultJson = HttpRequest.makeGetRequest(RETRIEVE_VENUE_REVIEW_URL, data);
+			
+			return resultJson;
+		}
+		
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+		
+			if (result != null) {
+				try {
+					final List<VenueReview> reviews = new VenueReviewParser().parseJSON(result);
+					
+					runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                        	showList(reviews);
+                        }
+                    });
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+    
+    private void showList(List<VenueReview> reviews)
+	{
+    	ListAdapter adapter = new ArrayAdapter<VenueReview>(this, android.R.layout.simple_list_item_1, reviews);
+    	ListView list = (ListView) findViewById(R.id.list_reviews);
+    	
+    	list.setAdapter(adapter);
+	}
     
     @SuppressWarnings("unchecked")
 	private void checkIn() {
@@ -69,7 +123,6 @@ public class CheckinActivity extends Activity {
     	List<NameValuePair> data = new ArrayList<NameValuePair>(3);
     	data.add(new BasicNameValuePair(KEY_JSON, kKey));
     	data.add(new BasicNameValuePair(VENUE_ID, venueId));
-//    	data.add(new BasicNameValuePair(VENUE_NAME, venueName));
 		data.add(new BasicNameValuePair(TIMESTAMP, timestamp));
     	
     	//make POST call
