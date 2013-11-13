@@ -12,7 +12,6 @@ import com.team5.courseassignment.R;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -96,10 +95,6 @@ public class RegistrationActivity extends Activity{
     
     
     private void showAlertMessage(final String title,final String message) {
-		
-		Log.d("b_logic", "RegistrationActivity.showInvalidInput() with argument: " + message);
-		
-		
 		
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setTitle(title);

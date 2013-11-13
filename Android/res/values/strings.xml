@@ -5,7 +5,8 @@
     
     <!-- Generic Strings -->
 	<string name="errorMessage">Error!</string>
-	<string name="ok">OK</string>
+	<string name="ok">Continue</string>
+	<string name="cancel">Cancel</string>
 	<string name="invalid_input_generic">Invalid input! Please try again!</string>
 	<string name="congratulations">Congratulations!</string>
 	
@@ -64,5 +65,8 @@
 	<!-- Review Activity -->
 	<string name="review_title">Review Venue</string>
 	<string name="review_button">Submit Review</string>
+	<string name="enter_review">Enter Your Review Here&#8230;</string>
+	<string name="review_success_title">Thanks</string>
+	<string name="review_success">For Your Review. Continue To Map?</string>
 		
 </resources>
