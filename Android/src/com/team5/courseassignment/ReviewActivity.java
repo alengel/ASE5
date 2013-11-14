@@ -1,5 +1,6 @@
 package com.team5.courseassignment;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -42,8 +46,10 @@ public class ReviewActivity extends Activity {
 	
 	private final static String RATING = "rating";
 	private final static String REVIEW = "review";
+	private final static String IMAGE ="profileImage";
 	
-	private AlertDialog.Builder alert;	
+	private AlertDialog.Builder alert;
+	private ImageView imageView;
     
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +72,17 @@ public class ReviewActivity extends Activity {
 			
     		@SuppressWarnings("unchecked")
 			public void onClick(View v) {
+    			
     			//get data for call
+    			
+    			imageView.buildDrawingCache();
+    			Bitmap profilePicture = imageView.getDrawingCache();
+    			ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+    			profilePicture.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object   
+    			byte[] b = baos.toByteArray();
+
+    			String encodedImage = Base64.encodeToString(b , Base64.DEFAULT);
+    			
 				String review = ((EditText) findViewById(R.id.venue_review)).getEditableText().toString();
 				RatingBar ratingBar = (RatingBar) findViewById(R.id.rating_bar);
 				String rating = String.valueOf(ratingBar.getRating());
@@ -77,6 +93,7 @@ public class ReviewActivity extends Activity {
 				data.add(new BasicNameValuePair("venue_id", venueId));
 				data.add(new BasicNameValuePair(RATING, rating));
 				data.add(new BasicNameValuePair(REVIEW, review));
+				data.add(new BasicNameValuePair(IMAGE,encodedImage));
 				
 				//make POST call
 				new ReviewAsyncTask().execute(data);
