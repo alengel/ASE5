@@ -2,7 +2,6 @@ package com.team5.courseassignment;
 
 import java.util.List;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -197,24 +196,20 @@ public class MapActivity extends Activity implements OnItemClickListener {
 			super.onPostExecute(result);
 		
 			if (result != null) {
-				try {
-					final List<FourSquareVenue> venues = new FourSquareJsonParser().parseJSON(result);
-					
-					runOnUiThread(new Runnable() {
 
-                        @Override
-                        public void run() {
-                        	showList(venues);
-                        }
-                    });
-					
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				final List<FourSquareVenue> venues = new FourSquareJsonParser().parseJSON(result);
+				
+				runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                    	showList(venues);
+                    }
+                });
 			}
 		}
 	}
+
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
