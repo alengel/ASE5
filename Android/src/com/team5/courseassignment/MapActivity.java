@@ -1,6 +1,5 @@
 package com.team5.courseassignment;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.json.JSONException;
@@ -200,11 +199,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 			if (result != null) {
 				try {
 					final List<FourSquareVenue> venues = new FourSquareJsonParser().parseJSON(result);
-					for(Iterator<FourSquareVenue> i = venues.iterator(); i.hasNext(); ) {
-						FourSquareVenue item = i.next();
-						Log.d("Venue: ", item.name + " " + item.id);
-						
-					}
+					
 					runOnUiThread(new Runnable() {
 
                         @Override

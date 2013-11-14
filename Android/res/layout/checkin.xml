@@ -3,6 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+<TextView
+        android:id="@+id/venue_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:background="#80FFFFFF"
+        android:gravity="center"
+        android:textSize="20sp" />
+	
+    <ListView
+    	android:id="@+id/list_reviews"
+    	android:layout_marginTop="1dp"
+    	android:background="#80FFFFFF"
+    	android:layout_below="@+id/venue_name"
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent" /> 
+    
+    <ImageView
+        android:id="@+id/pin_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/check_in_button"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/pin_description"
+        android:src="@drawable/pin" />
+
     <Button
 	    android:id="@+id/check_in_button"
 	    android:layout_width="match_parent"
@@ -11,25 +38,4 @@
 	    android:background="@drawable/actionbar"
 	    android:gravity="center"
 	    android:text="@string/check_in_button" />
-
-    <TextView
-        android:id="@+id/venue_name"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:background="@android:color/white"
-        android:layout_marginLeft="10dp"
-        android:gravity="center"
-        android:textSize="20sp" />
-
-    <ImageView
-        android:id="@+id/pin_image"
-        android:contentDescription="@string/pin_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/venue_name"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/pin" />
-
 </RelativeLayout>
