@@ -1,62 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/review_activity"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
     
-    <ImageView
-        android:id="@+id/imgView"
-        android:layout_width="200dp"
-        android:layout_height="179dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/profile_picture" />
-		
-    	<Button
-        android:id="@+id/chooseExisting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/rating_bar"
-        android:layout_centerVertical="true"
-        android:layout_weight="0"
-        android:background="@color/lightorange"
-        android:text="Choose Existing." />
-
-    	<Button
-   	    android:id="@+id/takeAphoto"
-     	android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-     	android:layout_centerVertical="true"
-        android:layout_marginLeft="14dp"
-        android:layout_toRightOf="@+id/chooseExisting"
-        android:background="@color/lightorange"
-        android:text="Take a photo." />
+    <FrameLayout 
+        android:id="@+id/frame"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_alignParentTop="true"
+	    android:layout_gravity="center_horizontal|center_vertical" >
+	    <ImageView
+	        android:id="@+id/imgView"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:scaleType="fitXY"
+	        android:layout_marginBottom="50dp"
+	        android:contentDescription="@string/image_description"
+	        android:src="@drawable/profile_picture" />
+	    
+	    <LinearLayout 
+	        android:id="@+id/button_container"
+	        android:orientation="horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+	    	android:layout_gravity="center_horizontal|bottom" >
+		    <Button
+		        android:id="@+id/chooseExisting"
+		        android:layout_width="fill_parent"
+		        android:layout_height="50dp"
+		        android:layout_weight="1"
+		        android:background="@drawable/actionbar"
+		        android:layout_marginRight="1dp"
+		        android:text="@string/choose_image" />
+			<Button
+		        android:id="@+id/takeAphoto"
+		        android:layout_width="fill_parent" 
+				android:layout_height="50dp"
+				android:layout_weight="1"
+		        android:background="@drawable/actionbar"
+		        android:text="@string/upload_new_image" />
+	    </LinearLayout>
+    </FrameLayout>
     
     <TextView
         android:id="@+id/venue_name_review"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/frame"
         android:background="#80FFFFFF"
         android:gravity="center"
-        android:textSize="20sp"
-        android:layout_marginTop="270dp" />
-    
+        android:textSize="20sp" />
+   
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/venue_name_review"
+        android:layout_centerHorizontal="true"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="1.0" />
+   
    <EditText
         android:id="@+id/venue_review"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:background="#80FFFFFF"
         android:layout_below="@+id/rating_bar"
-        android:layout_marginTop="1dp"
         android:ems="10"
         android:gravity="top"
         android:hint="@string/enter_review"
@@ -68,22 +81,10 @@
 	    android:id="@+id/review_button"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
+		android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
 	    android:background="@drawable/actionbar"
 	    android:gravity="center"
-	    android:text="@string/review_button" 
-	    android:layout_below="@+id/venue_review"/>
-
-    <RatingBar
-        android:id="@+id/rating_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/venue_name_review"
-        android:layout_centerHorizontal="true"
-        android:numStars="5"
-        android:rating="0"
-        android:stepSize="1.0" />
-
+	    android:text="@string/review_button"/>
 </RelativeLayout>
-</ScrollView>
 
