@@ -50,7 +50,7 @@ public class ReviewActivity extends Activity {
 	
 	private final static String RATING = "rating";
 	private final static String REVIEW = "review";
-	private final static String IMAGE ="profileImage";
+	private final static String IMAGE ="location_image";
 	
 	private AlertDialog.Builder alert;
 	private ImageView imageView;
@@ -107,9 +107,9 @@ public class ReviewActivity extends Activity {
     			//get data for call
     			
     			imageView.buildDrawingCache();
-    			Bitmap profilePicture = imageView.getDrawingCache();
+    			Bitmap venuePicture = imageView.getDrawingCache();
     			ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-    			profilePicture.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object   
+    			venuePicture.compress(Bitmap.CompressFormat.JPEG, 100, baos);
     			byte[] b = baos.toByteArray();
 
     			String encodedImage = Base64.encodeToString(b , Base64.DEFAULT);

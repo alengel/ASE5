@@ -108,7 +108,7 @@ public class RegistrationActivity extends Activity{
 			imageView.buildDrawingCache();
 			Bitmap profilePicture = imageView.getDrawingCache();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-			profilePicture.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object   
+			profilePicture.compress(Bitmap.CompressFormat.JPEG, 100, baos);  
 			byte[] b = baos.toByteArray();
 
 			String encodedImage = Base64.encodeToString(b , Base64.DEFAULT);
