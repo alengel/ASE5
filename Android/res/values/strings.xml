@@ -4,7 +4,8 @@
     <string name="app_name">PinMe</string>
     
     <!-- Generic Strings -->
-	<string name="errorMessage">Error!</string>
+    <string name="base_url">http://switchcodes.in/sandbox/projectpackets/t5/user/</string>
+    <string name="errorMessage">Error!</string>
 	<string name="ok">Continue</string>
 	<string name="cancel">Cancel</string>
 	<string name="invalid_input_generic">Invalid input! Please try again!</string>

@@ -26,8 +26,10 @@ import android.widget.TextView;
 public class CheckinActivity extends Activity {
 	
 	//variables for the POST call
-	private final static String CHECK_IN_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/geo-push";
-	private final static String RETRIEVE_VENUE_REVIEW_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/get-by-venue/venue_id/";
+	private static String CHECK_IN_URL;
+	private final static String CHECK_IN_URL_EXT = "geo-push";
+	private static String RETRIEVE_VENUE_REVIEW_URL;
+	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "get-by-venue/venue_id/";
 	private final static String TIMESTAMP = "timestamp";
 	
 	//key of user for connecting to the server
@@ -49,6 +51,11 @@ public class CheckinActivity extends Activity {
         kKey = this.getIntent().getStringExtra(KEY_JSON);
     	venueName = this.getIntent().getStringExtra(VENUE_NAME);
     	venueId = this.getIntent().getStringExtra(VENUE_ID);
+    	
+    	//Get the base url
+    	String baseUrl = getResources().getString(R.string.base_url);
+    	CHECK_IN_URL = baseUrl + CHECK_IN_URL_EXT;
+    	RETRIEVE_VENUE_REVIEW_URL = baseUrl + RETRIEVE_VENUE_REVIEW_URL_EXT;
     	
     	//Set layout
     	setContentView(R.layout.checkin);
