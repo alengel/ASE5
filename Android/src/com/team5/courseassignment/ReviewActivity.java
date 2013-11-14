@@ -13,9 +13,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,6 +54,8 @@ public class ReviewActivity extends Activity {
 	
 	private AlertDialog.Builder alert;
 	private ImageView imageView;
+	private static int RESULT_LOAD_IMAGE = 1;
+	private static final int CAMERA_REQUEST = 1888; 
     
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,31 @@ public class ReviewActivity extends Activity {
     	TextView name = (TextView) findViewById(R.id.venue_name_review);
     	name.setText(venueName);
     	alert = new AlertDialog.Builder(this);
+    	
+    	Button chooseExisting = (Button) findViewById(R.id.chooseExisting);
+        chooseExisting.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Intent i = new Intent(
+						Intent.ACTION_PICK,
+						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				
+				startActivityForResult(i, RESULT_LOAD_IMAGE);
+			}
+		});
+        
+        this.imageView = (ImageView)this.findViewById(R.id.imgView);
+        Button photoButton = (Button) this.findViewById(R.id.takeAphoto);
+        photoButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE); 
+                startActivityForResult(cameraIntent, CAMERA_REQUEST); 
+            }
+        });
     	
     	//Setting up review button.
     	Button checkinButton = (Button) findViewById(R.id.review_button);
@@ -101,6 +132,41 @@ public class ReviewActivity extends Activity {
 		});	
     }
     
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
+		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+			Uri selectedImage = data.getData();
+			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+			Cursor cursor = getContentResolver().query(selectedImage,
+					filePathColumn, null, null, null);
+			cursor.moveToFirst();
+
+			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+			String picturePath = cursor.getString(columnIndex);
+			cursor.close();
+			
+			ImageView imageView = (ImageView) findViewById(R.id.imgView);
+			
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inSampleSize=8;      // 1/8 of original image
+			Bitmap b = BitmapFactory.decodeFile(picturePath,options);
+			imageView.setImageBitmap(b);
+			
+		
+		}
+		
+		if (requestCode == CAMERA_REQUEST) {  
+            Bitmap photo = (Bitmap) data.getExtras().get("data"); 
+            imageView.setImageBitmap(photo);
+        } 
+    
+    
+    }
+    
+	
     private class ReviewAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
 		@Override
