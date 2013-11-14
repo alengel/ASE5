@@ -99,9 +99,8 @@
         android:layout_below="@+id/imgView"
         android:layout_toLeftOf="@+id/register_button_registration"
         android:background="@color/lightorange"
-        android:layout_weight="0"
         android:layout_marginTop="10dp"
-        android:text="Choose Existing." />
+        android:text="@string/choose_image" />
 
     <Button
         android:id="@+id/takeAphoto"
@@ -113,10 +112,11 @@
         android:background="@color/lightorange"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:text="Take a photo." />
+        android:text="@string/upload_new_image" />
 
     <ImageView
         android:id="@+id/imgView"
+        android:contentDescription="@string/user_image_description"
         android:layout_width="200dp"
         android:layout_height="179dp"
         android:layout_alignParentTop="true"

@@ -1,5 +1,6 @@
 package com.team5.courseassignment;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -42,8 +51,14 @@ public class ReviewActivity extends Activity {
 	
 	private final static String RATING = "rating";
 	private final static String REVIEW = "review";
+	private final static String IMAGE ="location_image";
 	
-	private AlertDialog.Builder alert;	
+	private AlertDialog.Builder alert;
+	private ImageView imageView;
+	private static int RESULT_LOAD_IMAGE = 1;
+	private static final int CAMERA_REQUEST = 1888; 
+	private float curScale = 1F;
+	private float curRotate = 0F;
     
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +75,48 @@ public class ReviewActivity extends Activity {
     	name.setText(venueName);
     	alert = new AlertDialog.Builder(this);
     	
+    	Button chooseExisting = (Button) findViewById(R.id.chooseExisting);
+        chooseExisting.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Intent i = new Intent(
+						Intent.ACTION_PICK,
+						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				
+				startActivityForResult(i, RESULT_LOAD_IMAGE);
+			}
+		});
+        
+        this.imageView = (ImageView)this.findViewById(R.id.imgView);
+        Button photoButton = (Button) this.findViewById(R.id.takeAphoto);
+        photoButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE); 
+                startActivityForResult(cameraIntent, CAMERA_REQUEST); 
+            }
+        });
+    	
     	//Setting up review button.
     	Button checkinButton = (Button) findViewById(R.id.review_button);
     	checkinButton.setOnClickListener(new OnClickListener() {
 			
     		@SuppressWarnings("unchecked")
 			public void onClick(View v) {
+    			
     			//get data for call
+    			
+    			imageView.buildDrawingCache();
+    			Bitmap venuePicture = imageView.getDrawingCache();
+    			ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+    			venuePicture.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+    			byte[] b = baos.toByteArray();
+
+    			String encodedImage = Base64.encodeToString(b , Base64.DEFAULT);
+    			
 				String review = ((EditText) findViewById(R.id.venue_review)).getEditableText().toString();
 				RatingBar ratingBar = (RatingBar) findViewById(R.id.rating_bar);
 				String rating = String.valueOf(ratingBar.getRating());
@@ -77,6 +127,7 @@ public class ReviewActivity extends Activity {
 				data.add(new BasicNameValuePair("venue_id", venueId));
 				data.add(new BasicNameValuePair(RATING, rating));
 				data.add(new BasicNameValuePair(REVIEW, review));
+				data.add(new BasicNameValuePair(IMAGE,encodedImage));
 				
 				//make POST call
 				new ReviewAsyncTask().execute(data);
@@ -84,6 +135,49 @@ public class ReviewActivity extends Activity {
 		});	
     }
     
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
+		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+			Uri selectedImage = data.getData();
+			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+			Cursor cursor = getContentResolver().query(selectedImage,
+					filePathColumn, null, null, null);
+			cursor.moveToFirst();
+
+			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+			String picturePath = cursor.getString(columnIndex);
+			cursor.close();
+			
+			ImageView imageView = (ImageView) findViewById(R.id.imgView);
+			
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inSampleSize=4;      // 1/8 of original image
+			Bitmap b = BitmapFactory.decodeFile(picturePath,options);
+			
+		    int bmpWidth = b.getWidth();
+			int bmpHeight = b.getHeight();
+	
+			Matrix matrix = new Matrix();
+			matrix.postScale(curScale, curScale);
+			matrix.postRotate(curRotate);
+	
+			Bitmap resizedBitmap = Bitmap.createBitmap(b, 0, 0, bmpWidth, bmpHeight, matrix, true);
+			  
+			imageView.setImageBitmap(resizedBitmap);
+		}
+		
+		if (requestCode == CAMERA_REQUEST) {  
+            Bitmap photo = (Bitmap) data.getExtras().get("data"); 
+            imageView.setImageBitmap(photo);
+        } 
+    
+    
+    }
+    
+	
     private class ReviewAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
 		@Override

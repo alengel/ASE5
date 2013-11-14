@@ -9,6 +9,8 @@
 	<string name="cancel">Cancel</string>
 	<string name="invalid_input_generic">Invalid input! Please try again!</string>
 	<string name="congratulations">Congratulations!</string>
+	<string name="upload_new_image">Take a photo</string>
+	<string name="choose_image">Choose from gallery</string>
 	
     <!-- Login & Registration Activity -->
     <string name="email_address">Email</string>
@@ -24,6 +26,7 @@
     <string name="continue_button">Continue</string>
 	<string name="first_name">First Name</string>
 	<string name="last_name">Last Name</string>
+	<string name="user_image_description">Upload user profile image</string>
 	<string name="retype_password">Retype Password</string>
 	<string name="passwords_not_equal">Invalid input! Your entered passwords are not the same!</string>
 	<string name="successMessageRegistration">You are now registered! Please login with your details.</string>
@@ -68,5 +71,6 @@
 	<string name="enter_review">Enter Your Review Here&#8230;</string>
 	<string name="review_success_title">Thanks</string>
 	<string name="review_success">For Your Review. Continue To Map?</string>
+	<string name="image_description">Upload a venue image</string>
 		
 </resources>
