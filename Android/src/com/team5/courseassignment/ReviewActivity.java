@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -56,6 +57,8 @@ public class ReviewActivity extends Activity {
 	private ImageView imageView;
 	private static int RESULT_LOAD_IMAGE = 1;
 	private static final int CAMERA_REQUEST = 1888; 
+	private float curScale = 1F;
+	private float curRotate = 0F;
     
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,11 +154,19 @@ public class ReviewActivity extends Activity {
 			ImageView imageView = (ImageView) findViewById(R.id.imgView);
 			
 			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.inSampleSize=8;      // 1/8 of original image
+			options.inSampleSize=4;      // 1/8 of original image
 			Bitmap b = BitmapFactory.decodeFile(picturePath,options);
-			imageView.setImageBitmap(b);
 			
-		
+		    int bmpWidth = b.getWidth();
+			int bmpHeight = b.getHeight();
+	
+			Matrix matrix = new Matrix();
+			matrix.postScale(curScale, curScale);
+			matrix.postRotate(curRotate);
+	
+			Bitmap resizedBitmap = Bitmap.createBitmap(b, 0, 0, bmpWidth, bmpHeight, matrix, true);
+			  
+			imageView.setImageBitmap(resizedBitmap);
 		}
 		
 		if (requestCode == CAMERA_REQUEST) {  
