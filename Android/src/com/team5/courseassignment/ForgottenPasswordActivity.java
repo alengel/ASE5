@@ -25,26 +25,22 @@ import com.team5.courseassignment.R;
 
 public class ForgottenPasswordActivity extends Activity {
 	
-	
 	//variables for the POST call
-	private final static String FORGOTTEN_PASSWORD_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/change-password/";
+	private static String FORGOTTEN_PASSWORD_URL;
+	private final static String FORGOTTEN_PASSWORD_URL_EXT = "change-password/";
 	private final static String EMAIL_KEY = "email";
-	
-	
 	
 	//variables for the POST answer
 	private final static String SUCCESS_JSON = "success";
 	  
-
-	
-	
-	
-	 protected void onCreate(Bundle savedInstanceState) {
+		protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        
 	        //set layout
 	        setContentView(R.layout.forgotten_password);
 	        
+	        //get the base url
+	        FORGOTTEN_PASSWORD_URL = getResources().getString(R.string.base_url) + FORGOTTEN_PASSWORD_URL_EXT;
 	        
 	        //set button Actions
 	        Button continueButton = (Button) findViewById(R.id.login_button_forgottenPassword);

@@ -17,10 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 /*
- * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !!!
+ * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !
  */
 
-//TODO: show licensing info in the Settings!!!
+//TODO: show licensing info in the Settings!
 public class SettingsActivity extends Activity {
 	
 	//key of user for connecting to the server
@@ -28,7 +28,8 @@ public class SettingsActivity extends Activity {
 	private final static String KEY_JSON ="key";
 	
 	//variables for the POST call
-	private final static String LOGOUT_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/logout";
+	private static String LOGOUT_URL;
+	private static String LOGOUT_URL_EXT = "logout";
 	
 	//variables for the POST answer
 		private final static String SUCCESS_JSON = "success";
@@ -40,6 +41,9 @@ public class SettingsActivity extends Activity {
         
         //get the key
     	kKey = this.getIntent().getStringExtra(KEY_JSON);
+    	
+    	//get the base url
+    	LOGOUT_URL = getResources().getString(R.string.base_url) + LOGOUT_URL_EXT;
     	
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()

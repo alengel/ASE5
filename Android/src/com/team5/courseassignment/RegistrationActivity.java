@@ -39,7 +39,8 @@ import android.graphics.BitmapFactory;
 public class RegistrationActivity extends Activity{
 	
 	//variables for the POST call
-	private final static String REGISTER_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/register";
+	private static String REGISTER_URL;
+	private static String REGISTER_URL_EXT = "register";
 	private final static String EMAIL_KEY = "email";
 	private final static String PASSWORD_KEY = "passwd";
 	private final static String FIRSTNAME_KEY = "first_name";
@@ -62,8 +63,10 @@ public class RegistrationActivity extends Activity{
         //set layout
         setContentView(R.layout.registration);	 
         
-        //set button actions
+        //get the base url
+        REGISTER_URL = getResources().getString(R.string.base_url) + REGISTER_URL_EXT;
         
+        //set button actions
         Button chooseExisting = (Button) findViewById(R.id.chooseExisting);
         chooseExisting.setOnClickListener(new View.OnClickListener() {
 			

@@ -32,7 +32,8 @@ import android.content.Intent;
 public class LoginActivity extends Activity {
 	
 	//variables for the POST call
-	private final static String LOGIN_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/login";
+	private static String LOGIN_URL;
+	private static String LOGIN_URL_EXT = "login";
 	private final static String EMAIL_KEY = "email";
 	private final static String PASSWORD_KEY = "passwd";
 	
@@ -50,7 +51,7 @@ public class LoginActivity extends Activity {
         
         //set layout
         setContentView(R.layout.login);	  
-        
+        LOGIN_URL = getResources().getString(R.string.base_url) + LOGIN_URL_EXT;
         
         //set Button actions
         TextView newToAppTextView = (TextView) findViewById(R.id.register_here_login);

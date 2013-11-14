@@ -36,7 +36,8 @@ import android.widget.TextView;
 public class ReviewActivity extends Activity {
 	
 	//variables for the POST call
-	private final static String REVIEW_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/check-in";
+	private static String REVIEW_URL;
+	private static String REVIEW_URL_EXT = "check-in";
 	
 	//key of user for connecting to the server
 	private String kKey;
@@ -69,6 +70,9 @@ public class ReviewActivity extends Activity {
     	venueName = this.getIntent().getStringExtra(VENUE_NAME);
     	venueId = this.getIntent().getStringExtra(VENUE_ID);
     	
+    	//get the base url
+    	REVIEW_URL = getResources().getString(R.string.base_url) + REVIEW_URL_EXT;
+        
     	//Set layout
     	setContentView(R.layout.review);
     	TextView name = (TextView) findViewById(R.id.venue_name_review);
