@@ -50,8 +50,11 @@ public class FourSquareJsonParserTest extends AndroidTestCase {
 											      "\"groups\":[{"+
 											         "\"items\":[{"+											                  
 											            "\"venue\":{" + 
-											             "  \"id\":\"430d0a00f964a5203e271fe3\","+
-											              " \"name\":\"Brooklyn Bridge Park\""+
+											              " \"id\":\"430d0a00f964a5203e271fe3\","+
+											              " \"name\":\"Brooklyn Bridge Park\","+
+											              " \"location\":{" + 
+												              " \"distance\":3"+
+												            "}"+
 											            "}"+
 											         "}]"+
 											      "}]"+
@@ -72,13 +75,19 @@ public class FourSquareJsonParserTest extends AndroidTestCase {
 											      "\"groups\":[{"+
 											         "\"items\":[{"+											                  
 											            "\"venue\":{" + 
-											             "  \"id\":\"430d0a00f964a5203e271fe3\","+
-											              " \"name\":\"Brooklyn Bridge Park\""+
+											              " \"id\":\"430d0a00f964a5203e271fe3\","+
+											              " \"name\":\"Brooklyn Bridge Park\","+
+											              " \"location\":{" + 
+												              " \"distance\":10"+
+												            "}"+
 											            "}},"+
 											            "{"+											                  
 											            "\"venue\":{" + 
-											             "  \"id\":\"42377700f964a52024201fe3\","+
-											              " \"name\":\"Brooklyn Heights Promenade\""+
+											              " \"id\":\"42377700f964a52024201fe3\","+
+											              " \"name\":\"Brooklyn Heights Promenade\","+
+											              " \"location\":{" + 
+												              " \"distance\":5"+
+												            "}"+
 											            "}"+
 											         "}]"+
 											      "}]"+
