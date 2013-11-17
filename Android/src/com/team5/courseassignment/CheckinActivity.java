@@ -28,9 +28,11 @@ public class CheckinActivity extends Activity {
 	//variables for the POST call
 	private static String CHECK_IN_URL;
 	private final static String CHECK_IN_URL_EXT = "geo-push";
+	private final static String TIMESTAMP = "timestamp";
+	
+	//variables for the GET call
 	private static String RETRIEVE_VENUE_REVIEW_URL;
 	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "get-by-venue/venue_id/";
-	private final static String TIMESTAMP = "timestamp";
 	
 	//key of user for connecting to the server
 	private String kKey;

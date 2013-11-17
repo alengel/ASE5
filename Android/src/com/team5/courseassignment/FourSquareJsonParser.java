@@ -27,8 +27,10 @@ public class FourSquareJsonParser {
 				JSONObject venue = item.getJSONObject("venue");
 				String name = venue.getString("name");
 				String id = venue.getString("id");
+				JSONObject location = venue.getJSONObject("location");
+				Integer distance = location.getInt("distance");
 				
-				FourSquareVenue fourSquareVenue = new FourSquareVenue(name, id);
+				FourSquareVenue fourSquareVenue = new FourSquareVenue(name, id, distance);
 				venues.add(fourSquareVenue);	
 		    }
 		

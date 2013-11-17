@@ -11,9 +11,10 @@ public class FourSquareVenueTest extends AndroidTestCase {
 	@Test
 	public void testConstructor() {
 
-		FourSquareVenue venue = new FourSquareVenue("name", "id");
+		FourSquareVenue venue = new FourSquareVenue("name", "id", 3);
+		
 		assertEquals("name", venue.name);
 		assertEquals("id", venue.id);
+		assertEquals(3, venue.distance);
 	}
-
 }
