@@ -27,8 +27,7 @@ public class CheckinActivity extends Activity {
 	
 	//variables for the POST call
 	private static String CHECK_IN_URL;
-	private final static String CHECK_IN_URL_EXT = "geo-push";
-	private final static String TIMESTAMP = "timestamp";
+	private final static String CHECK_IN_URL_EXT = "check-in";
 	
 	//variables for the GET call
 	private static String RETRIEVE_VENUE_REVIEW_URL;
@@ -126,13 +125,9 @@ public class CheckinActivity extends Activity {
     @SuppressWarnings("unchecked")
 	private void checkIn() {
     	
-    	Long tsLong = System.currentTimeMillis() / 1000L;
-    	String timestamp = tsLong.toString();
-    	
-    	List<NameValuePair> data = new ArrayList<NameValuePair>(3);
+    	List<NameValuePair> data = new ArrayList<NameValuePair>(2);
     	data.add(new BasicNameValuePair(KEY_JSON, kKey));
     	data.add(new BasicNameValuePair(VENUE_ID, venueId));
-		data.add(new BasicNameValuePair(TIMESTAMP, timestamp));
     	
     	//make POST call
 		new CheckinAsyncTask().execute(data);

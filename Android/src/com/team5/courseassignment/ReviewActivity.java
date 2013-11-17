@@ -37,7 +37,7 @@ public class ReviewActivity extends Activity {
 	
 	//variables for the POST call
 	private static String REVIEW_URL;
-	private static String REVIEW_URL_EXT = "check-in";
+	private static String REVIEW_URL_EXT = "review";
 	
 	//key of user for connecting to the server
 	private String kKey;
