@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import com.team5.courseassignment.R;
 
 
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
@@ -85,7 +87,11 @@ public class LoginActivity extends Activity {
 				data.add(new BasicNameValuePair(PASSWORD_KEY, encryptedPassword));
 				
 				//make POST call
-				new LoginAsyncTask().execute(data);
+				
+				
+				ProgressDialog progress = ProgressDialog.show(LoginActivity.this, "Please wait", "Loading ...");
+		    	
+				new LoginAsyncTask(progress).execute(data);
 			}
 		});
         
@@ -125,7 +131,20 @@ private void showInvalidInput(String message) {
     
     
     private class LoginAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+    	
+    	private ProgressDialog progress;
+    	public LoginAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
 
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	  protected void onProgressUpdate(Integer... progress) {
+ 	         setProgress(progress[0]);
+ 	     }
+    	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -135,11 +154,13 @@ private void showInvalidInput(String message) {
 			
 			return resultJson;
 		}
+		
 
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			
 			super.onPostExecute(result);
+			progress.dismiss();
 			
 			if(result != null) {
 				

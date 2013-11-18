@@ -1,5 +1,6 @@
 package com.team5.courseassignment;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.team5.courseassignment.R;
 
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -30,9 +32,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListPopupWindow;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 
 /*
@@ -40,7 +45,7 @@ import android.content.Intent;
  */
 
 
-public class MapActivity extends Activity implements OnItemClickListener {
+public class MapActivity extends Activity implements OnItemClickListener, LocationListener {
 	
 	private GoogleMap map;
 	
@@ -58,9 +63,11 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	private Location mLastLocation;
 	
 	// Popup variables
-	ListPopupWindow popup;
+	ListView lv;
 	private final static String VENUE_NAME ="name";
 	private final static String VENUE_ID ="id";
+	private String mBestProvider; 
+	List<FourSquareVenue> venues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +86,18 @@ public class MapActivity extends Activity implements OnItemClickListener {
         	UiSettings settings = map.getUiSettings();
         	settings.setZoomControlsEnabled(false);
         	settings.setMyLocationButtonEnabled(false);
+        	
+        	lv = (ListView) findViewById(R.id.anchor);
+        	//FourSquareVenue[] venues = new FourSquareVenue[]{};
+        	//List<FourSquareVenue> venues = new List<FourSquareVenue>();
+        	
+        	
+        	ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
+        	
+        	//lv.setAdapter(new MyAdapter(MapActivity.this,venues));
+        	
+        	lv.setAdapter(adapter);
+        	
         	
         	//Setting up locate me button.
         	Button loginButton = (Button) findViewById(R.id.locate_me_button);
@@ -123,9 +142,14 @@ public class MapActivity extends Activity implements OnItemClickListener {
     	};
     	
     	LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5*1000,
-                0, mLocationListener);
+    	
+    	
+    	Criteria criteria = new Criteria();
+    	mBestProvider = mLocationManager.getBestProvider(criteria, true);
+    	mLocationManager.requestLocationUpdates(mBestProvider, 1000, 10, this);
+    	
+    	//mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5*1000,
+        //  0, mLocationListener);
         
         mLastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
     }
@@ -143,18 +167,20 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), zoom));
 		
 		// make POST call to FourSquare API
-		new GetFourSquareVenue().execute(data);
+		ProgressDialog progress = ProgressDialog.show(MapActivity.this, "Please wait", "Loading ...");
+		new GetFourSquareVenue(progress).execute(data);
     }
 	
 	private void showList(List<FourSquareVenue> venues)
 	{
-		popup = new ListPopupWindow(this);
-        popup.setAnchorView(findViewById(R.id.anchor));
-        ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
-        popup.setAdapter(adapter);
-        popup.setOnItemClickListener(this);
+		lv = new ListView(this);
+        lv= (ListView) findViewById(R.id.anchor);
+        ListAdapter adapter = new MyAdapter(this, venues);
+        lv.setAdapter(adapter);
         
-        popup.show();
+        lv.setOnItemClickListener(this);
+        
+        //popup.show();
 	}
 	
 
@@ -174,13 +200,24 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		
 		startActivity(i);
 		
-        popup.dismiss();
+       // popup.dismiss();
     }
    
 	private class GetFourSquareVenue extends AsyncTask<String, Void, JSONObject> {
 		
     	String data;
-    	
+    	private ProgressDialog progress;
+    	public GetFourSquareVenue(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
+
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	  protected void onProgressUpdate(Integer... progress) {
+ 	         setProgress(progress[0]);
+ 	     }
 		@Override
 		protected JSONObject doInBackground(String... params) {
 		
@@ -194,7 +231,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-		
+			progress.dismiss();
 			if (result != null) {
 
 				final List<FourSquareVenue> venues = new FourSquareJsonParser().parseJSON(result);
@@ -203,7 +240,37 @@ public class MapActivity extends Activity implements OnItemClickListener {
 
                     @Override
                     public void run() {
-                    	showList(venues);
+                    	//showList(venues);
+                    	ListView lv = (ListView) findViewById(R.id.anchor);
+
+                    	// get data from the table by the ListAdapter
+                    	//ListAdapter customAdapter = new ListAdapter(this, R.layout.row, List<FourSquareVenue>);
+
+                    	
+                        //lv.setAdapter(new ListAdapter(this, R.layout.row, List<FourSquareVenue>));
+                    	ListAdapter adapter = new ArrayAdapter(MapActivity.this, android.R.layout.simple_list_item_1, venues);
+                        
+                    	lv.setAdapter(adapter);
+                        
+                        lv.setOnItemClickListener(new OnItemClickListener(){
+                        	@Override
+                        	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                        		Intent i = new Intent(getApplicationContext(), CheckinActivity.class);
+                        		
+                        		@SuppressWarnings("unchecked")
+                        		ArrayAdapter<FourSquareVenue> adapter = (ArrayAdapter<FourSquareVenue>) arg0.getAdapter();
+                        		FourSquareVenue venue = adapter.getItem(position);
+                        		
+                        		i.putExtra(KEY_JSON, kKey);
+                        		i.putExtra(VENUE_NAME, venue.name);
+                        		i.putExtra(VENUE_ID, venue.id);
+                        		
+                        		startActivity(i);
+                        		
+                               // popup.dismiss();
+                            }
+                        });
                     }
                 });
 			}
@@ -228,4 +295,30 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		
 		return true;
     }
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		mLastLocation = location;
+    	Log.d("location_update", location.toString());
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}
 }

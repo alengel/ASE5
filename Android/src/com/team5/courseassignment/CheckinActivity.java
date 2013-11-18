@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -73,13 +74,26 @@ public class CheckinActivity extends Activity {
     	
     	//make GET request to retrieve existing user reviews for venue
     	String data = venueId;
-    	new VenueReviewsAsyncTask().execute(data);
+    	ProgressDialog progress = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
+    	new VenueReviewsAsyncTask(progress).execute(data);
     }
     
     private class VenueReviewsAsyncTask extends AsyncTask<String, Void, JSONObject> {
 		
     	String data;
-    	
+    	private ProgressDialog progress;
+    	public VenueReviewsAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
+
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	  protected void onProgressUpdate(Integer... progress) {
+ 	         setProgress(progress[0]);
+ 	     }
+    	  
 		@Override
 		protected JSONObject doInBackground(String... params) {
 		
@@ -92,8 +106,9 @@ public class CheckinActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(JSONObject result) {
+			
 			super.onPostExecute(result);
-		
+			progress.dismiss();
 			if (result != null) {
 				try {
 					final List<VenueReview> reviews = new VenueReviewParser().parseJSON(result);
@@ -130,11 +145,24 @@ public class CheckinActivity extends Activity {
     	data.add(new BasicNameValuePair(VENUE_ID, venueId));
     	
     	//make POST call
-		new CheckinAsyncTask().execute(data);
+		ProgressDialog progress = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
+		new CheckinAsyncTask(progress).execute(data);
     }
     
     private class CheckinAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+    	private ProgressDialog progress;
+    	public CheckinAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
 
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	  protected void onProgressUpdate(Integer... progress) {
+ 	         setProgress(progress[0]);
+ 	     }
+    	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -150,7 +178,7 @@ public class CheckinActivity extends Activity {
 		protected void onPostExecute(JSONObject result) {
 			
 			super.onPostExecute(result);
-			
+			progress.dismiss();
 			if(result != null) {
 				
 				try {

@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -134,7 +135,8 @@ public class ReviewActivity extends Activity {
 				data.add(new BasicNameValuePair(IMAGE,encodedImage));
 				
 				//make POST call
-				new ReviewAsyncTask().execute(data);
+				ProgressDialog progress = ProgressDialog.show(ReviewActivity.this, "Please wait", "Loading ...");
+				new ReviewAsyncTask(progress).execute(data);
 			}
 		});	
     }
@@ -183,7 +185,19 @@ public class ReviewActivity extends Activity {
     
 	
     private class ReviewAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+    	private ProgressDialog progress;
+    	public ReviewAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
 
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	  protected void onProgressUpdate(Integer... progress) {
+ 	         setProgress(progress[0]);
+ 	     }
+    	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -199,7 +213,7 @@ public class ReviewActivity extends Activity {
 		protected void onPostExecute(JSONObject result) {
 			
 			super.onPostExecute(result);
-			
+			progress.dismiss();
 			if(result != null) {
 				
 				try {

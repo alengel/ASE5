@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,7 +21,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.team5.courseassignment.R;
-
 
 
 public class ForgottenPasswordActivity extends Activity {
@@ -58,7 +58,8 @@ public class ForgottenPasswordActivity extends Activity {
 					data.add(new BasicNameValuePair(EMAIL_KEY, email));
 					
 					//make POST call
-					new ForgottenPasswordAsyncTask().execute(data);
+					ProgressDialog progress = ProgressDialog.show(ForgottenPasswordActivity.this, "Please wait", "Loading ...");
+					new ForgottenPasswordAsyncTask(progress).execute(data);
 					
 					//TODO: show waiting dialog to user
 				}
@@ -87,7 +88,19 @@ public class ForgottenPasswordActivity extends Activity {
 	    
 	    
 	    private class ForgottenPasswordAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+	    	private ProgressDialog progress;
+	    	public ForgottenPasswordAsyncTask(ProgressDialog progress) {
+	    	    this.progress = progress;
+	    	  }
 
+	    	  public void onPreExecute() {
+	    	    progress.show();
+	    	  }
+
+	    	  protected void onProgressUpdate(Integer... progress) {
+	 	         setProgress(progress[0]);
+	 	     }
+	    	  
 	    	@Override
 			protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -102,7 +115,7 @@ public class ForgottenPasswordActivity extends Activity {
 			protected void onPostExecute(JSONObject result) {
 				
 				super.onPostExecute(result);
-				
+				progress.dismiss();
 				if(result != null) {
 					
 					try {
