@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -71,6 +72,35 @@ public class CheckinActivity extends Activity {
 				checkIn();
 			}
 		});
+    	
+CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxLike);
+    	
+    	// Make the button a socialize like button!
+    	btnCustomCheckBoxLike.setOnClickListener(new OnClickListener() {
+    		@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+    			
+    			/*
+    			 * 
+    			 *  CheckBox button = null; boolean isChecked = false;
+    			 
+    			 
+        			// The like was posted successfully, change the button to reflect the change
+        			if(isChecked) {
+        				button.setText("Unlike");
+        			}
+        			else {
+        				button.setText("Like");
+        			}
+    			*/
+
+    			
+				
+			}
+
+			
+    	});
     	
     	//make GET request to retrieve existing user reviews for venue
     	String data = venueId;
@@ -132,7 +162,7 @@ public class CheckinActivity extends Activity {
     private void showList(List<VenueReview> reviews)
 	{
     	ListAdapter adapter = new ArrayAdapter<VenueReview>(this, android.R.layout.simple_list_item_1, reviews);
-    	ListView list = (ListView) findViewById(R.id.list_reviews);
+    	ListView list = (ListView) findViewById(R.id.list);
     	
     	list.setAdapter(adapter);
 	}

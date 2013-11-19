@@ -11,14 +11,20 @@
         android:background="#80FFFFFF"
         android:gravity="center"
         android:textSize="20sp" />
+
+
 	
     <ListView
-    	android:id="@+id/list_reviews"
+    	android:id="@+id/list"
     	android:layout_marginTop="1dp"
     	android:background="#80FFFFFF"
     	android:layout_below="@+id/venue_name"
 	    android:layout_width="wrap_content"
-	    android:layout_height="match_parent" /> 
+	    android:layout_height="match_parent"
+	    android:drawSelectorOnTop="false"
+		android:choiceMode="multipleChoice" /> 
+	    
+    <!-- Set the android:button attribute to your state list drawable -->
     
     <ImageView
         android:id="@+id/pin_image"
@@ -38,4 +44,14 @@
 	    android:background="@drawable/actionbar"
 	    android:gravity="center"
 	    android:text="@string/check_in_button" />
+
+    <CheckBox
+        android:id="@+id/btnCustomCheckBoxLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:button="@drawable/like_button_state"
+        android:enabled="true" />
+
 </RelativeLayout>
