@@ -19,6 +19,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -86,7 +87,8 @@ public class SharedPreferencesEditor {
 			//TODO: change according to new API!!!
 			
 			//make POST call in order to get current Settings
-			new GetSettingsAsyncTask().execute(data);
+			ProgressDialog progress = ProgressDialog.show(null, "Please wait", "Loading ...");
+			new GetSettingsAsyncTask(progress).execute(data);
 		}
 		
 		return result;
@@ -106,7 +108,8 @@ public class SharedPreferencesEditor {
 		//TODO: change according to new API!!!
 		
 		//make POST call
-		new SetSettingsAsyncTask().execute(data);
+		ProgressDialog progress = ProgressDialog.show(null, "Please wait", "Loading ...");
+		new SetSettingsAsyncTask(progress).execute(data);
 		
 		return;
 	}
@@ -123,7 +126,8 @@ public class SharedPreferencesEditor {
 			//TODO: change according to new API!!!
 			
 			//make POST call in order to get current Settings
-			new GetSettingsAsyncTask().execute(data);
+			ProgressDialog progress = ProgressDialog.show(null, "Please wait", "Loading ...");
+			new GetSettingsAsyncTask(progress).execute(data);
 		}
 		
 		return result;
@@ -143,7 +147,8 @@ public class SharedPreferencesEditor {
 		//TODO: change according to new API!!!
 		
 		//make POST call
-		new SetSettingsAsyncTask().execute(data);
+		ProgressDialog progress = ProgressDialog.show(null, "Please wait", "Loading ...");
+		new SetSettingsAsyncTask(progress).execute(data);
 		
 		return;
 	}
@@ -160,7 +165,8 @@ public class SharedPreferencesEditor {
 			//TODO: change according to new API!!!
 			
 			//make POST call in order to get current Settings
-			new GetSettingsAsyncTask().execute(data);
+			ProgressDialog progress = ProgressDialog.show(null, "Please wait", "Loading ...");
+			new GetSettingsAsyncTask(progress).execute(data);
 		}
 		
 		return result;
@@ -180,13 +186,27 @@ public class SharedPreferencesEditor {
 		//TODO: change according to new API!!!
 		
 		//make POST call
-		new SetSettingsAsyncTask().execute(data);
+		ProgressDialog progress = ProgressDialog.show(null,"Please wait", "Loading ...");
+		new SetSettingsAsyncTask(progress).execute(data);
 		
 		return;
 	}
 	
 	private class GetSettingsAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+		private ProgressDialog progress;
+		public GetSettingsAsyncTask(ProgressDialog progress) {
+		    this.progress = progress;
+		  }
 
+		  public void onPreExecute() {
+		    progress.show();
+		  }
+
+	    @SuppressWarnings("unused")
+		protected void onProgressUpdate(Integer... progress) {
+		        // setProgress(progress[0]);
+		     }
+		  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -249,7 +269,7 @@ public class SharedPreferencesEditor {
 		protected void onPostExecute(JSONObject result) {
 			
 			super.onPostExecute(result);
-			
+			progress.dismiss();
 			if(result != null) {
 				
 				try {
@@ -282,7 +302,20 @@ public class SharedPreferencesEditor {
 	
 	
 	private class SetSettingsAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+		private ProgressDialog progress;
+		public SetSettingsAsyncTask(ProgressDialog progress) {
+		    this.progress = progress;
+		  }
 
+		  public void onPreExecute() {
+		    progress.show();
+		  }
+
+		@SuppressWarnings("unused")
+		protected void onProgressUpdate(Integer... progress) {
+		        // setProgress(progress[0]);
+		     }
+		  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -345,7 +378,7 @@ public class SharedPreferencesEditor {
 		protected void onPostExecute(JSONObject result) {
 			
 			super.onPostExecute(result);
-			
+			progress.dismiss();
 			if(result != null) {
 				
 				try {

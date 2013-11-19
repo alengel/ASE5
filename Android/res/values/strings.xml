@@ -73,5 +73,9 @@
 	<string name="review_success_title">Thanks</string>
 	<string name="review_success">For Your Review. Continue To Map?</string>
 	<string name="image_description">Upload a venue image</string>
+	
+	<!-- Row -->
+	<string name="id">id</string>
+	<string name="category_id">CategoryId</string>
 		
 </resources>

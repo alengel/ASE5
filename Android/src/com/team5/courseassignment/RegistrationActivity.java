@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -135,7 +136,8 @@ public class RegistrationActivity extends Activity{
 			
 
 			//make POST call
-			new RegisterAsyncTask().execute(data);
+			ProgressDialog progress = ProgressDialog.show(RegistrationActivity.this, "Please wait", "Loading ...");
+			new RegisterAsyncTask(progress).execute(data);
 			
 	
         	 }
@@ -205,7 +207,20 @@ public class RegistrationActivity extends Activity{
     
     
     private class RegisterAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+    	private ProgressDialog progress;
+    	public RegisterAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
 
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	  @SuppressWarnings("unused")
+		  protected void onProgressUpdate(Integer... progress) {
+ 	           setProgress(progress[0]);
+ 	      }
+    	  
     	@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -220,7 +235,7 @@ public class RegistrationActivity extends Activity{
 		protected void onPostExecute(JSONObject result) {
 			
 			super.onPostExecute(result);
-			
+			progress.dismiss();
 			if(result != null) {
 				
 				try {

@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -68,13 +69,27 @@ public class SettingsActivity extends Activity {
 		data.add(new BasicNameValuePair(KEY_JSON, kKey));
 		
   		//make POST call
-		new LogoutAsyncTask().execute(data);
+		ProgressDialog progress = ProgressDialog.show(SettingsActivity.this, "Please wait", "Loading ...");
+		new LogoutAsyncTask(progress).execute(data);
   		
   		return true;
       }
   	
 private class LogoutAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
-		
+	private ProgressDialog progress;
+	public LogoutAsyncTask(ProgressDialog progress) {
+	    this.progress = progress;
+	  }
+
+	  public void onPreExecute() {
+	    progress.show();
+	  }
+
+	  @SuppressWarnings("unused")
+	  protected void onProgressUpdate(Integer... progress) {
+	       setProgress(progress[0]);
+      }
+	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -89,7 +104,7 @@ private class LogoutAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONO
 		protected void onPostExecute(JSONObject result) {
 			
 			super.onPostExecute(result);
-			
+			progress.dismiss();
 			if(result != null) {
 				
 				try {

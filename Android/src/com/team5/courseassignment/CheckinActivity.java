@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ public class CheckinActivity extends Activity {
 	
 	//variables for the GET call
 	private static String RETRIEVE_VENUE_REVIEW_URL;
-	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "get-by-venue/venue_id/";
+	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "venue/venue_id/";
 	
 	//key of user for connecting to the server
 	private String kKey;
@@ -71,15 +73,54 @@ public class CheckinActivity extends Activity {
 			}
 		});
     	
+    	CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxLike);
+    	
+    	// Make the button a socialize like button!
+    	btnCustomCheckBoxLike.setOnClickListener(new OnClickListener() {
+    		@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+    			
+    			/*
+    			 * 
+    			 *  CheckBox button = null; boolean isChecked = false;
+    			 
+    			 
+        			// The like was posted successfully, change the button to reflect the change
+        			if(isChecked) {
+        				button.setText("Unlike");
+        			}
+        			else {
+        				button.setText("Like");
+        			}
+    			*/	
+			}
+    	});
+    	
     	//make GET request to retrieve existing user reviews for venue
-    	String data = venueId;
-    	new VenueReviewsAsyncTask().execute(data);
+    	String data = venueId + "/key/" + kKey;
+    	ProgressDialog progress = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
+    	
+    	new VenueReviewsAsyncTask(progress).execute(data);
     }
     
     private class VenueReviewsAsyncTask extends AsyncTask<String, Void, JSONObject> {
 		
     	String data;
-    	
+    	private ProgressDialog progress;
+    	public VenueReviewsAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
+
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	  @SuppressWarnings("unused")
+    	  protected void onProgressUpdate(Integer... progress) {
+    		  setProgress(progress[0]);
+ 	      }
+    	  
 		@Override
 		protected JSONObject doInBackground(String... params) {
 		
@@ -92,8 +133,9 @@ public class CheckinActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(JSONObject result) {
+			
 			super.onPostExecute(result);
-		
+			progress.dismiss();
 			if (result != null) {
 				try {
 					final List<VenueReview> reviews = new VenueReviewParser().parseJSON(result);
@@ -117,7 +159,7 @@ public class CheckinActivity extends Activity {
     private void showList(List<VenueReview> reviews)
 	{
     	ListAdapter adapter = new ArrayAdapter<VenueReview>(this, android.R.layout.simple_list_item_1, reviews);
-    	ListView list = (ListView) findViewById(R.id.list_reviews);
+    	ListView list = (ListView) findViewById(R.id.list);
     	
     	list.setAdapter(adapter);
 	}
@@ -130,11 +172,25 @@ public class CheckinActivity extends Activity {
     	data.add(new BasicNameValuePair(VENUE_ID, venueId));
     	
     	//make POST call
-		new CheckinAsyncTask().execute(data);
+		ProgressDialog progress = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
+		new CheckinAsyncTask(progress).execute(data);
     }
     
     private class CheckinAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+    	private ProgressDialog progress;
+    	public CheckinAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
 
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	 @SuppressWarnings("unused")
+		 protected void onProgressUpdate(Integer... progress) {
+ 	          setProgress(progress[0]);
+ 	     }
+    	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
 			
@@ -150,7 +206,7 @@ public class CheckinActivity extends Activity {
 		protected void onPostExecute(JSONObject result) {
 			
 			super.onPostExecute(result);
-			
+			progress.dismiss();
 			if(result != null) {
 				
 				try {
