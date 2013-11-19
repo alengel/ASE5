@@ -216,9 +216,10 @@ public class RegistrationActivity extends Activity{
     	    progress.show();
     	  }
 
-    	  protected void onProgressUpdate(Integer... progress) {
- 	         setProgress(progress[0]);
- 	     }
+    	  @SuppressWarnings("unused")
+		  protected void onProgressUpdate(Integer... progress) {
+ 	           setProgress(progress[0]);
+ 	      }
     	  
     	@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {

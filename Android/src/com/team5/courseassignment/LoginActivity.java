@@ -110,7 +110,7 @@ public class LoginActivity extends Activity {
     }   
     
     
-private void showInvalidInput(String message) {
+    private void showInvalidInput(String message) {
 		
 		Log.d("login", "Login.showInvalidInput() with argument: " + message);
 		
@@ -141,9 +141,10 @@ private void showInvalidInput(String message) {
     	    progress.show();
     	  }
 
-    	  protected void onProgressUpdate(Integer... progress) {
- 	         setProgress(progress[0]);
- 	     }
+    	  @SuppressWarnings("unused")
+		  protected void onProgressUpdate(Integer... progress) {
+ 	           setProgress(progress[0]);
+ 	      }
     	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {

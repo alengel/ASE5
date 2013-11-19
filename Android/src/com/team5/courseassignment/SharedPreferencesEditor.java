@@ -202,7 +202,8 @@ public class SharedPreferencesEditor {
 		    progress.show();
 		  }
 
-		  protected void onProgressUpdate(Integer... progress) {
+	    @SuppressWarnings("unused")
+		protected void onProgressUpdate(Integer... progress) {
 		        // setProgress(progress[0]);
 		     }
 		  
@@ -310,7 +311,8 @@ public class SharedPreferencesEditor {
 		    progress.show();
 		  }
 
-		  protected void onProgressUpdate(Integer... progress) {
+		@SuppressWarnings("unused")
+		protected void onProgressUpdate(Integer... progress) {
 		        // setProgress(progress[0]);
 		     }
 		  

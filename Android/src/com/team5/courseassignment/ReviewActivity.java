@@ -160,7 +160,7 @@ public class ReviewActivity extends Activity {
 			ImageView imageView = (ImageView) findViewById(R.id.imgView);
 			
 			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.inSampleSize=4;      // 1/8 of original image
+			options.inSampleSize=8;      // 1/8 of original image
 			Bitmap b = BitmapFactory.decodeFile(picturePath,options);
 			
 		    int bmpWidth = b.getWidth();
@@ -187,16 +187,17 @@ public class ReviewActivity extends Activity {
     private class ReviewAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
     	private ProgressDialog progress;
     	public ReviewAsyncTask(ProgressDialog progress) {
-    	    this.progress = progress;
+    		this.progress = progress;
     	  }
 
     	  public void onPreExecute() {
-    	    progress.show();
+    		  progress.show();
     	  }
 
-    	  protected void onProgressUpdate(Integer... progress) {
- 	         setProgress(progress[0]);
- 	     }
+    	  @SuppressWarnings("unused")
+		  protected void onProgressUpdate(Integer... progress) {
+    		  setProgress(progress[0]);
+ 	      }
     	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {

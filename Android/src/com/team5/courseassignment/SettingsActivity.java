@@ -85,9 +85,10 @@ private class LogoutAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONO
 	    progress.show();
 	  }
 
+	  @SuppressWarnings("unused")
 	  protected void onProgressUpdate(Integer... progress) {
-	         setProgress(progress[0]);
-	     }
+	       setProgress(progress[0]);
+      }
 	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {

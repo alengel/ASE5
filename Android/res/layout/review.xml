@@ -4,12 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
     
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
     <FrameLayout 
         android:id="@+id/frame"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:layout_alignParentTop="true"
 	    android:layout_gravity="center_horizontal|center_vertical" >
 	    <ImageView
 	        android:id="@+id/imgView"
@@ -49,8 +56,6 @@
         android:id="@+id/venue_name_review"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/frame"
         android:background="#80FFFFFF"
         android:gravity="center"
         android:textSize="20sp" />
@@ -59,8 +64,7 @@
         android:id="@+id/rating_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/venue_name_review"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:numStars="5"
         android:rating="0"
         android:stepSize="1.0" />
@@ -68,15 +72,16 @@
    <EditText
         android:id="@+id/venue_review"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="180dp"
         android:background="#80FFFFFF"
-        android:layout_below="@+id/rating_bar"
         android:ems="10"
         android:gravity="top"
         android:hint="@string/enter_review"
         android:inputType="textMultiLine" >
         <requestFocus />
     </EditText>
+    </LinearLayout>
+   </ScrollView>
     
     <Button
 	    android:id="@+id/review_button"

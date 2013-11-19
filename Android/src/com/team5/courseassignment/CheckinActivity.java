@@ -33,7 +33,7 @@ public class CheckinActivity extends Activity {
 	
 	//variables for the GET call
 	private static String RETRIEVE_VENUE_REVIEW_URL;
-	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "get-by-venue/venue_id/";
+	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "venue/venue_id/";
 	
 	//key of user for connecting to the server
 	private String kKey;
@@ -73,7 +73,7 @@ public class CheckinActivity extends Activity {
 			}
 		});
     	
-CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxLike);
+    	CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxLike);
     	
     	// Make the button a socialize like button!
     	btnCustomCheckBoxLike.setOnClickListener(new OnClickListener() {
@@ -93,18 +93,14 @@ CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxL
         			else {
         				button.setText("Like");
         			}
-    			*/
-
-    			
-				
+    			*/	
 			}
-
-			
     	});
     	
     	//make GET request to retrieve existing user reviews for venue
-    	String data = venueId;
+    	String data = venueId + "/key/" + kKey;
     	ProgressDialog progress = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
+    	
     	new VenueReviewsAsyncTask(progress).execute(data);
     }
     
@@ -120,9 +116,10 @@ CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxL
     	    progress.show();
     	  }
 
+    	  @SuppressWarnings("unused")
     	  protected void onProgressUpdate(Integer... progress) {
- 	         setProgress(progress[0]);
- 	     }
+    		  setProgress(progress[0]);
+ 	      }
     	  
 		@Override
 		protected JSONObject doInBackground(String... params) {
@@ -189,8 +186,9 @@ CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxL
     	    progress.show();
     	  }
 
-    	  protected void onProgressUpdate(Integer... progress) {
- 	         setProgress(progress[0]);
+    	 @SuppressWarnings("unused")
+		 protected void onProgressUpdate(Integer... progress) {
+ 	          setProgress(progress[0]);
  	     }
     	  
 		@Override
