@@ -60,12 +60,10 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	private LocationListener mLocationListener;
 	private Location mLastLocation;
 	
-	// Popup variables
-	ListView list;
-	ListPopupWindow popup;
-	private String venueName;
 	private final static String VENUE_NAME ="name";
 	private final static String VENUE_ID ="id";
+	
+	// ArrayList of venues.
 	ArrayList<FourSquareVenue> venues = new ArrayList<FourSquareVenue>();
 
     @Override
@@ -85,14 +83,6 @@ public class MapActivity extends Activity implements OnItemClickListener {
         	UiSettings settings = map.getUiSettings();
         	settings.setZoomControlsEnabled(false);
         	settings.setMyLocationButtonEnabled(false);
-        	
-        	ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
-        	ListView list = (ListView) findViewById(R.id.list);
-        	
-        	list.setAdapter(adapter);
-        	list.setOnItemClickListener(this);
-        	TextView name = (TextView) findViewById(R.id.venue_name);
-        	name.setText(venueName);
         	
         	//Setting up locate me button.
         	Button loginButton = (Button) findViewById(R.id.locate_me_button);
@@ -162,22 +152,10 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	
 	private void showList(List<FourSquareVenue> venues)
 	{
-		/**
-		 * popup = new ListPopupWindow(this);
-		 *
-        popup.setAnchorView(findViewById(R.id.anchor));
-        ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
-        //ListView list = (ListView) findViewById(R.id.anchor);
-        popup.setAdapter(adapter);
-        popup.setOnItemClickListener(this);
-        
-        popup.show();
-        */
-		
 		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
-    	ListView list = (ListView) findViewById(R.id.list);
-    	
+    	ListView list = (ListView) findViewById(R.id.list); 	
     	list.setAdapter(adapter);
+    	list.setOnItemClickListener(this);
 	}
 	
 
@@ -196,8 +174,6 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		i.putExtra(VENUE_ID, venue.id);
 		
 		startActivity(i);
-		
-       // popup.dismiss(); --> discards pop-up window
     }
    
 	private class GetFourSquareVenue extends AsyncTask<String, Void, JSONObject> {
