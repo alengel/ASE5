@@ -1,48 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical" >
+<fragment
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.MapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:layout_alignTop="@id/map" />
 
-	<LinearLayout
-   			android:layout_width="match_parent"
-    		android:layout_height="match_parent"
-   			android:layout_weight="1.0"
-    		android:orientation="vertical" >
+<TextView
+    android:id="@+id/venue_name"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    
+    android:layout_below="@id/map"
+    android:background="#80FFFFFF"
+    android:gravity="center"
+    android:textSize="20sp" />
+	
+    <ListView
+    	android:id="@+id/list"
+    	android:layout_marginTop="1dp"
+    	
+    	android:background="#80FFFFFF"
+    	android:layout_below="@+id/venue_name"
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent"
+	    android:drawSelectorOnTop="false"
+		 /> 
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
 
-	<LinearLayout
-    		android:layout_width="match_parent"
-    		android:layout_height="match_parent"
-    		android:layout_weight="1.0"
-    		android:orientation="vertical" >
-        
-        <ListView
-            android:id="@+id/anchor"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/map"
-             >
 
-        </ListView>
 
-        <Button
-            android:id="@+id/locate_me_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/actionbar"
-            android:text="@string/locate_me_button" />
-</LinearLayout>
 
-</LinearLayout>
 
+
+
+
+<Button
+    android:id="@+id/locate_me_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/actionbar"
+    android:text="@string/locate_me_button" />
+
+
+</RelativeLayout>
