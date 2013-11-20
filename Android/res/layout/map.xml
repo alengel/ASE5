@@ -11,7 +11,6 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:layout_alignTop="@id/map" />
-
 	
 <ListView
     android:id="@+id/list"
@@ -31,5 +30,16 @@
     android:background="@drawable/actionbar"
     android:text="@string/locate_me_button" />
 
+<TextView
+    android:id="@+id/hint"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@+id/list"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="110dp"
+    android:text="@string/hint"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:textColor="@color/white"
+    android:visibility="visible" />
 
 </RelativeLayout>

@@ -31,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -81,12 +82,14 @@ public class MapActivity extends Activity implements OnItemClickListener {
         	UiSettings settings = map.getUiSettings();
         	settings.setZoomControlsEnabled(false);
         	settings.setMyLocationButtonEnabled(false);
-        	
+        	     	
         	//Setting up locate me button.
         	Button loginButton = (Button) findViewById(R.id.locate_me_button);
             loginButton.setOnClickListener(new OnClickListener() {
     			public void onClick(View v) {
-					onLocateMe();
+    				TextView tv = (TextView) MapActivity.this.findViewById(R.id.hint);
+    		        tv.setVisibility(View.INVISIBLE);
+    				onLocateMe();
 				}
 			});	
         } else {
@@ -151,7 +154,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	private void showList(List<FourSquareVenue> venues)
 	{
 		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
-    	ListView list = (ListView) findViewById(R.id.list); 	
+    	ListView list = (ListView) findViewById(R.id.list); 
     	list.setAdapter(adapter);
     	list.setOnItemClickListener(this);
 	}
