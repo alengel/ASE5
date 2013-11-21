@@ -16,20 +16,17 @@
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="wrap_content"
-        android:layout_height="177dp"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_weight="0.83"
-        android:paddingTop="20dp" >
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical" >
 
 	    <ImageView
 	        android:id="@+id/imgView"
-	        android:layout_width="wrap_content"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center_horizontal"
 	        android:layout_marginBottom="50dp"
 	        android:contentDescription="@string/image_description"
-			android:paddingTop="55dp"
-	        android:scaleType="centerCrop"
+	        android:scaleType="fitXY"
 	        android:src="@drawable/default_venue" />
 	    
 	    <LinearLayout 
@@ -42,7 +39,7 @@
 		    <Button
 		        android:id="@+id/chooseExisting"
 		        android:layout_width="fill_parent"
-		        android:layout_height="fill_parent"
+		        android:layout_height="50dp"
 		        android:layout_weight="1"
 		        android:background="@drawable/actionbar"
 		        android:layout_marginRight="1dp"
@@ -63,8 +60,7 @@
         android:layout_height="50dp"
         android:background="#80FFFFFF"
         android:gravity="center"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp" />
+        android:textSize="20sp"/>
    
     <RatingBar
         android:id="@+id/rating_bar"
