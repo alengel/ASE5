@@ -38,7 +38,7 @@
             android:name="com.team5.courseassignment.RegistrationActivity"
             android:label="@string/app_name" >
         </activity>
-        
+        <!-- testing   
         <activity
             android:name="com.team5.courseassignment.LoginActivity"
             android:label="@string/app_name" > 
@@ -47,7 +47,16 @@
                 <action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->       
+            <activity
+            android:name="com.team5.courseassignment.OtherUsersProfileActivity"
+            android:label="@string/app_name" > 
             
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+              
         </activity> 
         
         <activity
