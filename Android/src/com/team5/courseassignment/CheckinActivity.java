@@ -76,34 +76,11 @@ public class CheckinActivity extends Activity {
     	checkinButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				checkIn();
-				adapter.imageLoader.clearCache();
-	            adapter.notifyDataSetChanged();
+				
+				
 			}
 		});
     	
-    	CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxLike);
-    	
-    	// Make the button a socialize like button!
-    	btnCustomCheckBoxLike.setOnClickListener(new OnClickListener() {
-    		@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-    			
-    			/*
-    			 * 
-    			 *  CheckBox button = null; boolean isChecked = false;
-    			 
-    			 
-        			// The like was posted successfully, change the button to reflect the change
-        			if(isChecked) {
-        				button.setText("Unlike");
-        			}
-        			else {
-        				button.setText("Like");
-        			}
-    			*/	
-			}
-    	});
     	
     	//make GET request to retrieve existing user reviews for venue
     	String data = venueId + "/key/" + kKey;
@@ -119,6 +96,7 @@ public class CheckinActivity extends Activity {
         super.onDestroy();
     }
     
+  
     private class VenueReviewsAsyncTask extends AsyncTask<String, Void, JSONObject> {
 		
     	String data;
@@ -176,7 +154,7 @@ public class CheckinActivity extends Activity {
 	{
     	//ListAdapter adapter = new ArrayAdapter<VenueReview>(this, android.R.layout.simple_list_item_1, reviews);
     	ListView list = (ListView) findViewById(R.id.list);
-    	 adapter=new ListViewAdapter(this, reviews);
+    	 adapter=new ListViewAdapter(this, R.layout.row, reviews);
          list.setAdapter(adapter);
     	//list.setAdapter(new ListViewAdapter(this, R.layout.row, reviews));
 	}

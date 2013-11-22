@@ -1,188 +1,188 @@
 package com.team5.courseassignment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
+import java.lang.Thread.State;
+import java.lang.ref.SoftReference;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.Map;
-import java.util.WeakHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import android.os.Handler;
-import android.content.Context;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
+ 
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.ImageView;
-
+import android.graphics.Matrix;
+import android.os.Handler;
+import android.util.Log;
+ 
+/**
+ * This is an object that can load images from a URL on a thread.
+ *
+ *
+ */
 public class ImageLoader {
-    
-    MemoryCache memoryCache=new MemoryCache();
-    FileCache fileCache;
-    private Map<ImageView, String> imageViews=Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
-    ExecutorService executorService;
-    Handler handler=new Handler();//handler to display images in UI thread
-    
-    public ImageLoader(Context context){
-        fileCache=new FileCache(context);
-        executorService=Executors.newFixedThreadPool(5);
+    private static final String TAG = "ImageThreadLoader";
+    private static float curScale = 1F;
+	private static float curRotate = 0F;
+ 
+    // Global cache of images.
+    // Using SoftReference to allow garbage collector to clean cache if needed
+    private final HashMap<String, SoftReference<Bitmap>> Cache = new HashMap<String,  SoftReference<Bitmap>>();
+ 
+    private final class QueueItem {
+        public URL url;
+        public ImageLoadedListener listener;
     }
-    
-    final int stub_id=R.drawable.profile_picture;
-    public void DisplayImage(String url, ImageView imageView)
-    {
-        imageViews.put(imageView, url);
-        Bitmap bitmap=memoryCache.get(url);
-        if(bitmap!=null)
-            imageView.setImageBitmap(bitmap);
-        else
-        {
-            queuePhoto(url, imageView);
-            imageView.setImageResource(stub_id);
-        }
+    private final ArrayList<QueueItem> Queue = new ArrayList<QueueItem>();
+ 
+    private final Handler handler = new Handler();  // Assumes that this is started from the main (UI) thread
+    private Thread thread;
+    private QueueRunner runner = new QueueRunner();;
+ 
+    /** Creates a new instance of the ImageThreadLoader */
+    public ImageLoader() {
+        thread = new Thread(runner);
     }
-        
-    private void queuePhoto(String url, ImageView imageView)
-    {
-        PhotoToLoad p=new PhotoToLoad(url, imageView);
-        executorService.submit(new PhotosLoader(p));
+ 
+    /**
+     * Defines an interface for a callback that will handle
+     * responses from the thread loader when an image is done
+     * being loaded.
+     */
+    public interface ImageLoadedListener {
+        public void imageLoaded(Bitmap imageBitmap );
     }
-    
-    private Bitmap getBitmap(String url) 
-    {
-        File f=fileCache.getFile(url);
-        
-        //from SD cache
-        Bitmap b = decodeFile(f);
-        if(b!=null)
-            return b;
-        
-        //from web
-        try {
-            Bitmap bitmap=null;
-            URL imageUrl = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection)imageUrl.openConnection();
-            conn.setConnectTimeout(30000);
-            conn.setReadTimeout(30000);
-            conn.setInstanceFollowRedirects(true);
-            InputStream is=conn.getInputStream();
-            OutputStream os = new FileOutputStream(f);
-            Utils.CopyStream(is, os);
-            os.close();
-            conn.disconnect();
-            bitmap = decodeFile(f);
-            return bitmap;
-        } catch (Throwable ex){
-           ex.printStackTrace();
-           if(ex instanceof OutOfMemoryError)
-               memoryCache.clear();
-           return null;
-        }
-    }
-
-    //decodes image and scales it to reduce memory consumption
-    private Bitmap decodeFile(File f){
-        try {
-            //decode image size
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inJustDecodeBounds = true;
-            FileInputStream stream1=new FileInputStream(f);
-            BitmapFactory.decodeStream(stream1,null,o);
-            stream1.close();
-            
-            //Find the correct scale value. It should be the power of 2.
-            final int REQUIRED_SIZE=70;
-            int width_tmp=o.outWidth, height_tmp=o.outHeight;
-            int scale=1;
-            while(true){
-                if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
-                    break;
-                width_tmp/=2;
-                height_tmp/=2;
-                scale*=2;
+ 
+    /**
+     * Provides a Runnable class to handle loading
+     * the image from the URL and settings the
+     * ImageView on the UI thread.
+     */
+    private class QueueRunner implements Runnable {
+        public void run() {
+            synchronized(this) {
+                while(Queue.size() > 0) {
+                    final QueueItem item = Queue.remove(0);
+ 
+                    // If in the cache, return that copy and be done
+                    if( Cache.containsKey(item.url.toString()) && Cache.get(item.url.toString()) != null) {
+                        // Use a handler to get back onto the UI thread for the update
+                        handler.post(new Runnable() {
+                            public void run() {
+                                if( item.listener != null ) {
+                                    // NB: There's a potential race condition here where the cache item could get
+                                    //     garbage collected between when we post the runnable and it's executed.
+                                    //     Ideally we would re-run the network load or something.
+                                    SoftReference<Bitmap> ref = Cache.get(item.url.toString());
+                                    if( ref != null ) {
+                                        item.listener.imageLoaded(ref.get());
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        final Bitmap bmp = readBitmapFromNetwork(item.url);
+                        if( bmp != null ) {
+                            Cache.put(item.url.toString(), new SoftReference<Bitmap>(bmp));
+ 
+                            // Use a handler to get back onto the UI thread for the update
+                            handler.post(new Runnable() {
+                                public void run() {
+                                    if( item.listener != null ) {
+                                        item.listener.imageLoaded(bmp);
+                                    }
+                                }
+                            });
+                        }
+ 
+                    }
+ 
+                }
             }
-            
-            //decode with inSampleSize
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize=scale;
-            FileInputStream stream2=new FileInputStream(f);
-            Bitmap bitmap=BitmapFactory.decodeStream(stream2, null, o2);
-            stream2.close();
-            return bitmap;
-        } catch (FileNotFoundException e) {
-        } 
-        catch (IOException e) {
-            e.printStackTrace();
+        }
+    }
+ 
+    /**
+     * Queues up a URI to load an image from for a given image view.
+     *
+     * @param uri   The URI source of the image
+     * @param callback  The listener class to call when the image is loaded
+     * @throws MalformedURLException If the provided uri cannot be parsed
+     * @return A Bitmap image if the image is in the cache, else null.
+     */
+    public Bitmap loadImage( final String uri, final ImageLoadedListener listener) throws MalformedURLException {
+    	
+    	// If it's in the cache, just get it and quit it
+        if( Cache.containsKey(uri)) {
+            SoftReference<Bitmap> ref = Cache.get(uri);
+            if( ref != null ) {
+                return ref.get();
+            }
+        }
+ 
+        QueueItem item = new QueueItem();
+        item.url = new URL(uri);
+        item.listener = listener;
+        Queue.add(item);
+ 
+        // start the thread if needed
+        if( thread.getState() == State.NEW) {
+            thread.start();
+        } else if( thread.getState() == State.TERMINATED) {
+            thread = new Thread(runner);
+            thread.start();
         }
         return null;
     }
-    
-    //Task for the queue
-    private class PhotoToLoad
-    {
-        public String url;
-        public ImageView imageView;
-        public PhotoToLoad(String u, ImageView i){
-            url=u; 
-            imageView=i;
-        }
-    }
-    
-    class PhotosLoader implements Runnable {
-        PhotoToLoad photoToLoad;
-        PhotosLoader(PhotoToLoad photoToLoad){
-            this.photoToLoad=photoToLoad;
-        }
-        
-        @Override
-        public void run() {
-            try{
-                if(imageViewReused(photoToLoad))
-                    return;
-                Bitmap bmp=getBitmap(photoToLoad.url);
-                memoryCache.put(photoToLoad.url, bmp);
-                if(imageViewReused(photoToLoad))
-                    return;
-                BitmapDisplayer bd=new BitmapDisplayer(bmp, photoToLoad);
-                handler.post(bd);
-            }catch(Throwable th){
-                th.printStackTrace();
+ 
+    /**
+     * Convenience method to retrieve a bitmap image from
+     * a URL over the network. The built-in methods do
+     * not seem to work, as they return a FileNotFound
+     * exception.
+     *
+     * Note that this does not perform any threading --
+     * it blocks the call while retrieving the data.
+     *
+     * @param url The URL to read the bitmap from.
+     * @return A Bitmap image or null if an error occurs.
+     */
+    public static Bitmap readBitmapFromNetwork( URL url ) {
+        InputStream is = null;
+        BufferedInputStream bis = null;
+        Bitmap bmp = null;
+        try {
+            URLConnection conn = url.openConnection();
+            conn.connect();
+            is = conn.getInputStream();
+            bis = new BufferedInputStream(is);
+            bmp = BitmapFactory.decodeStream(bis);
+            int bmpWidth = bmp.getWidth();
+			int bmpHeight = bmp.getHeight();
+	
+			Matrix matrix = new Matrix();
+			matrix.postScale(curScale, curScale);
+			matrix.postRotate(curRotate);
+	
+			bmp = Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeight, matrix, true);//
+        } catch (MalformedURLException e) {
+           // Log.e(TAG, "Bad ad URL", e);
+        } catch (IOException e) {
+            //Log.e(TAG, "Could not get remote ad image", e);
+        } finally {
+            try {
+                if( is != null )
+                    is.close();
+                if( bis != null )
+                    bis.close();
+            } catch (IOException e) {
+              //  Log.w(TAG, "Error closing stream.");
             }
         }
+        return bmp;
     }
-    
-    boolean imageViewReused(PhotoToLoad photoToLoad){
-        String tag=imageViews.get(photoToLoad.imageView);
-        if(tag==null || !tag.equals(photoToLoad.url))
-            return true;
-        return false;
-    }
-    
-    //Used to display bitmap in the UI thread
-    class BitmapDisplayer implements Runnable
-    {
-        Bitmap bitmap;
-        PhotoToLoad photoToLoad;
-        public BitmapDisplayer(Bitmap b, PhotoToLoad p){bitmap=b;photoToLoad=p;}
-        public void run()
-        {
-            if(imageViewReused(photoToLoad))
-                return;
-            if(bitmap!=null)
-                photoToLoad.imageView.setImageBitmap(bitmap);
-            else
-                photoToLoad.imageView.setImageResource(stub_id);
-        }
-    }
-
-    public void clearCache() {
-        memoryCache.clear();
-        fileCache.clear();
-    }
-
+ 
 }

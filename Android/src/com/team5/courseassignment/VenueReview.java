@@ -1,7 +1,5 @@
 package com.team5.courseassignment;
 
-import android.graphics.Bitmap;
-
 public class VenueReview {
 	public String profileImage;
 	public String firstName;
@@ -60,6 +58,6 @@ public class VenueReview {
 	@Override 
 	public String toString()
 	{
-		return profileImage + " " + firstName + " " + lastName + " was here. Rating: " + rating + " stars. \""+ review +"\" ";
+		return  firstName + " " + lastName + " was here. Rating: " + rating + " stars. \""+ review +"\" ";
 	}
 }

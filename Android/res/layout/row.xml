@@ -1,19 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="15dp">
-    
-    <ImageView 
-        android:id="@+id/user_picture"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:padding="10dip"
+ android:scrollbarAlwaysDrawHorizontalTrack="true"
+>
+
+    <CheckBox
+        android:id="@+id/btnCustomCheckBoxLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-    
-    <TextView 
-        android:id="@+id/context"
+        android:layout_alignRight="@+id/firstName"
+        android:layout_alignParentRight="true"
+        android:button="@drawable/like_button_state"
+        android:enabled="true" />
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+		android:scaleType="fitStart"
+		android:adjustViewBounds="true"
+        android:layout_alignParentLeft="true"
+         />
+
+    <TextView
+        android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/profile_image"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="1dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:gravity="left"
+        android:maxHeight="@dimen/activity_horizontal_margin"
+        android:maxLines="@integer/maxLines"
+        android:scrollHorizontally="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:singleLine="false"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+     <TextView
+        android:id="@+id/lastName"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/profile_image"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/firstName"
+        android:gravity="left"
+        android:maxHeight="@dimen/activity_horizontal_margin"
+        android:maxLines="@integer/maxLines"
+        android:scrollHorizontally="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:singleLine="false"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastName"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:gravity="left"
+        android:maxHeight="@dimen/activity_horizontal_margin"
+        android:maxLines="@integer/maxLines"
+        android:scrollHorizontally="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:singleLine="false"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rating"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:gravity="left"
+        android:maxHeight="@dimen/activity_horizontal_margin"
+        android:maxLines="@integer/maxLines"
+        android:scrollHorizontally="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:singleLine="false"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/commentButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnCustomCheckBoxLike"
+        android:layout_marginTop="1dp"
+        android:layout_alignRight="@+id/firstName"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/comment" 
+        
         />
-</LinearLayout>
+
+</RelativeLayout>
