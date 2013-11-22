@@ -160,18 +160,12 @@ public class ImageLoader {
             is = conn.getInputStream();
             bis = new BufferedInputStream(is);
             bmp = BitmapFactory.decodeStream(bis);
-            int bmpWidth = bmp.getWidth();
-			int bmpHeight = bmp.getHeight();
-	
-			Matrix matrix = new Matrix();
-			matrix.postScale(curScale, curScale);
-			matrix.postRotate(curRotate);
-	
-			bmp = Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeight, matrix, true);//
+          
+			
         } catch (MalformedURLException e) {
-           // Log.e(TAG, "Bad ad URL", e);
+         
         } catch (IOException e) {
-            //Log.e(TAG, "Could not get remote ad image", e);
+           
         } finally {
             try {
                 if( is != null )
@@ -179,7 +173,7 @@ public class ImageLoader {
                 if( bis != null )
                     bis.close();
             } catch (IOException e) {
-              //  Log.w(TAG, "Error closing stream.");
+             
             }
         }
         return bmp;

@@ -67,11 +67,9 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    		/**TODO 
 	    		  // launch CommentsActivity
 					Intent i = new Intent(getApplicationContext(), CommentsActivity.class); // need to create comments activity
-					
 					i.putExtra(KEY_JSON, kKey); //need to know api call for it
 					i.putExtra(user_NAME, user_id);//
 					i.putExtra(VENUE_ID, venueId);//
-					
 					startActivity(i);
 					*/
 	    		  
@@ -103,18 +101,16 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	            	/**TODO 
 		    		  // launch ProfilePageActivity
 						Intent i = new Intent(getApplicationContext(), ProfilePageActivity.class); // need to create comments activity
-						
 						i.putExtra(KEY_JSON, kKey); //need to know api call for it
 						i.putExtra(user_NAME, user_id);//
 						i.putExtra(VENUE_ID, venueId);//
-						
 						startActivity(i);
 						*/
 	            }
 	        });
 	      
 	    } catch( ClassCastException e ) {
-	     // Log.e(TAG, "Your layout must provide an image and a text view with ID's icon and text.", e);
+	    
 	      throw e;
 	    }
 	 
@@ -127,7 +123,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	      notifyDataSetChanged();                }
 	      });
 	    } catch (MalformedURLException e) {
-	     // Log.e(TAG, "Bad remote image URL: " + item.getProfileImage(), e);
+	     
 	    }
 	 
 	    textTitle.setText(item.getFirstName());

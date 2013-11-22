@@ -152,11 +152,9 @@ public class CheckinActivity extends Activity {
     
     private void showList(List<VenueReview> reviews)
 	{
-    	//ListAdapter adapter = new ArrayAdapter<VenueReview>(this, android.R.layout.simple_list_item_1, reviews);
     	ListView list = (ListView) findViewById(R.id.list);
     	 adapter=new ListViewAdapter(this, R.layout.row, reviews);
          list.setAdapter(adapter);
-    	//list.setAdapter(new ListViewAdapter(this, R.layout.row, reviews));
 	}
     
     @SuppressWarnings("unchecked")

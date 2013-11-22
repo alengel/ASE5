@@ -122,7 +122,7 @@
         android:layout_centerHorizontal="true"
         android:scaleType="fitXY"
         android:layout_marginTop="10dp"
-        android:src="@drawable/profile_picture" />
+        android:src="@drawable/default_profile_picture" />
 
 </RelativeLayout>
 </ScrollView>

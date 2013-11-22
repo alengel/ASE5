@@ -17,11 +17,12 @@
 
     <ImageView
         android:id="@+id/profile_image"
-        android:layout_width="75dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
 		android:scaleType="fitStart"
 		android:adjustViewBounds="true"
         android:layout_alignParentLeft="true"
+        android:src="@drawable/default_profile_picture"
          />
 
     <TextView
@@ -29,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/profile_image"
-        android:layout_marginLeft="18dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="1dp"
         android:layout_toRightOf="@+id/profile_image"
         android:gravity="left"
@@ -60,11 +61,11 @@
         android:textStyle="bold" />
     <TextView
         android:id="@+id/rating"
-        android:layout_width="190dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lastName"
         android:layout_marginTop="1dp"
-        android:layout_marginLeft="18dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/profile_image"
         android:gravity="left"
         android:maxHeight="@dimen/activity_horizontal_margin"
@@ -78,11 +79,11 @@
     
     <TextView
         android:id="@+id/review"
-        android:layout_width="190dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rating"
         android:layout_marginTop="1dp"
-        android:layout_marginLeft="18dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/profile_image"
         android:gravity="left"
         android:maxHeight="@dimen/activity_horizontal_margin"
