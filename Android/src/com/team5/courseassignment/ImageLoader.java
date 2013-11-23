@@ -14,9 +14,7 @@ import java.util.HashMap;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.Handler;
-import android.util.Log;
  
 /**
  * This is an object that can load images from a URL on a thread.
@@ -24,10 +22,6 @@ import android.util.Log;
  *
  */
 public class ImageLoader {
-    private static final String TAG = "ImageThreadLoader";
-    private static float curScale = 1F;
-	private static float curRotate = 0F;
- 
     // Global cache of images.
     // Using SoftReference to allow garbage collector to clean cache if needed
     private final HashMap<String, SoftReference<Bitmap>> Cache = new HashMap<String,  SoftReference<Bitmap>>();

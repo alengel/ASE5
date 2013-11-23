@@ -1,23 +1,17 @@
 package com.team5.courseassignment;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -26,18 +20,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ListViewAdapter extends ArrayAdapter<VenueReview> {
-	  private final static String TAG = "MediaItemAdapter";
 	  private int resourceId = 0;
 	  private LayoutInflater inflater;
-	  private Context context;
-	 
 	  private ImageLoader imageLoader = new ImageLoader();
 	 
 	  public ListViewAdapter(Context context, int resourceId, List<VenueReview> mediaItems) {
 	    super(context, 0, mediaItems);
 	    this.resourceId = resourceId;
 	    inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    this.context = context;
 	  }
 	 
 	  @Override

@@ -7,8 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Bitmap;
-
 public class VenueReviewParser {
 	public List<VenueReview> parseJSON(JSONObject results) throws JSONException {
 		List<VenueReview> reviews = new ArrayList<VenueReview>();
