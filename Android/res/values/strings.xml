@@ -78,6 +78,7 @@
 	<!-- Row -->
 	<string name="id">id</string>
 	<string name="category_id">CategoryId</string>
+	<string name="no_venue_review">Sorry but there is no reviews for current location.</string>
 	
 		
 </resources>

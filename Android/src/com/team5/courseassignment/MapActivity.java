@@ -35,7 +35,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 
 /*
@@ -149,8 +148,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), zoom));
 		
 		// make POST call to FourSquare API
-		ProgressDialog progress = ProgressDialog.show(MapActivity.this, "Please wait", "Loading ...");
-		new GetFourSquareVenue(progress).execute(data);
+		new GetFourSquareVenue().execute(data);
     }
 	
 	private void showList(List<FourSquareVenue> venues)
@@ -182,19 +180,6 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	private class GetFourSquareVenue extends AsyncTask<String, Void, JSONObject> {
 		
     	String data;
-    	private ProgressDialog progress;
-    	public GetFourSquareVenue(ProgressDialog progress) {
-    	    this.progress = progress;
-    	  }
-
-    	  public void onPreExecute() {
-    	    progress.show();
-    	  }
-
-    	  @SuppressWarnings("unused")
-		  protected void onProgressUpdate(Integer... progress) {
- 	           setProgress(progress[0]);
- 	      }
     	
 		@Override
 		protected JSONObject doInBackground(String... params) {
@@ -209,7 +194,6 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		@Override
 		protected void onPostExecute(JSONObject result) {
 			super.onPostExecute(result);
-			progress.dismiss();
 		
 			if (result != null) {
 

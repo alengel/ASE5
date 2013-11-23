@@ -16,12 +16,13 @@ public class VenueReviewParser {
 		for (int i = 0, size = data.length(); i < size; i++)
 	    {
 			JSONObject item = data.getJSONObject(i);
+			String profileImage = item.getString("profile_image");
 			String firstName = item.getString("first_name");
 			String lastName = item.getString("last_name");
 			String rating = item.getString("rating");
 			String review = item.getString("review");
 			
-			VenueReview venueReview = new VenueReview(firstName, lastName, rating, review);
+			VenueReview venueReview = new VenueReview(profileImage, firstName, lastName, rating, review);
 			reviews.add(venueReview);	
 	    }
 		return reviews;

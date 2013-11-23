@@ -5,6 +5,7 @@ public class FourSquareVenue {
 	public String id;
 	public int distance;
 	
+	
 	public FourSquareVenue(String name, String id, int distance) {
 		
 		this.name = name;

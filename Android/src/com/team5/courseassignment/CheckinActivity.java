@@ -18,10 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,7 +42,11 @@ public class CheckinActivity extends Activity {
 	private final static String VENUE_NAME = "name";
 	private String venueId;
 	private final static String VENUE_ID = "id";
-		
+
+	ListView list;
+	ListViewAdapter adapter;
+	
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,37 +66,18 @@ public class CheckinActivity extends Activity {
     	TextView name = (TextView) findViewById(R.id.venue_name);
     	name.setText(venueName);
     	
+    	 
+    	
     	//Setting up check in button.
     	Button checkinButton = (Button) findViewById(R.id.check_in_button);
     	checkinButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				checkIn();
+				
+				
 			}
 		});
     	
-    	CheckBox btnCustomCheckBoxLike = (CheckBox) findViewById(R.id.btnCustomCheckBoxLike);
-    	
-    	// Make the button a socialize like button!
-    	btnCustomCheckBoxLike.setOnClickListener(new OnClickListener() {
-    		@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-    			
-    			/*
-    			 * 
-    			 *  CheckBox button = null; boolean isChecked = false;
-    			 
-    			 
-        			// The like was posted successfully, change the button to reflect the change
-        			if(isChecked) {
-        				button.setText("Unlike");
-        			}
-        			else {
-        				button.setText("Like");
-        			}
-    			*/	
-			}
-    	});
     	
     	//make GET request to retrieve existing user reviews for venue
     	String data = venueId + "/key/" + kKey;
@@ -104,6 +86,14 @@ public class CheckinActivity extends Activity {
     	new VenueReviewsAsyncTask(progress).execute(data);
     }
     
+    @Override
+    public void onDestroy()
+    {
+        list.setAdapter(null);
+        super.onDestroy();
+    }
+    
+  
     private class VenueReviewsAsyncTask extends AsyncTask<String, Void, JSONObject> {
 		
     	String data;
@@ -125,6 +115,7 @@ public class CheckinActivity extends Activity {
 		protected JSONObject doInBackground(String... params) {
 		
 			data = params[0];
+			
 			
 			JSONObject resultJson = HttpRequest.makeGetRequest(RETRIEVE_VENUE_REVIEW_URL, data);
 			
@@ -158,10 +149,9 @@ public class CheckinActivity extends Activity {
     
     private void showList(List<VenueReview> reviews)
 	{
-    	ListAdapter adapter = new ArrayAdapter<VenueReview>(this, android.R.layout.simple_list_item_1, reviews);
     	ListView list = (ListView) findViewById(R.id.list);
-    	
-    	list.setAdapter(adapter);
+    	 adapter=new ListViewAdapter(this, R.layout.row, reviews);
+         list.setAdapter(adapter);
 	}
     
     @SuppressWarnings("unchecked")
