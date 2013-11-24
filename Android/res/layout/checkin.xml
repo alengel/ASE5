@@ -4,15 +4,13 @@
     android:layout_height="match_parent" >
 
 <TextView
-        android:id="@+id/venue_name"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:background="#80FFFFFF"
-        android:gravity="center"
-        android:textSize="20sp" />
-
-
+    android:id="@+id/venue_name"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_alignParentTop="true"
+    android:background="#80FFFFFF"
+    android:gravity="center"
+    android:textSize="20sp" />
 	
     <ListView
     	android:id="@+id/list"
@@ -44,14 +42,5 @@
 	    android:background="@drawable/actionbar"
 	    android:gravity="center"
 	    android:text="@string/check_in_button" />
-
-    <CheckBox
-        android:id="@+id/btnCustomCheckBoxLike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:button="@drawable/like_button_state"
-        android:enabled="true" />
 
 </RelativeLayout>
