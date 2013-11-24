@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -64,7 +65,12 @@ public class ForgottenPasswordActivity extends Activity {
 					//TODO: show waiting dialog to user
 				}
 			});
-	    }   
+	    }  
+		
+		@Override
+		public void onBackPressed() {
+		    this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+		}
 
 
 	 private void showInvalidInput(String message) {

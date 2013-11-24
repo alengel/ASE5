@@ -23,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -140,6 +141,11 @@ public class ReviewActivity extends Activity {
 			}
 		});	
     }
+	
+	@Override
+	public void onBackPressed() {
+	    this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+	}
     
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
