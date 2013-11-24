@@ -150,9 +150,10 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	  private void showPopUp2() {
 		  
 		  AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
-		  helpBuilder.setTitle("Please leave a comment");
-		  
+		  helpBuilder.setTitle("Comment");
+		  helpBuilder.setMessage("Please leave a comment.");
 		  final EditText input = new EditText(context);
+		  //input.setHint("Type here...");
 		  input.setSingleLine();
 		  input.setText("");
 		  helpBuilder.setView(input);
