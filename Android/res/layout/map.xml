@@ -37,9 +37,11 @@
     android:layout_alignTop="@+id/list"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="110dp"
+    android:gravity="center"
     android:text="@string/hint"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:textColor="@color/white"
+    android:textSize="15sp"
     android:visibility="visible" />
 
 </RelativeLayout>
