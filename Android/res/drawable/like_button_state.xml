@@ -5,7 +5,7 @@ add to res/drawable/like_button_state.xml
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/greenarrowup"
+        android:drawable="@drawable/greenarrow"
         android:state_checked="true"/>
     <item
         android:drawable="@drawable/arrowup"
