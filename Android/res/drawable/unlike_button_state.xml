@@ -5,9 +5,9 @@ add to res/drawable/like_button_state.xml
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/greenarrow"
+        android:drawable="@drawable/is_unlike"
         android:state_checked="true"/>
     <item
-        android:drawable="@drawable/arrowup"
+        android:drawable="@drawable/unlike"
         android:state_checked="false"/>    
 </selector>

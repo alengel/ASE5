@@ -15,11 +15,14 @@
 <ListView
     android:id="@+id/list"
     android:layout_marginTop="1dp"	
-    android:background="#80FFFFFF"
+    
     android:layout_below="@+id/map"
 	android:layout_width="wrap_content"
 	android:layout_height="match_parent"
 	android:drawSelectorOnTop="false"
+	android:divider="#FFCC00"
+    android:dividerHeight="1px"
+    android:background="@drawable/checkin_list_border"
 		 									/> 
 
 <Button
@@ -37,9 +40,11 @@
     android:layout_alignTop="@+id/list"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="110dp"
+    android:gravity="center"
     android:text="@string/hint"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:textColor="@color/white"
+    android:textSize="15sp"
     android:visibility="visible" />
 
 </RelativeLayout>
