@@ -96,7 +96,9 @@ public class CheckinActivity extends Activity {
     
     @Override
     public void onBackPressed() {
-        this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+    	Intent start = new Intent(CheckinActivity.this,MapActivity.class);
+        startActivity(start);
+        finishActivity(0);
     }
     
   

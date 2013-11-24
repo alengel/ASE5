@@ -143,9 +143,11 @@ public class ReviewActivity extends Activity {
     }
 	
 	@Override
-	public void onBackPressed() {
-	    this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
-	}
+    public void onBackPressed() {
+    	Intent start = new Intent(ReviewActivity.this,CheckinActivity.class);
+        startActivity(start);
+        finishActivity(0);
+    }
     
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

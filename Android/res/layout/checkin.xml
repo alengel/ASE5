@@ -15,7 +15,8 @@
     <ListView
     	android:id="@+id/list"
     	android:layout_marginTop="1dp"
-    	
+    	android:divider="@null"
+    	android:dividerHeight="0px"
     	android:layout_below="@+id/venue_name"
 	    android:layout_width="wrap_content"
 	    android:layout_height="match_parent"

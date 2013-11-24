@@ -55,7 +55,9 @@ public class SettingsActivity extends Activity {
     
     @Override
     public void onBackPressed() {
-        this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+    	Intent start = new Intent(SettingsActivity.this,MapActivity.class);
+        startActivity(start);
+        finishActivity(0);
     }
     
     @Override
