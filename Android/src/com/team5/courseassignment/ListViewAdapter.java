@@ -44,6 +44,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    TextView textTitle1;
 	    TextView textTitle2;
 	    TextView textTitle3;
+	    TextView textTitle4;
 	    
 	    
 	    final ImageView image;
@@ -55,6 +56,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	      textTitle1 = (TextView)view.findViewById(R.id.lastName);
 	      textTitle2 = (TextView)view.findViewById(R.id.rating);
 	      textTitle3 = (TextView)view.findViewById(R.id.review);
+	      textTitle4 = (TextView)view.findViewById(R.id.voteNumber);
 	      
 	     ImageButton ib = (ImageButton)view.findViewById(R.id.commentButton);
 	      ib.setOnClickListener(new OnClickListener(){
@@ -64,8 +66,23 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    	  }
 	      });
 	      
-	      CheckBox votes = (CheckBox)view. findViewById(R.id.btnCustomCheckBoxLike);
-	    	votes.setOnCheckedChangeListener(new OnCheckedChangeListener()
+	      CheckBox voteUp = (CheckBox)view. findViewById(R.id.voteUp);
+	    	voteUp.setOnCheckedChangeListener(new OnCheckedChangeListener()
+	    	{
+	    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	    	    {
+	    	        if ( isChecked )
+	    	        {
+	    	            //TODO perform voting logic
+	    	        }else{
+	    	        	
+	    	        }
+
+	    	    }
+	    	});
+	    	
+	    	CheckBox voteDown = (CheckBox)view. findViewById(R.id.voteDown);
+	    	voteDown.setOnCheckedChangeListener(new OnCheckedChangeListener()
 	    	{
 	    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	    	    {
@@ -120,6 +137,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    textTitle1.setText(item.getLastName()+"  was here");
 	    textTitle2.setText("Rating: "+item.getRating()+"  stars");
 	    textTitle3.setText("Review: "+item.getReview());
+	    textTitle4.setText(null); // Vote number need to get from server.
 	    
 	 
 	    if( cachedImage != null ) {
