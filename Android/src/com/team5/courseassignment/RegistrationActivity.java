@@ -149,7 +149,9 @@ public class RegistrationActivity extends Activity{
     
     @Override
     public void onBackPressed() {
-        this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+    	Intent start = new Intent(RegistrationActivity.this,LoginActivity.class);
+        startActivity(start);
+        finishActivity(0);
     }
     
     @Override
