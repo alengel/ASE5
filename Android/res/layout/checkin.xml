@@ -20,7 +20,9 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="match_parent"
 	    android:drawSelectorOnTop="false"
-		android:choiceMode="multipleChoice" /> 
+		android:choiceMode="multipleChoice"
+		android:divider="#FFCC00"
+    	android:dividerHeight="1px" /> 
 	    
     <!-- Set the android:button attribute to your state list drawable -->
     
