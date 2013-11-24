@@ -12,6 +12,7 @@
         android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:adjustViewBounds="true"
+        android:paddingRight="10dp"
         android:scaleType="fitXY"
         android:src="@drawable/default_profile_picture" />
 
