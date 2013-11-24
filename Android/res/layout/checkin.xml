@@ -21,9 +21,7 @@
 	    android:layout_height="match_parent"
 	    android:drawSelectorOnTop="false"
 		android:choiceMode="multipleChoice"
-		android:divider="#FFCC00"
-    	android:dividerHeight="1dp"
-    	android:background="@drawable/checkin_list_border"
+		
     	 /> 
 	    
     <!-- Set the android:button attribute to your state list drawable -->

@@ -5,4 +5,19 @@
    <!-- use this for a background colour -->
    <solid android:color="#80FFFFFF" />
    <stroke android:width="2dip" android:color="#FFCC00" />
+   <gradient 
+         android:startColor="#80FFFFFF"
+         android:endColor="#80FFFFFF" 
+         android:angle="270"/> 
+	
+   <padding android:left="5dp"
+        android:top="5dp"
+        android:right="5dp"
+        android:bottom="5dp" />
+   
+    <corners 
+         android:bottomRightRadius="7dp" 
+         android:bottomLeftRadius="7dp" 
+         android:topLeftRadius="7dp" 
+         android:topRightRadius="7dp"/> 
 </shape>
