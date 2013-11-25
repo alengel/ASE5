@@ -74,9 +74,12 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    	{
 	    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	    	    {
+	    	    	
+	    	    	
+	    	    	
 	    	    	if ( voteUp.isChecked() )
 	    	        {
-	    	        	voteUp.setEnabled(true);
+	    	    		voteUp.setEnabled(true);
 	    	        	//voteUp.setText(1);
 	    	        	voteDown.setEnabled(false);
 	    	        	//TODO
@@ -88,34 +91,49 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    	        	 */
 	    	        	
 	    	        	
-	    	        } else {
-	    	        	
+	    	        } else { 
+	    	        	voteUp.setEnabled(false);
 	    	        	//voteUp.setText(1);
 	    	        	voteDown.setEnabled(true);
 	    	        	//TODO
 	    	        }
 	    	    	
-	    	        	
-	    	    	if ( voteDown.isChecked() )
-	    	        {
-	    	        	voteUp.setEnabled(false);
-	    	        	//voteUp.setText(1);
-	    	        	voteDown.setEnabled(true);
-	    	        	//TODO
-	    	        	
-	    	        	
-	    	       } else{
-	    	    	   voteUp.setEnabled(true);
-	    	        	//voteUp.setText(1);
-	    	        	
-	    	        	//TODO
-	    	       }
+	    	    	
+	    	    	
 	    	     }    
 	    	    
 	    	});
 	    	
+	    	voteDown.setOnCheckedChangeListener(new OnCheckedChangeListener()
+	    	{
+	    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	    	    {
+	    	    	
 	    	
-	    	
+	    	if ( voteDown.isChecked() )
+	        {
+	    		voteDown.setEnabled(true);
+	        	//voteUp.setText(1);
+	        	voteUp.setEnabled(false);
+	        	//TODO
+	        	/**
+	        	 *  String selectedText = voteUp.getText().toString();
+            		Intent i = new Intent(this, VenueReview.class);
+            		i.putExtra("cakedata", selectedText);
+            		startActivity(i);
+	        	 */
+	        	
+	        	
+	        } else { 
+	        	voteUp.setEnabled(true);
+	        	//voteUp.setText(1);
+	        	voteDown.setEnabled(false);
+	        	//TODO
+	        	}
+	    		
+	    	    }    
+	    	    
+	    	});
 	    	
 	      
 	      image = (ImageView)view.findViewById(R.id.profile_image);
