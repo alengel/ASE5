@@ -11,6 +11,7 @@
     android:name="com.google.android.gms.maps.MapFragment"
     android:layout_width="match_parent"
     android:layout_height="160dp"
+    android:background="@drawable/list_border"
     android:layout_alignTop="@id/map" />
 	
 <ListView
@@ -22,7 +23,7 @@
 	android:layout_height="match_parent"
 	android:drawSelectorOnTop="false"
 	android:divider="#FFCC00"
-    android:dividerHeight="1px"
+    android:dividerHeight="2dp"
     android:background="@drawable/list_border"
 		 									/> 
 
@@ -44,7 +45,7 @@
     android:gravity="center"
     android:text="@string/hint"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="@color/white"
+    android:textColor="@color/black"
     android:textSize="15sp"
     android:visibility="visible" />
 

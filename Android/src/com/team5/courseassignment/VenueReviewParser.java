@@ -21,8 +21,9 @@ public class VenueReviewParser {
 			String lastName = item.getString("last_name");
 			String rating = item.getString("rating");
 			String review = item.getString("review");
+			//int votes = item.getInt("total_up");
 			
-			VenueReview venueReview = new VenueReview(profileImage, firstName, lastName, rating, review);
+			VenueReview venueReview = new VenueReview(profileImage, firstName, lastName, rating, review/*,votes*/);
 			reviews.add(venueReview);	
 	    }
 		return reviews;

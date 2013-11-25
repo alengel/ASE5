@@ -37,6 +37,7 @@ import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 
 /*
@@ -64,8 +65,8 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	private final static String VENUE_NAME ="name";
 	private final static String VENUE_ID ="id";
 	
-	// ArrayList of venues.
-	ArrayList<FourSquareVenue> venues = new ArrayList<FourSquareVenue>();
+	MapListViewAdapter adapter;
+	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +162,13 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	
 	private void showList(List<FourSquareVenue> venues)
 	{
+		/**
+		 * Custom list view adapter.
+		 */
+		/*ListView list = (ListView) findViewById(R.id.list);
+   	 	adapter=new MapListViewAdapter(this, R.layout.map_row, venues); 
+        list.setAdapter(adapter);*/
+		
 		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
     	ListView list = (ListView) findViewById(R.id.list); 
     	list.setAdapter(adapter);

@@ -27,15 +27,7 @@
 	    
     <!-- Set the android:button attribute to your state list drawable -->
     
-    <ImageView
-        android:id="@+id/pin_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/check_in_button"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:contentDescription="@string/pin_description"
-        android:src="@drawable/pin" />
+    
 
     <Button
 	    android:id="@+id/check_in_button"
