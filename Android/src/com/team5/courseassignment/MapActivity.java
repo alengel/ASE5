@@ -178,7 +178,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
-		Intent i = new Intent(getApplicationContext(), CheckinActivity.class);
+		Intent i = new Intent(getApplicationContext(), FollowerProfileActivity.class);
 		
 		@SuppressWarnings("unchecked")
 		ArrayAdapter<FourSquareVenue> adapter = (ArrayAdapter<FourSquareVenue>) arg0.getAdapter();
