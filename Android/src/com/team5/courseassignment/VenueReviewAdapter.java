@@ -22,13 +22,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewAdapter extends ArrayAdapter<VenueReview> {
+public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	  private int resourceId = 0;
 	  private LayoutInflater inflater;
 	  private ImageLoader imageLoader = new ImageLoader();
-	private Context context;
+	  private Context context;
 	
-	  public ListViewAdapter(Context context, int resourceId, List<VenueReview> mediaItems) {
+	  public VenueReviewAdapter(Context context, int resourceId, List<VenueReview> mediaItems) {
 	    super(context, 0, mediaItems);
 	    this.resourceId = resourceId;
 	    this.context = context;

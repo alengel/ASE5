@@ -90,6 +90,9 @@
 	
 	
 	<!-- Other Users Profile Activity -->
+	<string name="no_venue_review">Sorry but there are no reviews for your current location.</string>
+	
+	<!-- Reviewer Profile Activity -->
 	<string name="reviews">Reviews</string>
 	<string name="follow_button">Follow</string>
 	
@@ -105,5 +108,7 @@
         <item>Student Coffee</item>
         <item>McDonalds</item>
     </string-array>
+	<string name="location_image_description">Location Image</string>
+	<string name="user_name">Unknown</string>
 	
 </resources>

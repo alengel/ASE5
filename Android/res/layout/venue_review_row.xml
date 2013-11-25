@@ -4,20 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
- <ImageView android:id="@+id/location_image" 
+ <ImageView android:id="@+id/location_image"
+    android:contentDescription="@string/location_image_description" 
     android:layout_width="75dp" 
     android:layout_height="wrap_content" 
     android:scaleType="fitStart" 
-    android:adjustViewBounds="true"
-	android:layout_alignParentLeft="true" />
+    android:adjustViewBounds="true"/>
  
  <TextView android:id="@+id/location_name" 
      android:layout_width="wrap_content" 
      android:layout_height="wrap_content" 
-     android:layout_alignTop="@+id/location_image" 
      android:layout_marginLeft="18dp" 
      android:layout_marginTop="1dp" 
-     android:layout_toRightOf="@+id/location_image" 
      android:gravity="left" 
      android:maxHeight="@dimen/activity_horizontal_margin" 
      android:maxLines="5" 
@@ -28,13 +26,11 @@
      android:textSize="16sp" 
      android:textStyle="bold" />
  
-  <TextView android:id="@+id/ratings" 
+  <TextView android:id="@+id/rating" 
      android:layout_width="wrap_content" 
      android:layout_height="wrap_content" 
-     android:layout_below="@+id/location_name" 
      android:layout_marginLeft="18dp" 
      android:layout_marginTop="1dp" 
-     android:layout_toRightOf="@+id/location_image" 
      android:gravity="left" 
      android:maxHeight="@dimen/activity_horizontal_margin" 
      android:maxLines="5" 
@@ -48,10 +44,8 @@
    <TextView android:id="@+id/review" 
      android:layout_width="wrap_content" 
      android:layout_height="wrap_content" 
-     android:layout_below="@+id/ratings" 
      android:layout_marginLeft="18dp" 
      android:layout_marginTop="1dp" 
-     android:layout_toRightOf="@+id/location_image" 
      android:gravity="left" 
      android:maxHeight="@dimen/activity_horizontal_margin" 
      android:maxLines="5" 

@@ -1,12 +1,12 @@
 package com.team5.courseassignment;
 
-public class OtherUsersReviews {
+public class FollowerProfileVenue {
 	public String locationImage;
 	public String locationName;
 	public String rating;
 	public String review;
 
-	public OtherUsersReviews(String locationImage, String locationName,String rating, String review) {
+	public FollowerProfileVenue(String locationImage, String locationName,String rating, String review) {
 
 		this.locationImage = locationImage;
 		this.locationName = locationName;

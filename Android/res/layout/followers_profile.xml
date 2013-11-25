@@ -4,49 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".OtherUsersProfileActivity" >
+    tools:context=".FollowerProfileActivity" >
 
     <ImageView
-        android:id="@+id/imgView"
+        android:id="@+id/reviewer_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="22dp"
         android:contentDescription="@string/user_image_description"
-        android:src="@drawable/profile_picture" />
+        android:src="@drawable/default_profile_picture" />
 
     <Button
-        android:id="@+id/other_users_profile_button_Follow"
+        android:id="@+id/reviewer_follow_button"
         android:layout_width="220dp"
-        android:layout_height="35dp"
-        android:layout_alignBottom="@+id/imgView"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/reviewer_image"
+        android:layout_alignLeft="@+id/reviewer_name"
         android:layout_marginRight="10dp"
         android:background="@drawable/actionbar"
         android:text="@string/follow_button" />
         
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/reviewer_name"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_alignTop="@+id/imgView"
+        android:layout_alignTop="@+id/reviewer_image"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/imgView"
-        android:text="User Name"
+        android:layout_toRightOf="@+id/reviewer_image"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/orange"
         android:textSize="35sp" />
 
      <ListView
-        android:id="@+id/reviewList"
+        android:id="@+id/reviewerVenueList"
         android:background="#80ffffff"
         android:layout_width="400dp"
         android:layout_height="340dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/orange"
-        android:entries="@array/review_array" >
+        android:layout_alignParentLeft="true" >
 
     </ListView>
 
