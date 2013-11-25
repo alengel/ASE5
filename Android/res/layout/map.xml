@@ -23,7 +23,7 @@
 	android:layout_height="match_parent"
 	android:drawSelectorOnTop="false"
 	android:divider="#FFCC00"
-    android:dividerHeight="2dp"
+    android:dividerHeight="2px"
     android:background="@drawable/list_border"
 		 									/> 
 
