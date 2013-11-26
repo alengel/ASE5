@@ -14,16 +14,15 @@
         android:layout_marginTop="22dp"
         android:contentDescription="@string/user_image_description"
         android:src="@drawable/default_profile_picture" />
-
-    <Button
-        android:id="@+id/reviewer_follow_button"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_alignBottom="@+id/reviewer_image"
-        android:layout_alignLeft="@+id/reviewer_name"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/actionbar"
-        android:text="@string/follow_button" />
+    
+   <CheckBox
+         android:id="@+id/Follow_checkBox"
+         android:layout_width="220dp"
+         android:layout_height="50dp"
+         android:layout_alignBottom="@+id/reviewer_name"
+         android:layout_alignLeft="@+id/reviewer_name"
+         android:layout_marginRight="10dp"
+         android:button="@drawable/follow_button_state" />
         
     <TextView
         android:id="@+id/reviewer_name"
@@ -38,13 +37,16 @@
         android:textSize="35sp" />
 
      <ListView
-        android:id="@+id/reviewerVenueList"
-        android:background="#80ffffff"
-        android:layout_width="400dp"
-        android:layout_height="340dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" >
+         android:id="@+id/reviewerVenueList"
+         android:layout_width="400dp"
+         android:layout_height="340dp"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/reviewer_image"
+         android:background="#80ffffff" >
 
     </ListView>
+
+     
 
 </RelativeLayout>
