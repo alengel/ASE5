@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -145,6 +146,13 @@ public class RegistrationActivity extends Activity{
 		});
         
     } 
+    
+    @Override
+    public void onBackPressed() {
+    	Intent start = new Intent(RegistrationActivity.this,LoginActivity.class);
+        startActivity(start);
+        finishActivity(0);
+    }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

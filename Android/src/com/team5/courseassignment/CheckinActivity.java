@@ -13,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +33,10 @@ public class CheckinActivity extends Activity {
 	private static String RETRIEVE_VENUE_REVIEW_URL;
 	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "venue/venue_id/";
 	
+	//variables for the GET call
+	private static String RETRIEVE_VOTES_URL;
+	private final static String RETRIEVE_VOTES_URL_EXT = "vote";
+	
 	//key of user for connecting to the server
 	private String kKey;
     private final static String KEY_JSON ="key";
@@ -42,7 +47,7 @@ public class CheckinActivity extends Activity {
 	private final static String VENUE_NAME = "name";
 	private String venueId;
 	private final static String VENUE_ID = "id";
-
+	
 	ListView list;
 	ListViewAdapter adapter;
 	
@@ -55,11 +60,14 @@ public class CheckinActivity extends Activity {
         kKey = this.getIntent().getStringExtra(KEY_JSON);
     	venueName = this.getIntent().getStringExtra(VENUE_NAME);
     	venueId = this.getIntent().getStringExtra(VENUE_ID);
+    	//vote = this.getIntent().getStringExtra(TOTAL_UP);
     	
     	//Get the base url
     	String baseUrl = getResources().getString(R.string.base_url);
+    	//String baseUrl_location = getResources().getString(R.string.base_url_location);
     	CHECK_IN_URL = baseUrl + CHECK_IN_URL_EXT;
     	RETRIEVE_VENUE_REVIEW_URL = baseUrl + RETRIEVE_VENUE_REVIEW_URL_EXT;
+    	RETRIEVE_VOTES_URL = baseUrl + RETRIEVE_VOTES_URL_EXT;
     	
     	//Set layout
     	setContentView(R.layout.checkin);
@@ -91,6 +99,13 @@ public class CheckinActivity extends Activity {
     {
         list.setAdapter(null);
         super.onDestroy();
+    }
+    
+    @Override
+    public void onBackPressed() {
+    	Intent start = new Intent(CheckinActivity.this,MapActivity.class);
+        startActivity(start);
+        finishActivity(0);
     }
     
   
@@ -211,7 +226,7 @@ public class CheckinActivity extends Activity {
 						i.putExtra(KEY_JSON, kKey);
 						i.putExtra(VENUE_NAME, venueName);
 						i.putExtra(VENUE_ID, venueId);
-						
+						//i.putExtra(TOTAL_UP, vote);
 						startActivity(i);
 						
 					} else {

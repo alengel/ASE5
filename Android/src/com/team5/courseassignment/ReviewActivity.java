@@ -23,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -139,6 +140,13 @@ public class ReviewActivity extends Activity {
 				new ReviewAsyncTask(progress).execute(data);
 			}
 		});	
+    }
+	
+	@Override
+    public void onBackPressed() {
+    	Intent start = new Intent(ReviewActivity.this,CheckinActivity.class);
+        startActivity(start);
+        finishActivity(0);
     }
     
 	@Override

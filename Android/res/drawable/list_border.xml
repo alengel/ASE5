@@ -3,12 +3,13 @@
    <!-- use this for transparent -->
    <!-- <solid android:color="#00000000" /> -->
    <!-- use this for a background colour -->
-   <solid android:color="#000000" />
+   <solid android:color="#80FFFFFF"/>
    <stroke android:width="2dip" android:color="#FFCC00" />
    <gradient 
-         android:startColor="#000000"
-         android:endColor="#000000" 
-         android:angle="270"/> 
+         android:startColor="#80FFFFFF"
+         android:endColor="#80FFFFFF" 
+         android:angle="270"
+         /> 
 	
    <padding android:left="5dp"
         android:top="5dp"
@@ -16,8 +17,8 @@
         android:bottom="5dp" />
    
     <corners 
-         android:bottomRightRadius="2dp" 
-         android:bottomLeftRadius="2dp" 
-         android:topLeftRadius="2dp" 
-         android:topRightRadius="2dp"/> 
+         android:bottomRightRadius="7dp" 
+         android:bottomLeftRadius="7dp" 
+         android:topLeftRadius="7dp" 
+         android:topRightRadius="7dp"/> 
 </shape>

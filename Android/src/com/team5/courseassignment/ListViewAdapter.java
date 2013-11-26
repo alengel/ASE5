@@ -1,6 +1,7 @@
 package com.team5.courseassignment;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
@@ -27,12 +28,12 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	  private LayoutInflater inflater;
 	  private ImageLoader imageLoader = new ImageLoader();
 	private Context context;
-	  
-	 
+	
 	  public ListViewAdapter(Context context, int resourceId, List<VenueReview> mediaItems) {
 	    super(context, 0, mediaItems);
 	    this.resourceId = resourceId;
 	    this.context = context;
+	    
 	    inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	  }
 	 
@@ -66,34 +67,72 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    	  }
 	      });
 	      
-	      CheckBox voteUp = (CheckBox)view. findViewById(R.id.voteUp);
+	      final CheckBox voteUp = (CheckBox)view. findViewById(R.id.voteUp);
+	      final CheckBox voteDown = (CheckBox)view. findViewById(R.id.voteDown);
+	      
 	    	voteUp.setOnCheckedChangeListener(new OnCheckedChangeListener()
 	    	{
 	    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	    	    {
-	    	        if ( isChecked )
+	    	    	
+	    	    	
+	    	    	
+	    	    	if ( voteUp.isChecked() )
 	    	        {
-	    	            //TODO perform voting logic
-	    	        }else{
+	    	    		voteUp.setEnabled(true);
+	    	        	//voteUp.setText(1);
+	    	        	voteDown.setEnabled(false);
+	    	        	//TODO
+	    	        	/**
+	    	        	 *  String selectedText = voteUp.getText().toString();
+                    		Intent i = new Intent(this, VenueReview.class);
+                    		i.putExtra("cakedata", selectedText);
+                    		startActivity(i);
+	    	        	 */
 	    	        	
+	    	        	
+	    	        } else { 
+	    	        	voteUp.setEnabled(false);
+	    	        	//voteUp.setText(1);
+	    	        	voteDown.setEnabled(true);
+	    	        	//TODO
 	    	        }
-
-	    	    }
+	    	    	
+	    	    	
+	    	    	
+	    	     }    
+	    	    
 	    	});
 	    	
-	    	CheckBox voteDown = (CheckBox)view. findViewById(R.id.voteDown);
 	    	voteDown.setOnCheckedChangeListener(new OnCheckedChangeListener()
 	    	{
 	    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	    	    {
-	    	        if ( isChecked )
-	    	        {
-	    	            //TODO perform voting logic
-	    	        }else{
-	    	        	
-	    	        }
-
-	    	    }
+	    	    	
+	    	
+	    	if ( voteDown.isChecked() )
+	        {
+	    		voteDown.setEnabled(true);
+	        	//voteUp.setText(1);
+	        	voteUp.setEnabled(false);
+	        	//TODO
+	        	/**
+	        	 *  String selectedText = voteUp.getText().toString();
+            		Intent i = new Intent(this, VenueReview.class);
+            		i.putExtra("cakedata", selectedText);
+            		startActivity(i);
+	        	 */
+	        	
+	        	
+	        } else { 
+	        	voteUp.setEnabled(true);
+	        	//voteUp.setText(1);
+	        	voteDown.setEnabled(false);
+	        	//TODO
+	        	}
+	    		
+	    	    }    
+	    	    
 	    	});
 	    	
 	      
@@ -137,7 +176,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    textTitle1.setText(item.getLastName()+"  was here");
 	    textTitle2.setText("Rating: "+item.getRating()+"  stars");
 	    textTitle3.setText("Review: "+item.getReview());
-	    textTitle4.setText(null); // Vote number need to get from server.
+	    textTitle4.setText(item.getVotes()); // Vote number need to get from server.
 	    
 	 
 	    if( cachedImage != null ) {
@@ -163,6 +202,10 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 
 		     public void onClick(DialogInterface dialog, int which) {
 		      // Do nothing but close the dialog
+		    	/* String selectedText = comment.getText().toString();
+         		Intent i = new Intent(this, VenueReview.class);
+         		i.putExtra("cakedata", selectedText);
+         		startActivity(i);*/
 		     }
 		    });
 
@@ -171,16 +214,11 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 		   @Override
 		   public void onClick(DialogInterface dialog, int which) {
 		    // Do nothing
+			   dialog.cancel();
 		   }
 		  });
 		  
-		  helpBuilder.setNeutralButton("Neutral", new DialogInterface.OnClickListener() {
-
-		   @Override
-		   public void onClick(DialogInterface dialog, int which) {
-		    // Do nothing
-		   }
-		  });
+		 
 
 		  // Remember, create doesn't show the dialog
 		  AlertDialog helpDialog = helpBuilder.create();

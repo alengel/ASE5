@@ -3,13 +3,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+     >
 
 <fragment
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.MapFragment"
     android:layout_width="match_parent"
     android:layout_height="160dp"
+    android:background="@drawable/list_border"
     android:layout_alignTop="@id/map" />
 	
 <ListView
@@ -21,8 +23,8 @@
 	android:layout_height="match_parent"
 	android:drawSelectorOnTop="false"
 	android:divider="#FFCC00"
-    android:dividerHeight="1px"
-    android:background="@drawable/checkin_list_border"
+    android:dividerHeight="2px"
+    android:background="@drawable/list_border"
 		 									/> 
 
 <Button
@@ -43,7 +45,7 @@
     android:gravity="center"
     android:text="@string/hint"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="@color/white"
+    android:textColor="@color/black"
     android:textSize="15sp"
     android:visibility="visible" />
 
