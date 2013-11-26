@@ -111,8 +111,10 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignRight="@+id/voteDown"
-        android:layout_marginRight="40dp"
         android:layout_below="@+id/profile_image"
+        android:layout_marginRight="40dp"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/comment" />
 
     <TextView
