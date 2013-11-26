@@ -252,10 +252,29 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	//set settings icon actions
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-		i.putExtra(KEY_JSON, kKey);
-		startActivity(i);
 		
-		return true;
+		switch (item.getItemId()) {
+	    case R.id.action_profile:
+	    	Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+			i.putExtra(KEY_JSON, kKey);
+			startActivity(i);
+			
+	      break;
+	    case R.id.action_settings:
+	    	Intent i1 = new Intent(getApplicationContext(), SettingsActivity.class);
+			i1.putExtra(KEY_JSON, kKey);
+			startActivity(i1);
+			
+	      break;
+
+	    default:
+	      break;
+	    }
+
+	    return true;
+		
+		
+		
+		
     }
 }

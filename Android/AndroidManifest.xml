@@ -76,7 +76,10 @@
             android:theme="@style/PreferencesThemeText" >
         </activity>
         
-        
+        <activity
+            android:name="com.team5.courseassignment.ProfileActivity"
+            android:label="@string/app_name" >
+        </activity>
         
 		<!-- Pascal's Key -->
         <meta-data

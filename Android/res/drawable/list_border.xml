@@ -3,11 +3,11 @@
    <!-- use this for transparent -->
    <!-- <solid android:color="#00000000" /> -->
    <!-- use this for a background colour -->
-   <solid android:color="#80FFFFFF"/>
+   <solid android:color="#666666"/>
    <stroke android:width="2dip" android:color="#FFCC00" />
    <gradient 
-         android:startColor="#80FFFFFF"
-         android:endColor="#80FFFFFF" 
+         android:startColor="#666666"
+         android:endColor="#666666" 
          android:angle="270"
          /> 
 	
