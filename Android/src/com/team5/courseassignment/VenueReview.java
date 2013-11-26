@@ -6,16 +6,16 @@ public class VenueReview {
 	public String lastName;
 	public String rating;
 	public String review;
-	//public int votes;
+	public String votes;
 	
-	public VenueReview(String profileImage, String firstName, String lastName, String rating, String review/*, int votes*/) {
+	public VenueReview(String profileImage, String firstName, String lastName, String rating, String review, String votes) {
 		
 		this.profileImage=profileImage;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.rating = rating;
 		this.review = review;
-		//this.votes = votes;
+		this.votes = votes;
 	}
 	
 	public String getProfileImage() {
@@ -58,13 +58,13 @@ public class VenueReview {
         this.review = review;
     }
 	
-	/*public int getVotes() {
+	public String getVotes() {
         return votes;
     }
 	
-	public void setVotes(int votes) {
+	public void setVotes(String votes) {
         this.votes = votes;
-    }*/
+    }
 	
 	@Override 
 	public String toString()

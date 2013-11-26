@@ -176,7 +176,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    textTitle1.setText(item.getLastName()+"  was here");
 	    textTitle2.setText("Rating: "+item.getRating()+"  stars");
 	    textTitle3.setText("Review: "+item.getReview());
-	    //textTitle4.setText(item.votes); // Vote number need to get from server.
+	    textTitle4.setText(item.getVotes()); // Vote number need to get from server.
 	    
 	 
 	    if( cachedImage != null ) {

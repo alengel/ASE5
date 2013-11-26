@@ -5,6 +5,7 @@
     
     <!-- Generic Strings -->
     <string name="base_url">http://switchcodes.in/sandbox/projectpackets/t5/user/</string>
+    <string name="base_url_location">http://switchcodes.in/sandbox/projectpackets/t5/location/</string>
     <string name="errorMessage">Error!</string>
 	<string name="ok">Continue</string>
 	<string name="cancel">Cancel</string>

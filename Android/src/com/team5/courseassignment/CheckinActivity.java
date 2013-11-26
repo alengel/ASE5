@@ -34,8 +34,8 @@ public class CheckinActivity extends Activity {
 	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "venue/venue_id/";
 	
 	//variables for the GET call
-	//private static String RETRIEVE_VOTES_URL;
-	//private final static String RETRIEVE_VOTES_URL_EXT = "vote";
+	private static String RETRIEVE_VOTES_URL;
+	private final static String RETRIEVE_VOTES_URL_EXT = "vote";
 	
 	//key of user for connecting to the server
 	private String kKey;
@@ -64,9 +64,10 @@ public class CheckinActivity extends Activity {
     	
     	//Get the base url
     	String baseUrl = getResources().getString(R.string.base_url);
+    	//String baseUrl_location = getResources().getString(R.string.base_url_location);
     	CHECK_IN_URL = baseUrl + CHECK_IN_URL_EXT;
     	RETRIEVE_VENUE_REVIEW_URL = baseUrl + RETRIEVE_VENUE_REVIEW_URL_EXT;
-    	//RETRIEVE_VOTES_URL = baseUrl + RETRIEVE_VOTES_URL_EXT;
+    	RETRIEVE_VOTES_URL = baseUrl + RETRIEVE_VOTES_URL_EXT;
     	
     	//Set layout
     	setContentView(R.layout.checkin);
