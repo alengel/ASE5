@@ -44,6 +44,7 @@ public class FollowerProfileActivity extends Activity implements OnItemClickList
     	setContentView(R.layout.followers_profile);
     	    	
     	//Setting up follow button.
+    	
     	Button followButton = (Button) findViewById(R.id.reviewer_follow_button);
     	followButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
