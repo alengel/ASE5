@@ -14,11 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,7 +58,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	      textTitle3 = (TextView)view.findViewById(R.id.review);
 	      textTitle4 = (TextView)view.findViewById(R.id.voteNumber);
 	      
-	     ImageButton ib = (ImageButton)view.findViewById(R.id.commentButton);
+	     Button ib = (Button)view.findViewById(R.id.commentButton);
 	      ib.setOnClickListener(new OnClickListener(){
 	    	  @Override
 	    	  public void onClick(View v){

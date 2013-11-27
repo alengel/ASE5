@@ -83,5 +83,6 @@
 	<string name="category_id">CategoryId</string>
 	<string name="no_venue_review">Sorry but there is no reviews for current location.</string>
 	<string name="profile_title">Profile</string>
+	<string name="comment_description">Comment Button</string>
 		
 </resources>

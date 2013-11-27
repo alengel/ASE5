@@ -10,7 +10,7 @@
     	android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@drawable/checkin_list_border">
+        android:background="@drawable/list_border">
     
 	<TextView
 	    android:id="@+id/name"

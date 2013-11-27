@@ -4,7 +4,7 @@
  android:layout_height="wrap_content"
  android:padding="10dip"
  android:scrollbarAlwaysDrawHorizontalTrack="true"
- android:background="@drawable/checkin_list_border"
+ android:background="@drawable/list_border"
 >
 
     <ImageView
