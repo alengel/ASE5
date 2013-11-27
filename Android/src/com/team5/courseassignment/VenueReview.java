@@ -1,45 +1,45 @@
 package com.team5.courseassignment;
 
 public class VenueReview {
-	public String profile_image;
-	public String first_name;
-	public String last_name;
+	public String profileImage;
+	public String firstName;
+	public String lastName;
 	public String rating;
 	public String review;
-	public String total_vote;
+	public String votes;
 	
-	public VenueReview(String profile_image, String first_name, String last_name, String rating, String review, String total_vote) {
+	public VenueReview(String profileImage, String firstName, String lastName, String rating, String review, String votes) {
 		
-		this.profile_image=profile_image;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.profileImage=profileImage;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.rating = rating;
 		this.review = review;
-		this.total_vote = total_vote;
+		this.votes = votes;
 	}
 	
 	public String getProfileImage() {
-        return profile_image;
+        return profileImage;
     }
 	
-	public void setProfileImage(String profile_image) {
-        this.profile_image = profile_image;
+	public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 	
 	public String getFirstName() {
-        return first_name;
+        return firstName;
     }
 	
-	public void setFirstName(String first_name) {
-        this.first_name = first_name;
+	public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 	
 	public String getLastName() {
-        return last_name;
+        return lastName;
     }
 	
-	public void setLasttName(String last_name) {
-        this.last_name = last_name;
+	public void setLasttName(String lastName) {
+        this.lastName = lastName;
     }
 	
 	public String getRating() {
@@ -59,16 +59,16 @@ public class VenueReview {
     }
 	
 	public String getVotes() {
-        return total_vote;
+        return votes;
     }
 	
-	public void setVotes(String total_vote) {
-        this.total_vote = total_vote;
+	public void setVotes(String votes) {
+        this.votes = votes;
     }
 	
-	@Override 
+	
 	public String toString()
 	{
-		return  first_name + " " + last_name + " was here. Rating: " + rating + " stars. \""+ review +"\"+ total_vote ";
+		return  profileImage+ " " + firstName + " " + lastName + " was here. Rating: " + rating + " stars. \""+ review +"\" ";
 	}
 }

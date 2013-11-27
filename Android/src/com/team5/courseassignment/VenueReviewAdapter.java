@@ -1,15 +1,21 @@
 package com.team5.courseassignment;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.List;
 
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
+import com.team5.courseassignment.R.id;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,8 +176,10 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	    voteNumber.setText(item.getVotes()); // Vote number need to get from server.
 	    
 	 
-	    if( cachedImage != null ) {
-	      image.setImageBitmap(cachedImage);
+	    if( image != null ) {
+	      image.setImageBitmap(bitmap);
+	    }else {
+	    	image.getResources().getDrawable(id.profile_image );
 	    }
 	 
 	    return view;
