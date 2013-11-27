@@ -13,7 +13,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,12 +52,6 @@ public class SettingsActivity extends Activity {
                 .commit();   
     }
     
-    @Override
-    public void onBackPressed() {
-    	Intent start = new Intent(SettingsActivity.this,MapActivity.class);
-        startActivity(start);
-        finishActivity(0);
-    }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

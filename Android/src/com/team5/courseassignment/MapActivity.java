@@ -1,6 +1,5 @@
 package com.team5.courseassignment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -37,7 +36,6 @@ import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 
 /*
@@ -169,7 +167,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
    	 	adapter=new MapListViewAdapter(this, R.layout.map_row, venues); 
         list.setAdapter(adapter);*/
 		
-		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
+		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, R.layout.venue_list_item, venues);
     	ListView list = (ListView) findViewById(R.id.list); 
     	list.setAdapter(adapter);
     	list.setOnItemClickListener(this);
@@ -249,13 +247,27 @@ public class MapActivity extends Activity implements OnItemClickListener {
         return super.onCreateOptionsMenu(menu);
     }
 	
-	//set settings icon actions
+	//set actionbar icons
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-		i.putExtra(KEY_JSON, kKey);
-		startActivity(i);
 		
-		return true;
+		switch (item.getItemId()) {
+	    case R.id.action_profile:
+	    	Intent openProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+	    	openProfile.putExtra(KEY_JSON, kKey);
+			startActivity(openProfile);
+			break;
+			
+	    case R.id.action_settings:
+	    	Intent openSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+	    	openSettings.putExtra(KEY_JSON, kKey);
+			startActivity(openSettings);
+			break;
+
+	    default:
+	      break;
+	    }
+
+	    return true;
     }
 }

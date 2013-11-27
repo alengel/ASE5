@@ -6,7 +6,7 @@
 <TextView
     android:id="@+id/venue_name"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:layout_alignParentTop="true"
     android:background="#80FFFFFF"
     android:gravity="center"
@@ -21,14 +21,9 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="match_parent"
 	    android:drawSelectorOnTop="false"
-		android:choiceMode="multipleChoice"
-		
-    	 /> 
+		android:choiceMode="multipleChoice" /> 
 	    
     <!-- Set the android:button attribute to your state list drawable -->
-    
-    
-
     <Button
 	    android:id="@+id/check_in_button"
 	    android:layout_width="match_parent"

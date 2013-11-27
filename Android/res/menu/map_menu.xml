@@ -1,10 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+	
+	<item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/ic_action_profile"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/profile_title" />
+	
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:orderInCategory="200"
+        android:showAsAction="always"
         android:title="@string/settings_title"/>
-    
+     
 </menu>

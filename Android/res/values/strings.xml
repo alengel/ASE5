@@ -11,8 +11,8 @@
 	<string name="cancel">Cancel</string>
 	<string name="invalid_input_generic">Invalid input! Please try again!</string>
 	<string name="congratulations">Congratulations!</string>
-	<string name="upload_new_image">Take a photo</string>
-	<string name="choose_image">Choose from gallery</string>
+	<string name="upload_new_image">Take photo</string>
+	<string name="choose_image">Choose photo</string>
 	
     <!-- Login & Registration Activity -->
     <string name="email_address">Email</string>
@@ -80,6 +80,11 @@
 	<string name="id">id</string>
 	<string name="category_id">CategoryId</string>
 	<string name="no_venue_review">Sorry but there is no reviews for current location.</string>
+	<string name="profile_title">Profile</string>
+	<string name="comment_description">Comment Button</string>
 	
+	<!-- Profile Activity -->
+	<string name="profileTitle">Profile</string>
+	<string name="edit_profile">Edit Profile</string>
 		
 </resources>

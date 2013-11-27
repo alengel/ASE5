@@ -1,55 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
- android:layout_height="wrap_content"
- android:padding="10dip"
- android:scrollbarAlwaysDrawHorizontalTrack="true"
- 	android:background="#80FFFFFF"
-    >
+ 	android:layout_height="wrap_content"
+ 	android:padding="10dip"
+ 	android:scrollbarAlwaysDrawHorizontalTrack="true"
+ 	android:background="#80FFFFFF" >
     
     <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            
-            android:layout_alignParentTop="true"
-            
-            android:background="@drawable/checkin_list_border">
+    	android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/list_border">
     
-<TextView
-    android:id="@+id/name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginTop="1dp"
-    android:gravity="left"
-    android:maxHeight="@dimen/activity_horizontal_margin"
-    android:maxLines="@integer/maxLines"
-    android:scrollHorizontally="true"
-    android:scrollbarAlwaysDrawHorizontalTrack="true"
-    android:singleLine="false"
-    
-    android:textColor="#ffffff"
-    android:textSize="11sp"
-     />
+	<TextView
+	    android:id="@+id/name"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="5dp"
+	    android:layout_marginTop="1dp"
+	    android:gravity="left"
+	    android:maxHeight="@dimen/activity_horizontal_margin"
+	    android:maxLines="@integer/maxLines"
+	    android:scrollHorizontally="true"
+	    android:scrollbarAlwaysDrawHorizontalTrack="true"
+	    android:singleLine="false"
+	    android:textColor="@color/white"
+	    android:textSize="12sp" />
+	
+	<TextView
+	    android:id="@+id/distance"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginTop="1dp"
+	    android:gravity="left"
+	    android:maxHeight="@dimen/activity_horizontal_margin"
+	    android:maxLines="@integer/maxLines"
+	    android:scrollHorizontally="true"
+	    android:scrollbarAlwaysDrawHorizontalTrack="true"
+	    android:singleLine="false"
+	    android:layout_toRightOf="@+id/name"
+	    android:textSize="12sp" />
 
-<TextView
-    android:id="@+id/distance"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="1dp"
-    android:gravity="left"
-    android:maxHeight="@dimen/activity_horizontal_margin"
-    android:maxLines="@integer/maxLines"
-    android:scrollHorizontally="true"
-    android:scrollbarAlwaysDrawHorizontalTrack="true"
-    android:singleLine="false"
-    android:layout_toRightOf="@+id/name"
-    
-    android:textColor="#ffffff"
-    android:textSize="11sp"
-     />
-
-</RelativeLayout>
+	</RelativeLayout>
 </RelativeLayout>

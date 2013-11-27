@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
     
     <permission
@@ -76,7 +76,11 @@
             android:theme="@style/PreferencesThemeText" >
         </activity>
         
-        
+        <activity
+            android:name="com.team5.courseassignment.ProfileActivity"
+            android:label="@string/profileTitle" 
+             >
+        </activity>
         
 		<!-- Pascal's Key -->
         <meta-data

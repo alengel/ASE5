@@ -1,7 +1,6 @@
 package com.team5.courseassignment;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
@@ -15,11 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,11 +40,11 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	  public View getView(int position, View convertView, ViewGroup parent) {
 	 
 	    View view;
-	    TextView textTitle;
-	    TextView textTitle1;
-	    TextView textTitle2;
-	    TextView textTitle3;
-	    TextView textTitle4;
+	    TextView firstName;
+	    TextView lastName;
+	    TextView rating;
+	    TextView review;
+	    TextView voteNumber;
 	    
 	    
 	    final ImageView image;
@@ -53,17 +52,17 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    view = inflater.inflate(resourceId, parent, false);
 	 
 	    try {
-	      textTitle = (TextView)view.findViewById(R.id.firstName);
-	      textTitle1 = (TextView)view.findViewById(R.id.lastName);
-	      textTitle2 = (TextView)view.findViewById(R.id.rating);
-	      textTitle3 = (TextView)view.findViewById(R.id.review);
-	      textTitle4 = (TextView)view.findViewById(R.id.voteNumber);
+	      firstName = (TextView)view.findViewById(R.id.firstName);
+	      lastName = (TextView)view.findViewById(R.id.lastName);
+	      rating = (TextView)view.findViewById(R.id.rating);
+	      review = (TextView)view.findViewById(R.id.review);
+	      voteNumber = (TextView)view.findViewById(R.id.voteNumber);
 	      
-	     ImageButton ib = (ImageButton)view.findViewById(R.id.commentButton);
+	     Button ib = (Button)view.findViewById(R.id.commentButton);
 	      ib.setOnClickListener(new OnClickListener(){
 	    	  @Override
 	    	  public void onClick(View v){
-	    		  showPopUp2();
+	    		  showCommentPopup();
 	    	  }
 	      });
 	      
@@ -77,7 +76,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    	    	
 	    	    	
 	    	    	
-	    	    	if ( voteUp.isChecked() )
+	    	    	if ( isChecked)
 	    	        {
 	    	    		voteUp.setEnabled(true);
 	    	        	//voteUp.setText(1);
@@ -172,11 +171,11 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	     // Log.e(TAG, "Bad remote image URL: " + item.getProfileImage(), e);
 	    }
 	 
-	    textTitle.setText(item.getFirstName());
-	    textTitle1.setText(item.getLastName()+"  was here");
-	    textTitle2.setText("Rating: "+item.getRating()+"  stars");
-	    textTitle3.setText("Review: "+item.getReview());
-	    textTitle4.setText(item.getVotes()); // Vote number need to get from server.
+	    firstName.setText(item.getFirstName());
+	    lastName.setText(item.getLastName());
+	    rating.setText("Rating: "+item.getRating()+ " stars");
+	    review.setText(item.getReview());
+	    voteNumber.setText(item.getVotes()); // Vote number need to get from server.
 	    
 	 
 	    if( cachedImage != null ) {
@@ -186,44 +185,34 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    return view;
 	  }
 	  
-	  private void showPopUp2() {
+	  private void showCommentPopup() {
 		  
 		  AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
-		  helpBuilder.setTitle("Comment");
-		  helpBuilder.setMessage("Please leave a comment.");
+		  helpBuilder.setTitle("Enter your comment here");
+		  helpBuilder.setMessage(" ");
 		  final EditText input = new EditText(context);
-		  //input.setHint("Type here...");
 		  input.setSingleLine();
 		  input.setText("");
 		  helpBuilder.setView(input);
 
-		  helpBuilder.setPositiveButton("Positive",
+		  helpBuilder.setPositiveButton("Continue",
 		    new DialogInterface.OnClickListener() {
 
-		     public void onClick(DialogInterface dialog, int which) {
-		      // Do nothing but close the dialog
-		    	/* String selectedText = comment.getText().toString();
-         		Intent i = new Intent(this, VenueReview.class);
-         		i.putExtra("cakedata", selectedText);
-         		startActivity(i);*/
-		     }
+			     public void onClick(DialogInterface dialog, int which) {
+			    	 //Send the comment to the server...
+			     }
 		    });
 
-		  helpBuilder.setNegativeButton("Negative", new DialogInterface.OnClickListener() {
+		  helpBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
 		   @Override
 		   public void onClick(DialogInterface dialog, int which) {
-		    // Do nothing
 			   dialog.cancel();
 		   }
 		  });
 		  
-		 
-
-		  // Remember, create doesn't show the dialog
 		  AlertDialog helpDialog = helpBuilder.create();
-		  helpDialog.show();
-
+		  	helpDialog.show();
 		 }
 
 	}

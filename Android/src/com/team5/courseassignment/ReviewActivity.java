@@ -23,7 +23,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -291,13 +290,27 @@ public class ReviewActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 	
-	//set settings icon actions
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-		i.putExtra(KEY_JSON, kKey);
-		startActivity(i);
-		
-		return true;
-    }
+	//set actionbar icons
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			
+			switch (item.getItemId()) {
+		    case R.id.action_profile:
+		    	Intent openProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+		    	openProfile.putExtra(KEY_JSON, kKey);
+				startActivity(openProfile);
+				break;
+				
+		    case R.id.action_settings:
+		    	Intent openSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+		    	openSettings.putExtra(KEY_JSON, kKey);
+				startActivity(openSettings);
+				break;
+
+		    default:
+		      break;
+		    }
+
+		    return true;
+	    }
 }
