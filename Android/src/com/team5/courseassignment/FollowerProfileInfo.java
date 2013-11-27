@@ -35,4 +35,9 @@ public class FollowerProfileInfo {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public String getLocationImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

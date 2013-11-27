@@ -154,7 +154,8 @@ public class FollowerProfileActivity extends Activity implements OnItemClickList
     	String lastName = reviewer_profile.get(0).getLastName();
     	
     	name.setText(firstName + " " + lastName);
-	}
+    
+    	}
 }
 	
 		
