@@ -1,46 +1,44 @@
 package com.team5.courseassignment;
 
 public class ProfileInfo {
-	public String profileImage;
-	public String name;
-	public String lastName;
+	public String profile_image;
+	public String first_name;
+	public String last_name;
 	public String email;
-	public String editName;
-	public String editLastName;
+	
 
 	
-	public ProfileInfo(String profileImage, String name, String lastName, String email, String editName, String editLastName) {
+	public ProfileInfo(String profile_image, String first_name, String last_name, String email) {
 		
-		this.profileImage=profileImage;
-		this.name = name;
-		this.lastName = lastName;
+		this.profile_image=profile_image;
+		this.first_name = first_name;
+		this.last_name = last_name;
 		this.email = email;
-		this.editName = editName;
-		this.editLastName = editLastName;
+		
 	}
 	
 	public String getProfileImage() {
-        return profileImage;
+        return profile_image;
     }
 	
 	public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+        this.profile_image = profileImage;
     }
 	
 	public String getName() {
-        return name;
+        return first_name;
     }
 	
-	public void setName(String name) {
-        this.name = name;
+	public void setName(String first_name) {
+        this.first_name = first_name;
     }
 	
 	public String getLastName() {
-        return lastName;
+        return last_name;
     }
 	
-	public void setLastName(String lastName) {
-        this.lastName = lastName;
+	public void setLastName(String last_name) {
+        this.last_name = last_name;
     }
 	
 	public String getEmail() {
@@ -51,25 +49,11 @@ public class ProfileInfo {
         this.email = email;
     }
 	
-	public String getEditName() {
-        return editName;
-    }
 	
-	public void setEditName(String editName) {
-        this.editName = editName;
-    }
 	
-	public String getEditLastName() {
-        return editLastName;
-    }
 	
-	public void setEditLastName(String editLastName) {
-        this.editLastName = editLastName;
-    }
-	
-	/*@Override 
 	public String toString()
 	{
-		return  name + " " + lastName + " was here. Rating: " + rating + " stars. \""+ review +"\" ";
-	}*/
+		return  profile_image + " " +first_name+ last_name  + email +"\" ";
+	}
 }

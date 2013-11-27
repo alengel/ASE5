@@ -2,12 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical" 
+    >
+	
     <ImageView
         android:id="@+id/profilePicture"
         android:layout_width="95dp"
         android:layout_height="108dp"
+        android:layout_marginTop="9dp"
         android:src="@drawable/default_profile_picture" />
 
     <TextView
@@ -19,7 +21,8 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/profilePicture"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/orange" />
+        android:textColor="@color/orange"
+         />
 
     <TextView
         android:id="@+id/lastName"
@@ -29,7 +32,8 @@
         android:layout_alignBottom="@+id/name"
         android:layout_toRightOf="@+id/name"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/orange" />
+        android:textColor="@color/orange"
+         />
 
     <TextView
         android:id="@+id/email"
@@ -40,7 +44,8 @@
         android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/orange"
-        android:textSize="12sp" />
+        android:textSize="12sp" 
+        />
 
     <EditText
         android:id="@+id/editName"
@@ -48,8 +53,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/email"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:ems="10" />
+        android:ems="10"
+        android:textColor="@color/orange" />
 
     <EditText
         android:id="@+id/editLastName"
@@ -57,7 +65,61 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/editName"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:ems="10" />
+        android:ems="10"
+        android:textColor="@color/orange" />
+
+    <Button
+        android:id="@+id/take"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/profilePicture"
+        android:text="Take photo"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:background="@drawable/actionbar"
+         />
+
+    <Button
+        android:id="@+id/choose"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/editLastName"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/name"
+        android:text="Choose photo"
+        android:textSize="12sp"
+        android:background="@drawable/actionbar" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/choose" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/submit"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:layout_above="@+id/listView1"
+        android:layout_alignLeft="@+id/editLastName"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/choose"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/actionbar"
+        android:text="Submit"
+        android:textSize="16sp"
+         />
 
 </RelativeLayout>

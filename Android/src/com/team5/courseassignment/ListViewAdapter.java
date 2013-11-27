@@ -77,7 +77,7 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    	    	
 	    	    	
 	    	    	
-	    	    	if ( voteUp.isChecked() )
+	    	    	if ( isChecked)
 	    	        {
 	    	    		voteUp.setEnabled(true);
 	    	        	//voteUp.setText(1);
