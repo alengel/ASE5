@@ -35,8 +35,6 @@
 	
 	<!-- Forgotten Password Activity -->
 	<string name="email_address_2">Please enter your e-mail</string>
-	<!-- Profile Activity -->
-	<string name="profileTitle">Profile</string>
 	
 	<!-- Settings Activity -->
 	<string name="settings_title">Settings</string>
@@ -84,5 +82,9 @@
 	<string name="no_venue_review">Sorry but there is no reviews for current location.</string>
 	<string name="profile_title">Profile</string>
 	<string name="comment_description">Comment Button</string>
+	
+	<!-- Profile Activity -->
+	<string name="profileTitle">Profile</string>
+	<string name="edit_profile">Edit Profile</string>
 		
 </resources>
