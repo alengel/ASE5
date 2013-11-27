@@ -57,7 +57,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:textColor="@color/orange" />
+        android:textColor="@color/lightorange" />
 
     <EditText
         android:id="@+id/editLastName"
@@ -69,7 +69,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:textColor="@color/orange" />
+        android:textColor="@color/lightorange" />
 
     <Button
         android:id="@+id/take"
