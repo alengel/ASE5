@@ -247,21 +247,21 @@ public class MapActivity extends Activity implements OnItemClickListener {
         return super.onCreateOptionsMenu(menu);
     }
 	
-	//set settings icon actions
+	//set actionbar icons
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		switch (item.getItemId()) {
 	    case R.id.action_profile:
-	    	Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
-			i.putExtra(KEY_JSON, kKey);
-			startActivity(i);
+	    	Intent openProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+	    	openProfile.putExtra(KEY_JSON, kKey);
+			startActivity(openProfile);
 			break;
 			
 	    case R.id.action_settings:
-	    	Intent i1 = new Intent(getApplicationContext(), SettingsActivity.class);
-			i1.putExtra(KEY_JSON, kKey);
-			startActivity(i1);
+	    	Intent openSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+	    	openSettings.putExtra(KEY_JSON, kKey);
+			startActivity(openSettings);
 			break;
 
 	    default:

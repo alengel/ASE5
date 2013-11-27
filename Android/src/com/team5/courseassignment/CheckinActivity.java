@@ -74,15 +74,11 @@ public class CheckinActivity extends Activity {
     	TextView name = (TextView) findViewById(R.id.venue_name);
     	name.setText(venueName);
     	
-    	 
-    	
     	//Setting up check in button.
     	Button checkinButton = (Button) findViewById(R.id.check_in_button);
     	checkinButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				checkIn();
-				
-				
 			}
 		});
     	
@@ -103,7 +99,7 @@ public class CheckinActivity extends Activity {
     
     @Override
     public void onBackPressed() {
-    	Intent start = new Intent(CheckinActivity.this,MapActivity.class);
+    	Intent start = new Intent(CheckinActivity.this, MapActivity.class);
         startActivity(start);
         finishActivity(0);
     }
@@ -165,7 +161,7 @@ public class CheckinActivity extends Activity {
     private void showList(List<VenueReview> reviews)
 	{
     	ListView list = (ListView) findViewById(R.id.list);
-    	 adapter=new ListViewAdapter(this, R.layout.row, reviews);
+    	 adapter=new ListViewAdapter(this, R.layout.review_row, reviews);
          list.setAdapter(adapter);
 	}
     
@@ -249,13 +245,27 @@ public class CheckinActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 	
-	//set settings icon actions
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-		i.putExtra(KEY_JSON, kKey);
-		startActivity(i);
-		
-		return true;
-    }
+	//set actionbar icons
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			
+			switch (item.getItemId()) {
+		    case R.id.action_profile:
+		    	Intent openProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+		    	openProfile.putExtra(KEY_JSON, kKey);
+				startActivity(openProfile);
+				break;
+				
+		    case R.id.action_settings:
+		    	Intent openSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+		    	openSettings.putExtra(KEY_JSON, kKey);
+				startActivity(openSettings);
+				break;
+
+		    default:
+		      break;
+		    }
+
+		    return true;
+	    }
 }
