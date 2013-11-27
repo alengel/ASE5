@@ -13,9 +13,12 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class FollowerProfileActivity extends Activity implements OnItemClickListener{
 	//variables for the GET call
@@ -45,17 +48,24 @@ public class FollowerProfileActivity extends Activity implements OnItemClickList
     	    	
     	//Setting up follow button.
     	
-    	Button followButton = (Button) findViewById(R.id.reviewer_follow_button);
-    	followButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				follow();
-			}
-
-			private void follow() {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+    	final CheckBox followButton = (CheckBox) findViewById(R.id.reviewer_follow_button);
+    	followButton.setOnCheckedChangeListener(new OnCheckedChangeListener()
+	    	{
+	    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	    	    {
+	    	    	
+	    	    	
+	    	    	
+	    	    	if ( followButton.isChecked() )
+	    	        {
+	    	    		buttonView.setText("Follow");
+							//TODO
+	    	        	}
+	    	    	else { 
+	    	        	buttonView.setText("Unfollow");
+	    	        	}
+					}    
+	    	    });
 
     	ListView listView;
 	
