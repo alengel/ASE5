@@ -53,12 +53,6 @@ public class SettingsActivity extends Activity {
                 .commit();   
     }
     
-    @Override
-    public void onBackPressed() {
-    	Intent start = new Intent(SettingsActivity.this,MapActivity.class);
-        startActivity(start);
-        finishActivity(0);
-    }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
