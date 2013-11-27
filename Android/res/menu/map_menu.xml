@@ -9,7 +9,8 @@
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_action_profile"
-        android:orderInCategory="99"
+        android:orderInCategory="100"
         android:showAsAction="always"
+        android:title="@string/profile_title"
         />
 </menu>

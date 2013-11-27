@@ -5,12 +5,12 @@ add to res/drawable/like_button_state.xml
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/is_down"
+        android:drawable="@drawable/actionbar"
         android:state_checked="true"
         android:layout_width="35dp"
         android:layout_height="35dp"/>
     <item
-        android:drawable="@drawable/down"
+        android:drawable="@drawable/actionbar_green"
         android:state_checked="false"
         android:layout_width="35dp"
         android:layout_height="35dp"

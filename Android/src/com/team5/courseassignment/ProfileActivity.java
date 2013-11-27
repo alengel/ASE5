@@ -3,7 +3,7 @@ package com.team5.courseassignment;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.net.MalformedURLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
+
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,8 +27,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.view.Menu;
-import android.view.MenuInflater;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,9 +62,6 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
 	    private String lastNameKey;
 		private final static String LASTNAME_KEY = "last_name";
 		
-		private String emailKey;
-		private final static String EMAIL_KEY = "last_name";
-		
 		private String imageKey;
 		private final static String IMAGE = "profile_image";
 	    
@@ -74,9 +70,9 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
 		private ImageView profilePicture;
 	    
 		ListView list;
-		//ProfileVenueAdapter adapter;
-		private ImageLoader imageLoader = new ImageLoader();
-		List<ProfileInfo> user_profile = new ArrayList<ProfileInfo>();
+		ProfileListAdapter adapter;
+		
+		
 		  
 		
 	@SuppressWarnings("unchecked")
@@ -88,8 +84,7 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
     	kKey = this.getIntent().getStringExtra(KEY_JSON);
     	firstNameKey =this.getIntent().getStringExtra(FIRSTNAME_KEY);
     	lastNameKey=this.getIntent().getStringExtra(LASTNAME_KEY);
-    	
-    	//imageKey=this.getIntent().getStringExtra(IMAGE);
+    	imageKey=this.getIntent().getStringExtra(IMAGE);
     	
     	
     	
@@ -162,12 +157,12 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
     	
     	
     	
-    	/*List View for future
-    	ListView listView;
-        listView = (ListView) findViewById(R.id.reviewerVenueList);
-        listView.setOnItemClickListener(this);
+    	
+    	//ListView listView;
+       // listView = (ListView) findViewById(R.id.listView1);
+       // listView.setOnItemClickListener(this);
         
-    	*/
+    	
       //make GET request to retrieve existing user reviews for venue
 		
 		ProgressDialog progress = ProgressDialog.show(ProfileActivity.this, "Please wait", "Loading ...");
@@ -368,15 +363,14 @@ private void showAlertMessage(final String title,final String message) {
 		}
 	}
 	
-	/*
-	 * 
-	 * private void showList(List<FollowerProfileVenue> reviewer_profile_venues)
+	 
+	  private void showList(List<UserFollowers> followers)
 	{
-    	 ListView list = (ListView) findViewById(R.id.reviewerVenueList);
-    	 adapter = new FollowerVenueAdapter(this, R.layout.venue_review_row, reviewer_profile_venues);
+    	 ListView list = (ListView) findViewById(R.id.listView1);
+    	 adapter = new ProfileListAdapter(this, R.layout.followers_row, followers);
          list.setAdapter(adapter);
 	}
-	*/
+	
 	private void fillProfile( List<ProfileInfo> profile) 
 	{	//Set User name
 		EditText editName = (EditText) findViewById(R.id.editName);
@@ -389,18 +383,18 @@ private void showAlertMessage(final String title,final String message) {
 		
     	TextView name = (TextView) findViewById(R.id.name);
     	name.setText(firstName);
+    	
     	//Set User last_name
     	TextView lastName = (TextView) findViewById(R.id.lastName);
-    	
     	lastName.setText(LastName);
+    	
     	//Set User email
     	TextView email = (TextView) findViewById(R.id.email);
     	String Email =  profile.get(0).getEmail();
     	email.setText(Email);
+    	
     	//Set User picture
     	ImageView image = (ImageView)findViewById(R.id.profilePicture);
-    	//String profilePicture =  profile.get(0).getProfileImage();
-    	
     	byte[] decodedString = Base64.decode(profile.get(0).getProfileImage(),Base64.NO_WRAP);
     	InputStream inputStream  = new ByteArrayInputStream(decodedString);
     	Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);

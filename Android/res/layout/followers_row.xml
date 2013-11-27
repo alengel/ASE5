@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:padding="10dip"
+ android:scrollbarAlwaysDrawHorizontalTrack="true"
+ android:background="@drawable/checkin_list_border"
+>
+
+    <ImageView
+        android:id="@+id/ProfileImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:adjustViewBounds="true"
+        android:paddingRight="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/default_profile_picture" />
+
+    <TextView
+        android:id="@+id/firstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/profile_image"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="1dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:gravity="left"
+        android:maxHeight="@dimen/activity_horizontal_margin"
+        android:maxLines="@integer/maxLines"
+        android:scrollHorizontally="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:singleLine="false"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+     <TextView
+        android:id="@+id/lastName"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/profile_image"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/firstName"
+        android:gravity="left"
+        android:maxHeight="@dimen/activity_horizontal_margin"
+        android:maxLines="@integer/maxLines"
+        android:scrollHorizontally="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:singleLine="false"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+   
+
+    <CheckBox
+        android:id="@+id/unfollow"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:button="@drawable/unlike_button_state"
+        android:enabled="true" />
+
+</RelativeLayout>
