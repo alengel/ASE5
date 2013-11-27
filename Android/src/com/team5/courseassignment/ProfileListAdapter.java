@@ -12,9 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,7 +47,7 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 	      textTitle = (TextView)view.findViewById(R.id.firstName);
 	      textTitle1 = (TextView)view.findViewById(R.id.lastName);
 	      
-	      
+	 /*     
 	      final CheckBox unfollow = (CheckBox)view. findViewById(R.id.unfollow);
 	      
 	      
@@ -72,11 +69,11 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
                     		Intent i = new Intent(this, VenueReview.class);
                     		i.putExtra("cakedata", selectedText);
                     		startActivity(i);
-	    	        	 */
+	    	        	 ////////////////////
 	    	        	
 	    	        	
 	    	        } else { 
-	    	        	buttonView.setText("Follow");
+	    	        	buttonView.setText("Follow")
 	    	        }
 	    	    	
 	    	    	
@@ -84,7 +81,7 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 	    	     }    
 	    	    
 	    	});
-	    	
+	    	*/
 	    	
 	      
 	     

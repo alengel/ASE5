@@ -4,12 +4,11 @@
  android:layout_height="wrap_content"
  android:padding="10dip"
  android:background="@drawable/list_border"
- android:scrollbarAlwaysDrawHorizontalTrack="true"
->
+ android:scrollbarAlwaysDrawHorizontalTrack="true" >
 
     <ImageView
-        android:contentDescription="@string/profile_image"
         android:id="@+id/profile_image"
+        android:contentDescription="@string/profile_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_alignParentLeft="true"
@@ -32,10 +31,11 @@
         android:scrollHorizontally="true"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
         android:singleLine="false"
-        android:textColor="#ffffff"
-        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         android:textStyle="bold" />
-     <TextView
+    
+    <TextView
         android:id="@+id/lastName"
         android:layout_width="95dp"
         android:layout_height="wrap_content"
@@ -49,14 +49,32 @@
         android:scrollHorizontally="true"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
         android:singleLine="false"
-        android:textColor="#ffffff"
-        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         android:textStyle="bold" />
+        
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/firstName"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:gravity="left"
+        android:maxHeight="@dimen/activity_horizontal_margin"
+        android:maxLines="@integer/maxLines"
+        android:scrollHorizontally="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:singleLine="false"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+    
     <TextView
         android:id="@+id/rating"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lastName"
+        android:layout_below="@+id/review"
         android:layout_marginTop="1dp"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/profile_image"
@@ -66,27 +84,9 @@
         android:scrollHorizontally="true"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
         android:singleLine="false"
-        android:textColor="#ffffff"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textColor="@color/white"
+        android:textSize="14sp" />
     
-    <TextView
-        android:id="@+id/review"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rating"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/profile_image"
-        android:gravity="left"
-        android:maxHeight="@dimen/activity_horizontal_margin"
-        android:maxLines="@integer/maxLines"
-        android:scrollHorizontally="true"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        android:singleLine="false"
-        android:textColor="#ffffff"
-        android:textSize="12sp"
-        android:textStyle="bold" />
 
     <CheckBox
         android:id="@+id/voteDown"
@@ -111,7 +111,6 @@
         android:id="@+id/followerCommentButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/review"
         android:layout_below="@+id/profile_image"
         android:contentDescription="@string/comment_description"
         android:background="@drawable/comment" />
@@ -120,8 +119,11 @@
         android:id="@+id/voteNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/voteDown"
-        android:layout_alignRight="@+id/voteDown"
+        android:layout_below="@+id/voteUp"
+        android:layout_above="@+id/voteDown"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="4dp"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:textColor="@color/orange" />

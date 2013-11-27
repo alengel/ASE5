@@ -7,7 +7,7 @@
  	android:background="@drawable/list_border" >
 
     <ImageView
-        android:id="@+id/ProfileImage"
+        android:id="@+id/profileImage"
         android:contentDescription="@string/profile_title"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -21,10 +21,10 @@
         android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ProfileImage"
+        android:layout_alignTop="@+id/profileImage"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="1dp"
-        android:layout_toRightOf="@+id/ProfileImage"
+        android:layout_toRightOf="@+id/profileImage"
         android:gravity="left"
         android:maxHeight="@dimen/activity_horizontal_margin"
         android:maxLines="@integer/maxLines"
@@ -38,7 +38,7 @@
         android:id="@+id/lastName"
         android:layout_width="95dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ProfileImage"
+        android:layout_alignTop="@+id/profileImage"
         android:layout_marginTop="1dp"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/firstName"

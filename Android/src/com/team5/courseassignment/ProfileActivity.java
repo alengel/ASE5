@@ -7,6 +7,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -53,6 +54,7 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
 		private String imageKey;
 		private final static String IMAGE = "profile_image";
 	    
+		private ImageView profilePicture;
 		ListView list;
 		ProfileListAdapter adapter;
 	
@@ -75,6 +77,8 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
     	String data = "/key/" + kKey ;
 		
 		new ProfileAsyncTask(progress).execute(data);
+        this.profilePicture = (ImageView)this.findViewById(R.id.profilePicture);
+    	profilePicture.buildDrawingCache();
 	}
 	
 	//Makes it possible to click on the Review and allows to go to the Review screen once set up
@@ -122,14 +126,14 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
 			progress.dismiss();
 			if (result != null) {
 				try {
-					final List<ProfileInfo> profile = new ProfileInfoParser().parseJSON(result);
+					final List<ProfileInfo> data = new ProfileInfoParser().parseJSON(result);
 					//final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser().parseJSON(result);
 					
 					runOnUiThread(new Runnable() {
 
 	                    @Override
 	                    public void run() {
-	                    	fillProfile(profile);
+	                    	fillProfile(data);
 	                    	//showList(reviewer_profile_venue);
 	                    }
 	                });

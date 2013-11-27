@@ -66,9 +66,9 @@ public class VenueReview {
         this.votes = votes;
     }
 	
-	@Override 
+	
 	public String toString()
 	{
-		return  firstName + " " + lastName + " was here. Rating: " + rating + " stars. \""+ review +"\" ";
+		return  profileImage+ " " + firstName + " " + lastName + " was here. Rating: " + rating + " stars. \""+ review +"\" ";
 	}
 }

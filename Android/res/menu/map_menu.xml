@@ -3,7 +3,7 @@
 	<item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_action_profile"
-        android:orderInCategory="100"
+        android:orderInCategory="99"
         android:showAsAction="always"
         android:title="@string/profile_title" />
 	

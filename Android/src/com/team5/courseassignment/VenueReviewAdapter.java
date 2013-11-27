@@ -2,7 +2,6 @@ package com.team5.courseassignment;
 
 import java.net.MalformedURLException;
 import java.util.List;
-
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
 
 import android.app.AlertDialog;
@@ -88,7 +87,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	    	    	
 	    	    	
 	    	    	
-	    	    	if ( isChecked)
+	    	    	if ( voteUp.isChecked() )
 	    	        {
 	    	    		voteUp.setEnabled(true);
 	    	        	//voteUp.setText(1);
@@ -152,17 +151,18 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	    }
 	 
 	    VenueReview item = getItem(position);
+	    
 	    Bitmap cachedImage = null;
-	    try {
-	      cachedImage = imageLoader.loadImage(item.getProfileImage(), new ImageLoadedListener() {
-	      public void imageLoaded(Bitmap imageBitmap) {
-	      image.setImageBitmap(imageBitmap);
-	      notifyDataSetChanged();                }
-	      });
-	    } catch (MalformedURLException e) {
-	     // Log.e(TAG, "Bad remote image URL: " + item.getProfileImage(), e);
-	    }
-	 
+        try {
+          cachedImage = imageLoader.loadImage(item.getProfileImage(), new ImageLoadedListener() {
+          public void imageLoaded(Bitmap imageBitmap) {
+          image.setImageBitmap(imageBitmap);
+          notifyDataSetChanged();                }
+          });
+        } catch (MalformedURLException e) {
+         // Log.e(TAG, "Bad remote image URL: " + item.getProfileImage(), e);
+        }
+        
 	    firstName.setText(item.getFirstName());
 	    lastName.setText(item.getLastName());
 	    rating.setText("Rating: "+item.getRating()+ " stars");
@@ -171,10 +171,10 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	    
 	 
 	    if( cachedImage != null ) {
-	      image.setImageBitmap(cachedImage);
-	    }
-	 
-	    return view;
+            image.setImageBitmap(cachedImage);
+        }
+       
+        return view;
 	  }
 	  
 	  private void showCommentPopup() {
