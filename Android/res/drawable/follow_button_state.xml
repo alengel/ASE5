@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+Create a state list drawable to represent the button states then
+add to res/drawable/follow_button_state.xml 
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/unfollow_button"
+        android:state_checked="true"/>
+    <item
+        android:drawable="@drawable/follow_button"
+        android:state_checked="false"/>    
+</selector>
+

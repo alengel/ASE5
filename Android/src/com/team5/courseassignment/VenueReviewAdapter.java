@@ -8,6 +8,7 @@ import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,17 +23,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListViewAdapter extends ArrayAdapter<VenueReview> {
+public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	  private int resourceId = 0;
 	  private LayoutInflater inflater;
 	  private ImageLoader imageLoader = new ImageLoader();
-	private Context context;
+	  private Context context;
+	  private String kKey;
 	
-	  public ListViewAdapter(Context context, int resourceId, List<VenueReview> mediaItems) {
+	  public VenueReviewAdapter(Context context, int resourceId, List<VenueReview> mediaItems, String kKey) {
 	    super(context, 0, mediaItems);
 	    this.resourceId = resourceId;
 	    this.context = context;
-	    
+	    this.kKey = kKey;
 	    inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	  }
 	 
@@ -58,13 +60,23 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	      review = (TextView)view.findViewById(R.id.review);
 	      voteNumber = (TextView)view.findViewById(R.id.voteNumber);
 	      
-	     Button ib = (Button)view.findViewById(R.id.commentButton);
+	     Button ib = (Button)view.findViewById(R.id.followerCommentButton);
 	      ib.setOnClickListener(new OnClickListener(){
 	    	  @Override
 	    	  public void onClick(View v){
 	    		  showCommentPopup();
 	    	  }
 	      });
+	      
+	      image = (ImageView)view.findViewById(R.id.profile_image);
+	      image.setOnClickListener(new OnClickListener() 
+	        {
+	            @Override
+	            public void onClick(View v) 
+	            {
+	            	openFollowerProfile();
+	            }
+	        });
 	      
 	      final CheckBox voteUp = (CheckBox)view. findViewById(R.id.voteUp);
 	      final CheckBox voteDown = (CheckBox)view. findViewById(R.id.voteDown);
@@ -134,26 +146,6 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 	    	    
 	    	});
 	    	
-	      
-	      image = (ImageView)view.findViewById(R.id.profile_image);
-	      image.setOnClickListener(new OnClickListener() 
-	        {
-	            @Override
-	            public void onClick(View v) 
-	            {
-	            	/**TODO 
-		    		  // launch ProfilePageActivity
-						Intent i = new Intent(getApplicationContext(), ProfilePageActivity.class); // need to create comments activity
-						
-						i.putExtra(KEY_JSON, kKey); //need to know api call for it
-						i.putExtra(user_NAME, user_id);//
-						i.putExtra(VENUE_ID, venueId);//
-						
-						startActivity(i);
-						*/
-	            }
-	        });
-	      
 	    } catch( ClassCastException e ) {
 	     // Log.e(TAG, "Your layout must provide an image and a text view with ID's icon and text.", e);
 	      throw e;
@@ -214,5 +206,15 @@ public class ListViewAdapter extends ArrayAdapter<VenueReview> {
 		  AlertDialog helpDialog = helpBuilder.create();
 		  	helpDialog.show();
 		 }
-
+	  
+	  
+	  private void openFollowerProfile() {
+		// launch ProfilePageActivity
+		Intent openProfile = new Intent(this.context, FollowerProfileActivity.class); // need to create comments activity
+		
+		openProfile.putExtra(SharedPreferencesEditor.KEY_JSON, kKey);
+		// openProfile.putExtra(user_NAME, user_id);
+		
+		context.startActivity(openProfile);
+	  }
 	}

@@ -84,7 +84,7 @@ public class AccountActivity extends Activity implements OnItemClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
       //Set layout
-    	setContentView(R.layout.user_profile);
+    	setContentView(R.layout.user_account);
     	kKey = this.getIntent().getStringExtra(KEY_JSON);
     	firstNameKey =this.getIntent().getStringExtra(FIRSTNAME_KEY);
     	lastNameKey=this.getIntent().getStringExtra(LASTNAME_KEY);
@@ -372,7 +372,7 @@ private void showAlertMessage(final String title,final String message) {
 	private void showList(List<UserFollowers> followers)
 	{
     	 ListView list = (ListView) findViewById(R.id.listView1);
-    	 adapter = new ProfileListAdapter(this, R.layout.followers_row, followers);
+    	 adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
          list.setAdapter(adapter);
 	}
 	

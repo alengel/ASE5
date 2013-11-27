@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+ 	android:layout_height="wrap_content"
+ 	android:padding="10dip"
+ 	android:scrollbarAlwaysDrawHorizontalTrack="true"
+ 	android:background="@drawable/list_border" >
+ 	   
+ <ImageView android:id="@+id/location_image"
+    android:contentDescription="@string/location_image_description" 
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:layout_alignParentLeft="true"
+    android:adjustViewBounds="true"
+    android:paddingRight="10dp"
+    android:scaleType="fitXY"
+    android:src="@drawable/default_venue"/>
+ 
+ <TextView android:id="@+id/location_name" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignTop="@+id/location_image"
+     android:layout_marginLeft="5dp"
+     android:layout_toRightOf="@+id/location_image"
+     android:gravity="left"
+     android:maxHeight="@dimen/activity_horizontal_margin"
+     android:maxLines="@integer/maxLines"
+     android:scrollHorizontally="true"
+     android:scrollbarAlwaysDrawHorizontalTrack="true"
+     android:singleLine="true"
+     android:textColor="@color/white"
+     android:textSize="16sp"
+     android:textStyle="bold" />
+ 
+ <TextView android:id="@+id/review" 
+     android:layout_width="wrap_content"
+     android:layout_height="40dp"
+     android:layout_toRightOf="@+id/location_image"
+     android:layout_marginLeft="5dp"
+     android:layout_below="@+id/location_name"
+     android:gravity="left"
+     android:maxHeight="@dimen/activity_horizontal_margin"
+     android:maxLines="@integer/maxLines"
+     android:scrollHorizontally="true"
+     android:scrollbarAlwaysDrawHorizontalTrack="true"
+     android:singleLine="false"
+     android:textColor="@color/white"
+     android:textSize="14sp" />
+ 
+  <TextView android:id="@+id/rating" 
+     android:layout_width="wrap_content" 
+     android:layout_height="wrap_content" 
+     android:layout_marginLeft="5dp" 
+     android:layout_toRightOf="@+id/location_image"
+     android:layout_below="@+id/review"
+     android:gravity="left" 
+     android:maxHeight="@dimen/activity_horizontal_margin" 
+     android:maxLines="5" 
+     android:scrollHorizontally="true" 
+     android:scrollbarAlwaysDrawHorizontalTrack="true" 
+     android:singleLine="false" 
+     android:textColor="@color/white" 
+     android:textSize="14sp" />
+
+</RelativeLayout>
