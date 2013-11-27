@@ -88,7 +88,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	    	    	
 	    	    	
 	    	    	
-	    	    	if ( isChecked)
+	    	    	if ( voteUp.isChecked() )
 	    	        {
 	    	    		voteUp.setEnabled(true);
 	    	        	//voteUp.setText(1);
