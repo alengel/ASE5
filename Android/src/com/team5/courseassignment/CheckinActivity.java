@@ -13,7 +13,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +33,7 @@ public class CheckinActivity extends Activity {
 	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "venue/venue_id/";
 	
 	//variables for the GET call
+	@SuppressWarnings("unused")
 	private static String RETRIEVE_VOTES_URL;
 	private final static String RETRIEVE_VOTES_URL_EXT = "vote";
 	

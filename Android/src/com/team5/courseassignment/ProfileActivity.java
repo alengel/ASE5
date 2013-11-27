@@ -57,12 +57,15 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
 	    private final static String KEY_JSON ="key";
 	    
 
-	    private String firstNameKey;
+	    @SuppressWarnings("unused")
+		private String firstNameKey;
 	    private final static String FIRSTNAME_KEY = "first_name";
 	    
+	    @SuppressWarnings("unused")
 	    private String lastNameKey;
 		private final static String LASTNAME_KEY = "last_name";
 		
+		@SuppressWarnings("unused")
 		private String imageKey;
 		private final static String IMAGE = "profile_image";
 	    
@@ -365,7 +368,8 @@ private void showAlertMessage(final String title,final String message) {
 	}
 	
 	 
-	  private void showList(List<UserFollowers> followers)
+    @SuppressWarnings("unused")
+	private void showList(List<UserFollowers> followers)
 	{
     	 ListView list = (ListView) findViewById(R.id.listView1);
     	 adapter = new ProfileListAdapter(this, R.layout.followers_row, followers);

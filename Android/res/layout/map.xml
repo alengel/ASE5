@@ -3,8 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-     >
+    android:orientation="vertical" >
 
 <fragment
     android:id="@+id/map"
@@ -17,15 +16,13 @@
 <ListView
     android:id="@+id/list"
     android:layout_marginTop="1dp"	
-    
     android:layout_below="@+id/map"
 	android:layout_width="wrap_content"
 	android:layout_height="match_parent"
 	android:drawSelectorOnTop="false"
 	android:divider="#FFCC00"
-    android:dividerHeight="2px"
-    android:background="@drawable/list_border"
-		 									/> 
+    android:dividerHeight="1dp"
+    android:background="@drawable/list_border" /> 
 
 <Button
     android:id="@+id/locate_me_button"
@@ -33,6 +30,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:background="@drawable/actionbar"
+    android:layout_marginTop="1dp"
     android:text="@string/locate_me_button" />
 
 <TextView
@@ -45,7 +43,7 @@
     android:gravity="center"
     android:text="@string/hint"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="@color/black"
+    android:textColor="@color/white"
     android:textSize="15sp"
     android:visibility="visible" />
 

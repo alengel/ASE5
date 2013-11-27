@@ -1,6 +1,5 @@
 package com.team5.courseassignment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -37,7 +36,6 @@ import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 
 /*
@@ -169,7 +167,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
    	 	adapter=new MapListViewAdapter(this, R.layout.map_row, venues); 
         list.setAdapter(adapter);*/
 		
-		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, android.R.layout.simple_list_item_1, venues);
+		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, R.layout.venue_list_item, venues);
     	ListView list = (ListView) findViewById(R.id.list); 
     	list.setAdapter(adapter);
     	list.setOnItemClickListener(this);
@@ -258,23 +256,18 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	    	Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
 			i.putExtra(KEY_JSON, kKey);
 			startActivity(i);
+			break;
 			
-	      break;
 	    case R.id.action_settings:
 	    	Intent i1 = new Intent(getApplicationContext(), SettingsActivity.class);
 			i1.putExtra(KEY_JSON, kKey);
 			startActivity(i1);
-			
-	      break;
+			break;
 
 	    default:
 	      break;
 	    }
 
 	    return true;
-		
-		
-		
-		
     }
 }

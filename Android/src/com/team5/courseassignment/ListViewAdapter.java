@@ -1,7 +1,6 @@
 package com.team5.courseassignment;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
