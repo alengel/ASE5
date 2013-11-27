@@ -24,9 +24,20 @@ public class FollowerProfileActivity extends Activity implements
 	// variables for the GET call
 	private static String RETRIEVE_REVIEWER_PROFILE_URL;
 	private final static String RETRIEVE_REVIEWER_PROFILE_URL_EXT = "reviewer-profile/reviewer_id/20";
-
+	
+	//variables for POST call
+		private static String FOLLOW_URL;
+		private final static String FOLLOW_URL_EXT = "reviewer_id";
+		private final static String FOLLOW = "follow";
+		private String followReviewer; 
+		
 	// key of user for connecting to the server
 	private String kKey;
+		public static final String SUCCESS_JSON = null;
+		
+	//reviewer details
+		private String reviewerID;
+		
 
 	ListView list;
 	FollowerVenueAdapter adapter;
@@ -41,7 +52,6 @@ public class FollowerProfileActivity extends Activity implements
 		// Get the base url
 		String baseUrl = getResources().getString(R.string.base_url);
 		RETRIEVE_REVIEWER_PROFILE_URL = baseUrl
-				+ RETRIEVE_REVIEWER_PROFILE_URL_EXT;
 
 		// Set layout
 		setContentView(R.layout.follower_profile);
@@ -53,10 +63,14 @@ public class FollowerProfileActivity extends Activity implements
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				if (followButton.isChecked()) {
-					buttonView.setText("Follow");
+	    	    		buttonView.setText("Unfollow");
+	    	    		followReviewer = "true";
+	    	    		follow();
 					// TODO
 				} else {
-					buttonView.setText("Unfollow");
+	    	        	buttonView.setText("Follow");
+	    	        	followReviewer = "false";
+	    	        	follow();
 				}
 			}
 		});
@@ -158,4 +172,74 @@ public class FollowerProfileActivity extends Activity implements
 		name.setText(firstName + " " + lastName);
 
 	}
+	
+	 @SuppressWarnings("unchecked")
+		private void follow() {
+	    	
+	    	List<NameValuePair> data = new ArrayList<NameValuePair>(2);
+	    	data.add(new BasicNameValuePair(FOLLOW_URL_EXT, reviewerID));
+	    	data.add(new BasicNameValuePair(FOLLOW, followReviewer));
+	    	
+	    	//make POST call
+			ProgressDialog progress = ProgressDialog.show(FollowerProfileActivity.this, "Please wait", "Loading ...");
+			new FollowAsyncTask(progress).execute(data);
+	    }
+	private class FollowAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+    	private ProgressDialog progress;
+    	public FollowAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
+    	
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	 @SuppressWarnings("unused")
+		 protected void onProgressUpdate(Integer... progress) {
+ 	          setProgress(progress[0]);
+ 	     }
+    	  
+		@Override
+		protected JSONObject doInBackground(List<NameValuePair>... params) {
+			
+			
+			List<NameValuePair> data = params[0];
+			
+			JSONObject resultJson = HttpRequest.makePostRequest(FOLLOW_URL, data);
+			
+			return resultJson;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			
+			super.onPostExecute(result);
+			progress.dismiss();
+			if(result != null) {
+				
+				try {
+					
+					String success = result.getString(SUCCESS_JSON);
+					
+					if(success.equals("true")) {
+						
+						// launch
+						Intent i = new Intent(getApplicationContext(), FollowerProfileActivity.class);
+						
+						i.putExtra(KEY_JSON, kKey);
+						i.putExtra(FOLLOW_URL_EXT, reviewerID);
+						i.putExtra(FOLLOW, followReviewer);						
+						startActivity(i);
+						
+					} else {
+						//TODO: if the server responds with error, display message
+					} 
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+			} 
+		}	
+    }
 }
