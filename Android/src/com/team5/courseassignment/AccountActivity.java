@@ -84,7 +84,7 @@ public class AccountActivity extends Activity implements OnItemClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
       //Set layout
-    	setContentView(R.layout.user_profile);
+    	setContentView(R.layout.user_account);
     	kKey = this.getIntent().getStringExtra(KEY_JSON);
     	firstNameKey =this.getIntent().getStringExtra(FIRSTNAME_KEY);
     	lastNameKey=this.getIntent().getStringExtra(LASTNAME_KEY);
