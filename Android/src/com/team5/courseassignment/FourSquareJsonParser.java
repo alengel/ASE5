@@ -9,36 +9,36 @@ import org.json.JSONObject;
 
 public class FourSquareJsonParser {
 	public List<FourSquareVenue> parseJSON(JSONObject results) {
-		
+
 		List<FourSquareVenue> venues = new ArrayList<FourSquareVenue>();
-		
-		if(results == null)
+
+		if (results == null)
 			return venues;
-		
+
 		try {
 			JSONObject response = results.getJSONObject("response");
 
 			JSONArray groups = response.getJSONArray("groups");
 			JSONArray items = groups.getJSONObject(0).getJSONArray("items");
-			
-			for (int i = 0, size = items.length(); i < size; i++)
-		    {
+
+			for (int i = 0, size = items.length(); i < size; i++) {
 				JSONObject item = items.getJSONObject(i);
 				JSONObject venue = item.getJSONObject("venue");
 				String name = venue.getString("name");
 				String id = venue.getString("id");
 				JSONObject location = venue.getJSONObject("location");
 				Integer distance = location.getInt("distance");
-				
-				FourSquareVenue fourSquareVenue = new FourSquareVenue(name, id, distance);
-				venues.add(fourSquareVenue);	
-		    }
-		
+
+				FourSquareVenue fourSquareVenue = new FourSquareVenue(name, id,
+						distance);
+				venues.add(fourSquareVenue);
+			}
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return venues;
 	}
 }
