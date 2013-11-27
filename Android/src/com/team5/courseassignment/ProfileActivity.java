@@ -147,6 +147,7 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
         		 
         	 
 		String firstName = ((EditText) findViewById(R.id.editName)).getEditableText().toString();
+		
 		String lastName = ((EditText) findViewById(R.id.editLastName)).getEditableText().toString();
 		
 		
@@ -378,13 +379,19 @@ private void showAlertMessage(final String title,final String message) {
 	*/
 	private void fillProfile( List<ProfileInfo> profile) 
 	{	//Set User name
-
+		EditText editName = (EditText) findViewById(R.id.editName);
+		String firstName =  profile.get(0).getName();
+		editName.setText(firstName);
+		
+		EditText editLastName = (EditText) findViewById(R.id.editLastName);
+		String LastName =  profile.get(0).getLastName();
+		editLastName.setText(LastName);
+		
     	TextView name = (TextView) findViewById(R.id.name);
-    	String firstName =  profile.get(0).getName();
     	name.setText(firstName);
     	//Set User last_name
     	TextView lastName = (TextView) findViewById(R.id.lastName);
-    	String LastName =  profile.get(0).getLastName();
+    	
     	lastName.setText(LastName);
     	//Set User email
     	TextView email = (TextView) findViewById(R.id.email);
