@@ -21,7 +21,8 @@ import org.json.JSONObject;
 import android.util.Log;
 
 public class HttpRequest {
-	public static JSONObject makePostRequest(String url, List<NameValuePair> data) {
+	public static JSONObject makePostRequest(String url,
+			List<NameValuePair> data) {
 
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
@@ -71,20 +72,20 @@ public class HttpRequest {
 
 		return resultJson;
 	}
-	
+
 	public static JSONObject makeGetRequest(String url, String data) {
-		
+
 		HttpClient client = new DefaultHttpClient();
 		String createUrl = url + data;
 		HttpGet get = new HttpGet(createUrl);
 		HttpResponse response = null;
-	
+
 		try {
-	
+
 			Log.d("log http get request", "get: " + get);
-	
+
 			response = client.execute(get);
-	
+
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -92,23 +93,24 @@ public class HttpRequest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
+
 		JSONObject resultJson = null;
-	
+
 		if (response != null) {
 			try {
-	
+
 				Log.d("log http get request", "response: " + response);
-	
-				String resultString = EntityUtils.toString(response
-						.getEntity());
-	
+
+				String resultString = EntityUtils
+						.toString(response.getEntity());
+
 				Log.d("log http get request", "resultString: " + resultString);
-	
+
 				resultJson = new JSONObject(resultString);
-	
-				Log.d("log http get request", "resultJson: " + resultJson.toString());
-	
+
+				Log.d("log http get request",
+						"resultJson: " + resultJson.toString());
+
 			} catch (ParseException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

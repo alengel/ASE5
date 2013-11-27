@@ -5,7 +5,8 @@ public class FollowerProfileInfo {
 	public String firstName;
 	public String lastName;
 
-	public FollowerProfileInfo(String profileImage, String firstName, String lastName) {
+	public FollowerProfileInfo(String profileImage, String firstName,
+			String lastName) {
 
 		this.profileImage = profileImage;
 		this.firstName = firstName;

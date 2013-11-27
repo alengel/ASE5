@@ -6,7 +6,8 @@ public class FollowerProfileVenue {
 	public String rating;
 	public String review;
 
-	public FollowerProfileVenue(String locationImage, String locationName,String rating, String review) {
+	public FollowerProfileVenue(String locationImage, String locationName,
+			String rating, String review) {
 
 		this.locationImage = locationImage;
 		this.locationName = locationName;
@@ -48,7 +49,7 @@ public class FollowerProfileVenue {
 
 	@Override
 	public String toString() {
-		return locationName + "Rating: " + rating
-				+ " stars. \"" + review + "\" ";
+		return locationName + "Rating: " + rating + " stars. \"" + review
+				+ "\" ";
 	}
 }

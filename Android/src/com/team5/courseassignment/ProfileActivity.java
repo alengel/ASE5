@@ -7,7 +7,6 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -27,117 +26,118 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ProfileActivity extends Activity implements OnItemClickListener{
-	//variables for the GET call
-		private static String RETRIEVE_PROFILE_URL;
-		private final static String RETRIEVE_PROFILE_URL_EXT = "profile";
-		
-		@SuppressWarnings("unused")
-		private static String SET_PROFILE_URL;
-		private final static String SET_PROFILE_URL_EXT = "update";
-		
-	
-	//key of user for connecting to the server
-		private String kKey;
-	    private final static String KEY_JSON ="key";
-	    
+public class ProfileActivity extends Activity implements OnItemClickListener {
+	// variables for the GET call
+	private static String RETRIEVE_PROFILE_URL;
+	private final static String RETRIEVE_PROFILE_URL_EXT = "profile";
 
-	    @SuppressWarnings("unused")
-		private String firstNameKey;
-	    private final static String FIRSTNAME_KEY = "first_name";
-	    
-	    @SuppressWarnings("unused")
-	    private String lastNameKey;
-		private final static String LASTNAME_KEY = "last_name";
-		
-		@SuppressWarnings("unused")
-		private String imageKey;
-		private final static String IMAGE = "profile_image";
-	    
-		private ImageView profilePicture;
-		ListView list;
-		ProfileListAdapter adapter;
-	
+	@SuppressWarnings("unused")
+	private static String SET_PROFILE_URL;
+	private final static String SET_PROFILE_URL_EXT = "update";
+
+	// key of user for connecting to the server
+	private String kKey;
+
+	@SuppressWarnings("unused")
+	private String firstNameKey;
+	private final static String FIRSTNAME_KEY = "first_name";
+
+	@SuppressWarnings("unused")
+	private String lastNameKey;
+	private final static String LASTNAME_KEY = "last_name";
+
+	@SuppressWarnings("unused")
+	private String imageKey;
+	private final static String IMAGE = "profile_image";
+
+	private ImageView profilePicture;
+	ListView list;
+	ProfileListAdapter adapter;
+
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-      //Set layout
-    	setContentView(R.layout.user_profile);
-    	kKey = this.getIntent().getStringExtra(KEY_JSON);
-    	firstNameKey =this.getIntent().getStringExtra(FIRSTNAME_KEY);
-    	lastNameKey=this.getIntent().getStringExtra(LASTNAME_KEY);
-    	imageKey=this.getIntent().getStringExtra(IMAGE);
-    
-    	//Get the base url
-    	String baseUrl = getResources().getString(R.string.base_url);
-    	RETRIEVE_PROFILE_URL = baseUrl + RETRIEVE_PROFILE_URL_EXT;
-    	SET_PROFILE_URL = baseUrl + SET_PROFILE_URL_EXT;
-    	
-    	ProgressDialog progress = ProgressDialog.show(ProfileActivity.this, "Please wait", "Loading ...");
-    	String data = "/key/" + kKey ;
-		
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// Set layout
+		setContentView(R.layout.user_profile);
+		kKey = SharedPreferencesEditor.getKey();
+		firstNameKey = this.getIntent().getStringExtra(FIRSTNAME_KEY);
+		lastNameKey = this.getIntent().getStringExtra(LASTNAME_KEY);
+		imageKey = this.getIntent().getStringExtra(IMAGE);
+
+		// Get the base url
+		String baseUrl = getResources().getString(R.string.base_url);
+		RETRIEVE_PROFILE_URL = baseUrl + RETRIEVE_PROFILE_URL_EXT;
+		SET_PROFILE_URL = baseUrl + SET_PROFILE_URL_EXT;
+
+		ProgressDialog progress = ProgressDialog.show(ProfileActivity.this,
+				"Please wait", "Loading ...");
+		String data = "/key/" + kKey;
+
 		new ProfileAsyncTask(progress).execute(data);
-        this.profilePicture = (ImageView)this.findViewById(R.id.profilePicture);
-    	profilePicture.buildDrawingCache();
+		this.profilePicture = (ImageView) this
+				.findViewById(R.id.profilePicture);
+		profilePicture.buildDrawingCache();
 	}
-	
-	//Makes it possible to click on the Review and allows to go to the Review screen once set up
+
+	// Makes it possible to click on the Review and allows to go to the Review
+	// screen once set up
 	@Override
-    public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-        Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-                  Toast.LENGTH_SHORT).show();
-    }
-	
+	public void onItemClick(AdapterView<?> adapter, View view, int position,
+			long id) {
+		Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
+				Toast.LENGTH_SHORT).show();
+	}
+
 	private class ProfileAsyncTask extends AsyncTask<String, Void, JSONObject> {
-		
+
 		String data;
 		private ProgressDialog progress;
+
 		public ProfileAsyncTask(ProgressDialog progress) {
-		    this.progress = progress;
-		  }
+			this.progress = progress;
+		}
 
-		  public void onPreExecute() {
-		    progress.show();
-		  }
+		public void onPreExecute() {
+			progress.show();
+		}
 
-		  @SuppressWarnings("unused")
-		  protected void onProgressUpdate(Integer... progress) {
-			  setProgress(progress[0]);
-		      }
-		  
+		@SuppressWarnings("unused")
+		protected void onProgressUpdate(Integer... progress) {
+			setProgress(progress[0]);
+		}
+
 		@Override
 		protected JSONObject doInBackground(String... params) {
-		
-			 data = params[0];
-			
-			
-			JSONObject resultJson = HttpRequest.makeGetRequest(RETRIEVE_PROFILE_URL, data);
-			
-			
-		    
-			//resultJson	= HttpRequest.makeGetRequest(RETRIEVE_PROFILE_URL, data);
+
+			data = params[0];
+
+			JSONObject resultJson = HttpRequest.makeGetRequest(
+					RETRIEVE_PROFILE_URL, data);
+
+			// resultJson = HttpRequest.makeGetRequest(RETRIEVE_PROFILE_URL,
+			// data);
 			return resultJson;
 		}
-		
+
 		@Override
 		protected void onPostExecute(JSONObject result) {
-			
+
 			super.onPostExecute(result);
 			progress.dismiss();
 			if (result != null) {
 				try {
-					final List<ProfileInfo> data = new ProfileInfoParser().parseJSON(result);
-					//final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser().parseJSON(result);
-					
+					final List<ProfileInfo> data = new ProfileInfoParser()
+							.parseJSON(result);
+
 					runOnUiThread(new Runnable() {
 
-	                    @Override
-	                    public void run() {
-	                    	fillProfile(data);
-	                    	//showList(reviewer_profile_venue);
-	                    }
-	                });
-					
+						@Override
+						public void run() {
+							fillProfile(data);
+							// showList(reviewer_profile_venue);
+						}
+					});
+
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -145,77 +145,72 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
 			}
 		}
 	}
-	
-	 
-    @SuppressWarnings("unused")
-	private void showList(List<UserFollowers> followers)
-	{
-    	 ListView list = (ListView) findViewById(R.id.listView1);
-    	 adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
-         list.setAdapter(adapter);
+
+	@SuppressWarnings("unused")
+	private void showList(List<UserFollowers> followers) {
+		ListView list = (ListView) findViewById(R.id.listView1);
+		adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
+		list.setAdapter(adapter);
 	}
-	
-	private void fillProfile( List<ProfileInfo> profile) 
-	{	//Set User name
-		String firstName =  profile.get(0).getName();
-		String LastName =  profile.get(0).getLastName();
-		
-    	TextView name = (TextView) findViewById(R.id.name);
-    	name.setText(firstName);
-    	
-    	//Set User last_name
-    	TextView lastName = (TextView) findViewById(R.id.lastName);
-    	lastName.setText(LastName);
-    	
-    	//Set User email
-    	TextView email = (TextView) findViewById(R.id.email);
-    	String Email =  profile.get(0).getEmail();
-    	email.setText(Email);
-    	
-    	//Set User picture
-    	ImageView image = (ImageView)findViewById(R.id.profilePicture);
-    	byte[] decodedString = Base64.decode(profile.get(0).getProfileImage(),Base64.NO_WRAP);
-    	InputStream inputStream  = new ByteArrayInputStream(decodedString);
-    	Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
-    	
-    	if(bitmap != null){
-    		image.setImageBitmap(bitmap);
-    	}
+
+	private void fillProfile(List<ProfileInfo> profile) { // Set User name
+		String firstName = profile.get(0).getName();
+		String LastName = profile.get(0).getLastName();
+
+		TextView name = (TextView) findViewById(R.id.name);
+		name.setText(firstName);
+
+		// Set User last_name
+		TextView lastName = (TextView) findViewById(R.id.lastName);
+		lastName.setText(LastName);
+
+		// Set User email
+		TextView email = (TextView) findViewById(R.id.email);
+		String Email = profile.get(0).getEmail();
+		email.setText(Email);
+
+		// Set User picture
+		ImageView image = (ImageView) findViewById(R.id.profilePicture);
+		byte[] decodedString = Base64.decode(profile.get(0).getProfileImage(),
+				Base64.NO_WRAP);
+		InputStream inputStream = new ByteArrayInputStream(decodedString);
+		Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+		if (bitmap != null) {
+			image.setImageBitmap(bitmap);
+		}
 	}
-	
+
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.map_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-	
-	//set settings icon actions
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu items for use in the action bar
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.map_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	// set settings icon actions
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
+
 		switch (item.getItemId()) {
-	    case R.id.action_profile:
-	    	Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
-			i.putExtra(KEY_JSON, kKey);
+		case R.id.action_profile:
+			Intent i = new Intent(getApplicationContext(),
+					ProfileActivity.class);
 			startActivity(i);
-			
-	      break;
-	    case R.id.action_settings:
-	    	Intent i1 = new Intent(getApplicationContext(), SettingsActivity.class);
-			i1.putExtra(KEY_JSON, kKey);
+
+			break;
+		case R.id.action_settings:
+			Intent i1 = new Intent(getApplicationContext(),
+					SettingsActivity.class);
 			startActivity(i1);
-			
-	      break;
 
-	    default:
-	      break;
-	    }
+			break;
 
-	    return true;
-    }
+		default:
+			break;
+		}
+
+		return true;
+	}
 }
-	
-		
-
