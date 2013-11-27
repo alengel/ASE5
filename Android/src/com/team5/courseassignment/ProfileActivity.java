@@ -1,6 +1,8 @@
 package com.team5.courseassignment;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +63,9 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
 	    private String lastNameKey;
 		private final static String LASTNAME_KEY = "last_name";
 		
+		private String emailKey;
+		private final static String EMAIL_KEY = "last_name";
+		
 		private String imageKey;
 		private final static String IMAGE = "profile_image";
 	    
@@ -83,7 +88,8 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
     	kKey = this.getIntent().getStringExtra(KEY_JSON);
     	firstNameKey =this.getIntent().getStringExtra(FIRSTNAME_KEY);
     	lastNameKey=this.getIntent().getStringExtra(LASTNAME_KEY);
-    	imageKey=this.getIntent().getStringExtra(IMAGE);
+    	
+    	//imageKey=this.getIntent().getStringExtra(IMAGE);
     	
     	
     	
@@ -341,14 +347,14 @@ private void showAlertMessage(final String title,final String message) {
 			progress.dismiss();
 			if (result != null) {
 				try {
-					final List<ProfileInfo> user_profile = new ProfileInfoParser().parseJSON(result);
+					final List<ProfileInfo> profile = new ProfileInfoParser().parseJSON(result);
 					//final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser().parseJSON(result);
 					
 					runOnUiThread(new Runnable() {
 
 	                    @Override
 	                    public void run() {
-	                    	fillProfile(user_profile);
+	                    	fillProfile(profile);
 	                    	//showList(reviewer_profile_venue);
 	                    }
 	                });
@@ -370,27 +376,30 @@ private void showAlertMessage(final String title,final String message) {
          list.setAdapter(adapter);
 	}
 	*/
-	private void fillProfile( List<ProfileInfo> user_profile) 
-	{//Set User name
-		
-		
+	private void fillProfile( List<ProfileInfo> profile) 
+	{	//Set User name
+
     	TextView name = (TextView) findViewById(R.id.name);
-    	/*name.setText(((ProfileInfo) user_profile).getName());
-    	
+    	String firstName =  profile.get(0).getName();
+    	name.setText(firstName);
+    	//Set User last_name
     	TextView lastName = (TextView) findViewById(R.id.lastName);
-    	lastName.setText(((ProfileInfo) user_profile).getLastName());
-    	
+    	String LastName =  profile.get(0).getLastName();
+    	lastName.setText(LastName);
+    	//Set User email
     	TextView email = (TextView) findViewById(R.id.email);
-    	email.setText(((ProfileInfo) user_profile).getEmail());
-    	ImageView profileImage = (ImageView) findViewById(R.id.profileImage);
-    	*/
-		
-    	String firstName =  user_profile.get(0).getName();
-    	String lastName = user_profile.get(0).getLastName();
-    	String email = user_profile.get(0).getEmail();
-    	String profilePicture =  user_profile.get(0).getProfileImage();
+    	String Email =  profile.get(0).getEmail();
+    	email.setText(Email);
+    	//Set User picture
+    	ImageView image = (ImageView)findViewById(R.id.profilePicture);
+    	//String profilePicture =  profile.get(0).getProfileImage();
     	
-    	name.setText("TEEEEEXT");
+    	byte[] decodedString = Base64.decode(profile.get(0).getProfileImage(),Base64.NO_WRAP);
+    	InputStream inputStream  = new ByteArrayInputStream(decodedString);
+    	Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+    	image.setImageBitmap(bitmap);
+    	
+    	
     	
 	}
 	

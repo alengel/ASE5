@@ -10,20 +10,20 @@ import org.json.JSONObject;
 public class ProfileInfoParser {
 
 	public List<ProfileInfo> parseJSON(JSONObject results) throws JSONException {
-		List<ProfileInfo> user_profile = new ArrayList<ProfileInfo>();
+		List<ProfileInfo> profile = new ArrayList<ProfileInfo>();
 		
-		JSONArray data = results.getJSONArray("data");
-		JSONObject user = data.getJSONObject(0);
-		String profileImage = user.getString("profile_image");
-		String name = user.getString("first_name");
-		String lastName = user.getString("last_name");
-		String email = user.getString("email");
+		JSONObject data = results.getJSONObject("data");
+		//JSONObject user = data.getJSONObject(0);
+		String profileImage = data.getString("profile_image");
+		String name = data.getString("first_name");
+		String lastName = data.getString("last_name");
+		String email = data.getString("email");
 		
 		
 		ProfileInfo followerProfileInfo = new ProfileInfo(profileImage, name, lastName,email);
-		user_profile.add(followerProfileInfo);	
+		profile.add(followerProfileInfo);	
 	    
-		return user_profile;
+		return profile;
 	}
 }
 
