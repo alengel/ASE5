@@ -135,25 +135,20 @@ public class CheckinActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(JSONObject result) {
-			
+
 			super.onPostExecute(result);
 			progress.dismiss();
 			if (result != null) {
-				try {
-					final List<VenueReview> reviews = new VenueReviewParser().parseJSON(result);
-					
-					runOnUiThread(new Runnable() {
 
-                        @Override
-                        public void run() {
-                        	showList(reviews);
-                        }
-                    });
-					
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				final List<VenueReview> reviews = new VenueReviewParser().parseJSON(result);
+
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						showList(reviews);
+					}
+				});
+
 			}
 		}
 	}

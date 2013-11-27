@@ -50,11 +50,13 @@ public class VenueReviewParserTest extends AndroidTestCase {
 				"   \"success\":\"true\",\r\n" + 
 				"   \"data\":[\r\n" + 
 				"      {\r\n" + 
+				"         \"profile_image\":\"profileImage\",\r\n" + 
 				"         \"first_name\":\"Alena\",\r\n" + 
 				"         \"last_name\":\"Ruprecht\",\r\n" + 
 				"         \"email\":\"alenaruprecht@gmail.com\",\r\n" + 
 				"         \"rating\":\"4.0\",\r\n" + 
-				"         \"review\":\"great place, long queues\"\r\n" + 
+				"         \"review\":\"great place, long queues\",\r\n" + 
+				"         \"total_vote\":\"12\"\r\n" + 
 				"      },\r\n" + 
 				"   ]\r\n" + 
 				"}";
@@ -64,10 +66,12 @@ public class VenueReviewParserTest extends AndroidTestCase {
 		// Test with one review.
 		final List<VenueReview> reviews = new VenueReviewParser().parseJSON(json);
 		assertEquals(1, reviews.size());
+		assertEquals(reviews.get(0).profileImage, "profileImage");
 		assertEquals(reviews.get(0).firstName, "Alena");
 		assertEquals(reviews.get(0).lastName, "Ruprecht");
 		assertEquals(reviews.get(0).rating, "4.0");
 		assertEquals(reviews.get(0).review, "great place, long queues");
+		assertEquals(reviews.get(0).votes, "12");
 	}
 	
 	@Test
@@ -77,18 +81,22 @@ public class VenueReviewParserTest extends AndroidTestCase {
 				"   \"success\":\"true\",\r\n" + 
 				"   \"data\":[\r\n" + 
 				"      {\r\n" + 
+				"         \"profile_image\":\"profileImage\",\r\n" + 
 				"         \"first_name\":\"Alena\",\r\n" + 
 				"         \"last_name\":\"Ruprecht\",\r\n" + 
 				"         \"email\":\"alenaruprecht@gmail.com\",\r\n" + 
 				"         \"rating\":\"4.0\",\r\n" + 
-				"         \"review\":\"great place, long queues\"\r\n" + 
+				"         \"review\":\"great place, long queues\",\r\n" + 
+				"         \"total_vote\":\"12\"\r\n" + 
 				"      },\r\n" + 
 				"      {\r\n" + 
+				"         \"profile_image\":\"profileImage2\",\r\n" + 
 				"         \"first_name\":\"Michael\",\r\n" + 
 				"         \"last_name\":\"Jackson\",\r\n" + 
 				"         \"email\":\"alenaruprecht@gmail.com\",\r\n" + 
 				"         \"rating\":\"3.0\",\r\n" + 
-				"         \"review\":\"always busy\"\r\n" + 
+				"         \"review\":\"always busy\",\r\n" + 
+				"         \"total_vote\":\"13\"\r\n" + 
 				"      }\r\n" + 
 				"   ]\r\n" + 
 				"}";
@@ -98,15 +106,19 @@ public class VenueReviewParserTest extends AndroidTestCase {
 		// Test with two reviews.
 		final List<VenueReview> reviews = new VenueReviewParser().parseJSON(json);
 		assertEquals(2, reviews.size());
+		assertEquals(reviews.get(0).profileImage, "profileImage");
 		assertEquals(reviews.get(0).firstName, "Alena");
 		assertEquals(reviews.get(0).lastName, "Ruprecht");
 		assertEquals(reviews.get(0).rating, "4.0");
 		assertEquals(reviews.get(0).review, "great place, long queues");
+		assertEquals(reviews.get(0).votes, "12");
 		
+		assertEquals(reviews.get(1).profileImage, "profileImage2");
 		assertEquals(reviews.get(1).firstName, "Michael");
 		assertEquals(reviews.get(1).lastName, "Jackson");
 		assertEquals(reviews.get(1).rating, "3.0");
 		assertEquals(reviews.get(1).review, "always busy");
+		assertEquals(reviews.get(1).votes, "13");
 	}
 	
 	// Create a JSONObject from a string.
