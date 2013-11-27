@@ -63,7 +63,7 @@ public class FollowerVenueAdapter extends ArrayAdapter<FollowerProfileVenue> {
 	 
 	    locationName.setText(item.getLocationName());
 	    rating.setText("Rating: "+item.getRating()+"  stars");
-	    review.setText("Review: "+item.getReview());
+	    review.setText(item.getReview());
 	 
 	    if( cachedImage != null ) {
 	      image.setImageBitmap(cachedImage);

@@ -42,7 +42,7 @@ public class FollowerProfileActivity extends Activity implements OnItemClickList
     	RETRIEVE_REVIEWER_PROFILE_URL = baseUrl + RETRIEVE_REVIEWER_PROFILE_URL_EXT;
     	
     	//Set layout
-    	setContentView(R.layout.followers_profile);
+    	setContentView(R.layout.follower_profile);
     	    	
     	//Setting up follow button.
     	
@@ -51,9 +51,6 @@ public class FollowerProfileActivity extends Activity implements OnItemClickList
 	    	{
 	    	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	    	    {
-	    	    	
-	    	    	
-	    	    	
 	    	    	if ( followButton.isChecked() )
 	    	        {
 	    	    		buttonView.setText("Follow");

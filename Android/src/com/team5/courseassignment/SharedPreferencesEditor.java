@@ -39,7 +39,7 @@ public class SharedPreferencesEditor {
 		
 	//variables for the POST answer
 	private final static String SUCCESS_JSON = "success";
-	private final static String KEY_JSON ="key";
+	public final static String KEY_JSON ="key";
 	
 	
 	//variables for logic

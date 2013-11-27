@@ -160,13 +160,6 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	
 	private void showList(List<FourSquareVenue> venues)
 	{
-		/**
-		 * Custom list view adapter.
-		 */
-		/*ListView list = (ListView) findViewById(R.id.list);
-   	 	adapter=new MapListViewAdapter(this, R.layout.map_row, venues); 
-        list.setAdapter(adapter);*/
-		
 		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this, R.layout.venue_list_item, venues);
     	ListView list = (ListView) findViewById(R.id.list); 
     	list.setAdapter(adapter);
@@ -178,7 +171,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
-		Intent i = new Intent(getApplicationContext(), FollowerProfileActivity.class);
+		Intent i = new Intent(getApplicationContext(), CheckinActivity.class);
 		
 		@SuppressWarnings("unchecked")
 		ArrayAdapter<FourSquareVenue> adapter = (ArrayAdapter<FourSquareVenue>) arg0.getAdapter();

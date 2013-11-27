@@ -372,7 +372,7 @@ private void showAlertMessage(final String title,final String message) {
 	private void showList(List<UserFollowers> followers)
 	{
     	 ListView list = (ListView) findViewById(R.id.listView1);
-    	 adapter = new ProfileListAdapter(this, R.layout.followers_row, followers);
+    	 adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
          list.setAdapter(adapter);
 	}
 	

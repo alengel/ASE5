@@ -161,7 +161,7 @@ public class CheckinActivity extends Activity {
     private void showList(List<VenueReview> reviews)
 	{
     	ListView list = (ListView) findViewById(R.id.list);
-    	 adapter=new VenueReviewAdapter(this, R.layout.follower_venue_row, reviews);
+    	 adapter=new VenueReviewAdapter(this, R.layout.follower_venue_row, reviews, kKey);
          list.setAdapter(adapter);
 	}
     
