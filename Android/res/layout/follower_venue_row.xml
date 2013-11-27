@@ -8,6 +8,7 @@
 >
 
     <ImageView
+        android:contentDescription="@string/profile_image"
         android:id="@+id/profile_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -107,6 +108,7 @@
         android:enabled="true" />
 
     <ImageButton
+        android:contentDescription="@string/image_button"
         android:id="@+id/commentButton"
         android:layout_width="30dp"
         android:layout_height="30dp"

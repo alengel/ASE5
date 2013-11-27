@@ -16,7 +16,7 @@
         android:src="@drawable/default_profile_picture" />
     
    <CheckBox
-         android:id="@+id/Follow_checkBox"
+         android:id="@+id/reviewer_follow_button"
          android:layout_width="220dp"
          android:layout_height="50dp"
          android:layout_alignBottom="@+id/reviewer_name"

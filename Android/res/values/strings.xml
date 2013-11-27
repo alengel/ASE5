@@ -110,5 +110,6 @@
     </string-array>
 	<string name="location_image_description">Location Image</string>
 	<string name="user_name">Unknown</string>
-	
+	<string name="profile_image">Profile image</string>
+	<string name="image_button">Image button</string>
 </resources>
