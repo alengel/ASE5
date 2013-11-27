@@ -11,11 +11,13 @@ public class VenueReviewTest extends AndroidTestCase {
 	@Test
 	public void testConstructor() {
 
-		VenueReview venue = new VenueReview("firstName", "lastName", "rating", "review");
+		VenueReview venue = new VenueReview("profileImage", "firstName", "lastName", "rating", "review", "votes");
 
+		assertEquals("profileImage", venue.profileImage);
 		assertEquals("firstName", venue.firstName);
 		assertEquals("lastName", venue.lastName);
 		assertEquals("rating", venue.rating);
 		assertEquals("review", venue.review);
+		assertEquals("votes", venue.votes);
 	}
 }
