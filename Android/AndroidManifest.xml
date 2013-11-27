@@ -78,7 +78,8 @@
         
         <activity
             android:name="com.team5.courseassignment.ProfileActivity"
-            android:label="@string/app_name" >
+            android:label="@string/profileTitle" 
+             >
         </activity>
         
 		<!-- Pascal's Key -->

@@ -78,7 +78,7 @@
         android:layout_height="35dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/profilePicture"
-        android:text="Take photo"
+        android:text="@string/upload_new_image"
         android:layout_marginTop="5dp"
         android:textSize="12sp"
         android:background="@drawable/actionbar"
@@ -92,7 +92,7 @@
         android:layout_below="@+id/editLastName"
         android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/name"
-        android:text="Choose photo"
+        android:text="@string/choose_image"
         android:textSize="12sp"
         android:background="@drawable/actionbar" />
 
