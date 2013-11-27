@@ -1,7 +1,6 @@
 package com.team5.courseassignment;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -78,9 +77,8 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
     	String data = "/key/" + kKey ;
 		
 		new ProfileAsyncTask(progress).execute(data);
-       this.profilePicture = (ImageView)this.findViewById(R.id.profilePicture);
+        this.profilePicture = (ImageView)this.findViewById(R.id.profilePicture);
     	profilePicture.buildDrawingCache();
-		Bitmap ProfilePicture = profilePicture.getDrawingCache();
 	}
 	
 	//Makes it possible to click on the Review and allows to go to the Review screen once set up
@@ -88,9 +86,6 @@ public class ProfileActivity extends Activity implements OnItemClickListener{
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
         Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
                   Toast.LENGTH_SHORT).show();
-			profilePicture = (ImageView) findViewById(R.id.profilePicture);
-			profilePicture.setImageBitmap(b);
-            profilePicture.setImageBitmap(photo);
     }
 	
 	private class ProfileAsyncTask extends AsyncTask<String, Void, JSONObject> {
