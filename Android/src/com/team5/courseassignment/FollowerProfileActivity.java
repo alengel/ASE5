@@ -1,12 +1,16 @@
 package com.team5.courseassignment;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -26,17 +30,18 @@ public class FollowerProfileActivity extends Activity implements
 	private final static String RETRIEVE_REVIEWER_PROFILE_URL_EXT = "reviewer-profile/reviewer_id/20";
 	
 	//variables for POST call
-		private static String FOLLOW_URL;
-		private final static String FOLLOW_URL_EXT = "reviewer_id";
-		private final static String FOLLOW = "follow";
-		private String followReviewer; 
+	private static String FOLLOW_URL;
+	private final static String FOLLOW_URL_EXT = "reviewer_id";
+	private final static String FOLLOW = "follow";
+	private String followReviewer; 
 		
 	// key of user for connecting to the server
 	private String kKey;
-		public static final String SUCCESS_JSON = null;
+	private String KEY_JSON = SharedPreferencesEditor.KEY_JSON;
+	public static final String SUCCESS_JSON = null;
 		
 	//reviewer details
-		private String reviewerID;
+	private String reviewerID;
 		
 
 	ListView list;
@@ -49,9 +54,10 @@ public class FollowerProfileActivity extends Activity implements
 		// Get the key and user details
 		kKey = SharedPreferencesEditor.getKey();
 
-		// Get the base url
-		String baseUrl = getResources().getString(R.string.base_url);
-		RETRIEVE_REVIEWER_PROFILE_URL = baseUrl
+		//Get the base url
+        String baseUrl = getResources().getString(R.string.base_url);
+        RETRIEVE_REVIEWER_PROFILE_URL = baseUrl + RETRIEVE_REVIEWER_PROFILE_URL_EXT;
+        FOLLOW_URL = baseUrl + FOLLOW_URL_EXT;
 
 		// Set layout
 		setContentView(R.layout.follower_profile);
@@ -66,7 +72,6 @@ public class FollowerProfileActivity extends Activity implements
 	    	    		buttonView.setText("Unfollow");
 	    	    		followReviewer = "true";
 	    	    		follow();
-					// TODO
 				} else {
 	    	        	buttonView.setText("Follow");
 	    	        	followReviewer = "false";
@@ -175,8 +180,9 @@ public class FollowerProfileActivity extends Activity implements
 	
 	 @SuppressWarnings("unchecked")
 		private void follow() {
-	    	
-	    	List<NameValuePair> data = new ArrayList<NameValuePair>(2);
+	    	String reviewerID = "20";
+	    	List<NameValuePair> data = new ArrayList<NameValuePair>(3);
+	    	data.add(new BasicNameValuePair(KEY_JSON, kKey));
 	    	data.add(new BasicNameValuePair(FOLLOW_URL_EXT, reviewerID));
 	    	data.add(new BasicNameValuePair(FOLLOW, followReviewer));
 	    	
@@ -184,7 +190,8 @@ public class FollowerProfileActivity extends Activity implements
 			ProgressDialog progress = ProgressDialog.show(FollowerProfileActivity.this, "Please wait", "Loading ...");
 			new FollowAsyncTask(progress).execute(data);
 	    }
-	private class FollowAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+	
+	 private class FollowAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
     	private ProgressDialog progress;
     	public FollowAsyncTask(ProgressDialog progress) {
     	    this.progress = progress;
@@ -201,7 +208,6 @@ public class FollowerProfileActivity extends Activity implements
     	  
 		@Override
 		protected JSONObject doInBackground(List<NameValuePair>... params) {
-			
 			
 			List<NameValuePair> data = params[0];
 			
@@ -225,8 +231,6 @@ public class FollowerProfileActivity extends Activity implements
 						
 						// launch
 						Intent i = new Intent(getApplicationContext(), FollowerProfileActivity.class);
-						
-						i.putExtra(KEY_JSON, kKey);
 						i.putExtra(FOLLOW_URL_EXT, reviewerID);
 						i.putExtra(FOLLOW, followReviewer);						
 						startActivity(i);
