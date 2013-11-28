@@ -22,7 +22,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="70dp"
-        android:button="@drawable/follow_button_state" />
+        android:button="@drawable/unfollow_button_state" />
         
     <TextView
         android:id="@+id/reviewer_name"

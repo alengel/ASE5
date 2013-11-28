@@ -10,7 +10,6 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -31,21 +30,20 @@ public class FollowerProfileActivity extends Activity implements
 	
 	//variables for POST call
 	private static String FOLLOW_URL;
-	private final static String FOLLOW_URL_EXT = "reviewer_id";
-	private final static String FOLLOW = "follow";
-	private String followReviewer; 
+	private final static String FOLLOW_URL_EXT = "follow";
+	private final String REVIEWER_ID = "reviewer_id";
+	private final String FOLLOW = "follow";
+	private Boolean followReviewer; 
+	private String reviewerId;
 		
 	// key of user for connecting to the server
 	private String kKey;
 	private String KEY_JSON = SharedPreferencesEditor.KEY_JSON;
-	public static final String SUCCESS_JSON = null;
-		
-	//reviewer details
-	private String reviewerID;
-		
+	public static final String SUCCESS_JSON = "success";
 
 	ListView list;
 	FollowerVenueAdapter adapter;
+	private CheckBox followButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class FollowerProfileActivity extends Activity implements
 		// Get the key and user details
 		kKey = SharedPreferencesEditor.getKey();
 
-		//Get the base url
+		//Get the base url and set up Urls
         String baseUrl = getResources().getString(R.string.base_url);
         RETRIEVE_REVIEWER_PROFILE_URL = baseUrl + RETRIEVE_REVIEWER_PROFILE_URL_EXT;
         FOLLOW_URL = baseUrl + FOLLOW_URL_EXT;
@@ -63,19 +61,15 @@ public class FollowerProfileActivity extends Activity implements
 		setContentView(R.layout.follower_profile);
 
 		// Setting up follow button.
-
-		final CheckBox followButton = (CheckBox) findViewById(R.id.reviewer_follow_button);
+		followButton = (CheckBox) findViewById(R.id.reviewer_follow_button);
 		followButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (followButton.isChecked()) {
-	    	    		buttonView.setText("Unfollow");
-	    	    		followReviewer = "true";
-	    	    		follow();
+    	    		followReviewer = true;
+    	    		follow();
 				} else {
-	    	        	buttonView.setText("Follow");
-	    	        	followReviewer = "false";
-	    	        	follow();
+    	        	followReviewer = false;
+    	        	follow();
 				}
 			}
 		});
@@ -91,6 +85,13 @@ public class FollowerProfileActivity extends Activity implements
 				FollowerProfileActivity.this, "Please wait", "Loading ...");
 
 		new ReviewerProfileAsyncTask(progress).execute(data);
+	}
+	
+	protected void onResume(Bundle savedInstanceState) {
+		super.onResume();
+
+		// Get the key and user details
+		kKey = SharedPreferencesEditor.getKey();
 	}
 
 	// Makes it possible to click on the Review and allows to go to the Review
@@ -179,12 +180,12 @@ public class FollowerProfileActivity extends Activity implements
 	}
 	
 	 @SuppressWarnings("unchecked")
-		private void follow() {
-	    	String reviewerID = "20";
+	 private void follow() {
+	    	reviewerId = "20";
 	    	List<NameValuePair> data = new ArrayList<NameValuePair>(3);
 	    	data.add(new BasicNameValuePair(KEY_JSON, kKey));
-	    	data.add(new BasicNameValuePair(FOLLOW_URL_EXT, reviewerID));
-	    	data.add(new BasicNameValuePair(FOLLOW, followReviewer));
+	    	data.add(new BasicNameValuePair(REVIEWER_ID, reviewerId));
+	    	data.add(new BasicNameValuePair(FOLLOW, followReviewer.toString()));
 	    	
 	    	//make POST call
 			ProgressDialog progress = ProgressDialog.show(FollowerProfileActivity.this, "Please wait", "Loading ...");
@@ -228,13 +229,7 @@ public class FollowerProfileActivity extends Activity implements
 					String success = result.getString(SUCCESS_JSON);
 					
 					if(success.equals("true")) {
-						
-						// launch
-						Intent i = new Intent(getApplicationContext(), FollowerProfileActivity.class);
-						i.putExtra(FOLLOW_URL_EXT, reviewerID);
-						i.putExtra(FOLLOW, followReviewer);						
-						startActivity(i);
-						
+						//TODO: Move logic of button changing in here.
 					} else {
 						//TODO: if the server responds with error, display message
 					} 
