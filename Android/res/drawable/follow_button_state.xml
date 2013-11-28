@@ -5,10 +5,10 @@ add to res/drawable/follow_button_state.xml
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/unfollow_button"
+        android:drawable="@drawable/follow_button"
         android:state_checked="true"/>
     <item
-        android:drawable="@drawable/follow_button"
+        android:drawable="@drawable/unfollow_button"
         android:state_checked="false"/>    
 </selector>
 

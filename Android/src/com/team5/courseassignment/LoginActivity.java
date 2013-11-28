@@ -193,8 +193,7 @@ public class LoginActivity extends Activity {
 					} else {
 						showInvalidInput(getResources().getString(
 								R.string.invalid_input_generic));
-					} // TODO: do more error checking stuff when Sandeep has
-						// extended his API
+					} 
 
 				} catch (JSONException e) {
 					e.printStackTrace();

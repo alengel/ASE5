@@ -20,9 +20,9 @@
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="70dp"
-        android:button="@drawable/follow_button_state" />
+        android:button="@drawable/unfollow_button_state" />
         
     <TextView
         android:id="@+id/reviewer_name"
@@ -31,7 +31,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/reviewer_image"
-        android:textSize="28sp"
+        android:textSize="23sp"
         android:textColor="@color/white" />
 
      <ListView

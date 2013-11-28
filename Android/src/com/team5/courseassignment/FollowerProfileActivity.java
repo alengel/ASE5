@@ -1,7 +1,10 @@
 package com.team5.courseassignment;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,12 +27,23 @@ public class FollowerProfileActivity extends Activity implements
 	// variables for the GET call
 	private static String RETRIEVE_REVIEWER_PROFILE_URL;
 	private final static String RETRIEVE_REVIEWER_PROFILE_URL_EXT = "reviewer-profile/reviewer_id/20";
-
+	
+	//variables for POST call
+	private static String FOLLOW_URL;
+	private final static String FOLLOW_URL_EXT = "follow";
+	private final String REVIEWER_ID = "reviewer_id";
+	private final String FOLLOW = "follow";
+	private Boolean followReviewer; 
+	private String reviewerId;
+		
 	// key of user for connecting to the server
 	private String kKey;
+	private String KEY_JSON = SharedPreferencesEditor.KEY_JSON;
+	public static final String SUCCESS_JSON = "success";
 
 	ListView list;
 	FollowerVenueAdapter adapter;
+	private CheckBox followButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +52,24 @@ public class FollowerProfileActivity extends Activity implements
 		// Get the key and user details
 		kKey = SharedPreferencesEditor.getKey();
 
-		// Get the base url
-		String baseUrl = getResources().getString(R.string.base_url);
-		RETRIEVE_REVIEWER_PROFILE_URL = baseUrl
-				+ RETRIEVE_REVIEWER_PROFILE_URL_EXT;
+		//Get the base url and set up Urls
+        String baseUrl = getResources().getString(R.string.base_url);
+        RETRIEVE_REVIEWER_PROFILE_URL = baseUrl + RETRIEVE_REVIEWER_PROFILE_URL_EXT;
+        FOLLOW_URL = baseUrl + FOLLOW_URL_EXT;
 
 		// Set layout
 		setContentView(R.layout.follower_profile);
 
 		// Setting up follow button.
-
-		final CheckBox followButton = (CheckBox) findViewById(R.id.reviewer_follow_button);
+		followButton = (CheckBox) findViewById(R.id.reviewer_follow_button);
 		followButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (followButton.isChecked()) {
-					buttonView.setText("Follow");
-					// TODO
+    	    		followReviewer = true;
+    	    		follow();
 				} else {
-					buttonView.setText("Unfollow");
+    	        	followReviewer = false;
+    	        	follow();
 				}
 			}
 		});
@@ -72,6 +85,13 @@ public class FollowerProfileActivity extends Activity implements
 				FollowerProfileActivity.this, "Please wait", "Loading ...");
 
 		new ReviewerProfileAsyncTask(progress).execute(data);
+	}
+	
+	protected void onResume(Bundle savedInstanceState) {
+		super.onResume();
+
+		// Get the key and user details
+		kKey = SharedPreferencesEditor.getKey();
 	}
 
 	// Makes it possible to click on the Review and allows to go to the Review
@@ -158,4 +178,67 @@ public class FollowerProfileActivity extends Activity implements
 		name.setText(firstName + " " + lastName);
 
 	}
+	
+	 @SuppressWarnings("unchecked")
+	 private void follow() {
+	    	reviewerId = "20";
+	    	List<NameValuePair> data = new ArrayList<NameValuePair>(3);
+	    	data.add(new BasicNameValuePair(KEY_JSON, kKey));
+	    	data.add(new BasicNameValuePair(REVIEWER_ID, reviewerId));
+	    	data.add(new BasicNameValuePair(FOLLOW, followReviewer.toString()));
+	    	
+	    	//make POST call
+			ProgressDialog progress = ProgressDialog.show(FollowerProfileActivity.this, "Please wait", "Loading ...");
+			new FollowAsyncTask(progress).execute(data);
+	    }
+	
+	 private class FollowAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+    	private ProgressDialog progress;
+    	public FollowAsyncTask(ProgressDialog progress) {
+    	    this.progress = progress;
+    	  }
+    	
+    	  public void onPreExecute() {
+    	    progress.show();
+    	  }
+
+    	 @SuppressWarnings("unused")
+		 protected void onProgressUpdate(Integer... progress) {
+ 	          setProgress(progress[0]);
+ 	     }
+    	  
+		@Override
+		protected JSONObject doInBackground(List<NameValuePair>... params) {
+			
+			List<NameValuePair> data = params[0];
+			
+			JSONObject resultJson = HttpRequest.makePostRequest(FOLLOW_URL, data);
+			
+			return resultJson;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			
+			super.onPostExecute(result);
+			progress.dismiss();
+			if(result != null) {
+				
+				try {
+					
+					String success = result.getString(SUCCESS_JSON);
+					
+					if(success.equals("true")) {
+						//TODO: Move logic of button changing in here.
+					} else {
+						//TODO: if the server responds with error, display message
+					} 
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+			} 
+		}	
+    }
 }
