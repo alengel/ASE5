@@ -17,7 +17,7 @@
     
    <CheckBox
         android:id="@+id/reviewer_follow_button"
-        android:layout_width="125dp"
+        android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
