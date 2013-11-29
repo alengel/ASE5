@@ -48,6 +48,8 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	
 	private final String REVIEW_ID = "review_id";
 	private String reviewId;
+	private final String REVIEWER_ID = "reviewer_id";
+	private String reviewerId;
 	private final String VOTE = "vote";
 	private String voteValue;
 
@@ -82,7 +84,6 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 			rating = (TextView) view.findViewById(R.id.rating);
 			review = (TextView) view.findViewById(R.id.review);
 			voteNumber = (TextView) view.findViewById(R.id.voteNumber);
-			reviewId = VenueReview.getReviewId();
 			
 			String baseUrl = context.getResources().getString(R.string.base_url);
 			VOTE_URL = baseUrl + VOTE_URL_EXT;
@@ -183,7 +184,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		rating.setText("Rating: " + item.getRating() + " stars");
 		review.setText(item.getReview());
 		voteNumber.setText(item.getVotes()); // Vote number need to get from
-												// server.
+		reviewerId = item.getReviewerId();										// server.
 
 		if (cachedImage != null) {
 			image.setImageBitmap(cachedImage);
@@ -227,7 +228,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		// launch ProfilePageActivity
 		Intent openProfile = new Intent(this.context, FollowerProfileActivity.class);
 		openProfile.putExtra(SharedPreferencesEditor.KEY_JSON, kKey);
-		// openProfile.putExtra(user_NAME, user_id);
+		openProfile.putExtra(REVIEWER_ID, reviewerId);
 
 		context.startActivity(openProfile);
 	}

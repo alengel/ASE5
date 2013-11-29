@@ -7,7 +7,7 @@ public class VenueReview {
 	public String reviewerId;
 	public String rating;
 	public String review;
-	public static String reviewId;
+	public String reviewId;
 	public String votes;
 
 	public VenueReview(String profileImage, String firstName, String lastName, String reviewerId,
@@ -19,7 +19,7 @@ public class VenueReview {
 		this.reviewerId = reviewerId;
 		this.rating = rating;
 		this.review = review;
-		VenueReview.reviewId = reviewId;
+		this.reviewId = reviewId;
 		this.votes = votes;
 	}
 
@@ -71,12 +71,12 @@ public class VenueReview {
 		this.review = review;
 	}
 	
-	public static String getReviewId() {
+	public String getReviewId() {
 		return reviewId;
 	}
 
 	public void setReviewId(String reviewId) {
-		VenueReview.reviewId = reviewId;
+		this.reviewId = reviewId;
 	}
 
 	public String getVotes() {

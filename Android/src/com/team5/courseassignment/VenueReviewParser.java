@@ -29,8 +29,7 @@ public class VenueReviewParser {
 				String reviewId = item.getString("review_id");
 				String votes = item.getString("total_vote");
 
-				VenueReview venueReview = new VenueReview(profileImage,
-						firstName, lastName, reviewerId, rating, review, reviewId, votes);
+				VenueReview venueReview = new VenueReview(profileImage, firstName, lastName, reviewerId, rating, review, reviewId, votes);
 				reviews.add(venueReview);
 			}
 		} catch (JSONException e) {

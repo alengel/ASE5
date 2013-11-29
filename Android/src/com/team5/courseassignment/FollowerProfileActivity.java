@@ -26,7 +26,7 @@ public class FollowerProfileActivity extends Activity implements
 		OnItemClickListener {
 	// variables for the GET call
 	private static String RETRIEVE_REVIEWER_PROFILE_URL;
-	private final static String RETRIEVE_REVIEWER_PROFILE_URL_EXT = "reviewer-profile/reviewer_id/20";
+	private final static String RETRIEVE_REVIEWER_PROFILE_URL_EXT = "reviewer-profile/reviewer_id/";
 	
 	//variables for POST call
 	private static String FOLLOW_URL;
@@ -51,6 +51,9 @@ public class FollowerProfileActivity extends Activity implements
 
 		// Get the key and user details
 		kKey = SharedPreferencesEditor.getKey();
+		
+		//Set the reviewer_Id
+		reviewerId = this.getIntent().getStringExtra(REVIEWER_ID);
 
 		//Get the base url and set up Urls
         String baseUrl = getResources().getString(R.string.base_url);
@@ -80,7 +83,7 @@ public class FollowerProfileActivity extends Activity implements
 		listView.setOnItemClickListener(this);
 
 		// make GET request to retrieve existing user reviews for venue
-		String data = "/key/" + kKey;
+		String data = reviewerId + "/key/" + kKey;
 		ProgressDialog progress = ProgressDialog.show(
 				FollowerProfileActivity.this, "Please wait", "Loading ...");
 
@@ -179,7 +182,6 @@ public class FollowerProfileActivity extends Activity implements
 	
 	 @SuppressWarnings("unchecked")
 	 private void follow() {
-	    	reviewerId = "20";
 	    	List<NameValuePair> data = new ArrayList<NameValuePair>(3);
 	    	data.add(new BasicNameValuePair(KEY_JSON, kKey));
 	    	data.add(new BasicNameValuePair(REVIEWER_ID, reviewerId));
