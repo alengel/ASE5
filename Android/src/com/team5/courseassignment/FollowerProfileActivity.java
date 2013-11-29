@@ -140,20 +140,19 @@ public class FollowerProfileActivity extends Activity implements
 			progress.dismiss();
 			if (result != null) {
 				try {
-					final List<FollowerProfileInfo> reviewer_profile = new FollowerProfileInfoParser()
-							.parseJSON(result);
-					final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser()
-							.parseJSON(result);
-
+					final FollowerProfileInfo reviewer_profile = new FollowerProfileInfoParser().parseJSON(result);
+					final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser().parseJSON(result);
+					
 					runOnUiThread(new Runnable() {
 
-						@Override
-						public void run() {
-							fillProfile(reviewer_profile);
-							showList(reviewer_profile_venue);
-						}
-					});
-
+	                    @Override
+	                    public void run() {
+	                    	if(reviewer_profile != null)
+	                    		fillProfile(reviewer_profile);
+	                    	showList(reviewer_profile_venue);
+	                    }
+	                });
+					
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -169,11 +168,11 @@ public class FollowerProfileActivity extends Activity implements
 		list.setAdapter(adapter);
 	}
 
-	private void fillProfile(List<FollowerProfileInfo> reviewer_profile) {
+	private void fillProfile(FollowerProfileInfo reviewer_profile) {
 		// Set User name
 		TextView name = (TextView) findViewById(R.id.reviewer_name);
-		String firstName = reviewer_profile.get(0).getFirstName();
-		String lastName = reviewer_profile.get(0).getLastName();
+		String firstName = reviewer_profile.getFirstName();
+		String lastName = reviewer_profile.getLastName();
 
 		name.setText(firstName + " " + lastName);
 
