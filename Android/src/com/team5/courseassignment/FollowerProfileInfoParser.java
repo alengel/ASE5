@@ -24,8 +24,7 @@ public class FollowerProfileInfoParser
 			String firstName = user.getString("first_name");
 			String lastName = user.getString("last_name");
 
-			reviewer_profile = new FollowerProfileInfo(profileImage, firstName,
-					lastName);
+			reviewer_profile = new FollowerProfileInfo(profileImage, firstName, lastName);
 		} catch (JSONException e)
 		{
 			// TODO Auto-generated catch block

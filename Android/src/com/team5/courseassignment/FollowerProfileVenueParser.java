@@ -7,24 +7,39 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FollowerProfileVenueParser {
+public class FollowerProfileVenueParser
+{
 
 	public List<FollowerProfileVenue> parseJSON(JSONObject results)
-			throws JSONException {
+	{
 		List<FollowerProfileVenue> reviewer_profile_venue = new ArrayList<FollowerProfileVenue>();
 
-		JSONArray details = results.getJSONArray("details");
-		for (int i = 0, size = details.length(); i < size; i++) {
-			JSONObject item = details.getJSONObject(i);
-			String locationImage = item.getString("location_image");
-			String locationName = item.getString("location_name");
-			String rating = item.getString("rating");
-			String review = item.getString("review");
+		if (results == null)
+			return reviewer_profile_venue;
 
-			FollowerProfileVenue followerProfileVenue = new FollowerProfileVenue(
-					locationImage, locationName, rating, review);
-			reviewer_profile_venue.add(followerProfileVenue);
+		JSONArray details;
+		try
+		{
+			details = results.getJSONArray("details");
+
+			for (int i = 0, size = details.length(); i < size; i++)
+			{
+				JSONObject item = details.getJSONObject(i);
+				String locationImage = item.getString("location_image");
+				String locationName = item.getString("location_name");
+				String rating = item.getString("rating");
+				String review = item.getString("review");
+
+				FollowerProfileVenue followerProfileVenue = new FollowerProfileVenue(locationImage, locationName, rating, review);
+				reviewer_profile_venue.add(followerProfileVenue);
+			}
+		} 
+		catch (JSONException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 		return reviewer_profile_venue;
 	}
 }

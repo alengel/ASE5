@@ -134,29 +134,28 @@ public class FollowerProfileActivity extends Activity implements
 		}
 
 		@Override
-		protected void onPostExecute(JSONObject result) {
-
+		protected void onPostExecute(JSONObject result)
+		{
 			super.onPostExecute(result);
 			progress.dismiss();
-			if (result != null) {
-				try {
-					final FollowerProfileInfo reviewer_profile = new FollowerProfileInfoParser().parseJSON(result);
-					final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser().parseJSON(result);
-					
-					runOnUiThread(new Runnable() {
+			
+			if (result != null)
+			{
 
-	                    @Override
-	                    public void run() {
-	                    	if(reviewer_profile != null)
-	                    		fillProfile(reviewer_profile);
-	                    	showList(reviewer_profile_venue);
-	                    }
-	                });
-					
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				final FollowerProfileInfo reviewer_profile = new FollowerProfileInfoParser().parseJSON(result);
+				final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser().parseJSON(result);
+
+				runOnUiThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						if (reviewer_profile != null)
+							fillProfile(reviewer_profile);
+						
+						showList(reviewer_profile_venue);
+					}
+				});
 			}
 		}
 	}
