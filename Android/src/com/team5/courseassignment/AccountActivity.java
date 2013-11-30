@@ -233,7 +233,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	 */
 
 	private class SubmitChangesAsyncTask extends
-	AsyncTask<List<NameValuePair>, Void, JSONObject> {
+			AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		private ProgressDialog progress;
 
 		public SubmitChangesAsyncTask(ProgressDialog progress) {
@@ -276,15 +276,15 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 						showAlertMessage(
 								(getResources()
 										.getString(R.string.congratulations)),
-										getResources().getString(
-												R.string.successMessageRegistration));
+								getResources().getString(
+										R.string.successMessageRegistration));
 
 					} else {
 
 						showAlertMessage(
 								(getResources()
 										.getString(R.string.errorMessage)),
-										MSG_JSON);
+								MSG_JSON);
 
 					}
 
@@ -311,20 +311,20 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		alert.setPositiveButton(getResources().getString(R.string.ok),
 				new DialogInterface.OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO: maybe delete content of some fields
-				if ((getResources()
-						.getString(R.string.successMessageRegistration))
-						.equals(message)) {
-					Intent i = new Intent(getApplicationContext(),
-							LoginActivity.class);
-					startActivity(i);
-				} else {
-					// TODO
-				}
-			}
-		});
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO: maybe delete content of some fields
+						if ((getResources()
+								.getString(R.string.successMessageRegistration))
+								.equals(message)) {
+							Intent i = new Intent(getApplicationContext(),
+									LoginActivity.class);
+							startActivity(i);
+						} else {
+							// TODO
+						}
+					}
+				});
 
 		alert.show();
 	}
@@ -373,16 +373,16 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 			if (result != null) {
 				try {
 					final List<ProfileInfo> profile = new ProfileInfoParser()
-					.parseJSON(result);
-					// final List<FollowerProfileVenue> reviewer_profile_venue =
-					// new FollowerProfileVenueParser().parseJSON(result);
+							.parseJSON(result);
+					final List<UserFollowers> followers = new UserFollowersParser()
+							.parseJSON(result);
 
 					runOnUiThread(new Runnable() {
 
 						@Override
 						public void run() {
 							fillProfile(profile);
-							// showList(reviewer_profile_venue);
+							showList(followers);
 						}
 					});
 
