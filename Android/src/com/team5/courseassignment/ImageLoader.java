@@ -18,7 +18,6 @@ import android.os.Handler;
 /**
  * This is an object that can load images from a URL on a thread.
  * 
- * 
  */
 public class ImageLoader {
 	// Global cache of images.
