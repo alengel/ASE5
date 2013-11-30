@@ -8,6 +8,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FourSquareJsonParser {
+
+	/**
+	 * This class parses list of venues "groups" from the foursquare-api as a
+	 * JSONArray
+	 * 
+	 * @param results
+	 * @return venues - array list of objects to return, which is venue, name,
+	 *         id, location and distance. If the response from the server is
+	 *         true-this parser will parse all data from groups: [ array ]
+	 */
 	public List<FourSquareVenue> parseJSON(JSONObject results) {
 
 		List<FourSquareVenue> venues = new ArrayList<FourSquareVenue>();
@@ -35,7 +45,7 @@ public class FourSquareJsonParser {
 			}
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
