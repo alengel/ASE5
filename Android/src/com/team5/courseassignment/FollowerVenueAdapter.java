@@ -19,6 +19,16 @@ public class FollowerVenueAdapter extends ArrayAdapter<FollowerProfileVenue> {
 	private LayoutInflater inflater;
 	private ImageLoader imageLoader = new ImageLoader();
 
+	/**
+	 * The constructor method of follower venue adapter.
+	 * 
+	 * @param context
+	 *            - the context.
+	 * @param resourceId
+	 *            - id of the source - integer.
+	 * @param mediaItems
+	 *            - list of venues visited by follower with all media data.
+	 */
 	public FollowerVenueAdapter(Context context, int resourceId,
 			List<FollowerProfileVenue> mediaItems) {
 		super(context, 0, mediaItems);
@@ -27,6 +37,10 @@ public class FollowerVenueAdapter extends ArrayAdapter<FollowerProfileVenue> {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
+	/**
+	 * GetView method sets list view to have this custom adapter. It creates
+	 * views (Text, Image), binds list view adapter, layout style.
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
