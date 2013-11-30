@@ -31,6 +31,7 @@ public class ForgottenPasswordActivity extends Activity {
 	// variables for the POST answer
 	private final static String SUCCESS_JSON = "success";
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -103,6 +104,7 @@ public class ForgottenPasswordActivity extends Activity {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}

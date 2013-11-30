@@ -38,6 +38,7 @@ public class UserFollowers {
 		this.last_name = last_name;
 	}
 
+	@Override
 	public String toString() {
 		return profile_image + " " + first_name + last_name + "\" ";
 	}

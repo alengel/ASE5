@@ -22,7 +22,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.provider.MediaStore.MediaColumns;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -198,7 +198,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK
 				&& null != data) {
 			Uri selectedImage = data.getData();
-			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+			String[] filePathColumn = { MediaColumns.DATA };
 
 			Cursor cursor = getContentResolver().query(selectedImage,
 					filePathColumn, null, null, null);
@@ -239,6 +239,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}
@@ -344,6 +345,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}

@@ -108,6 +108,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 			final CheckBox voteDown = (CheckBox) view.findViewById(R.id.voteDown);
 
 			voteUp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				@Override
 				public void onCheckedChanged(CompoundButton buttonView,
 						boolean isChecked) {
 
@@ -131,6 +132,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 			});
 
 			voteDown.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				@Override
 				public void onCheckedChanged(CompoundButton buttonView,
 						boolean isChecked) {
 
@@ -170,6 +172,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		try {
 			cachedImage = imageLoader.loadImage(item.getProfileImage(),
 					new ImageLoadedListener() {
+						@Override
 						public void imageLoaded(Bitmap imageBitmap) {
 							image.setImageBitmap(imageBitmap);
 							notifyDataSetChanged();
@@ -207,6 +210,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		helpBuilder.setPositiveButton("Continue",
 				new DialogInterface.OnClickListener() {
 
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// Send the comment to the server...
 					}
@@ -267,6 +271,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}

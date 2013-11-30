@@ -208,6 +208,7 @@ public class SharedPreferencesEditor {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}
@@ -310,6 +311,7 @@ public class SharedPreferencesEditor {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}

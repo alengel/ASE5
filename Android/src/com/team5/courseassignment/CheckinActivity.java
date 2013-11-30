@@ -2,12 +2,10 @@ package com.team5.courseassignment;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -51,6 +49,15 @@ public class CheckinActivity extends Activity {
 	ListView list;
 	VenueReviewAdapter adapter;
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 * 
+	 * 
+	 */
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,12 +78,13 @@ public class CheckinActivity extends Activity {
 
 		// Set layout
 		setContentView(R.layout.checkin);
-		TextView name = (TextView) findViewById(R.id.venue_name);
+		TextView name = (TextView) findViewById(R.id.venueName);
 		name.setText(venueName);
 
 		// Setting up check in button.
-		Button checkinButton = (Button) findViewById(R.id.check_in_button);
+		Button checkinButton = (Button) findViewById(R.id.checkInButton);
 		checkinButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				checkIn();
 			}
@@ -90,11 +98,22 @@ public class CheckinActivity extends Activity {
 		new VenueReviewsAsyncTask(progress).execute(data);
 	}
 
+	/**
+	 * Performs any final cleanup before activity is destroyed.  .
+	 * 
+	 */
+	
 	@Override
 	public void onDestroy() {
 		list.setAdapter(null);
 		super.onDestroy();
 	}
+	
+	/**
+	 * Called when the activity has detected the user's press of the back key.
+	 * The default implementation simply finishes the current activity, 
+	 * but in our case we override this to go to MapActivity screen.
+	 */
 
 	@Override
 	public void onBackPressed() {
@@ -103,6 +122,13 @@ public class CheckinActivity extends Activity {
 		finishActivity(0);
 	}
 
+	/**
+	 * Creates get request on execute. With list of data which needs to be taken
+	 * from server. Pre-loader created when executed.
+	 * 
+	 * 
+	 */
+	
 	private class VenueReviewsAsyncTask extends
 			AsyncTask<String, Void, JSONObject> {
 
@@ -113,6 +139,7 @@ public class CheckinActivity extends Activity {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}
@@ -154,13 +181,23 @@ public class CheckinActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Creates list view with custom adapter. To display list of all reviews made in particular venue.
+	 * With their profile picture in the right, and comment/voteUp|voteDown button in the left.
+	 * 
+	 */
 	private void showList(List<VenueReview> reviews) {
 		ListView list = (ListView) findViewById(R.id.list);
 		adapter = new VenueReviewAdapter(this, R.layout.follower_venue_row,
 				reviews);
 		list.setAdapter(adapter);
 	}
-
+	
+	/**
+	 * Method which sends key and venue id to server.
+	 * When check-in button pressed.
+	 * Opens reviewActivity after execution.
+	 */
 	@SuppressWarnings("unchecked")
 	private void checkIn() {
 
@@ -173,7 +210,14 @@ public class CheckinActivity extends Activity {
 				"Please wait", "Loading ...");
 		new CheckinAsyncTask(progress).execute(data);
 	}
-
+	
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed.
+	 * Review Activity is loaded on post execute.
+	 * 
+	 */
+	
 	private class CheckinAsyncTask extends
 			AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		private ProgressDialog progress;
@@ -182,6 +226,7 @@ public class CheckinActivity extends Activity {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}
@@ -221,12 +266,11 @@ public class CheckinActivity extends Activity {
 
 						i.putExtra(VENUE_NAME, venueName);
 						i.putExtra(VENUE_ID, venueId);
-						// i.putExtra(TOTAL_UP, vote);
+						
 						startActivity(i);
 
 					} else {
-						// TODO: if the server responds with error, display
-						// message
+						
 					}
 
 				} catch (JSONException e) {
@@ -236,7 +280,12 @@ public class CheckinActivity extends Activity {
 			}
 		}
 	}
-
+	
+	
+	/**
+	 * Creates implicit inflation for use in action bar.
+	 * Rendering map_menu layout.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
@@ -244,8 +293,13 @@ public class CheckinActivity extends Activity {
 		inflater.inflate(R.menu.map_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
-	// set actionbar icons
+	
+	/**
+	 * Setting actionbar icons
+	 * first profile icon.
+	 * second settings icon
+	 */
+	 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 

@@ -108,6 +108,7 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 		try {
 			cachedImage = imageLoader.loadImage(item.getProfileImage(),
 					new ImageLoadedListener() {
+						@Override
 						public void imageLoaded(Bitmap imageBitmap) {
 							image.setImageBitmap(imageBitmap);
 							notifyDataSetChanged();
