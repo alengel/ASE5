@@ -30,7 +30,7 @@
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/reviewer_image"
+        android:layout_toRightOf="@+id/reviewerImage"
         android:textSize="23sp"
         android:textColor="@color/white" />
 
@@ -41,7 +41,7 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/reviewer_image" >
+        android:layout_below="@+id/reviewerImage" >
      </ListView>
 
      
