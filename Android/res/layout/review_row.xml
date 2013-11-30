@@ -7,7 +7,7 @@
  	android:background="@drawable/list_border" >
 
     <ImageView
-        android:id="@+id/profile_image"
+        android:id="@+id/profileImage"
         android:contentDescription="@string/profile_title"
         android:layout_width="70dp"
         android:layout_height="70dp"

@@ -37,15 +37,15 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	private LayoutInflater inflater;
 	private ImageLoader imageLoader = new ImageLoader();
 	private Context context;
-	
+
 	private String kKey;
 	private String KEY_JSON = SharedPreferencesEditor.KEY_JSON;
 	private final static String SUCCESS_JSON = "success";
-	
+
 	// variables for the POST call
 	private static String VOTE_URL;
 	private final static String VOTE_URL_EXT = "vote";
-	
+
 	private final String REVIEW_ID = "review_id";
 	private String reviewId;
 	private final String REVIEWER_ID = "reviewer_id";
@@ -53,6 +53,16 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	private final String VOTE = "vote";
 	private String voteValue;
 
+	/**
+	 * The constructor method of venue review list adapter.
+	 * 
+	 * @param context
+	 *            - the context.
+	 * @param resourceId
+	 *            - id of the source - integer.
+	 * @param mediaItems
+	 *            - list of user reviews with all media data.
+	 */
 	public VenueReviewAdapter(Context context, int resourceId,
 			List<VenueReview> mediaItems) {
 		super(context, 0, mediaItems);
@@ -64,6 +74,11 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
+	/**
+	 * GetView method sets list view to have this custom adapter. It creates
+	 * views (Text, Image), binds list view adapter, changes style of layout of
+	 * each row item.
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -84,8 +99,9 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 			rating = (TextView) view.findViewById(R.id.rating);
 			review = (TextView) view.findViewById(R.id.review);
 			voteNumber = (TextView) view.findViewById(R.id.voteNumber);
-			
-			String baseUrl = context.getResources().getString(R.string.base_url);
+
+			String baseUrl = context.getResources()
+					.getString(R.string.base_url);
 			VOTE_URL = baseUrl + VOTE_URL_EXT;
 
 			Button ib = (Button) view.findViewById(R.id.followerCommentButton);
@@ -96,7 +112,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 				}
 			});
 
-			image = (ImageView) view.findViewById(R.id.profile_image);
+			image = (ImageView) view.findViewById(R.id.profileImage);
 			image.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -105,7 +121,8 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 			});
 
 			final CheckBox voteUp = (CheckBox) view.findViewById(R.id.voteUp);
-			final CheckBox voteDown = (CheckBox) view.findViewById(R.id.voteDown);
+			final CheckBox voteDown = (CheckBox) view
+					.findViewById(R.id.voteDown);
 
 			voteUp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
@@ -140,19 +157,12 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 						voteDown.setEnabled(true);
 						// voteUp.setText(1);
 						voteUp.setEnabled(false);
-						// TODO
-						/**
-						 * String selectedText = voteUp.getText().toString();
-						 * Intent i = new Intent(this, VenueReview.class);
-						 * i.putExtra("cakedata", selectedText);
-						 * startActivity(i);
-						 */
 
 					} else {
 						voteUp.setEnabled(true);
-						// voteUp.setText(1);
+
 						voteDown.setEnabled(false);
-						// TODO
+
 					}
 
 				}
@@ -160,9 +170,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 			});
 
 		} catch (ClassCastException e) {
-			// Log.e(TAG,
-			// "Your layout must provide an image and a text view with ID's icon and text.",
-			// e);
+
 			throw e;
 		}
 
@@ -179,16 +187,17 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 						}
 					});
 		} catch (MalformedURLException e) {
-			// Log.e(TAG, "Bad remote image URL: " + item.getProfileImage(), e);
+
 		}
 
 		firstName.setText(item.getFirstName());
 		lastName.setText(item.getLastName());
 		rating.setText("Rating: " + item.getRating() + " stars");
 		review.setText(item.getReview());
-		voteNumber.setText(item.getVotes()); // Vote number need to get from server.
+		voteNumber.setText(item.getVotes()); // Vote number need to get from
+												// server.
 		reviewId = item.getReviewId();
-		reviewerId = item.getReviewerId();										
+		reviewerId = item.getReviewerId();
 
 		if (cachedImage != null) {
 			image.setImageBitmap(cachedImage);
@@ -197,6 +206,10 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		return view;
 	}
 
+	/**
+	 * This method will create pop up dialog, where user can input his/her
+	 * comment and send it to server.
+	 */
 	private void showCommentPopup() {
 
 		AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
@@ -229,15 +242,25 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		helpDialog.show();
 	}
 
+	/**
+	 * This method will open a new screen (Intent) of FollowerProfileActivity,
+	 * by sending key and reviewerId to the server.
+	 */
 	private void openFollowerProfile() {
 		// launch ProfilePageActivity
-		Intent openProfile = new Intent(this.context, FollowerProfileActivity.class);
+		Intent openProfile = new Intent(this.context,
+				FollowerProfileActivity.class);
 		openProfile.putExtra(SharedPreferencesEditor.KEY_JSON, kKey);
 		openProfile.putExtra(REVIEWER_ID, reviewerId);
 
 		context.startActivity(openProfile);
 	}
-	
+
+	/**
+	 * VoteUp() method is posting list of data such as: key, reviewerId and
+	 * voteValue to the server, to increase particular user review if and only
+	 * if respond from the server will be true!
+	 */
 	@SuppressWarnings("unchecked")
 	private void voteUp() {
 
@@ -247,10 +270,16 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		data.add(new BasicNameValuePair(VOTE, voteValue));
 
 		// make POST call
-		ProgressDialog progress = ProgressDialog.show(context, "Please wait", "Loading ...");
+		ProgressDialog progress = ProgressDialog.show(context, "Please wait",
+				"Loading ...");
 		new VoteAsyncTask(progress).execute(data);
 	}
-	
+
+	/**
+	 * VoteDown() method is posting list of data such as: key, reviewerId and
+	 * voteValue to the server, to decrease particular user review if and only
+	 * if respond from the server will be true!
+	 */
 	@SuppressWarnings("unchecked")
 	private void voteDown() {
 
@@ -260,11 +289,20 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		data.add(new BasicNameValuePair(VOTE, voteValue));
 
 		// make POST call
-		ProgressDialog progress = ProgressDialog.show(context, "Please wait", "Loading ...");
+		ProgressDialog progress = ProgressDialog.show(context, "Please wait",
+				"Loading ...");
 		new VoteAsyncTask(progress).execute(data);
 	}
 
-	private class VoteAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed. Staying at the same CheckinActivity
+	 * screen on post execute, if and only if success message is "true". It
+	 * depends on validation of key, reviewerId and voteValue.
+	 * 
+	 */
+	private class VoteAsyncTask extends
+			AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		private ProgressDialog progress;
 
 		public VoteAsyncTask(ProgressDialog progress) {
@@ -286,8 +324,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(VOTE_URL,
-					data);
+			JSONObject resultJson = HttpRequest.makePostRequest(VOTE_URL, data);
 
 			return resultJson;
 		}
@@ -304,10 +341,9 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 					String success = result.getString(SUCCESS_JSON);
 
 					if (success.equals("true")) {
-						// do something here
+
 					} else {
-						// TODO: if the server responds with error, display
-						// message
+
 					}
 
 				} catch (JSONException e) {
