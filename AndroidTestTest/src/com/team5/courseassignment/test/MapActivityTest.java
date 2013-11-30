@@ -65,7 +65,8 @@ public class MapActivityTest extends
 
 		// Click register button
 		mSettingsMenu.performClick();
-
+		
+		
 		activityMonitor.waitForActivityWithTimeout(10000);
 
 		// Check that SettingsActivity was created once.
