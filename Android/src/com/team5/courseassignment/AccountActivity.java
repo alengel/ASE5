@@ -3,6 +3,7 @@ package com.team5.courseassignment;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +70,18 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	private static final int CAMERA_REQUEST = 1888;
 	private ImageView profilePicture;
 
+	// List view and its adapter, to display image and text with custom layout.
 	ListView list;
 	ProfileListAdapter adapter;
+
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 * 
+	 * 
+	 */
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -122,12 +133,9 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 			}
 		});
 
-		// Get the key and user details
+		// Set continue button which posts data to server with changes of user
+		// first name and last.
 
-		// setName = this.getIntent().getStringExtra(FIRSTNAME_KEY);
-		// setLastName = this.getIntent().getStringExtra(LASTNAME_KEY);
-
-		// get Strings from the EditText fields
 		Button continueButton = (Button) findViewById(R.id.submit);
 		continueButton.setOnClickListener(new OnClickListener() {
 
@@ -147,10 +155,6 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 				byte[] b = baos.toByteArray();
 
 				String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-
-				// ListView listView;
-				// listView = (ListView) findViewById(R.id.listView1);
-				// listView.setOnItemClickListener(this);
 
 				// make GET request to retrieve existing user reviews for venue
 
@@ -177,6 +181,17 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 				Toast.LENGTH_SHORT).show();
 	}
 
+	/**
+	 * Gets image from gallery or takes a picture on button activity result.
+	 * 
+	 * @param requestCode
+	 *            The request code whether its load from gallery or from camera.
+	 * @param resultCode
+	 *            The result code whether its load from gallery or from camera
+	 * 
+	 * @return dat - A Bitmap image if the picture loaded from gallery or
+	 *         camera.
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -210,8 +225,15 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 
 	}
 
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed.
+	 * 
+	 * 
+	 */
+
 	private class SubmitChangesAsyncTask extends
-			AsyncTask<List<NameValuePair>, Void, JSONObject> {
+	AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		private ProgressDialog progress;
 
 		public SubmitChangesAsyncTask(ProgressDialog progress) {
@@ -254,18 +276,17 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 						showAlertMessage(
 								(getResources()
 										.getString(R.string.congratulations)),
-								getResources().getString(
-										R.string.successMessageRegistration));
+										getResources().getString(
+												R.string.successMessageRegistration));
 
 					} else {
 
 						showAlertMessage(
 								(getResources()
 										.getString(R.string.errorMessage)),
-								MSG_JSON);
+										MSG_JSON);
 
-					}// TODO: do more error checking stuff when Sandeep has
-						// extended his API
+					}
 
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -274,6 +295,13 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		}
 	}
 
+	/**
+	 * When submit button is pressed and data is changed in server this alert
+	 * dialog appears. With the success message and "Ok" button which redirects
+	 * to map activity screen.
+	 * 
+	 * 
+	 */
 	private void showAlertMessage(final String title, final String message) {
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -283,23 +311,30 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		alert.setPositiveButton(getResources().getString(R.string.ok),
 				new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO: maybe delete content of some fields
-						if ((getResources()
-								.getString(R.string.successMessageRegistration))
-								.equals(message)) {
-							Intent i = new Intent(getApplicationContext(),
-									LoginActivity.class);
-							startActivity(i);
-						} else {
-							// TODO
-						}
-					}
-				});
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO: maybe delete content of some fields
+				if ((getResources()
+						.getString(R.string.successMessageRegistration))
+						.equals(message)) {
+					Intent i = new Intent(getApplicationContext(),
+							LoginActivity.class);
+					startActivity(i);
+				} else {
+					// TODO
+				}
+			}
+		});
 
 		alert.show();
 	}
+
+	/**
+	 * Creates get request on execute. With list of data which needs to be taken
+	 * from server. Pre-loader created when executed.
+	 * 
+	 * 
+	 */
 
 	private class ProfileAsyncTask extends AsyncTask<String, Void, JSONObject> {
 
@@ -327,8 +362,6 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 			JSONObject resultJson = HttpRequest.makeGetRequest(
 					RETRIEVE_PROFILE_URL, data);
 
-			// resultJson = HttpRequest.makeGetRequest(RETRIEVE_PROFILE_URL,
-			// data);
 			return resultJson;
 		}
 
@@ -340,7 +373,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 			if (result != null) {
 				try {
 					final List<ProfileInfo> profile = new ProfileInfoParser()
-							.parseJSON(result);
+					.parseJSON(result);
 					// final List<FollowerProfileVenue> reviewer_profile_venue =
 					// new FollowerProfileVenueParser().parseJSON(result);
 
@@ -354,12 +387,18 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 					});
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}
 		}
 	}
+
+	/**
+	 * Creates list view with custom adapter. To display list of all followers.
+	 * With their profile picture in the right, and unfollow button in the left.
+	 * 
+	 */
 
 	@SuppressWarnings("unused")
 	private void showList(List<UserFollowers> followers) {
@@ -368,6 +407,11 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		list.setAdapter(adapter);
 	}
 
+	/**
+	 * This method fills all text views and image views. With list of data taken
+	 * from server.
+	 * 
+	 */
 	private void fillProfile(List<ProfileInfo> profile) { // Set User name
 		EditText editName = (EditText) findViewById(R.id.editName);
 		String firstName = profile.get(0).getName();
@@ -399,6 +443,11 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 
 	}
 
+	/**
+	 * Creates inflater for use in action bar.
+	 * 
+	 */
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
@@ -407,7 +456,11 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	// set settings icon actions
+	/**
+	 * Sett's settings icon actions.
+	 * 
+	 */
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
