@@ -38,7 +38,14 @@ public class Utilities {
 
 		return sha1;
 	}
-
+	
+	/**
+	 * This method converts byte array to string representation.
+	 * 
+	 * @param hash
+	 *            - byte array.
+	 * @return result
+	 */
 	public static String convertByteArrayToString(final byte[] hash) {
 
 		Formatter formatter = new Formatter();
