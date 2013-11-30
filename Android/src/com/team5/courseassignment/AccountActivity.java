@@ -188,7 +188,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	 * @param resultCode
 	 *            The result code whether its load from gallery or from camera
 	 * 
-	 * @return dat - A Bitmap image if the picture loaded from gallery or
+	 * @return data - A Bitmap image if the picture loaded from gallery or
 	 *         camera.
 	 */
 	@Override

@@ -20,7 +20,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.util.Base64;
 import android.view.View;
@@ -52,6 +51,12 @@ public class RegistrationActivity extends Activity {
 	private static final int CAMERA_REQUEST = 1888;
 	private ImageView imageView;
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -97,7 +102,6 @@ public class RegistrationActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				// TODO: show the user that progress is happening and set text
 				// fields to be unchangeable!
 
 				// get Strings from the EditText fields
@@ -129,8 +133,6 @@ public class RegistrationActivity extends Activity {
 									R.string.passwords_not_equal));
 				}
 
-				// TODO: maybe more user input checking
-
 				String encryptedPassword = Utilities.encryptString(password);
 
 				List<NameValuePair> data = new ArrayList<NameValuePair>(4);
@@ -152,6 +154,11 @@ public class RegistrationActivity extends Activity {
 
 	}
 
+	/**
+	 * OnBackPressed() Called when the activity has detected the user's press of
+	 * the back key. The default implementation simply finishes the current
+	 * activity, but in our case we override this to go to MapActivity screen.
+	 */
 	@Override
 	public void onBackPressed() {
 		Intent start = new Intent(RegistrationActivity.this,
@@ -160,6 +167,17 @@ public class RegistrationActivity extends Activity {
 		finishActivity(0);
 	}
 
+	/**
+	 * Gets image from gallery or takes a picture on button activity result.
+	 * 
+	 * @param requestCode
+	 *            The request code whether its load from gallery or from camera.
+	 * @param resultCode
+	 *            The result code whether its load from gallery or from camera
+	 * 
+	 * @return data - A Bitmap image if the picture loaded from gallery or
+	 *         camera.
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -193,6 +211,15 @@ public class RegistrationActivity extends Activity {
 
 	}
 
+	/**
+	 * Displays success registration message as a pop up window. When server
+	 * verified all data input made by user.
+	 * 
+	 * @param title
+	 *            - Title of the pop up window.
+	 * @param message
+	 *            - String successMessageRegistration - Success message!
+	 */
 	private void showAlertMessage(final String title, final String message) {
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -204,7 +231,7 @@ public class RegistrationActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO: maybe delete content of some fields
+
 						if ((getResources()
 								.getString(R.string.successMessageRegistration))
 								.equals(message)) {
@@ -212,14 +239,23 @@ public class RegistrationActivity extends Activity {
 									LoginActivity.class);
 							startActivity(i);
 						} else {
-							// TODO
+
 						}
 					}
 				});
-
+		
 		alert.show();
 	}
 
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed. Redirecting to login screen on post
+	 * execute, if and only if success message is "true". It depends on user
+	 * input. Corresponding pop up window will appear with corresponding
+	 * message, whether its false its error message which we get from server
+	 * otherwise its congratulations message taken from string.xml
+	 * 
+	 */
 	private class RegisterAsyncTask extends
 			AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		private ProgressDialog progress;
@@ -275,8 +311,7 @@ public class RegistrationActivity extends Activity {
 										.getString(R.string.errorMessage)),
 								MSG_JSON);
 
-					}// TODO: do more error checking stuff when Sandeep has
-						// extended his API
+					}
 
 				} catch (JSONException e) {
 					e.printStackTrace();
