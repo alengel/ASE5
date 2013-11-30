@@ -45,6 +45,14 @@ public class FollowerProfileActivity extends Activity implements
 	FollowerVenueAdapter adapter;
 	private CheckBox followButton;
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 * 
+	 * 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,7 +72,7 @@ public class FollowerProfileActivity extends Activity implements
 		setContentView(R.layout.follower_profile);
 
 		// Setting up follow button.
-		followButton = (CheckBox) findViewById(R.id.reviewer_follow_button);
+		followButton = (CheckBox) findViewById(R.id.reviewerFollowButton);
 		followButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -91,6 +99,11 @@ public class FollowerProfileActivity extends Activity implements
 		new ReviewerProfileAsyncTask(progress).execute(data);
 	}
 	
+	/**
+	 * Created for this activity to start interacting with the user. 
+	 * Called after onRestoreInstanceState(Bundle), onRestart(); or onPause();
+	 * @param savedInstanceState
+	 */
 	protected void onResume(Bundle savedInstanceState) {
 		super.onResume();
 
@@ -98,8 +111,11 @@ public class FollowerProfileActivity extends Activity implements
 		kKey = SharedPreferencesEditor.getKey();
 	}
 
-	// Makes it possible to click on the Review and allows to go to the Review
-	// screen once set up
+	/**
+	 *  Makes it possible to click on the Review and allows to go to the Review
+	 * screen once set up
+	 */
+	
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position,
 			long id) {
@@ -107,6 +123,10 @@ public class FollowerProfileActivity extends Activity implements
 				Toast.LENGTH_SHORT).show();
 	}
 
+	/**
+	 * Creates get request on execute. With list of data which needs to be taken
+	 * from server. Pre-loader created when executed.
+	 */
 	private class ReviewerProfileAsyncTask extends
 			AsyncTask<String, Void, JSONObject> {
 
@@ -165,6 +185,11 @@ public class FollowerProfileActivity extends Activity implements
 		}
 	}
 
+	/**
+	 * Creates list view with custom adapter. To display list of all profile reviewer venues.
+	 * With venue picture in the right.
+	 * 
+	 */
 	private void showList(List<FollowerProfileVenue> reviewer_profile_venues) {
 		ListView list = (ListView) findViewById(R.id.reviewerVenueList);
 		adapter = new FollowerVenueAdapter(this, R.layout.venue_review_row,
@@ -172,9 +197,14 @@ public class FollowerProfileActivity extends Activity implements
 		list.setAdapter(adapter);
 	}
 
+	/**
+	 * This method fills all text views. With list of data taken
+	 * from server.
+	 * 
+	 */
 	private void fillProfile(FollowerProfileInfo reviewer_profile) {
 		// Set User name
-		TextView name = (TextView) findViewById(R.id.reviewer_name);
+		TextView name = (TextView) findViewById(R.id.reviewerName);
 		String firstName = reviewer_profile.getFirstName();
 		String lastName = reviewer_profile.getLastName();
 
@@ -182,6 +212,10 @@ public class FollowerProfileActivity extends Activity implements
 
 	}
 	
+	/**
+	 * This method sends list of @param data to the server.
+	 * To make follow request.
+	 */
 	 @SuppressWarnings("unchecked")
 	 private void follow() {
 	    	List<NameValuePair> data = new ArrayList<NameValuePair>(3);
@@ -194,6 +228,12 @@ public class FollowerProfileActivity extends Activity implements
 			new FollowAsyncTask(progress).execute(data);
 	    }
 	
+	 /**
+		 * Creates post request on execute. With list of data to send to server.
+		 * Pre-loader created when executed.
+		 * User is followed by you on post execute.
+		 * 
+		 */
 	 private class FollowAsyncTask extends AsyncTask<List<NameValuePair>, Void, JSONObject> {
     	private ProgressDialog progress;
     	public FollowAsyncTask(ProgressDialog progress) {
