@@ -23,7 +23,7 @@
 	    android:drawSelectorOnTop="false"
 		android:choiceMode="multipleChoice" /> 
 	    
-    <!-- Set the android:button attribute to your state list drawable -->
+    <!-- Set the android:button attribute to the state list drawable -->
     <Button
 	    android:id="@+id/checkInButton"
 	    android:layout_width="match_parent"
