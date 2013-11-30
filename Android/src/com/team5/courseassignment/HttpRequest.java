@@ -20,7 +20,21 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+/**
+ * This class created to handle GET/POST requests by calling
+ * makeGetRequest|makePostRequest we can actually establish connection with the
+ * database.
+ */
 public class HttpRequest {
+	/**
+	 * This method creates POST request
+	 * 
+	 * @param url
+	 *            - URL required to establish connection.
+	 * @param data
+	 *            - List of data to make POST request
+	 * @return JSON as result.
+	 */
 	public static JSONObject makePostRequest(String url,
 			List<NameValuePair> data) {
 
@@ -73,6 +87,15 @@ public class HttpRequest {
 		return resultJson;
 	}
 
+	/**
+	 * This method creates GET request.
+	 * 
+	 * @param url
+	 *            - URL required to establish connection
+	 * @param data
+	 *            - List of data to make GET request.
+	 * @return JSON as result
+	 */
 	public static JSONObject makeGetRequest(String url, String data) {
 
 		HttpClient client = new DefaultHttpClient();
