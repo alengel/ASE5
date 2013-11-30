@@ -31,6 +31,14 @@ public class ForgottenPasswordActivity extends Activity {
 	// variables for the POST answer
 	private final static String SUCCESS_JSON = "success";
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 * 
+	 * 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +51,7 @@ public class ForgottenPasswordActivity extends Activity {
 				+ FORGOTTEN_PASSWORD_URL_EXT;
 
 		// set button Actions
-		Button continueButton = (Button) findViewById(R.id.login_button_forgottenPassword);
+		Button continueButton = (Button) findViewById(R.id.loginButtonForgottenPassword);
 		continueButton.setOnClickListener(new OnClickListener() {
 
 			@SuppressWarnings("unchecked")
@@ -51,7 +59,7 @@ public class ForgottenPasswordActivity extends Activity {
 			public void onClick(View v) {
 
 				// get data for call
-				String email = ((EditText) findViewById(R.id.email_box_forgottenPassword))
+				String email = ((EditText) findViewById(R.id.emailBoxForgottenPassword))
 						.getEditableText().toString();
 
 				// TODO: maybe user input checking
@@ -69,6 +77,11 @@ public class ForgottenPasswordActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Called when the activity has detected the user's press of the back key.
+	 * The default implementation simply finishes the current activity, but in
+	 * our case we override this to go to MapActivity screen.
+	 */
 	@Override
 	public void onBackPressed() {
 		Intent start = new Intent(ForgottenPasswordActivity.this,
@@ -77,6 +90,13 @@ public class ForgottenPasswordActivity extends Activity {
 		finishActivity(0);
 	}
 
+	/**
+	 * Displays invalid input message as a pop up window. When user incorrectly
+	 * types to the Edit text field.
+	 * 
+	 * @param message
+	 *            - String errorMessage - error message.
+	 */
 	private void showInvalidInput(String message) {
 
 		Log.d("b_logic", "Login.showInvalidInput() with argument: " + message);
@@ -96,6 +116,15 @@ public class ForgottenPasswordActivity extends Activity {
 		alert.show();
 	}
 
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed. Redirecting to login screen on post
+	 * execute, if and only if success message is "true". It depends on user
+	 * input. Corresponding pop up window will appear with corresponding
+	 * message, whether its false its error message which we get from server
+	 * otherwise its congratulations message taken from string.xml
+	 * 
+	 */
 	private class ForgottenPasswordAsyncTask extends
 			AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		private ProgressDialog progress;
@@ -146,8 +175,7 @@ public class ForgottenPasswordActivity extends Activity {
 					} else {
 						showInvalidInput(getResources().getString(
 								R.string.invalid_input_generic));
-					} // TODO: do more error checking stuff when Sandeep has
-						// extended his API
+					}
 
 				} catch (JSONException e) {
 					e.printStackTrace();
