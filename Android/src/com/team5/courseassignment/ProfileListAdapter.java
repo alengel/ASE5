@@ -22,6 +22,16 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 	@SuppressWarnings("unused")
 	private Context context;
 
+	/**
+	 * The constructor method of profile list adapter.
+	 * 
+	 * @param context
+	 *            - the context.
+	 * @param resourceId
+	 *            - id of the source - integer.
+	 * @param mediaItems
+	 *            - list of user followers with all media data.
+	 */
 	public ProfileListAdapter(Context context, int resourceId,
 			List<UserFollowers> mediaItems) {
 		super(context, 0, mediaItems);
@@ -32,6 +42,11 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
+	/**
+	 * GetView method sets list view to have this custom adapter. It creates
+	 * views (Text, Image), binds list view adapter, changes style of layout of
+	 * each row item.
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -62,14 +77,12 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 			 * 
 			 * buttonView.setText("Unfollow");
 			 * 
-			 * //TODO /** String selectedText = voteUp.getText().toString();
-			 * Intent i = new Intent(this, VenueReview.class);
-			 * i.putExtra("cakedata", selectedText); startActivity(i);
-			 * ////////////////////
+			 * String selectedText = voteUp.getText().toString(); Intent i = new
+			 * Intent(this, VenueReview.class); i.putExtra("cakedata",
+			 * selectedText); startActivity(i); ////////////////////
 			 * 
 			 * 
 			 * } else { buttonView.setText("Follow") }
-			 * 
 			 * 
 			 * 
 			 * }
@@ -81,25 +94,12 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 			image.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					/**
-					 * TODO // launch ProfilePageActivity Intent i = new
-					 * Intent(getApplicationContext(),
-					 * ProfilePageActivity.class); // need to create comments
-					 * activity
-					 * 
-					 * i.putExtra(KEY_JSON, kKey); //need to know api call for
-					 * it i.putExtra(user_NAME, user_id);// i.putExtra(VENUE_ID,
-					 * venueId);//
-					 * 
-					 * startActivity(i);
-					 */
+
 				}
 			});
 
 		} catch (ClassCastException e) {
-			// Log.e(TAG,
-			// "Your layout must provide an image and a text view with ID's icon and text.",
-			// e);
+
 			throw e;
 		}
 
@@ -115,7 +115,7 @@ public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 						}
 					});
 		} catch (MalformedURLException e) {
-			// Log.e(TAG, "Bad remote image URL: " + item.getProfileImage(), e);
+
 		}
 
 		textTitle.setText(item.getName());
