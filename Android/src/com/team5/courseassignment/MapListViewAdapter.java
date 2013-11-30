@@ -13,8 +13,16 @@ public class MapListViewAdapter extends ArrayAdapter<FourSquareVenue> {
 	private int resourceId = 0;
 	private LayoutInflater inflater;
 
-	// private ImageLoader imageLoader = new ImageLoader();
-
+	/**
+	 * The constructor method of map list venue adapter.
+	 * 
+	 * @param context
+	 *            - the context.
+	 * @param resourceId
+	 *            - id of the source - integer.
+	 * @param mediaItems
+	 *            - list of venues visited by follower with all media data.
+	 */
 	public MapListViewAdapter(Context context, int resourceId,
 			List<FourSquareVenue> mediaItems) {
 		super(context, 0, mediaItems);
@@ -24,6 +32,11 @@ public class MapListViewAdapter extends ArrayAdapter<FourSquareVenue> {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
+	/**
+	 * GetView method sets list view to have this custom adapter. It creates
+	 * TextView's, binds list view adapter, changes style of layout of each row
+	 * item.
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -38,9 +51,7 @@ public class MapListViewAdapter extends ArrayAdapter<FourSquareVenue> {
 			textTitle1 = (TextView) view.findViewById(R.id.distance);
 
 		} catch (ClassCastException e) {
-			// Log.e(TAG,
-			// "Your layout must provide an image and a text view with ID's icon and text.",
-			// e);
+
 			throw e;
 		}
 
