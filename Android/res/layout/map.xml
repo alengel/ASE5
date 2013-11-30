@@ -25,7 +25,7 @@
     android:background="@drawable/list_border" /> 
 
 <Button
-    android:id="@+id/locate_me_button"
+    android:id="@+id/locateMeButton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
