@@ -3,7 +3,6 @@ package com.team5.courseassignment;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -400,7 +399,6 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	 * 
 	 */
 
-	@SuppressWarnings("unused")
 	private void showList(List<UserFollowers> followers) {
 		ListView list = (ListView) findViewById(R.id.listView1);
 		adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
@@ -457,7 +455,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	}
 
 	/**
-	 * Sett's settings icon actions.
+	 * Set settings icon actions.
 	 * 
 	 */
 
