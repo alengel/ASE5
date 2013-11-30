@@ -4,19 +4,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FollowerProfileInfoParser
-{
+public class FollowerProfileInfoParser {
 
-	public FollowerProfileInfo parseJSON(JSONObject results)
-	{
+	/**
+	 * This class parses profile data of the follower as a JSONArray
+	 * 
+	 * @param results
+	 * @return reviewer_profile - array list of objects to return, which is
+	 *         profile_image, first_name and last_name. If the response from the
+	 *         server is true-this parser will parse all data from profile: [
+	 *         array ]
+	 */
+	public FollowerProfileInfo parseJSON(JSONObject results) {
 		FollowerProfileInfo reviewer_profile = null;
 
 		if (results == null)
 			return reviewer_profile;
 
 		JSONArray profile;
-		try
-		{
+		try {
 			profile = results.getJSONArray("profile");
 
 			JSONObject user = profile.getJSONObject(0);
@@ -24,10 +30,10 @@ public class FollowerProfileInfoParser
 			String firstName = user.getString("first_name");
 			String lastName = user.getString("last_name");
 
-			reviewer_profile = new FollowerProfileInfo(profileImage, firstName, lastName);
-		} catch (JSONException e)
-		{
-			// TODO Auto-generated catch block
+			reviewer_profile = new FollowerProfileInfo(profileImage, firstName,
+					lastName);
+		} catch (JSONException e) {
+
 			e.printStackTrace();
 		}
 
