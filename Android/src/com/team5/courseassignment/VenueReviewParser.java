@@ -8,6 +8,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class VenueReviewParser {
+	/**
+	 * This class parses list of venue reviews of particular venue/location as a
+	 * JSONArray
+	 * 
+	 * @param results
+	 * @return reviews - array list of objects to return, which is
+	 *         profile_image, first_name, last_name, id, rating, review,
+	 *         review_id and total_vote. If the response from the server is
+	 *         true-this parser will parse all data from data: [ array ] to
+	 *         ArrayList<VenueReview>
+	 */
 	public List<VenueReview> parseJSON(JSONObject results) {
 		List<VenueReview> reviews = new ArrayList<VenueReview>();
 
@@ -29,7 +40,9 @@ public class VenueReviewParser {
 				String reviewId = item.getString("review_id");
 				String votes = item.getString("total_vote");
 
-				VenueReview venueReview = new VenueReview(profileImage, firstName, lastName, reviewerId, rating, review, reviewId, votes);
+				VenueReview venueReview = new VenueReview(profileImage,
+						firstName, lastName, reviewerId, rating, review,
+						reviewId, votes);
 				reviews.add(venueReview);
 			}
 		} catch (JSONException e) {
