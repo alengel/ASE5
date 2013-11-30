@@ -183,8 +183,9 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 		lastName.setText(item.getLastName());
 		rating.setText("Rating: " + item.getRating() + " stars");
 		review.setText(item.getReview());
-		voteNumber.setText(item.getVotes()); // Vote number need to get from
-		reviewerId = item.getReviewerId();										// server.
+		voteNumber.setText(item.getVotes()); // Vote number need to get from server.
+		reviewId = item.getReviewId();
+		reviewerId = item.getReviewerId();										
 
 		if (cachedImage != null) {
 			image.setImageBitmap(cachedImage);
