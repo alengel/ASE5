@@ -21,9 +21,13 @@ public class FollowerVenueAdapter extends ArrayAdapter<FollowerProfileVenue> {
 
 	/**
 	 * The constructor method of follower venue adapter.
-	 * @param context - the context.
-	 * @param resourceId - id of the source - integer.
-	 * @param mediaItems - list of venues visited by follower with all media data.
+	 * 
+	 * @param context
+	 *            - the context.
+	 * @param resourceId
+	 *            - id of the source - integer.
+	 * @param mediaItems
+	 *            - list of venues visited by follower with all media data.
 	 */
 	public FollowerVenueAdapter(Context context, int resourceId,
 			List<FollowerProfileVenue> mediaItems) {
@@ -34,8 +38,8 @@ public class FollowerVenueAdapter extends ArrayAdapter<FollowerProfileVenue> {
 	}
 
 	/**
-	 * GetView method sets list view to have this custom adapter.
-	 * It creates views (Text, Image), binds list view adapter, layout style.
+	 * GetView method sets list view to have this custom adapter. It creates
+	 * views (Text, Image), binds list view adapter, layout style.
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
