@@ -53,9 +53,11 @@ public class VenueReviewParserTest extends AndroidTestCase {
 				"         \"profile_image\":\"profileImage\",\r\n" + 
 				"         \"first_name\":\"Alena\",\r\n" + 
 				"         \"last_name\":\"Ruprecht\",\r\n" + 
+				"         \"id\":\"20\",\r\n" + 
 				"         \"email\":\"alenaruprecht@gmail.com\",\r\n" + 
 				"         \"rating\":\"4.0\",\r\n" + 
 				"         \"review\":\"great place, long queues\",\r\n" + 
+				"         \"review_id\":\"50\",\r\n" + 
 				"         \"total_vote\":\"12\"\r\n" + 
 				"      },\r\n" + 
 				"   ]\r\n" + 
@@ -69,8 +71,10 @@ public class VenueReviewParserTest extends AndroidTestCase {
 		assertEquals(reviews.get(0).profileImage, "profileImage");
 		assertEquals(reviews.get(0).firstName, "Alena");
 		assertEquals(reviews.get(0).lastName, "Ruprecht");
+		assertEquals(reviews.get(0).reviewerId, "20");
 		assertEquals(reviews.get(0).rating, "4.0");
 		assertEquals(reviews.get(0).review, "great place, long queues");
+		assertEquals(reviews.get(0).reviewId, "50");
 		assertEquals(reviews.get(0).votes, "12");
 	}
 	
@@ -84,18 +88,22 @@ public class VenueReviewParserTest extends AndroidTestCase {
 				"         \"profile_image\":\"profileImage\",\r\n" + 
 				"         \"first_name\":\"Alena\",\r\n" + 
 				"         \"last_name\":\"Ruprecht\",\r\n" + 
+				"         \"id\":\"20\",\r\n" + 
 				"         \"email\":\"alenaruprecht@gmail.com\",\r\n" + 
 				"         \"rating\":\"4.0\",\r\n" + 
 				"         \"review\":\"great place, long queues\",\r\n" + 
+				"         \"review_id\":\"50\",\r\n" + 
 				"         \"total_vote\":\"12\"\r\n" + 
 				"      },\r\n" + 
 				"      {\r\n" + 
 				"         \"profile_image\":\"profileImage2\",\r\n" + 
 				"         \"first_name\":\"Michael\",\r\n" + 
 				"         \"last_name\":\"Jackson\",\r\n" + 
+				"         \"id\":\"45\",\r\n" + 
 				"         \"email\":\"alenaruprecht@gmail.com\",\r\n" + 
 				"         \"rating\":\"3.0\",\r\n" + 
 				"         \"review\":\"always busy\",\r\n" + 
+				"         \"review_id\":\"33\",\r\n" + 
 				"         \"total_vote\":\"13\"\r\n" + 
 				"      }\r\n" + 
 				"   ]\r\n" + 
@@ -109,15 +117,19 @@ public class VenueReviewParserTest extends AndroidTestCase {
 		assertEquals(reviews.get(0).profileImage, "profileImage");
 		assertEquals(reviews.get(0).firstName, "Alena");
 		assertEquals(reviews.get(0).lastName, "Ruprecht");
+		assertEquals(reviews.get(0).reviewerId, "20");
 		assertEquals(reviews.get(0).rating, "4.0");
 		assertEquals(reviews.get(0).review, "great place, long queues");
+		assertEquals(reviews.get(0).reviewId, "50");
 		assertEquals(reviews.get(0).votes, "12");
 		
 		assertEquals(reviews.get(1).profileImage, "profileImage2");
 		assertEquals(reviews.get(1).firstName, "Michael");
 		assertEquals(reviews.get(1).lastName, "Jackson");
+		assertEquals(reviews.get(1).reviewerId, "45");
 		assertEquals(reviews.get(1).rating, "3.0");
 		assertEquals(reviews.get(1).review, "always busy");
+		assertEquals(reviews.get(1).reviewId, "33");
 		assertEquals(reviews.get(1).votes, "13");
 	}
 	

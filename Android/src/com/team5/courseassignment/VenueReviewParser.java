@@ -23,12 +23,13 @@ public class VenueReviewParser {
 				String profileImage = item.getString("profile_image");
 				String firstName = item.getString("first_name");
 				String lastName = item.getString("last_name");
+				String reviewerId = item.getString("id");
 				String rating = item.getString("rating");
 				String review = item.getString("review");
+				String reviewId = item.getString("review_id");
 				String votes = item.getString("total_vote");
 
-				VenueReview venueReview = new VenueReview(profileImage,
-						firstName, lastName, rating, review, votes);
+				VenueReview venueReview = new VenueReview(profileImage, firstName, lastName, reviewerId, rating, review, reviewId, votes);
 				reviews.add(venueReview);
 			}
 		} catch (JSONException e) {

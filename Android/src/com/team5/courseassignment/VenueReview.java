@@ -4,18 +4,22 @@ public class VenueReview {
 	public String profileImage;
 	public String firstName;
 	public String lastName;
+	public String reviewerId;
 	public String rating;
 	public String review;
+	public String reviewId;
 	public String votes;
 
-	public VenueReview(String profileImage, String firstName, String lastName,
-			String rating, String review, String votes) {
+	public VenueReview(String profileImage, String firstName, String lastName, String reviewerId,
+			String rating, String review, String reviewId, String votes) {
 
 		this.profileImage = profileImage;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.reviewerId = reviewerId;
 		this.rating = rating;
 		this.review = review;
+		this.reviewId = reviewId;
 		this.votes = votes;
 	}
 
@@ -42,6 +46,14 @@ public class VenueReview {
 	public void setLasttName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getReviewerId() {
+		return reviewerId;
+	}
+
+	public void setReviewerId(String reviewerId) {
+		this.reviewerId = reviewerId;
+	}
 
 	public String getRating() {
 		return rating;
@@ -58,6 +70,14 @@ public class VenueReview {
 	public void setReview(String review) {
 		this.review = review;
 	}
+	
+	public String getReviewId() {
+		return reviewId;
+	}
+
+	public void setReviewId(String reviewId) {
+		this.reviewId = reviewId;
+	}
 
 	public String getVotes() {
 		return votes;
@@ -65,11 +85,5 @@ public class VenueReview {
 
 	public void setVotes(String votes) {
 		this.votes = votes;
-	}
-
-	public String toString() {
-		return profileImage + " " + firstName + " " + lastName
-				+ " was here. Rating: " + rating + " stars. \"" + review
-				+ "\" ";
 	}
 }
