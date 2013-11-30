@@ -55,7 +55,7 @@
     </FrameLayout>
     
     <TextView
-        android:id="@+id/venue_name_review"
+        android:id="@+id/venueNameReview"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#80FFFFFF"
@@ -63,7 +63,7 @@
         android:textSize="20sp"/>
    
     <RatingBar
-        android:id="@+id/rating_bar"
+        android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -72,7 +72,7 @@
         android:stepSize="1.0" />
    
    <EditText
-        android:id="@+id/venue_review"
+        android:id="@+id/venueReview"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:background="#80FFFFFF"
@@ -86,7 +86,7 @@
    </ScrollView>
     
     <Button
-	    android:id="@+id/review_button"
+	    android:id="@+id/reviewButton"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"

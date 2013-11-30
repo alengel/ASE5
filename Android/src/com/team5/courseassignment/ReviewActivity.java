@@ -21,7 +21,6 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.util.Base64;
 import android.view.Menu;
@@ -63,6 +62,12 @@ public class ReviewActivity extends Activity {
 	private float curScale = 1F;
 	private float curRotate = 0F;
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,7 +83,7 @@ public class ReviewActivity extends Activity {
 
 		// Set layout
 		setContentView(R.layout.review);
-		TextView name = (TextView) findViewById(R.id.venue_name_review);
+		TextView name = (TextView) findViewById(R.id.venueNameReview);
 		name.setText(venueName);
 		alert = new AlertDialog.Builder(this);
 
@@ -109,7 +114,7 @@ public class ReviewActivity extends Activity {
 		});
 
 		// Setting up review button.
-		Button checkinButton = (Button) findViewById(R.id.review_button);
+		Button checkinButton = (Button) findViewById(R.id.reviewButton);
 		checkinButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -126,9 +131,9 @@ public class ReviewActivity extends Activity {
 
 				String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
 
-				String review = ((EditText) findViewById(R.id.venue_review))
+				String review = ((EditText) findViewById(R.id.venueReview))
 						.getEditableText().toString();
-				RatingBar ratingBar = (RatingBar) findViewById(R.id.rating_bar);
+				RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 				String rating = String.valueOf(ratingBar.getRating());
 
 				List<NameValuePair> data = new ArrayList<NameValuePair>(5);
@@ -147,6 +152,11 @@ public class ReviewActivity extends Activity {
 		});
 	}
 
+	/**
+	 * OnBackPressed() Called when the activity has detected the user's press of
+	 * the back key. The default implementation simply finishes the current
+	 * activity, but in our case we override this to go to MapActivity screen.
+	 */
 	@Override
 	public void onBackPressed() {
 		Intent start = new Intent(ReviewActivity.this, CheckinActivity.class);
@@ -154,6 +164,17 @@ public class ReviewActivity extends Activity {
 		finishActivity(0);
 	}
 
+	/**
+	 * Gets image from gallery or takes a picture on button activity result.
+	 * 
+	 * @param requestCode
+	 *            The request code whether its load from gallery or from camera.
+	 * @param resultCode
+	 *            The result code whether its load from gallery or from camera
+	 * 
+	 * @return data - A Bitmap image if the picture loaded from gallery or
+	 *         camera.
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -197,6 +218,15 @@ public class ReviewActivity extends Activity {
 
 	}
 
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed. Redirecting to map activity screen on
+	 * post execute, if and only if success message is "true". It depends on
+	 * user input. Corresponding pop up window will appear with corresponding
+	 * message, whether its false its error message which we get from server
+	 * otherwise its congratulations message taken from string.xml
+	 * 
+	 */
 	private class ReviewAsyncTask extends
 			AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		private ProgressDialog progress;
@@ -245,8 +275,7 @@ public class ReviewActivity extends Activity {
 										R.string.review_success));
 
 					} else {
-						// TODO: if the server responds with error, display
-						// message
+
 					}
 
 				} catch (JSONException e) {
@@ -257,6 +286,15 @@ public class ReviewActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Displays success registration message as a pop up window. When server
+	 * verified all data input made by user.
+	 * 
+	 * @param title
+	 *            - Title of the pop up window.
+	 * @param message
+	 *            - String message - Success review message!
+	 */
 	private void showReviewSuccessMessage(final String title,
 			final String message) {
 
@@ -274,7 +312,7 @@ public class ReviewActivity extends Activity {
 									MapActivity.class);
 							startActivity(i);
 						} else {
-							// TODO: If the user clicks neither button.
+
 						}
 					}
 				});
@@ -292,7 +330,7 @@ public class ReviewActivity extends Activity {
 
 							startActivity(i);
 						} else {
-							// TODO: If the user clicks neither button.
+
 						}
 					}
 				});
@@ -300,6 +338,10 @@ public class ReviewActivity extends Activity {
 		alert.show();
 	}
 
+	/**
+	 * Creates implicit inflation for use in action bar. Rendering map_menu
+	 * layout.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
@@ -308,7 +350,9 @@ public class ReviewActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	// set actionbar icons
+	/**
+	 * Setting actionBar icons. first - profile icon. second - settings icon.
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
