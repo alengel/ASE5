@@ -142,6 +142,7 @@ public class LoginActivity extends Activity {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}

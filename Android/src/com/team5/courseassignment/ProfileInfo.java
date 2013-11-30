@@ -48,6 +48,7 @@ public class ProfileInfo {
 		this.email = email;
 	}
 
+	@Override
 	public String toString() {
 		return profile_image + " " + first_name + last_name + email + "\" ";
 	}

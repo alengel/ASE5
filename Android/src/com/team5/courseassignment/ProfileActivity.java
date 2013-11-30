@@ -97,6 +97,7 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}

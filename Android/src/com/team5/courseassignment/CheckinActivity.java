@@ -77,6 +77,7 @@ public class CheckinActivity extends Activity {
 		// Setting up check in button.
 		Button checkinButton = (Button) findViewById(R.id.check_in_button);
 		checkinButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				checkIn();
 			}
@@ -113,6 +114,7 @@ public class CheckinActivity extends Activity {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}
@@ -182,6 +184,7 @@ public class CheckinActivity extends Activity {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}

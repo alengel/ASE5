@@ -56,6 +56,7 @@ public class FollowerVenueAdapter extends ArrayAdapter<FollowerProfileVenue> {
 		try {
 			cachedImage = imageLoader.loadImage(item.getLocationImage(),
 					new ImageLoadedListener() {
+						@Override
 						public void imageLoaded(Bitmap imageBitmap) {
 							image.setImageBitmap(imageBitmap);
 							notifyDataSetChanged();

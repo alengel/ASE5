@@ -66,6 +66,7 @@ public class FollowerProfileActivity extends Activity implements
 		// Setting up follow button.
 		followButton = (CheckBox) findViewById(R.id.reviewer_follow_button);
 		followButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (followButton.isChecked()) {
     	    		followReviewer = true;
@@ -116,6 +117,7 @@ public class FollowerProfileActivity extends Activity implements
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}
@@ -198,7 +200,8 @@ public class FollowerProfileActivity extends Activity implements
     	    this.progress = progress;
     	  }
     	
-    	  public void onPreExecute() {
+    	  @Override
+		public void onPreExecute() {
     	    progress.show();
     	  }
 

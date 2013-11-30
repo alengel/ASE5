@@ -86,6 +86,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 			// Setting up locate me button.
 			Button loginButton = (Button) findViewById(R.id.locate_me_button);
 			loginButton.setOnClickListener(new OnClickListener() {
+				@Override
 				public void onClick(View v) {
 					TextView tv = (TextView) MapActivity.this
 							.findViewById(R.id.hint);
@@ -199,6 +200,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 			this.progress = progress;
 		}
 
+		@Override
 		public void onPreExecute() {
 			progress.show();
 		}
@@ -258,19 +260,19 @@ public class MapActivity extends Activity implements OnItemClickListener {
 					ProfileActivity.class);
 			openProfile.putExtra(KEY_JSON, kKey);
 			startActivity(openProfile);
-			break;
+			return true;
 
 		case R.id.action_settings:
 			Intent openSettings = new Intent(getApplicationContext(),
 					SettingsActivity.class);
 			openSettings.putExtra(KEY_JSON, kKey);
 			startActivity(openSettings);
-			break;
+			return true;
 
 		default:
-			break;
+			return super.onOptionsItemSelected(item);
 		}
 
-		return true;
+		
 	}
 }

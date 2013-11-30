@@ -56,6 +56,7 @@ public class ImageLoader {
 	 * settings the ImageView on the UI thread.
 	 */
 	private class QueueRunner implements Runnable {
+		@Override
 		public void run() {
 			synchronized (this) {
 				while (Queue.size() > 0) {
@@ -67,6 +68,7 @@ public class ImageLoader {
 						// Use a handler to get back onto the UI thread for the
 						// update
 						handler.post(new Runnable() {
+							@Override
 							public void run() {
 								if (item.listener != null) {
 									// NB: There's a potential race condition
@@ -92,6 +94,7 @@ public class ImageLoader {
 							// Use a handler to get back onto the UI thread for
 							// the update
 							handler.post(new Runnable() {
+								@Override
 								public void run() {
 									if (item.listener != null) {
 										item.listener.imageLoaded(bmp);
