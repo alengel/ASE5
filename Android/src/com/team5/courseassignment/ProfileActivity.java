@@ -54,6 +54,12 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	ListView list;
 	ProfileListAdapter adapter;
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,8 +85,10 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		profilePicture.buildDrawingCache();
 	}
 
-	// Makes it possible to click on the Review and allows to go to the Review
-	// screen once set up
+	/**
+	 * Makes it possible to click on the Review and allows to go to the Review
+	 * screen once set up
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position,
 			long id) {
@@ -88,6 +96,11 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 				Toast.LENGTH_SHORT).show();
 	}
 
+	/**
+	 * Creates get request on execute. With list of data which needs to be taken
+	 * from server. pre-loader created when pre-executed. And fill the
+	 * profileActivity screen with parsed data. (textFields,ImageView)
+	 */
 	private class ProfileAsyncTask extends AsyncTask<String, Void, JSONObject> {
 
 		String data;
@@ -115,8 +128,6 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 			JSONObject resultJson = HttpRequest.makeGetRequest(
 					RETRIEVE_PROFILE_URL, data);
 
-			// resultJson = HttpRequest.makeGetRequest(RETRIEVE_PROFILE_URL,
-			// data);
 			return resultJson;
 		}
 
@@ -147,6 +158,10 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		}
 	}
 
+	/**
+	 * Creates list view with custom profile list adapter. To display list of
+	 * all followers.
+	 */
 	@SuppressWarnings("unused")
 	private void showList(List<UserFollowers> followers) {
 		ListView list = (ListView) findViewById(R.id.listView1);
@@ -154,6 +169,11 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		list.setAdapter(adapter);
 	}
 
+	/**
+	 * This method fills all text views and image views. With list of data taken
+	 * from server.
+	 * 
+	 */
 	private void fillProfile(List<ProfileInfo> profile) { // Set User name
 		String firstName = profile.get(0).getName();
 		String LastName = profile.get(0).getLastName();
@@ -182,6 +202,10 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		}
 	}
 
+	/**
+	 * Creates implicit inflation for use in action bar. Rendering map_menu
+	 * layout.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
@@ -190,7 +214,9 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	// set settings icon actions
+	/**
+	 * Setting actionBar icons. first - profile icon. second - settings icon.
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
