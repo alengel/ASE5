@@ -12,9 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.team5.courseassignment.FollowerProfileVenue;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.R.id;
+import com.team5.courseassignment.data.FollowerProfileVenue;
 import com.team5.courseassignment.utilities.ImageLoader;
 import com.team5.courseassignment.utilities.ImageLoader.ImageLoadedListener;
 

@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.team5.courseassignment.FourSquareVenue;
+import com.team5.courseassignment.data.FourSquareVenue;
 import com.team5.courseassignment.parsers.FourSquareJsonParser;
 
 import android.test.AndroidTestCase;

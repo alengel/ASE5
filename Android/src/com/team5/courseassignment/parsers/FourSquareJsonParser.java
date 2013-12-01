@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.FourSquareVenue;
+import com.team5.courseassignment.data.FourSquareVenue;
 
 public class FourSquareJsonParser {
 

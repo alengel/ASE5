@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.VenueReview;
+import com.team5.courseassignment.data.VenueReview;
 
 public class VenueReviewParser {
 	/**

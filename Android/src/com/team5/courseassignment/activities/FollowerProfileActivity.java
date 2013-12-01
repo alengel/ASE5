@@ -8,10 +8,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.FollowerProfileInfo;
-import com.team5.courseassignment.FollowerProfileVenue;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.adapters.FollowerVenueAdapter;
+import com.team5.courseassignment.data.FollowerProfileInfo;
+import com.team5.courseassignment.data.FollowerProfileVenue;
 import com.team5.courseassignment.parsers.FollowerProfileInfoParser;
 import com.team5.courseassignment.parsers.FollowerProfileVenueParser;
 import com.team5.courseassignment.utilities.HttpRequest;

@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.data;
 
 public class FourSquareVenue {
 	public String name;

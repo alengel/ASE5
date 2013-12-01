@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.FollowerProfileInfo;
+import com.team5.courseassignment.data.FollowerProfileInfo;
 
 public class FollowerProfileInfoParser {
 

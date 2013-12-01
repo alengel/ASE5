@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import android.test.AndroidTestCase;
 
-import com.team5.courseassignment.VenueReview;
+import com.team5.courseassignment.data.VenueReview;
 
 public class VenueReviewTest extends AndroidTestCase {
 

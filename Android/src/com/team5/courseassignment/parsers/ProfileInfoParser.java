@@ -6,7 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.ProfileInfo;
+import com.team5.courseassignment.data.ProfileInfo;
 
 public class ProfileInfoParser {
 

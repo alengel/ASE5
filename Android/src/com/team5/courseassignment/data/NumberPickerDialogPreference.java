@@ -1,4 +1,9 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.data;
+
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.R.id;
+import com.team5.courseassignment.R.layout;
+import com.team5.courseassignment.R.styleable;
 
 import android.content.Context;
 import android.content.res.TypedArray;

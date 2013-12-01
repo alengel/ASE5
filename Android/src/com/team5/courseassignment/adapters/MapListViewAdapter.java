@@ -2,9 +2,9 @@ package com.team5.courseassignment.adapters;
 
 import java.util.List;
 
-import com.team5.courseassignment.FourSquareVenue;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.R.id;
+import com.team5.courseassignment.data.FourSquareVenue;
 
 import android.content.Context;
 import android.view.LayoutInflater;
