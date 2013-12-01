@@ -8,11 +8,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.R;
-import com.team5.courseassignment.utilities.HttpRequest;
-import com.team5.courseassignment.utilities.SettingsFragment;
-import com.team5.courseassignment.utilities.SharedPreferencesEditor;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,6 +16,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SettingsFragment;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 /*
  * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !

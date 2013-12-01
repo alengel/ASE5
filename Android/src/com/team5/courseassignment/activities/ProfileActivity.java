@@ -7,14 +7,6 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.R;
-import com.team5.courseassignment.adapters.ProfileListAdapter;
-import com.team5.courseassignment.data.ProfileInfo;
-import com.team5.courseassignment.data.UserFollowers;
-import com.team5.courseassignment.parsers.ProfileInfoParser;
-import com.team5.courseassignment.utilities.HttpRequest;
-import com.team5.courseassignment.utilities.SharedPreferencesEditor;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -33,6 +25,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.adapters.ProfileListAdapter;
+import com.team5.courseassignment.data.ProfileInfo;
+import com.team5.courseassignment.data.UserFollowers;
+import com.team5.courseassignment.parsers.ProfileInfoParser;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 public class ProfileActivity extends Activity implements OnItemClickListener {
 	// variables for the GET call
