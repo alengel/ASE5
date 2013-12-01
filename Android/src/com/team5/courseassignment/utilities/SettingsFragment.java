@@ -1,10 +1,9 @@
 package com.team5.courseassignment.utilities;
 
-import com.team5.courseassignment.R;
-import com.team5.courseassignment.R.layout;
-
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+
+import com.team5.courseassignment.R;
 
 /*
  * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !!!

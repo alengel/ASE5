@@ -8,15 +8,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.R;
-import com.team5.courseassignment.adapters.FollowerVenueAdapter;
-import com.team5.courseassignment.data.FollowerProfileInfo;
-import com.team5.courseassignment.data.FollowerProfileVenue;
-import com.team5.courseassignment.parsers.FollowerProfileInfoParser;
-import com.team5.courseassignment.parsers.FollowerProfileVenueParser;
-import com.team5.courseassignment.utilities.HttpRequest;
-import com.team5.courseassignment.utilities.SharedPreferencesEditor;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -30,6 +21,15 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.adapters.FollowerVenueAdapter;
+import com.team5.courseassignment.data.FollowerProfileInfo;
+import com.team5.courseassignment.data.FollowerProfileVenue;
+import com.team5.courseassignment.parsers.FollowerProfileInfoParser;
+import com.team5.courseassignment.parsers.FollowerProfileVenueParser;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 public class FollowerProfileActivity extends Activity implements
 		OnItemClickListener {

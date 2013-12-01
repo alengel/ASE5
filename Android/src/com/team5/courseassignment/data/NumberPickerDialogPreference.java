@@ -1,10 +1,5 @@
 package com.team5.courseassignment.data;
 
-import com.team5.courseassignment.R;
-import com.team5.courseassignment.R.id;
-import com.team5.courseassignment.R.layout;
-import com.team5.courseassignment.R.styleable;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
@@ -14,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import com.team5.courseassignment.R;
 
 public class NumberPickerDialogPreference extends DialogPreference {
 	/**

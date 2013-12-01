@@ -2,16 +2,15 @@ package com.team5.courseassignment.adapters;
 
 import java.util.List;
 
-import com.team5.courseassignment.R;
-import com.team5.courseassignment.R.id;
-import com.team5.courseassignment.data.FourSquareVenue;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.data.FourSquareVenue;
 
 public class MapListViewAdapter extends ArrayAdapter<FourSquareVenue> {
 	private int resourceId = 0;
