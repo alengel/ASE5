@@ -39,6 +39,13 @@ public class LoginActivity extends Activity {
 	private final static String SUCCESS_JSON = "success";
 	private final static String KEY_JSON = "key";
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 *
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,7 +80,7 @@ public class LoginActivity extends Activity {
 				String password = ((EditText) findViewById(R.id.password_box_login))
 						.getEditableText().toString();
 
-				// TODO: maybe user input checking
+	
 
 				String encryptedPassword = Utilities.encryptString(password);
 
@@ -104,6 +111,10 @@ public class LoginActivity extends Activity {
 		});
 	}
 
+	/**
+	*Called when a key was pressed down and not handled by any of the views inside of the activity.
+	*
+	*/
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -113,6 +124,13 @@ public class LoginActivity extends Activity {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	/**
+	 * Displays invalid input message as a pop up window. When user incorrectly
+	 * types to the Edit text field.
+	 * 
+	 * @param message
+	 *            - String errorMessage - error message.
+	 */
 	private void showInvalidInput(String message) {
 
 		Log.d("login", "Login.showInvalidInput() with argument: " + message);
@@ -132,7 +150,13 @@ public class LoginActivity extends Activity {
 				});
 		alert.show();
 	}
-
+	
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed.
+	 * Map Activity is loaded on post execute.
+	 * If Json result success == true
+	 */
 	private class LoginAsyncTask extends
 			AsyncTask<List<NameValuePair>, Void, JSONObject> {
 
