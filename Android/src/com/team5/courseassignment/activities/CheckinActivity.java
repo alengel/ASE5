@@ -114,8 +114,11 @@ public class CheckinActivity extends Activity {
 	
 	@Override
 	public void onDestroy() {
-		list.setAdapter(null);
-		super.onDestroy();
+		if(list != null) {
+			list.setAdapter(null);
+	    }
+	    super.onDestroy();
+		
 	}
 	
 	/**
