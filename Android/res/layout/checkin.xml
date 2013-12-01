@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-<TextView
-    android:id="@+id/venueName"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_alignParentTop="true"
-    android:background="#80FFFFFF"
-    android:gravity="center"
-    android:textSize="20sp" />
-	
+    <ImageView
+       android:id="@+id/locationImage"
+        android:contentDescription="@string/location_image_description"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/default_venue" />
+
+    <TextView
+        android:id="@+id/venueName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#80FFFFFF"
+        android:gravity="center"
+        android:text="@string/location_name"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
     <ListView
-    	android:id="@+id/list"
-    	android:layout_marginTop="1dp"
-    	android:divider="@null"
-    	android:dividerHeight="0px"
-    	android:layout_below="@+id/venueName"
-	    android:layout_width="wrap_content"
-	    android:layout_height="match_parent"
-	    android:drawSelectorOnTop="false"
-		android:choiceMode="multipleChoice" /> 
+        android:id="@+id/list"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/locationImage"
+        android:layout_above="@+id/checkInButton"
+        android:choiceMode="multipleChoice"
+        android:divider="@null"
+        android:dividerHeight="0px"
+        android:drawSelectorOnTop="false" />
 	    
     <!-- Set the android:button attribute to the state list drawable -->
     <Button
@@ -32,5 +45,33 @@
 	    android:background="@drawable/actionbar"
 	    android:gravity="center"
 	    android:text="@string/check_in_button" />
+
+    <ImageButton
+        android:id="@+id/callButton"
+        android:contentDescription="@string/call_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/list"
+        android:layout_alignRight="@+id/locationImage"
+        android:layout_alignBottom="@+id/locationImage"
+        android:src="@drawable/ic_action_call" />
+
+    <ImageButton
+        android:id="@+id/directionsButton"
+        android:contentDescription="@string/directions_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/callButton"
+        android:layout_toLeftOf="@+id/callButton"
+        android:src="@drawable/ic_action_directions" />
+
+    <ImageButton
+        android:id="@+id/websiteButton"
+        android:contentDescription="@string/website_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/callButton"
+        android:layout_toLeftOf="@+id/directionsButton"
+        android:src="@drawable/ic_action_web_site" />
 
 </RelativeLayout>

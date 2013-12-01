@@ -95,21 +95,14 @@
 	<!-- Reviewer Profile Activity -->
 	<string name="reviews">Reviews</string>
 	<string name="follow_button">Follow</string>
-	
-
-    
-     <string-array name="review_array">
-        <item>Starbucks</item>
-        <item>Falmer Bar</item>
-        <item>Nero Cafe</item>
-        <item>Cafe Costa</item>
-        <item>University of Sussex</item>
-        <item>Co-operative</item>
-        <item>Student Coffee</item>
-        <item>McDonalds</item>
-    </string-array>
 	<string name="location_image_description">Location Image</string>
 	<string name="user_name">Unknown</string>
 	<string name="profile_image">Profile image</string>
 	<string name="image_button">Image button</string>
+	
+	<!--  New Check In -->
+	<string name="call_button">Call Button</string>
+	<string name="directions_button">Directions Button</string>
+	<string name="website_button">Website Button</string>
+	<string name="location_name">Location Name</string>
 </resources>
