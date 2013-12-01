@@ -7,26 +7,24 @@
     <ImageView
         android:id="@+id/locationImage"
         android:contentDescription="@string/location_image_description"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
         android:src="@drawable/default_venue" />
 
     <TextView
         android:id="@+id/venueName"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:background="#80FFFFFF"
         android:gravity="center"
         android:text="@string/location_name"
-        android:textSize="30sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <ListView
         android:id="@+id/list"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@+id/locationImage"
@@ -46,32 +44,32 @@
 	    android:gravity="center"
 	    android:text="@string/check_in_button" />
 
-    <ImageButton
-        android:id="@+id/callButton"
-        android:contentDescription="@string/call_button"
+    <Button
+        android:id="@+id/directionsButton"
+        android:contentDescription="@string/directions_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/list"
         android:layout_alignRight="@+id/locationImage"
         android:layout_alignBottom="@+id/locationImage"
-        android:src="@drawable/ic_action_call" />
+        android:background="@drawable/ic_action_directions" />
 
-    <ImageButton
-        android:id="@+id/directionsButton"
-        android:contentDescription="@string/directions_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/callButton"
-        android:layout_toLeftOf="@+id/callButton"
-        android:src="@drawable/ic_action_directions" />
-
-    <ImageButton
+    <Button
         android:id="@+id/websiteButton"
         android:contentDescription="@string/website_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/callButton"
+        android:layout_alignTop="@+id/directionsButton"
         android:layout_toLeftOf="@+id/directionsButton"
-        android:src="@drawable/ic_action_web_site" />
+        android:background="@drawable/ic_action_web_site" />
+
+    <Button
+        android:id="@+id/callButton"
+        android:contentDescription="@string/call_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/websiteButton"
+        android:layout_toLeftOf="@+id/websiteButton"
+        android:background="@drawable/ic_action_call" />
 
 </RelativeLayout>
