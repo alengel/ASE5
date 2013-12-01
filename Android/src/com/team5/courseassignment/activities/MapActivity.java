@@ -37,11 +37,11 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.team5.courseassignment.FourSquareVenue;
-import com.team5.courseassignment.HttpRequest;
 import com.team5.courseassignment.R;
-import com.team5.courseassignment.SharedPreferencesEditor;
 import com.team5.courseassignment.adapters.MapListViewAdapter;
 import com.team5.courseassignment.parsers.FourSquareJsonParser;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 /*
  * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !!!

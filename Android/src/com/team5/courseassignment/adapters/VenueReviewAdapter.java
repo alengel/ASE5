@@ -30,15 +30,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.team5.courseassignment.HttpRequest;
-import com.team5.courseassignment.ImageLoader;
 import com.team5.courseassignment.R;
-import com.team5.courseassignment.SharedPreferencesEditor;
 import com.team5.courseassignment.VenueReview;
-import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
 import com.team5.courseassignment.R.id;
 import com.team5.courseassignment.R.string;
 import com.team5.courseassignment.activities.FollowerProfileActivity;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.ImageLoader;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
+import com.team5.courseassignment.utilities.ImageLoader.ImageLoadedListener;
 
 public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	private int resourceId = 0;

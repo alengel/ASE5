@@ -9,12 +9,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-import com.team5.courseassignment.HttpRequest;
 import com.team5.courseassignment.R;
-import com.team5.courseassignment.SharedPreferencesEditor;
 import com.team5.courseassignment.VenueReview;
 import com.team5.courseassignment.adapters.VenueReviewAdapter;
 import com.team5.courseassignment.parsers.VenueReviewParser;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

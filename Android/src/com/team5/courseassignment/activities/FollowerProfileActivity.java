@@ -10,12 +10,12 @@ import org.json.JSONObject;
 
 import com.team5.courseassignment.FollowerProfileInfo;
 import com.team5.courseassignment.FollowerProfileVenue;
-import com.team5.courseassignment.HttpRequest;
 import com.team5.courseassignment.R;
-import com.team5.courseassignment.SharedPreferencesEditor;
 import com.team5.courseassignment.adapters.FollowerVenueAdapter;
 import com.team5.courseassignment.parsers.FollowerProfileInfoParser;
 import com.team5.courseassignment.parsers.FollowerProfileVenueParser;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
