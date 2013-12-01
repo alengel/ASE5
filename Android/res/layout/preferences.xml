@@ -8,7 +8,7 @@
         android:title="@string/pref_general_title"
         android:key="pref_key_general_settings"
         android:textColor="@android:color/black" >
-        <com.team5.courseassignment.NumberPickerDialogPreference
+        <com.team5.courseassignment.data.NumberPickerDialogPreference
             android:key="pref_key_interval"
             android:title="@string/pref_title_interval"
 	        android:summary="@string/pref_summary_interval"
@@ -16,7 +16,7 @@
 	        custom:min="5" 
 	        android:defaultValue="30"
 	        android:max="300" />
-        <com.team5.courseassignment.NumberPickerDialogPreference
+        <com.team5.courseassignment.data.NumberPickerDialogPreference
             android:key="pref_key_logging_period"
             android:summary="@string/pref_summary_logging_period"
             android:title="@string/pref_title_logging_period"
@@ -29,7 +29,7 @@
     <PreferenceCategory 
         android:title="@string/pref_advanced_title"
         android:key="pref_key_advanced_settings">
-        <com.team5.courseassignment.NumberPickerDialogPreference
+        <com.team5.courseassignment.data.NumberPickerDialogPreference
             android:key="pref_key_distance"
             android:summary="@string/pref_summary_distance"
             android:title="@string/pref_title_distance"
@@ -37,7 +37,7 @@
 	        custom:min="1" 
 	        android:defaultValue="100"
 	        android:max="1000" />
-        <com.team5.courseassignment.NumberPickerDialogPreference
+        <com.team5.courseassignment.data.NumberPickerDialogPreference
             android:key="pref_key_logout_limit"
             android:summary="@string/pref_summary_logout_limit"
             android:title="@string/pref_title_logout_limit"

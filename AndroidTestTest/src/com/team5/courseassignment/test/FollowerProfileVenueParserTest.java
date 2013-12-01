@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import android.test.AndroidTestCase;
 
-import com.team5.courseassignment.FollowerProfileVenue;
-import com.team5.courseassignment.FollowerProfileVenueParser;
+import com.team5.courseassignment.data.FollowerProfileVenue;
+import com.team5.courseassignment.parsers.FollowerProfileVenueParser;
 
 
 

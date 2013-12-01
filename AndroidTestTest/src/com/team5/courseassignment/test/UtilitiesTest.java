@@ -1,6 +1,6 @@
 package com.team5.courseassignment.test;
 
-import com.team5.courseassignment.Utilities;
+import com.team5.courseassignment.utilities.Utilities;
 
 import org.junit.Test;
 

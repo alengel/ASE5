@@ -7,13 +7,14 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.HttpRequest;
-import com.team5.courseassignment.ProfileInfo;
-import com.team5.courseassignment.ProfileInfoParser;
-import com.team5.courseassignment.ProfileListAdapter;
 import com.team5.courseassignment.R;
-import com.team5.courseassignment.SharedPreferencesEditor;
-import com.team5.courseassignment.UserFollowers;
+import com.team5.courseassignment.adapters.ProfileListAdapter;
+import com.team5.courseassignment.data.ProfileInfo;
+import com.team5.courseassignment.data.UserFollowers;
+import com.team5.courseassignment.parsers.ProfileInfoParser;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;

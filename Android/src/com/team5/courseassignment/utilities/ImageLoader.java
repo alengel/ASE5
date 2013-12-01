@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.utilities;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

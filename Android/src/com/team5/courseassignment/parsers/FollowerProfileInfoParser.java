@@ -1,8 +1,10 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.parsers;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.team5.courseassignment.data.FollowerProfileInfo;
 
 public class FollowerProfileInfoParser {
 

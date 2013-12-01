@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import android.test.AndroidTestCase;
 
-import com.team5.courseassignment.FollowerProfileInfo;
-import com.team5.courseassignment.FollowerProfileInfoParser;
+import com.team5.courseassignment.data.FollowerProfileInfo;
+import com.team5.courseassignment.parsers.FollowerProfileInfoParser;
 
 
 

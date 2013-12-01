@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.utilities;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

@@ -6,8 +6,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.team5.courseassignment.VenueReviewParser;
-import com.team5.courseassignment.VenueReview;
+
+import com.team5.courseassignment.data.VenueReview;
+import com.team5.courseassignment.parsers.VenueReviewParser;
 
 import android.test.AndroidTestCase;
 

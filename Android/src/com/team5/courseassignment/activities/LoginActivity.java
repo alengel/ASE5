@@ -8,10 +8,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.team5.courseassignment.HttpRequest;
 import com.team5.courseassignment.R;
-import com.team5.courseassignment.SharedPreferencesEditor;
-import com.team5.courseassignment.Utilities;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
+import com.team5.courseassignment.utilities.Utilities;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
