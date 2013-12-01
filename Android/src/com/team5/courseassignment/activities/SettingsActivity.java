@@ -12,9 +12,6 @@ import com.team5.courseassignment.HttpRequest;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.SettingsFragment;
 import com.team5.courseassignment.SharedPreferencesEditor;
-import com.team5.courseassignment.R.menu;
-import com.team5.courseassignment.R.string;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;

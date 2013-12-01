@@ -14,10 +14,6 @@ import com.team5.courseassignment.SharedPreferencesEditor;
 import com.team5.courseassignment.VenueReview;
 import com.team5.courseassignment.VenueReviewAdapter;
 import com.team5.courseassignment.VenueReviewParser;
-import com.team5.courseassignment.R.id;
-import com.team5.courseassignment.R.layout;
-import com.team5.courseassignment.R.menu;
-import com.team5.courseassignment.R.string;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
