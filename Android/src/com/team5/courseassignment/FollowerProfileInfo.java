@@ -29,7 +29,7 @@ public class FollowerProfileInfo {
 	 * 
 	 * @return profileImage
 	 */
-	public String geProfileImage() {
+	public String getProfileImage() {
 		return profileImage;
 	}
 

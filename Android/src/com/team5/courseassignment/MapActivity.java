@@ -63,6 +63,12 @@ public class MapActivity extends Activity implements OnItemClickListener {
 
 	MapListViewAdapter adapter;
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,7 +90,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 			settings.setMyLocationButtonEnabled(false);
 
 			// Setting up locate me button.
-			Button loginButton = (Button) findViewById(R.id.locate_me_button);
+			Button loginButton = (Button) findViewById(R.id.locateMeButton);
 			loginButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -96,7 +102,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 			});
 		} else {
 
-			// kill the application and inform the user
+			// close the application and inform the user
 			Toast.makeText(getApplicationContext(),
 					getResources().getString(R.string.play_services_missing),
 					Toast.LENGTH_LONG).show();
@@ -106,27 +112,24 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		mLocationListener = new LocationListener() {
 			@Override
 			public void onLocationChanged(final Location location) {
-				// your code here
+
 				mLastLocation = location;
 				Log.d("location_update", location.toString());
 			}
 
 			@Override
 			public void onProviderDisabled(String provider) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onProviderEnabled(String provider) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onStatusChanged(String provider, int status,
 					Bundle extras) {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -141,12 +144,22 @@ public class MapActivity extends Activity implements OnItemClickListener {
 				.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 	}
 
+	/**
+	 * Called when the activity has detected the user's press of the back key.
+	 * The default implementation simply finishes the current activity, but in
+	 * our case we override this to go to MapActivity screen.
+	 */
 	@Override
 	public void onBackPressed() {
 		this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,
 				KeyEvent.KEYCODE_BACK));
 	}
 
+	/**
+	 * When LocateMe button pressed... Method which gets location, zooms map
+	 * into current position. and executes fourSquare api call for nearest
+	 * venue/location as a list. Stays at MapActivity after execution.
+	 */
 	@SuppressLint("DefaultLocale")
 	private void onLocateMe() {
 		// get the new location
@@ -165,6 +178,10 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		new GetFourSquareVenue(progress).execute(data);
 	}
 
+	/**
+	 * Creates list view with Array adapter. To display list of all nearest
+	 * venues/locations around you.
+	 */
 	private void showList(List<FourSquareVenue> venues) {
 		ListAdapter adapter = new ArrayAdapter<FourSquareVenue>(this,
 				R.layout.venue_list_item, venues);
@@ -173,6 +190,10 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		list.setOnItemClickListener(this);
 	}
 
+	/**
+	 * On list item click - By passing venue name and venue id to foursquare
+	 * server CheckinActivity executed.
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long arg3) {
@@ -190,6 +211,10 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		startActivity(i);
 	}
 
+	/**
+	 * Creates get request on execute. With list of venues/locations which needs
+	 * to be taken - - from server. pre-loader created when pre-executed.
+	 */
 	private class GetFourSquareVenue extends
 			AsyncTask<String, Void, JSONObject> {
 
@@ -242,6 +267,10 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		}
 	}
 
+	/**
+	 * Creates implicit inflation for use in action bar. Rendering map_menu
+	 * layout.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
@@ -250,7 +279,9 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	// set actionbar icons
+	/**
+	 * Setting actionBar icons. first - profile icon. second - settings icon.
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -273,6 +304,5 @@ public class MapActivity extends Activity implements OnItemClickListener {
 			return super.onOptionsItemSelected(item);
 		}
 
-		
 	}
 }
