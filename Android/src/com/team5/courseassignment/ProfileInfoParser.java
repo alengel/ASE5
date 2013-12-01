@@ -8,6 +8,15 @@ import org.json.JSONObject;
 
 public class ProfileInfoParser {
 
+	/**
+	 * This class parses profile data of the follower as a JSONArray
+	 * 
+	 * @param results
+	 * @return profile - array list of objects to return, which is
+	 *         profile_image, first_name, last_name and email. If the response from the
+	 *         server is true-this parser will parse all data from 
+	 *         data: [ array ] to ArrayList<ProfileInfo>
+	 */
 	public List<ProfileInfo> parseJSON(JSONObject results) throws JSONException {
 		List<ProfileInfo> profile = new ArrayList<ProfileInfo>();
 

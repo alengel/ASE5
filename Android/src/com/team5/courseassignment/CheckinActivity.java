@@ -110,6 +110,7 @@ public class CheckinActivity extends Activity {
 	}
 	
 	/**
+	 * OnBackPressed()
 	 * Called when the activity has detected the user's press of the back key.
 	 * The default implementation simply finishes the current activity, 
 	 * but in our case we override this to go to MapActivity screen.

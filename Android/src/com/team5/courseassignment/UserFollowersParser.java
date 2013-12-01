@@ -9,6 +9,15 @@ import org.json.JSONObject;
 
 public class UserFollowersParser {
 
+	/**
+	 * This class parses user data of the follower as a JSONArray
+	 * 
+	 * @param results
+	 * @return reviewer_profile_venue - array list of objects to return, which
+	 *         is profile_image, first_name and last_name. If the response from
+	 *         the server is true-this parser will parse all data from
+	 *         followers: [ array ] to ArrayList<ProfileInfo>
+	 */
 	public List<UserFollowers> parseJSON(JSONObject results)
 			throws JSONException {
 		List<UserFollowers> reviewer_profile_venue = new ArrayList<UserFollowers>();

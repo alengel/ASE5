@@ -21,7 +21,6 @@ import android.view.MenuItem;
  * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !
  */
 
-//TODO: show licensing info in the Settings!
 public class SettingsActivity extends Activity {
 
 	// key of user for connecting to the server
@@ -35,6 +34,12 @@ public class SettingsActivity extends Activity {
 	// variables for the POST answer
 	private final static String SUCCESS_JSON = "success";
 
+	/**
+	 * Called when the activity is first created. This is where we do all of our
+	 * normal static set up: create views, bind data to lists, etc. This method
+	 * also provides a Bundle containing the activity's previously frozen state,
+	 * if there was one.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,6 +56,10 @@ public class SettingsActivity extends Activity {
 				.replace(android.R.id.content, new SettingsFragment()).commit();
 	}
 
+	/**
+	 * Creates implicit inflation for use in action bar. Rendering settings_menu
+	 * layout.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
@@ -59,7 +68,9 @@ public class SettingsActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	// set logout icon actions
+	/**
+	 * Setting logout icon actions.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -75,6 +86,15 @@ public class SettingsActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed. Redirecting to log in activity screen
+	 * on post execute, if and only if success message is "true". It depends on
+	 * user input. Corresponding pop up window will appear with corresponding
+	 * message, whether its false its error message which we get from server
+	 * otherwise its congratulations message taken from string.xml
+	 * 
+	 */
 	private class LogoutAsyncTask extends
 			AsyncTask<List<NameValuePair>, Void, JSONObject> {
 		private ProgressDialog progress;
@@ -116,13 +136,13 @@ public class SettingsActivity extends Activity {
 					String success = result.getString(SUCCESS_JSON);
 
 					if (success.equals("true")) {
-						// launch LoginActivity
+
 						Intent i = new Intent(getApplicationContext(),
 								LoginActivity.class);
 						startActivity(i);
 
 					} else {
-						// TODO: Add toast that server response has failed.
+
 					}
 
 				} catch (JSONException e) {

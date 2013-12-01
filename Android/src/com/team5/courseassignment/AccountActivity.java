@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.util.Base64;
 import android.view.Menu;
@@ -189,7 +188,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	 * @param resultCode
 	 *            The result code whether its load from gallery or from camera
 	 * 
-	 * @return dat - A Bitmap image if the picture loaded from gallery or
+	 * @return data - A Bitmap image if the picture loaded from gallery or
 	 *         camera.
 	 */
 	@Override
@@ -314,7 +313,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO: maybe delete content of some fields
+
 						if ((getResources()
 								.getString(R.string.successMessageRegistration))
 								.equals(message)) {
@@ -322,7 +321,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 									LoginActivity.class);
 							startActivity(i);
 						} else {
-							// TODO
+
 						}
 					}
 				});

@@ -54,11 +54,11 @@ public class FollowerVenueAdapter extends ArrayAdapter<FollowerProfileVenue> {
 		view = inflater.inflate(resourceId, parent, false);
 
 		try {
-			locationName = (TextView) view.findViewById(R.id.location_name);
+			locationName = (TextView) view.findViewById(R.id.locationName);
 			review = (TextView) view.findViewById(R.id.review);
 			rating = (TextView) view.findViewById(R.id.rating);
 
-			image = (ImageView) view.findViewById(R.id.location_image);
+			image = (ImageView) view.findViewById(R.id.locationImage);
 
 		} catch (ClassCastException e) {
 			throw e;
