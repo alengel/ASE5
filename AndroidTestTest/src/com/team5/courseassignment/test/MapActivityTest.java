@@ -1,8 +1,8 @@
 package com.team5.courseassignment.test;
 
-import com.team5.courseassignment.MapActivity;
-import com.team5.courseassignment.ProfileActivity;
-import com.team5.courseassignment.SettingsActivity;
+import com.team5.courseassignment.activities.MapActivity;
+import com.team5.courseassignment.activities.ProfileActivity;
+import com.team5.courseassignment.activities.SettingsActivity;
 
 import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2;

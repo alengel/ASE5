@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.activities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.team5.courseassignment.HttpRequest;
+import com.team5.courseassignment.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

@@ -1,13 +1,12 @@
 package com.team5.courseassignment.test;
 
-import com.team5.courseassignment.LoginActivity;
-import com.team5.courseassignment.RegistrationActivity;
-import com.team5.courseassignment.ForgottenPasswordActivity;
+import com.team5.courseassignment.activities.ForgottenPasswordActivity;
+import com.team5.courseassignment.activities.LoginActivity;
+import com.team5.courseassignment.activities.RegistrationActivity;
 
 import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
-
 import android.widget.EditText;
 import android.widget.TextView;
 

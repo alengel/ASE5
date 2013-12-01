@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.activities;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -9,6 +9,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.team5.courseassignment.HttpRequest;
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.SharedPreferencesEditor;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

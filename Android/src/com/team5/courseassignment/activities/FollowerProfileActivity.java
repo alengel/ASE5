@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.activities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,15 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.team5.courseassignment.FollowerProfileInfo;
+import com.team5.courseassignment.FollowerProfileInfoParser;
+import com.team5.courseassignment.FollowerProfileVenue;
+import com.team5.courseassignment.FollowerProfileVenueParser;
+import com.team5.courseassignment.FollowerVenueAdapter;
+import com.team5.courseassignment.HttpRequest;
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.SharedPreferencesEditor;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.team5.courseassignment"
+    
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -35,12 +36,12 @@
         android:theme="@style/AppTheme" >
                 
 		<activity
-            android:name="com.team5.courseassignment.RegistrationActivity"
+            android:name="com.team5.courseassignment.activities.RegistrationActivity"
             android:label="@string/app_name" >
         </activity>
         
         <activity
-            android:name="com.team5.courseassignment.LoginActivity"
+            android:name="com.team5.courseassignment.activities.LoginActivity"
             android:label="@string/app_name" > 
             
             <intent-filter>
@@ -50,38 +51,36 @@
         </activity>
         
         <activity
-            android:name="com.team5.courseassignment.FollowerProfileActivity"
+            android:name="com.team5.courseassignment.activities.FollowerProfileActivity"
             android:label="@string/app_name" >   
         </activity> 
         
         <activity
-            android:name="com.team5.courseassignment.MapActivity"
+    		android:name="com.team5.courseassignment.activities.MapActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
-            android:name="com.team5.courseassignment.CheckinActivity"
+ 			android:name="com.team5.courseassignment.activities.CheckinActivity"
             android:label="@string/check_in_title" >
         </activity>
 
         <activity
-            android:name="com.team5.courseassignment.ReviewActivity"
+    		android:name="com.team5.courseassignment.activities.ReviewActivity"
             android:label="@string/review_title" >
         </activity>
         
         <activity
-            android:name="com.team5.courseassignment.ForgottenPasswordActivity"
+            android:name="com.team5.courseassignment.activities.ForgottenPasswordActivity"
             android:label="@string/app_name" >
         </activity>
         
         <activity
-            android:name="com.team5.courseassignment.SettingsActivity"
+            android:name="com.team5.courseassignment.activities.SettingsActivity"
             android:label="@string/settings_title" 
             android:theme="@style/PreferencesThemeText" >
         </activity>
         
-        <activity
-            android:name="com.team5.courseassignment.ProfileActivity"
+        <activity			android:name="com.team5.courseassignment.activities.ProfileActivity"
             android:label="@string/profileTitle" 
              >
         </activity>
