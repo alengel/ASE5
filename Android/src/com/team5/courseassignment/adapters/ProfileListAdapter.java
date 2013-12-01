@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.adapters;
 
 import java.net.MalformedURLException;
 import java.util.List;
@@ -13,7 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.team5.courseassignment.ImageLoader;
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.UserFollowers;
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
+import com.team5.courseassignment.R.id;
 
 public class ProfileListAdapter extends ArrayAdapter<UserFollowers> {
 	private int resourceId = 0;

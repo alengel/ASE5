@@ -38,9 +38,9 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.team5.courseassignment.FourSquareVenue;
 import com.team5.courseassignment.HttpRequest;
-import com.team5.courseassignment.MapListViewAdapter;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.SharedPreferencesEditor;
+import com.team5.courseassignment.adapters.MapListViewAdapter;
 import com.team5.courseassignment.parsers.FourSquareJsonParser;
 
 /*

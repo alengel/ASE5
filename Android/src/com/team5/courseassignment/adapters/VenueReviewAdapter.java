@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.adapters;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -30,7 +30,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.team5.courseassignment.HttpRequest;
+import com.team5.courseassignment.ImageLoader;
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.SharedPreferencesEditor;
+import com.team5.courseassignment.VenueReview;
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
+import com.team5.courseassignment.R.id;
+import com.team5.courseassignment.R.string;
 import com.team5.courseassignment.activities.FollowerProfileActivity;
 
 public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {

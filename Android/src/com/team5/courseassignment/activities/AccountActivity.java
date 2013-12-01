@@ -13,10 +13,10 @@ import org.json.JSONObject;
 
 import com.team5.courseassignment.HttpRequest;
 import com.team5.courseassignment.ProfileInfo;
-import com.team5.courseassignment.ProfileListAdapter;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.SharedPreferencesEditor;
 import com.team5.courseassignment.UserFollowers;
+import com.team5.courseassignment.adapters.ProfileListAdapter;
 import com.team5.courseassignment.parsers.ProfileInfoParser;
 import com.team5.courseassignment.parsers.UserFollowersParser;
 
