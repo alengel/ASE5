@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.activities;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +10,19 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.team5.courseassignment.HttpRequest;
+import com.team5.courseassignment.ProfileInfo;
+import com.team5.courseassignment.ProfileInfoParser;
+import com.team5.courseassignment.ProfileListAdapter;
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.SharedPreferencesEditor;
+import com.team5.courseassignment.UserFollowers;
+import com.team5.courseassignment.UserFollowersParser;
+import com.team5.courseassignment.R.id;
+import com.team5.courseassignment.R.layout;
+import com.team5.courseassignment.R.menu;
+import com.team5.courseassignment.R.string;
 
 import android.app.Activity;
 import android.app.AlertDialog;

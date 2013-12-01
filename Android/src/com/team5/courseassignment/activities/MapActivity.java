@@ -1,4 +1,4 @@
-package com.team5.courseassignment;
+package com.team5.courseassignment.activities;
 
 import java.util.List;
 
@@ -36,6 +36,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.team5.courseassignment.FourSquareJsonParser;
+import com.team5.courseassignment.FourSquareVenue;
+import com.team5.courseassignment.HttpRequest;
+import com.team5.courseassignment.MapListViewAdapter;
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.SharedPreferencesEditor;
+import com.team5.courseassignment.R.id;
+import com.team5.courseassignment.R.layout;
+import com.team5.courseassignment.R.menu;
+import com.team5.courseassignment.R.string;
 
 /*
  * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !!!

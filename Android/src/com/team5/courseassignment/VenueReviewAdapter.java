@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.team5.courseassignment.ImageLoader.ImageLoadedListener;
+import com.team5.courseassignment.activities.FollowerProfileActivity;
 
 public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	private int resourceId = 0;
