@@ -9,11 +9,12 @@ import org.json.JSONObject;
 
 import com.team5.courseassignment.HttpRequest;
 import com.team5.courseassignment.ProfileInfo;
-import com.team5.courseassignment.ProfileInfoParser;
 import com.team5.courseassignment.ProfileListAdapter;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.SharedPreferencesEditor;
 import com.team5.courseassignment.UserFollowers;
+import com.team5.courseassignment.parsers.ProfileInfoParser;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
