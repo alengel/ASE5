@@ -54,8 +54,8 @@ public class ProfileInfoParserTest extends AndroidTestCase
 				"      {\r\n" + 
 				"         \"profile_image\":\"profileImage\",\r\n" + 
 				"         \"first_name\":\"Alena\",\r\n" + 
-				"         \"last_name\":\"Ruprecht\"\r\n" + 
-				//"         \"email\":\"somemail@mail.com\"\r\n" + 
+				"         \"last_name\":\"Ruprecht\",\r\n" + 
+				"         \"email\":\"email\"\r\n" + 
 				"      },\r\n" + 
 				"   ]\r\n" + 
 				"}";
@@ -68,7 +68,7 @@ public class ProfileInfoParserTest extends AndroidTestCase
 		assertEquals(profile.profileImage, "profileImage");
 		assertEquals(profile.firstName, "Alena");
 		assertEquals(profile.lastName, "Ruprecht");
-		//assertEquals(profile.email, "somemail@mail.com");
+		assertEquals(profile.email, "email");
 	}
 	
 	// Create a JSONObject from a string.
