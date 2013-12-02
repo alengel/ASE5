@@ -8,6 +8,15 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+
+import com.team5.courseassignment.R;
+import com.team5.courseassignment.adapters.VenueReviewAdapter;
+import com.team5.courseassignment.data.VenueReview;
+import com.team5.courseassignment.parsers.VenueReviewParser;
+import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -57,6 +66,8 @@ public class CheckinActivity extends Activity {
 
 	ListView list;
 	VenueReviewAdapter adapter;
+	ProgressDialog progress;
+	
 
 	/**
 	 * Called when the activity is first created. This is where we do all of our
@@ -112,14 +123,20 @@ public class CheckinActivity extends Activity {
 	 * 
 	 */
 	
+
 	@Override
 	public void onDestroy() {
 		if(list != null) {
 			list.setAdapter(null);
 	    }
 	    super.onDestroy();
-		
+	    
+	    if (progress!=null && progress.isShowing()){
+	    	progress.dismiss();
+	    }
 	}
+	
+	
 	
 	/**
 	 * OnBackPressed()
@@ -175,9 +192,9 @@ public class CheckinActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(JSONObject result) {
-
-			super.onPostExecute(result);
 			progress.dismiss();
+			super.onPostExecute(result);
+			
 			if (result != null) {
 
 				final List<VenueReview> reviews = new VenueReviewParser()
