@@ -109,7 +109,6 @@ public class FollowerProfileVenue {
 	 */
 	@Override
 	public String toString() {
-		return locationName + "Rating: " + rating + " stars. \"" + review
-				+ "\" ";
+		return locationName  + rating +  review;
 	}
 }
