@@ -3,6 +3,7 @@ package com.team5.courseassignment.parsers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,19 +20,30 @@ public class ProfileInfoParser {
 	 *         server is true-this parser will parse all data from 
 	 *         data: [ array ] to ArrayList<ProfileInfo>
 	 */
-	public List<ProfileInfo> parseJSON(JSONObject results) throws JSONException {
-		List<ProfileInfo> profile = new ArrayList<ProfileInfo>();
+	public ProfileInfo parseJSON(JSONObject results) {
+		ProfileInfo profile = null;
 
-		JSONObject data = results.getJSONObject("data");
-		// JSONObject user = data.getJSONObject(0);
-		String profileImage = data.getString("profile_image");
-		String name = data.getString("first_name");
-		String lastName = data.getString("last_name");
-		String email = data.getString("email");
+		if (results == null)
+			return profile;
+		
+		
+		try {
+			
 
-		ProfileInfo followerProfileInfo = new ProfileInfo(profileImage, name,
+		JSONObject user = results.getJSONObject("data");
+		 
+		String profileImage = user.getString("profile_image");
+		String name = user.getString("first_name");
+		String lastName = user.getString("last_name");
+		String email = user.getString("email");
+
+		profile = new ProfileInfo(profileImage, name,
 				lastName, email);
-		profile.add(followerProfileInfo);
+		
+		} catch (JSONException e) {
+
+			e.printStackTrace();
+		}
 
 		return profile;
 	}

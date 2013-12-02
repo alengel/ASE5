@@ -1,9 +1,9 @@
 package com.team5.courseassignment.data;
 
 public class ProfileInfo {
-	public String profile_image;
-	public String first_name;
-	public String last_name;
+	public String profileImage;
+	public String firstName;
+	public String lastName;
 	public String email;
 
 	/**
@@ -19,12 +19,12 @@ public class ProfileInfo {
 	 * @param email
 	 *            - User's email - String.
 	 */
-	public ProfileInfo(String profile_image, String first_name,
-			String last_name, String email) {
+	public ProfileInfo(String profileImage, String firstName,
+			String lastName, String email) {
 
-		this.profile_image = profile_image;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.profileImage = profileImage;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 
 	}
@@ -35,7 +35,7 @@ public class ProfileInfo {
 	 * @return profile_image
 	 */
 	public String getProfileImage() {
-		return profile_image;
+		return profileImage;
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ProfileInfo {
 	 *            - in case if user wants to change his/her profile picture.
 	 */
 	public void setProfileImage(String profileImage) {
-		this.profile_image = profileImage;
+		this.profileImage = profileImage;
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class ProfileInfo {
 	 * @return user name
 	 */
 	public String getName() {
-		return first_name;
+		return firstName;
 	}
 
 	/**
@@ -63,8 +63,8 @@ public class ProfileInfo {
 	 * @param first_name
 	 *            - in case if user wants to change his/her first name.
 	 */
-	public void setName(String first_name) {
-		this.first_name = first_name;
+	public void setName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class ProfileInfo {
 	 * @return user's last_name
 	 */
 	public String getLastName() {
-		return last_name;
+		return lastName;
 	}
 
 	/**
@@ -82,8 +82,8 @@ public class ProfileInfo {
 	 * @param last_name
 	 *            - in case if user wants to change his/her last name.
 	 */
-	public void setLastName(String last_name) {
-		this.last_name = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	/**
@@ -111,6 +111,6 @@ public class ProfileInfo {
 	 */
 	@Override
 	public String toString() {
-		return profile_image + " " + first_name + last_name + email + "\" ";
+		return profileImage + " " + firstName + lastName + email + "\" ";
 	}
 }

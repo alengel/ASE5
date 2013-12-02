@@ -16,10 +16,10 @@ public class FollowerProfileVenueTest extends AndroidTestCase {
 											"rating", "review"
 											);
 
-		assertEquals("profileImage", venue.locationImage);
-		assertEquals("firstName", venue.locationName);
-		assertEquals("lastName", venue.rating);
-		assertEquals("lastName", venue.review);
+		assertEquals("locationImage", venue.locationImage);
+		assertEquals("locationName", venue.locationName);
+		assertEquals("rating", venue.rating);
+		assertEquals("review", venue.review);
 		
 	}
 }

@@ -11,13 +11,13 @@ public class UserFollowerTest extends AndroidTestCase {
 	@Test
 	public void testConstructor() {
 
-		UserFollowers data = new UserFollowers("profile_image",
-											"first_name",
-											"last_name");
+		UserFollowers data = new UserFollowers("profileImage",
+											"firstName",
+											"lastName");
 
-		assertEquals("profileImage", data.profile_image);
-		assertEquals("firstName", data.first_name);
-		assertEquals("lastName", data.last_name);
+		assertEquals("profileImage", data.profileImage);
+		assertEquals("firstName", data.firstName);
+		assertEquals("lastName", data.lastName);
 		
 		
 	}

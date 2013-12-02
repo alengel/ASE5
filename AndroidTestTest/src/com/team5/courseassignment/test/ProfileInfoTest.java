@@ -11,15 +11,15 @@ public class ProfileInfoTest extends AndroidTestCase {
 	@Test
 	public void testConstructor() {
 
-		ProfileInfo data = new ProfileInfo("profile_image",
-											"first_name",
-											"last_name",
+		ProfileInfo data = new ProfileInfo("profileImage",
+											"firstName",
+											"lastName",
 											"email");
 
-		assertEquals("profileImage", data.profile_image);
-		assertEquals("firstName", data.first_name);
-		assertEquals("lastName", data.last_name);
-		assertEquals("reviewerId", data.email);
+		assertEquals("profileImage", data.profileImage);
+		assertEquals("firstName", data.firstName);
+		assertEquals("lastName", data.lastName);
+		assertEquals("email", data.email);
 		
 	}
 }
