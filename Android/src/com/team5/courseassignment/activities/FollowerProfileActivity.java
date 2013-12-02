@@ -177,10 +177,8 @@ public class FollowerProfileActivity extends Activity implements
 
 			if (result != null) {
 
-				final FollowerProfileInfo reviewer_profile = new FollowerProfileInfoParser()
-						.parseJSON(result);
-				final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser()
-						.parseJSON(result);
+				final FollowerProfileInfo reviewer_profile = new FollowerProfileInfoParser().parseJSON(result);
+				final List<FollowerProfileVenue> reviewer_profile_venue = new FollowerProfileVenueParser().parseJSON(result);
 
 				runOnUiThread(new Runnable() {
 					@Override

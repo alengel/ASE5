@@ -50,14 +50,13 @@ public class ProfileInfoParserTest extends AndroidTestCase
 	{		
 		String text = "{\r\n" + 
 				"   \"success\":\"true\",\r\n" + 
-				"   \"data\":[\r\n" + 
+				"   \"data\":\r\n" + 
 				"      {\r\n" + 
 				"         \"profile_image\":\"profileImage\",\r\n" + 
 				"         \"first_name\":\"Alena\",\r\n" + 
 				"         \"last_name\":\"Ruprecht\",\r\n" + 
 				"         \"email\":\"email\"\r\n" + 
-				"      },\r\n" + 
-				"   ]\r\n" + 
+				"      }\r\n" + 
 				"}";
 		
 		JSONObject json = createJSONObject(text);		

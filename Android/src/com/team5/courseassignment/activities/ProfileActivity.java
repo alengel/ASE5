@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -141,30 +140,26 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		}
 
 		@Override
-		protected void onPostExecute(JSONObject result) {
+		protected void onPostExecute(JSONObject result)
+		{
 
 			super.onPostExecute(result);
 			progress.dismiss();
-			if (result != null) {
-				try {
-					final ProfileInfo data = new ProfileInfoParser()
-							.parseJSON(result);
-					final List<UserFollowers> followers = new UserFollowersParser()
-					.parseJSON(result);
+			if (result != null)
+			{
+				final ProfileInfo data = new ProfileInfoParser().parseJSON(result);
+				final List<UserFollowers> followers = new UserFollowersParser().parseJSON(result);
 
-					runOnUiThread(new Runnable() {
+				runOnUiThread(new Runnable()
+				{
 
-						@Override
-						public void run() {
-							fillProfile(data);
-							 showList(followers);
-						}
-					});
-
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					@Override
+					public void run()
+					{
+						fillProfile(data);
+						showList(followers);
+					}
+				});
 			}
 		}
 	}

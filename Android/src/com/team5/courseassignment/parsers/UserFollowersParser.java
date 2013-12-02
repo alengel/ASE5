@@ -9,7 +9,8 @@ import org.json.JSONObject;
 
 import com.team5.courseassignment.data.UserFollowers;
 
-public class UserFollowersParser {
+public class UserFollowersParser
+{
 
 	/**
 	 * This class parses user data of the follower as a JSONArray
@@ -21,20 +22,33 @@ public class UserFollowersParser {
 	 *         followers: [ array ] to ArrayList<ProfileInfo>
 	 */
 	public List<UserFollowers> parseJSON(JSONObject results)
-			throws JSONException {
+	{
 		List<UserFollowers> reviewer_profile_venue = new ArrayList<UserFollowers>();
 
-		JSONArray followers = results.getJSONArray("followers");
-		for (int i = 0, size = followers.length(); i < size; i++) {
-			JSONObject item = followers.getJSONObject(i);
-			String profileImage = item.getString("profile_image");
-			String firstName = item.getString("first_name");
-			String lastName = item.getString("last_name");
+		if (results == null)
+			return reviewer_profile_venue;
 
-			UserFollowers followerProfileVenue = new UserFollowers(
-					profileImage, firstName, lastName);
-			reviewer_profile_venue.add(followerProfileVenue);
+		try
+		{
+			JSONArray followers = results.getJSONArray("followers");
+
+			for (int i = 0, size = followers.length(); i < size; i++)
+			{
+				JSONObject item = followers.getJSONObject(i);
+				String profileImage = item.getString("profile_image");
+				String firstName = item.getString("first_name");
+				String lastName = item.getString("last_name");
+
+				UserFollowers followerProfileVenue = new UserFollowers(profileImage, firstName, lastName);
+				reviewer_profile_venue.add(followerProfileVenue);
+			}
+		} 
+		catch (JSONException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 		return reviewer_profile_venue;
 	}
 }
