@@ -382,7 +382,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 			progress.dismiss();
 			if (result != null) {
 				try {
-					final List<ProfileInfo> profile = new ProfileInfoParser()
+					final ProfileInfo profile = new ProfileInfoParser()
 							.parseJSON(result);
 					final List<UserFollowers> followers = new UserFollowersParser()
 							.parseJSON(result);
@@ -421,13 +421,13 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	 * from server.
 	 * 
 	 */
-	private void fillProfile(List<ProfileInfo> profile) { // Set User name
+	private void fillProfile(ProfileInfo profile) { // Set User name
 		EditText editName = (EditText) findViewById(R.id.editName);
-		String firstName = profile.get(0).getName();
+		String firstName = profile.getName();
 		editName.setText(firstName);
 
 		EditText editLastName = (EditText) findViewById(R.id.editLastName);
-		String LastName = profile.get(0).getLastName();
+		String LastName = profile.getLastName();
 		editLastName.setText(LastName);
 
 		TextView name = (TextView) findViewById(R.id.name);
@@ -439,12 +439,12 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 
 		// Set User email
 		TextView email = (TextView) findViewById(R.id.email);
-		String Email = profile.get(0).getEmail();
+		String Email = profile.getEmail();
 		email.setText(Email);
 
 		// Set User picture
 		ImageView image = (ImageView) findViewById(R.id.profilePicture);
-		byte[] decodedString = Base64.decode(profile.get(0).getProfileImage(),
+		byte[] decodedString = Base64.decode(profile.getProfileImage(),
 				Base64.NO_WRAP);
 		InputStream inputStream = new ByteArrayInputStream(decodedString);
 		Bitmap bitmap = BitmapFactory.decodeStream(inputStream);

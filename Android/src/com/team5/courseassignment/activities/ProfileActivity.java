@@ -31,6 +31,7 @@ import com.team5.courseassignment.adapters.ProfileListAdapter;
 import com.team5.courseassignment.data.ProfileInfo;
 import com.team5.courseassignment.data.UserFollowers;
 import com.team5.courseassignment.parsers.ProfileInfoParser;
+import com.team5.courseassignment.parsers.UserFollowersParser;
 import com.team5.courseassignment.utilities.HttpRequest;
 import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
@@ -146,15 +147,17 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 			progress.dismiss();
 			if (result != null) {
 				try {
-					final List<ProfileInfo> data = new ProfileInfoParser()
+					final ProfileInfo data = new ProfileInfoParser()
 							.parseJSON(result);
+					final List<UserFollowers> followers = new UserFollowersParser()
+					.parseJSON(result);
 
 					runOnUiThread(new Runnable() {
 
 						@Override
 						public void run() {
 							fillProfile(data);
-							// showList(reviewer_profile_venue);
+							 showList(followers);
 						}
 					});
 
@@ -170,7 +173,6 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	 * Creates list view with custom profile list adapter. To display list of
 	 * all followers.
 	 */
-	@SuppressWarnings("unused")
 	private void showList(List<UserFollowers> followers) {
 		ListView list = (ListView) findViewById(R.id.listView1);
 		adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
@@ -182,9 +184,9 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	 * from server.
 	 * 
 	 */
-	private void fillProfile(List<ProfileInfo> profile) { // Set User name
-		String firstName = profile.get(0).getName();
-		String LastName = profile.get(0).getLastName();
+	private void fillProfile(ProfileInfo profile) { // Set User name
+		String firstName = profile.getName();
+		String LastName = profile.getLastName();
 
 		TextView name = (TextView) findViewById(R.id.name);
 		name.setText(firstName);
@@ -195,12 +197,12 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 
 		// Set User email
 		TextView email = (TextView) findViewById(R.id.email);
-		String Email = profile.get(0).getEmail();
+		String Email = profile.getEmail();
 		email.setText(Email);
 
 		// Set User picture
 		ImageView image = (ImageView) findViewById(R.id.profilePicture);
-		byte[] decodedString = Base64.decode(profile.get(0).getProfileImage(),
+		byte[] decodedString = Base64.decode(profile.getProfileImage(),
 				Base64.NO_WRAP);
 		InputStream inputStream = new ByteArrayInputStream(decodedString);
 		Bitmap bitmap = BitmapFactory.decodeStream(inputStream);

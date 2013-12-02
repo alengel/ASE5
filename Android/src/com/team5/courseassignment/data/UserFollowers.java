@@ -1,9 +1,9 @@
 package com.team5.courseassignment.data;
 
 public class UserFollowers {
-	public String profile_image;
-	public String first_name;
-	public String last_name;
+	public String profileImage;
+	public String firstName;
+	public String lastName;
 
 	/**
 	 * Constructor method of user followers. Info as follows
@@ -17,12 +17,12 @@ public class UserFollowers {
 	 *            - User's last name - String.
 	 * 
 	 */
-	public UserFollowers(String profile_image, String first_name,
-			String last_name) {
+	public UserFollowers(String profileImage, String firstName,
+			String lastName) {
 
-		this.profile_image = profile_image;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.profileImage = profileImage;
+		this.firstName = firstName;
+		this.lastName = lastName;
 
 	}
 
@@ -32,7 +32,7 @@ public class UserFollowers {
 	 * @return profile_image
 	 */
 	public String getProfileImage() {
-		return profile_image;
+		return profileImage;
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class UserFollowers {
 	 *            - in case if user wants to change his/her profile picture.
 	 */
 	public void setProfileImage(String profileImage) {
-		this.profile_image = profileImage;
+		this.profileImage = profileImage;
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class UserFollowers {
 	 * @return first_name
 	 */
 	public String getName() {
-		return first_name;
+		return firstName;
 	}
 
 	/**
@@ -60,8 +60,8 @@ public class UserFollowers {
 	 * @param first_name
 	 *            - in case if user wants to change his/her first name.
 	 */
-	public void setName(String first_name) {
-		this.first_name = first_name;
+	public void setName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class UserFollowers {
 	 * @return user's last_name
 	 */
 	public String getLastName() {
-		return last_name;
+		return lastName;
 	}
 
 	/**
@@ -79,8 +79,8 @@ public class UserFollowers {
 	 * @param last_name
 	 *            - in case if user wants to change his/her last name.
 	 */
-	public void setLastName(String last_name) {
-		this.last_name = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	/**
@@ -89,6 +89,6 @@ public class UserFollowers {
 	 */
 	@Override
 	public String toString() {
-		return profile_image + " " + first_name + last_name + "\" ";
+		return profileImage + " " + firstName + lastName + "\" ";
 	}
 }
