@@ -10,7 +10,6 @@ import com.team5.courseassignment.data.FourSquareVenue;
 import android.content.Context;
 import android.test.AndroidTestCase;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;

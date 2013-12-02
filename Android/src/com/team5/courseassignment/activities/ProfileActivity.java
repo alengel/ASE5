@@ -173,7 +173,6 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	 * Creates list view with custom profile list adapter. To display list of
 	 * all followers.
 	 */
-	@SuppressWarnings("unused")
 	private void showList(List<UserFollowers> followers) {
 		ListView list = (ListView) findViewById(R.id.listView1);
 		adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);

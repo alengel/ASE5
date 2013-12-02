@@ -31,13 +31,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.team5.courseassignment.R;
-import com.team5.courseassignment.adapters.VenueReviewAdapter;
-import com.team5.courseassignment.data.VenueReview;
-import com.team5.courseassignment.parsers.VenueReviewParser;
-import com.team5.courseassignment.utilities.HttpRequest;
-import com.team5.courseassignment.utilities.SharedPreferencesEditor;
-
 public class CheckinActivity extends Activity {
 
 	// variables for the POST call
