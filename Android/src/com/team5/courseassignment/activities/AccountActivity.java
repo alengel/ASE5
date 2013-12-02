@@ -376,30 +376,28 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		}
 
 		@Override
-		protected void onPostExecute(JSONObject result) {
+		protected void onPostExecute(JSONObject result)
+		{
 
 			super.onPostExecute(result);
 			progress.dismiss();
-			if (result != null) {
-				try {
-					final ProfileInfo profile = new ProfileInfoParser()
-							.parseJSON(result);
-					final List<UserFollowers> followers = new UserFollowersParser()
-							.parseJSON(result);
+			if (result != null)
+			{
 
-					runOnUiThread(new Runnable() {
+				final ProfileInfo profile = new ProfileInfoParser().parseJSON(result);
+				final List<UserFollowers> followers = new UserFollowersParser().parseJSON(result);
 
-						@Override
-						public void run() {
-							fillProfile(profile);
-							showList(followers);
-						}
-					});
+				runOnUiThread(new Runnable()
+				{
 
-				} catch (JSONException e) {
+					@Override
+					public void run()
+					{
+						fillProfile(profile);
+						showList(followers);
+					}
+				});
 
-					e.printStackTrace();
-				}
 			}
 		}
 	}
