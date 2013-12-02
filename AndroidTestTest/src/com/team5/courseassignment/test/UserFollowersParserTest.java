@@ -54,7 +54,6 @@ public class UserFollowersParserTest extends AndroidTestCase {
 				"         \"profile_image\":\"profileImage\",\r\n" + 
 				"         \"first_name\":\"Alena\",\r\n" + 
 				"         \"last_name\":\"Ruprecht\",\r\n" + 
-				
 				"      },\r\n" + 
 				"   ]\r\n" + 
 				"}";
@@ -80,13 +79,11 @@ public class UserFollowersParserTest extends AndroidTestCase {
 				"         \"profile_image\":\"profileImage\",\r\n" + 
 				"         \"first_name\":\"Alena\",\r\n" + 
 				"         \"last_name\":\"Ruprecht\",\r\n" + 
-				
 				"      },\r\n" + 
 				"      {\r\n" + 
 				"         \"profile_image\":\"profileImage2\",\r\n" + 
 				"         \"first_name\":\"Michael\",\r\n" + 
 				"         \"last_name\":\"Jackson\",\r\n" + 
-				
 				"      }\r\n" + 
 				"   ]\r\n" + 
 				"}";
