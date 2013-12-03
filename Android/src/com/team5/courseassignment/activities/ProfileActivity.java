@@ -2,8 +2,12 @@ package com.team5.courseassignment.activities;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -18,8 +22,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,14 +44,16 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	// variables for the GET call
 	private static String RETRIEVE_PROFILE_URL;
 	private final static String RETRIEVE_PROFILE_URL_EXT = "profile";
-
+	private final static String SUCCESS_JSON = "success";
 	@SuppressWarnings("unused")
 	private static String SET_PROFILE_URL;
 	private final static String SET_PROFILE_URL_EXT = "update";
 
 	// key of user for connecting to the server
 	private String kKey;
-
+	// variables for the POST call
+	private final static String KEY_JSON = "key";
+	
 	@SuppressWarnings("unused")
 	private String firstNameKey;
 	private final static String FIRSTNAME_KEY = "first_name";
@@ -83,6 +91,15 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		RETRIEVE_PROFILE_URL = baseUrl + RETRIEVE_PROFILE_URL_EXT;
 		SET_PROFILE_URL = baseUrl + SET_PROFILE_URL_EXT;
 
+		// Setting up onEditButton.
+				Button editProfile = (Button) findViewById(R.id.editProfile);
+				editProfile.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onEditButton();
+					}
+				});
+		
 		ProgressDialog progress = ProgressDialog.show(ProfileActivity.this,
 				"Please wait", "Loading ...");
 		String data = "/key/" + kKey;
@@ -93,6 +110,91 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		profilePicture.buildDrawingCache();
 	}
 
+	/**
+	 * Method which sends key and venue id to server.
+	 * When check-in button pressed.
+	 * Opens reviewActivity after execution.
+	 */
+	@SuppressWarnings("unchecked")
+	private void onEditButton() {
+
+		List<NameValuePair> data = new ArrayList<NameValuePair>(1);
+		data.add(new BasicNameValuePair(KEY_JSON, kKey));
+		
+
+		// make POST call
+		ProgressDialog progress = ProgressDialog.show(ProfileActivity.this,
+				"Please wait", "Loading ...");
+		new EditAsyncTask(progress).execute(data);
+	}
+	
+	/**
+	 * Creates post request on execute. With list of data to send to server.
+	 * Pre-loader created when executed.
+	 * Review Activity is loaded on post execute.
+	 * 
+	 */
+	
+	private class EditAsyncTask extends
+			AsyncTask<List<NameValuePair>, Void, JSONObject> {
+		private ProgressDialog progress;
+
+		public EditAsyncTask(ProgressDialog progress) {
+			this.progress = progress;
+		}
+
+		@Override
+		public void onPreExecute() {
+			progress.show();
+		}
+
+		@SuppressWarnings("unused")
+		protected void onProgressUpdate(Integer... progress) {
+			setProgress(progress[0]);
+		}
+
+		@Override
+		protected JSONObject doInBackground(List<NameValuePair>... params) {
+
+			List<NameValuePair> data = params[0];
+
+			JSONObject resultJson = HttpRequest.makePostRequest(RETRIEVE_PROFILE_URL,
+					data);
+
+			return resultJson;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+
+			super.onPostExecute(result);
+			progress.dismiss();
+			if (result != null) {
+
+				try {
+
+					String success = result.getString(SUCCESS_JSON);
+
+					if (success.equals("true")) {
+
+						// launch AccountActivity
+						
+						Intent i = new Intent(getApplicationContext(),
+								AccountActivity.class);
+						startActivity(i);
+
+					} else {
+						
+					}
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+	}
+	
 	/**
 	 * Makes it possible to click on the Review and allows to go to the Review
 	 * screen once set up

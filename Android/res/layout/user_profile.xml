@@ -12,17 +12,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:src="@drawable/default_profile_picture" />
-
-    <Button
-        android:id="@+id/edit_profile"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/email"
-        android:text="@string/edit_profile"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/actionbar" />
         
     <TextView
         android:id="@+id/name"
@@ -61,9 +50,24 @@
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/editProfile"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/profilePicture" >
+        android:layout_alignTop="@+id/editProfile" >
+
     </ListView>
+
+    <Button
+        android:id="@+id/editProfile"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignLeft="@+id/profilePicture"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/profilePicture"
+        android:background="@drawable/actionbar"
+        android:text="@string/edit_profile" />
+
 </RelativeLayout>
