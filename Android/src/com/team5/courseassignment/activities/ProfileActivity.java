@@ -96,7 +96,10 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 				editProfile.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						onEditButton();
+						Intent openProfile = new Intent(getApplicationContext(),
+								AccountActivity.class);
+						openProfile.putExtra(KEY_JSON, kKey);
+						startActivity(openProfile);
 					}
 				});
 		
@@ -111,89 +114,20 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	}
 
 	/**
-	 * Method which sends key and venue id to server.
-	 * When check-in button pressed.
-	 * Opens reviewActivity after execution.
+	 * Method which sends key to server and opens new Activity.
+	 * When Edit button pressed.
+	 * Opens AccountActivity after execution.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	private void onEditButton() {
 
-		List<NameValuePair> data = new ArrayList<NameValuePair>(1);
-		data.add(new BasicNameValuePair(KEY_JSON, kKey));
-		
-
-		// make POST call
-		ProgressDialog progress = ProgressDialog.show(ProfileActivity.this,
-				"Please wait", "Loading ...");
-		new EditAsyncTask(progress).execute(data);
+		Intent openProfile = new Intent(getApplicationContext(),
+				AccountActivity.class);
+		openProfile.putExtra(KEY_JSON, kKey);
+		startActivity(openProfile);
 	}
 	
-	/**
-	 * Creates post request on execute. With list of data to send to server.
-	 * Pre-loader created when executed.
-	 * Review Activity is loaded on post execute.
-	 * 
-	 */
 	
-	private class EditAsyncTask extends
-			AsyncTask<List<NameValuePair>, Void, JSONObject> {
-		private ProgressDialog progress;
-
-		public EditAsyncTask(ProgressDialog progress) {
-			this.progress = progress;
-		}
-
-		@Override
-		public void onPreExecute() {
-			progress.show();
-		}
-
-		@SuppressWarnings("unused")
-		protected void onProgressUpdate(Integer... progress) {
-			setProgress(progress[0]);
-		}
-
-		@Override
-		protected JSONObject doInBackground(List<NameValuePair>... params) {
-
-			List<NameValuePair> data = params[0];
-
-			JSONObject resultJson = HttpRequest.makePostRequest(RETRIEVE_PROFILE_URL,
-					data);
-
-			return resultJson;
-		}
-
-		@Override
-		protected void onPostExecute(JSONObject result) {
-
-			super.onPostExecute(result);
-			progress.dismiss();
-			if (result != null) {
-
-				try {
-
-					String success = result.getString(SUCCESS_JSON);
-
-					if (success.equals("true")) {
-
-						// launch AccountActivity
-						
-						Intent i = new Intent(getApplicationContext(),
-								AccountActivity.class);
-						startActivity(i);
-
-					} else {
-						
-					}
-
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-
-			}
-		}
-	}
 	
 	/**
 	 * Makes it possible to click on the Review and allows to go to the Review

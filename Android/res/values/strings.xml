@@ -87,7 +87,8 @@
 	<string name="profileTitle">Profile</string>
 	<string name="edit_profile">Edit Profile</string>
 		
-	
+	<!-- Account Activity -->
+	<string name="accountTitle">My Account</string>
 	
 	<!-- Other Users Profile Activity -->
 	<string name="no_venue_review">Sorry but there are no reviews for your current location.</string>

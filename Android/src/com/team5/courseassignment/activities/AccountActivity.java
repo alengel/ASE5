@@ -385,7 +385,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 			{
 
 				final ProfileInfo profile = new ProfileInfoParser().parseJSON(result);
-				final List<UserFollowers> followers = new UserFollowersParser().parseJSON(result);
+				//final List<UserFollowers> followers = new UserFollowersParser().parseJSON(result);
 
 				runOnUiThread(new Runnable()
 				{
@@ -394,7 +394,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 					public void run()
 					{
 						fillProfile(profile);
-						showList(followers);
+						//showList(followers);
 					}
 				});
 
@@ -408,11 +408,11 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	 * 
 	 */
 
-	private void showList(List<UserFollowers> followers) {
+	/*private void showList(List<UserFollowers> followers) {
 		ListView list = (ListView) findViewById(R.id.listView1);
 		adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
 		list.setAdapter(adapter);
-	}
+	}*/
 
 	/**
 	 * This method fills all text views and image views. With list of data taken

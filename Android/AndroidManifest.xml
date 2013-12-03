@@ -85,6 +85,12 @@
              >
         </activity>
         
+        <activity
+			android:name="com.team5.courseassignment.activities.AccountActivity"
+            android:label="@string/accountTitle" 
+             >
+        </activity>
+        
 		<!-- Pascal's Key -->
         <meta-data
     		android:name="com.google.android.maps.v2.API_KEY"
