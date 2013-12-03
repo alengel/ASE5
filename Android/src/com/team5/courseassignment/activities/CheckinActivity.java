@@ -57,6 +57,14 @@ public class CheckinActivity extends Activity {
 	private final static String VENUE_NAME = "name";
 	private String venueId;
 	private final static String VENUE_ID = "id";
+	private int venueLat;
+	private final static String VENUE_LAT = "lat";
+	private int venueLng;
+	private final static String VENUE_LNG = "lng";
+	private String venueHomepage;
+	private final static String VENUE_HOMEPAGE = "homepage";
+	private String venuePhoneNumber;
+	private final static String VENUE_PHONE = "phone";
 
 	ListView list;
 	VenueReviewAdapter adapter;
@@ -80,6 +88,10 @@ public class CheckinActivity extends Activity {
 		kKey = SharedPreferencesEditor.getKey();
 		venueName = this.getIntent().getStringExtra(VENUE_NAME);
 		venueId = this.getIntent().getStringExtra(VENUE_ID);
+		venueLat = this.getIntent().getIntExtra(VENUE_LAT, 0);
+		venueLng = this.getIntent().getIntExtra(VENUE_LNG, 0);
+		venueHomepage = this.getIntent().getStringExtra(VENUE_HOMEPAGE);
+		venuePhoneNumber = this.getIntent().getStringExtra(VENUE_PHONE);
 		// vote = this.getIntent().getStringExtra(TOTAL_UP);
 
 		// Get the base url

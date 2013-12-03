@@ -66,6 +66,10 @@ public class MapActivity extends Activity implements OnItemClickListener {
 
 	private final static String VENUE_NAME = "name";
 	private final static String VENUE_ID = "id";
+	private final static String VENUE_LAT = "lat";
+	private final static String VENUE_LNG = "lng";
+	private final static String VENUE_HOMEPAGE = "homepage";
+	private final static String VENUE_PHONE = "phone";
 
 	MapListViewAdapter adapter;
 
@@ -224,6 +228,10 @@ public class MapActivity extends Activity implements OnItemClickListener {
 
 		i.putExtra(VENUE_NAME, venue.getName());
 		i.putExtra(VENUE_ID, venue.getId());
+		i.putExtra(VENUE_LAT, venue.getLocation().latitude);
+		i.putExtra(VENUE_LNG, venue.getLocation().longitude);
+		i.putExtra(VENUE_HOMEPAGE, venue.getHomepage());
+		i.putExtra(VENUE_PHONE, venue.getPhoneNumber());
 
 		startActivity(i);
 	}
