@@ -14,6 +14,7 @@ import com.team5.courseassignment.R;
 import com.team5.courseassignment.adapters.VenueReviewAdapter;
 import com.team5.courseassignment.data.VenueReview;
 import com.team5.courseassignment.parsers.VenueReviewParser;
+import com.team5.courseassignment.services.SearchService;
 import com.team5.courseassignment.utilities.HttpRequest;
 import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
@@ -282,9 +283,13 @@ public class CheckinActivity extends Activity {
 					String success = result.getString(SUCCESS_JSON);
 
 					if (success.equals("true")) {
-
+						
+						//lauch SearchService
+						Intent i = new Intent(getApplicationContext(), SearchService.class);
+						startService(i);
+						
 						// launch ReviewActivity
-						Intent i = new Intent(getApplicationContext(),
+						i = new Intent(getApplicationContext(),
 								ReviewActivity.class);
 
 						i.putExtra(VENUE_NAME, venueName);
