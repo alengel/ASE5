@@ -2,12 +2,8 @@ package com.team5.courseassignment.activities;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -44,7 +40,6 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	// variables for the GET call
 	private static String RETRIEVE_PROFILE_URL;
 	private final static String RETRIEVE_PROFILE_URL_EXT = "profile";
-	private final static String SUCCESS_JSON = "success";
 	@SuppressWarnings("unused")
 	private static String SET_PROFILE_URL;
 	private final static String SET_PROFILE_URL_EXT = "update";
@@ -96,10 +91,7 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 				editProfile.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Intent openProfile = new Intent(getApplicationContext(),
-								AccountActivity.class);
-						openProfile.putExtra(KEY_JSON, kKey);
-						startActivity(openProfile);
+						onEditButton();
 					}
 				});
 		
@@ -120,7 +112,6 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	 */
 	
 	private void onEditButton() {
-
 		Intent openProfile = new Intent(getApplicationContext(),
 				AccountActivity.class);
 		openProfile.putExtra(KEY_JSON, kKey);

@@ -41,9 +41,7 @@ import android.widget.Toast;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.adapters.ProfileListAdapter;
 import com.team5.courseassignment.data.ProfileInfo;
-import com.team5.courseassignment.data.UserFollowers;
 import com.team5.courseassignment.parsers.ProfileInfoParser;
-import com.team5.courseassignment.parsers.UserFollowersParser;
 import com.team5.courseassignment.utilities.HttpRequest;
 import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
@@ -446,7 +444,10 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 				Base64.NO_WRAP);
 		InputStream inputStream = new ByteArrayInputStream(decodedString);
 		Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-		image.setImageBitmap(bitmap);
+		
+		if (bitmap != null) {
+			image.setImageBitmap(bitmap);
+		}
 
 	}
 

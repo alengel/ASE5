@@ -10,8 +10,12 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -295,5 +299,44 @@ public class FollowerProfileActivity extends Activity implements
 
 			}
 		}
+	}
+	
+	/**
+	 * Creates implicit inflation for use in action bar. Rendering map_menu
+	 * layout.
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu items for use in the action bar
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.map_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	/**
+	 * Setting actionBar icons. first - profile icon. second - settings icon.
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+		case R.id.action_profile:
+			Intent openProfile = new Intent(getApplicationContext(),
+					ProfileActivity.class);
+			openProfile.putExtra(KEY_JSON, kKey);
+			startActivity(openProfile);
+			return true;
+
+		case R.id.action_settings:
+			Intent openSettings = new Intent(getApplicationContext(),
+					SettingsActivity.class);
+			openSettings.putExtra(KEY_JSON, kKey);
+			startActivity(openSettings);
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
 	}
 }
