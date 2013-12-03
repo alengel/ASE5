@@ -4,15 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.support.v4.app.Fragment;
 
 import com.team5.courseassignment.R;
-import com.team5.courseassignment.activities.ProfileActivity;
+import com.team5.courseassignment.activities.AccountActivity;
+
 
 /*
  * IMPORTANT NOTICE: We are only using DEBUG certificates as signature for the Google Maps API !!!
  */
 
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragment{
 
 	/**
 	 * Called when the activity is first created. This is where we do all of our
@@ -21,6 +23,8 @@ public class SettingsFragment extends PreferenceFragment {
 	 * if there was one.
 	 */
 	private String kKey;
+	private final static String KEY_JSON = "key";
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,8 +34,12 @@ public class SettingsFragment extends PreferenceFragment {
 		addPreferencesFromResource(R.layout.preferences);
 		
 		// get the key
-					kKey = SharedPreferencesEditor.getKey();
+		kKey = SharedPreferencesEditor.getKey();
+					
 		
+		
+		
+		 
 		Preference pref = (Preference) findPreference("pref_key_my_account");
 		pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 		  @Override
@@ -39,12 +47,16 @@ public class SettingsFragment extends PreferenceFragment {
 		    
 			  
 			 // startActivity(preference.getIntent(), kKey);
+			  Intent intent = new Intent(getActivity(), AccountActivity.class);
+			  intent.putExtra(KEY_JSON, kKey);
+			  startActivity(intent);			            
+			return true;
 		    
-		    
-		    return true;
+		   
 		  }
 		});
+		
 	}
 	
-	
+
 }

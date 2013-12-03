@@ -81,9 +81,12 @@
             android:name="com.team5.courseassignment.activities.SettingsActivity"
             android:label="@string/settings_title" 
             android:theme="@style/PreferencesThemeText" >
+            
         </activity>
         
-        <activity			android:name="com.team5.courseassignment.activities.ProfileActivity"
+        
+        <activity
+			android:name="com.team5.courseassignment.activities.ProfileActivity"
             android:label="@string/profileTitle" 
              >
         </activity>

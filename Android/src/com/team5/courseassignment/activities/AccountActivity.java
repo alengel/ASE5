@@ -405,13 +405,13 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 	 * With their profile picture in the right, and unfollow button in the left.
 	 * 
 	 */
-
+/*
 	/*private void showList(List<UserFollowers> followers) {
 		ListView list = (ListView) findViewById(R.id.listView1);
 		adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
 		list.setAdapter(adapter);
 	}*/
-
+*/
 	/**
 	 * This method fills all text views and image views. With list of data taken
 	 * from server.

@@ -15,10 +15,7 @@
 	        android:summary="@string/pref_summary_my_account"
 	        android:dialogMessage="@string/pref_summary_my_account">
 	        
-        <intent 
-        android:action="android.intent.action.VIEW"
-        android:targetPackage="com.team5.courseassignment"
-        android:targetClass="com.team5.courseassignment.activities.AccountActivity"/>
+        
         
         </PreferenceScreen>
     </PreferenceCategory>
