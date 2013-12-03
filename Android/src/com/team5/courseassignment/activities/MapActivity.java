@@ -169,19 +169,23 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	@SuppressLint("DefaultLocale")
 	private void onLocateMe() {
 		// get the new location
-		Double latitude = mLastLocation.getLatitude();
-		Double longitude = mLastLocation.getLongitude();
-		Integer zoom = 15;
-		String data = String.format("ll=%f,%f", latitude, longitude);
+		if(mLastLocation != null) {
+			
+			Double latitude = mLastLocation.getLatitude();
+			Double longitude = mLastLocation.getLongitude();
+			Integer zoom = 15;
+			String data = String.format("ll=%f,%f", latitude, longitude);
 
-		// zoom map into user's current location
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
-				longitude), zoom));
+			// zoom map into user's current location
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
+					longitude), zoom));
 
-		// make POST call to FourSquare API
-		ProgressDialog progress = ProgressDialog.show(MapActivity.this,
-				"Please wait", "Loading ...");
-		new GetFourSquareVenue(progress).execute(data);
+			// make POST call to FourSquare API
+			ProgressDialog progress = ProgressDialog.show(MapActivity.this,
+					"Please wait", "Loading ...");
+			new GetFourSquareVenue(progress).execute(data);
+		}
+		
 	}
 
 	/**
