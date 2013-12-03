@@ -143,6 +143,13 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
 		mLocationManager.requestLocationUpdates(
+				LocationManager.GPS_PROVIDER, 5 * 1000, 0,
+				mLocationListener);
+
+		mLastLocation = mLocationManager
+				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		
+		mLocationManager.requestLocationUpdates(
 				LocationManager.NETWORK_PROVIDER, 5 * 1000, 0,
 				mLocationListener);
 
