@@ -18,8 +18,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,14 +40,15 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 	// variables for the GET call
 	private static String RETRIEVE_PROFILE_URL;
 	private final static String RETRIEVE_PROFILE_URL_EXT = "profile";
-
 	@SuppressWarnings("unused")
 	private static String SET_PROFILE_URL;
 	private final static String SET_PROFILE_URL_EXT = "update";
 
 	// key of user for connecting to the server
 	private String kKey;
-
+	// variables for the POST call
+	private final static String KEY_JSON = "key";
+	
 	@SuppressWarnings("unused")
 	private String firstNameKey;
 	private final static String FIRSTNAME_KEY = "first_name";
@@ -83,6 +86,15 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		RETRIEVE_PROFILE_URL = baseUrl + RETRIEVE_PROFILE_URL_EXT;
 		SET_PROFILE_URL = baseUrl + SET_PROFILE_URL_EXT;
 
+		// Setting up onEditButton.
+				Button editProfile = (Button) findViewById(R.id.editProfile);
+				editProfile.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onEditButton();
+					}
+				});
+		
 		ProgressDialog progress = ProgressDialog.show(ProfileActivity.this,
 				"Please wait", "Loading ...");
 		String data = "/key/" + kKey;
@@ -93,6 +105,21 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		profilePicture.buildDrawingCache();
 	}
 
+	/**
+	 * Method which sends key to server and opens new Activity.
+	 * When Edit button pressed.
+	 * Opens AccountActivity after execution.
+	 */
+	
+	private void onEditButton() {
+		Intent openProfile = new Intent(getApplicationContext(),
+				AccountActivity.class);
+		openProfile.putExtra(KEY_JSON, kKey);
+		startActivity(openProfile);
+	}
+	
+	
+	
 	/**
 	 * Makes it possible to click on the Review and allows to go to the Review
 	 * screen once set up
