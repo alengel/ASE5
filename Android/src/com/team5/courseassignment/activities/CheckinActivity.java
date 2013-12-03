@@ -176,6 +176,26 @@ public class CheckinActivity extends Activity {
 			}
 		});
 		
+		
+		Button callButton = (Button) findViewById(R.id.callButton);
+		if (venuePhoneNumber == null || venuePhoneNumber.equals("")) {
+			callButton.setEnabled(false);
+
+		} else {
+			callButton.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					
+					Uri telUri = Uri.parse("tel:"
+							+ venuePhoneNumber.trim());
+					Intent i = new Intent(Intent.ACTION_DIAL);
+					i.setData(telUri);
+					startActivity(i);
+
+				}
+			});
+		}
 	}
 
 	/**
