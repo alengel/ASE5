@@ -3,9 +3,9 @@ package com.team5.courseassignment.data;
 import com.google.android.gms.maps.model.LatLng;
 
 public class FourSquareVenue {
-	public String name;
-	public String id;
-	public int distance;
+	private String name;
+	private String id;
+	private int distance;
 	private LatLng location;
 	private String homepage;
 	private String phoneNumber;
@@ -91,4 +91,22 @@ public class FourSquareVenue {
 	public String toString() {
 		return name + ", " + distance + " m";
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public LatLng getLocation() {
+		return location;
+	}
+
+	public String getHomepage() {
+		return homepage;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	
+	
 }

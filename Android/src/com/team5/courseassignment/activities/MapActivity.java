@@ -211,8 +211,8 @@ public class MapActivity extends Activity implements OnItemClickListener {
 				.getAdapter();
 		FourSquareVenue venue = adapter.getItem(position);
 
-		i.putExtra(VENUE_NAME, venue.name);
-		i.putExtra(VENUE_ID, venue.id);
+		i.putExtra(VENUE_NAME, venue.getName());
+		i.putExtra(VENUE_ID, venue.getId());
 
 		startActivity(i);
 	}
