@@ -46,8 +46,8 @@ public class FourSquareJsonParser {
 				//location
 				JSONObject location = venue.getJSONObject("location");
 				Integer distance = location.getInt("distance");
-				int lat = location.getInt("lat");
-				int lng = location.getInt("lng");
+				double lat = location.getDouble("lat");
+				double lng = location.getDouble("lng");
 				LatLng latLng = new LatLng(lat, lng);
 				
 				//contact
