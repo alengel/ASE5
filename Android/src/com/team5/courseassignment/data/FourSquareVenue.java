@@ -10,22 +10,7 @@ public class FourSquareVenue {
 	private String homepage;
 	private String phoneNumber;
 
-	/**
-	 * Constructor method of foursquare venue. Info as follows
-	 * 
-	 * @param name
-	 *            - The name of the venue/location.
-	 * @param id
-	 *            - Given id of the venue/location.
-	 * @param distance
-	 *            - Distance to the venue/location.
-	 */
-	public FourSquareVenue(String name, String id, int distance) {
-
-		this.name = name;
-		this.id = id;
-		this.distance = distance;
-	}
+	
 	
 	/**
 	 * Constructor of FoursquareVenue
