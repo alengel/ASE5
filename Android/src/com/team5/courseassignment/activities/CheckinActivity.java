@@ -160,6 +160,22 @@ public class CheckinActivity extends Activity {
 			}
 		});
 		
+		
+		Button websiteButton = (Button) findViewById(R.id.websiteButton);
+		websiteButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Uri venueWebsite = Uri.parse(venueHomepage);
+				Intent i = new Intent(Intent.ACTION_VIEW);
+
+				i.setData(venueWebsite);
+				startActivity(i);
+				
+			}
+		});
+		
 	}
 
 	/**
