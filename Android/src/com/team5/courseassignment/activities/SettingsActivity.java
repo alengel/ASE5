@@ -13,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,6 +60,8 @@ public class SettingsActivity extends Activity {
 		// Display the fragment as the main content.
 		getFragmentManager().beginTransaction()
 				.replace(android.R.id.content, new SettingsFragment()).commit();
+		
+		
 	}
 
 	/**
@@ -73,23 +76,48 @@ public class SettingsActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	
+	
 	/**
-	 * Setting logout icon actions.
+	 * Setting actionBar icons. first - profile icon. second - settings icon. third- logout icon.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		List<NameValuePair> data = new ArrayList<NameValuePair>(1);
-		data.add(new BasicNameValuePair(KEY_JSON, kKey));
+		switch (item.getItemId()) {
+		case R.id.action_profile:
+			Intent openProfile = new Intent(getApplicationContext(),
+					ProfileActivity.class);
+			openProfile.putExtra(KEY_JSON, kKey);
+			startActivity(openProfile);
+			return true;
 
-		// make POST call
-		ProgressDialog progress = ProgressDialog.show(SettingsActivity.this,
-				"Please wait", "Loading ...");
-		new LogoutAsyncTask(progress).execute(data);
+		case R.id.action_settings:
+			Intent openSettings = new Intent(getApplicationContext(),
+					SettingsActivity.class);
+			openSettings.putExtra(KEY_JSON, kKey);
+			startActivity(openSettings);
+			return true;
+			
+		case R.id.action_logout:
+			List<NameValuePair> data = new ArrayList<NameValuePair>(1);
+			data.add(new BasicNameValuePair(KEY_JSON, kKey));
 
-		return true;
+			// make POST call
+			ProgressDialog progress = ProgressDialog.show(SettingsActivity.this,
+					"Please wait", "Loading ...");
+			new LogoutAsyncTask(progress).execute(data);
+
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
 	}
+	
+
 
 	/**
 	 * Creates post request on execute. With list of data to send to server.
