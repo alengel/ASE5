@@ -58,6 +58,7 @@ public class SearchService extends Service  {
 	private LocationRequest kLocationRequest;
 	private boolean kLocationRequestsRunning; //are request running currently?
 	private Location kLastSentLocation;
+	private static int GEOFENCE_EXPIRATION_TIME = 12 * 60 * 60 * 1000;
 	
 	//key of user for connecting to the Webserver
 	private String kKey;
@@ -200,7 +201,7 @@ public class SearchService extends Service  {
 	
 	/*
 	 * ----------------------------------------------------------------------------
-	 * methods beloging to GooglePlayServicesClient implementation
+	 * methods beloging to Geofence implementation
 	 * ----------------------------------------------------------------------------
 	 */
 
