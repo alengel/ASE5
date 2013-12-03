@@ -138,43 +138,48 @@ public class CheckinActivity extends Activity {
 	private void defineExternalIntentButtonActions() {
 		
 		Button directionsButton = (Button) findViewById(R.id.directionsButton);
-		directionsButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
+		if(venueLat != Double.MAX_VALUE && venueLng != Double.MAX_VALUE && userLat != Double.MAX_VALUE && userLng != Double.MAX_VALUE) {
+			directionsButton.setOnClickListener(new OnClickListener() {
 				
-				String userLatLng = "";
-				//Check if current position is available
-				if(userLat != Double.MAX_VALUE && userLng != Double.MAX_VALUE) {
-					userLatLng = userLat + "," + userLng;
+				@Override
+				public void onClick(View v) {
+					
+					String userLatLng = userLat + "," + userLng;
+					
+					Uri mapsUri = Uri
+							.parse("http://maps.google.com/maps?saddr=" + userLatLng + "&daddr="
+									+ venueLat
+									+ ","
+									+ venueLng);
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(mapsUri);
+					startActivity(intent);
+					
 				}
-				Uri mapsUri = Uri
-						.parse("http://maps.google.com/maps?saddr=" + userLatLng + "&daddr="
-								+ venueLat
-								+ ","
-								+ venueLng);
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(mapsUri);
-				startActivity(intent);
-				
-			}
-		});
+			});
+		} else {
+			directionsButton.setEnabled(false);
+		}
 		
 		
 		Button websiteButton = (Button) findViewById(R.id.websiteButton);
-		websiteButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
+		if(venueHomepage == null || venueHomepage.equals("")) {
+			websiteButton.setEnabled(false);
+		} else {
+			websiteButton.setOnClickListener(new OnClickListener() {
 				
-				Uri venueWebsite = Uri.parse(venueHomepage);
-				Intent i = new Intent(Intent.ACTION_VIEW);
+				@Override
+				public void onClick(View v) {
+					
+					Uri venueWebsite = Uri.parse(venueHomepage);
+					Intent i = new Intent(Intent.ACTION_VIEW);
 
-				i.setData(venueWebsite);
-				startActivity(i);
-				
-			}
-		});
+					i.setData(venueWebsite);
+					startActivity(i);
+					
+				}
+			});
+		}
 		
 		
 		Button callButton = (Button) findViewById(R.id.callButton);
