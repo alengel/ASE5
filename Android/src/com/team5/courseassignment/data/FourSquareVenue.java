@@ -1,9 +1,14 @@
 package com.team5.courseassignment.data;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class FourSquareVenue {
 	public String name;
 	public String id;
 	public int distance;
+	private LatLng location;
+	private String homepage;
+	private String phoneNumber;
 
 	/**
 	 * Constructor method of foursquare venue. Info as follows
@@ -20,6 +25,25 @@ public class FourSquareVenue {
 		this.name = name;
 		this.id = id;
 		this.distance = distance;
+	}
+	
+	/**
+	 * Constructor of FoursquareVenue
+	 * @param name
+	 * @param id foursquare id of venue
+	 * @param distance Distance to the venue
+	 * @param location LatLng of the venue
+	 * @param homepage
+	 * @param phoneNumer
+	 */
+	public FourSquareVenue(String name, String id, int distance, LatLng location, String homepage, String phoneNumer) {
+
+		this.name = name;
+		this.id = id;
+		this.distance = distance;
+		this.location = location;
+		this.homepage = homepage;
+		this.phoneNumber = phoneNumer;
 	}
 
 	/**
