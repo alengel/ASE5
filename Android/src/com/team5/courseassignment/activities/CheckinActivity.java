@@ -21,6 +21,8 @@ import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -57,14 +59,18 @@ public class CheckinActivity extends Activity {
 	private final static String VENUE_NAME = "name";
 	private String venueId;
 	private final static String VENUE_ID = "id";
-	private int venueLat;
+	private double venueLat;
 	private final static String VENUE_LAT = "lat";
-	private int venueLng;
+	private double venueLng;
 	private final static String VENUE_LNG = "lng";
 	private String venueHomepage;
 	private final static String VENUE_HOMEPAGE = "homepage";
 	private String venuePhoneNumber;
 	private final static String VENUE_PHONE = "phone";
+	private double userLat;
+	private final static String USER_LAT = "u_lat";
+	private double userLng;
+	private final static String USER_LNG = "u_lng";
 
 	ListView list;
 	VenueReviewAdapter adapter;
@@ -88,11 +94,16 @@ public class CheckinActivity extends Activity {
 		kKey = SharedPreferencesEditor.getKey();
 		venueName = this.getIntent().getStringExtra(VENUE_NAME);
 		venueId = this.getIntent().getStringExtra(VENUE_ID);
-		venueLat = this.getIntent().getIntExtra(VENUE_LAT, 0);
-		venueLng = this.getIntent().getIntExtra(VENUE_LNG, 0);
+		venueLat = this.getIntent().getDoubleExtra(VENUE_LAT, 0);
+		venueLng = this.getIntent().getDoubleExtra(VENUE_LNG, 0);
 		venueHomepage = this.getIntent().getStringExtra(VENUE_HOMEPAGE);
 		venuePhoneNumber = this.getIntent().getStringExtra(VENUE_PHONE);
+		userLat = this.getIntent().getDoubleExtra(USER_LAT, 0);
+		userLng = this.getIntent().getDoubleExtra(USER_LNG, 0);
+		
 		// vote = this.getIntent().getStringExtra(TOTAL_UP);
+		
+		defineExternalIntentButtonActions();
 
 		// Get the base url
 		String baseUrl = getResources().getString(R.string.base_url);
@@ -122,6 +133,33 @@ public class CheckinActivity extends Activity {
 				"Please wait", "Loading ...");
 
 		new VenueReviewsAsyncTask(progress).execute(data);
+	}
+
+	private void defineExternalIntentButtonActions() {
+		
+		Button directionsButton = (Button) findViewById(R.id.directionsButton);
+		directionsButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				String userLatLng = "";
+				//Check if current position is available
+				if(userLat != Double.MAX_VALUE && userLng != Double.MAX_VALUE) {
+					userLatLng = userLat + "," + userLng;
+				}
+				Uri mapsUri = Uri
+						.parse("http://maps.google.com/maps?saddr=" + userLatLng + "&daddr="
+								+ venueLat
+								+ ","
+								+ venueLng);
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(mapsUri);
+				startActivity(intent);
+				
+			}
+		});
+		
 	}
 
 	/**
