@@ -55,6 +55,9 @@ public class FourSquareJsonParser {
 				String phonenumber;
 				if(contact != null) {
 					phonenumber = contact.getString("formattedPhone");
+					if(phonenumber == null || phonenumber.equals("")) {
+						phonenumber = contact.getString(" phone");
+					}
 				} else {
 					phonenumber = "";
 				}
