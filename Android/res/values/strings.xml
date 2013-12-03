@@ -106,4 +106,7 @@
 	<string name="directions_button">Directions Button</string>
 	<string name="website_button">Website Button</string>
 	<string name="location_name">Location Name</string>
+	
+	<!-- SearchService -->
+	<string name="service_description">PinMe SearchService running</string>
 </resources>
