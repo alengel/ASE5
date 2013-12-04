@@ -1,6 +1,7 @@
 package com.team5.courseassignment.test;
 
 import org.junit.Test;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.test.AndroidTestCase;
 
@@ -11,10 +12,12 @@ public class FourSquareVenueTest extends AndroidTestCase {
 	@Test
 	public void testConstructor() {
 
-		FourSquareVenue venue = new FourSquareVenue("name", "id", 3);
+		FourSquareVenue venue = new FourSquareVenue("name", "id", 3, new LatLng(0,0), "homePage", "phoneNumer");
 		
-		assertEquals("name", venue.name);
-		assertEquals("id", venue.id);
-		assertEquals(3, venue.distance);
+		assertEquals("name", venue.getName());
+		assertEquals("id", venue.getId());
+		assertEquals(3, venue.getDistance());
+		assertEquals("homePage", venue.getHomepage());
+		assertEquals("phoneNumber", venue.getPhoneNumber());
 	}
 }

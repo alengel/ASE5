@@ -4,6 +4,7 @@ package com.team5.courseassignment.test;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.team5.courseassignment.adapters.MapListViewAdapter;
 import com.team5.courseassignment.data.FourSquareVenue;
 
@@ -30,9 +31,9 @@ public class MapListViewAdapterTest extends AndroidTestCase {
         super.setUp();
         ArrayList<FourSquareVenue> data = new ArrayList<FourSquareVenue>();
 
-        name = new FourSquareVenue("", "", 0);
-        id = new FourSquareVenue("", "", 0);
-        distance = new FourSquareVenue("", "", 0);
+        name = new FourSquareVenue("", "", 3, new LatLng(0,0), "", "");
+        id = new FourSquareVenue("", "", 3, new LatLng(0,0), "", "");
+        distance = new FourSquareVenue("", "", 3, new LatLng(0,0), "", "");
         
         data.add(name);
         data.add(id);

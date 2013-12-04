@@ -64,8 +64,8 @@ public class FourSquareJsonParserTest extends AndroidTestCase {
 		// Test with one venue.
 		final List<FourSquareVenue> venues = new FourSquareJsonParser().parseJSON(json);
 		assertEquals(1, venues.size());
-		assertEquals(venues.get(0).name, "Brooklyn Bridge Park");
-		assertEquals(venues.get(0).id, "430d0a00f964a5203e271fe3");
+		assertEquals(venues.get(0).getName(), "Brooklyn Bridge Park");
+		assertEquals(venues.get(0).getId(), "430d0a00f964a5203e271fe3");
 	}
 	
 	@Test
@@ -99,11 +99,11 @@ public class FourSquareJsonParserTest extends AndroidTestCase {
 		
 		assertEquals(2, venues.size());
 		
-		assertEquals(venues.get(0).name, "Brooklyn Bridge Park");
-		assertEquals(venues.get(0).id, "430d0a00f964a5203e271fe3");
+		assertEquals(venues.get(0).getName(), "Brooklyn Bridge Park");
+		assertEquals(venues.get(0).getId(), "430d0a00f964a5203e271fe3");
 		
-		assertEquals(venues.get(1).name, "Brooklyn Heights Promenade");
-		assertEquals(venues.get(1).id, "42377700f964a52024201fe3");
+		assertEquals(venues.get(1).getName(), "Brooklyn Heights Promenade");
+		assertEquals(venues.get(1).getId(), "42377700f964a52024201fe3");
 	}
 	
 	// Create a JSONObject from a string.
