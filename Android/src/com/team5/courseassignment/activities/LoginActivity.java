@@ -37,7 +37,6 @@ import com.team5.courseassignment.utilities.Utilities;
 public class LoginActivity extends Activity {
 
 	// variables for the POST call
-	private static String LOGIN_URL;
 	private static String LOGIN_URL_EXT = "login";
 	private final static String EMAIL_KEY = "email";
 	private final static String PASSWORD_KEY = "passwd";
@@ -83,7 +82,6 @@ public class LoginActivity extends Activity {
         	
         	// set layout
     		setContentView(R.layout.login);
-    		LOGIN_URL = getResources().getString(R.string.base_url) + LOGIN_URL_EXT;
 
     		// set Button actions
     		TextView newToAppTextView = (TextView) findViewById(R.id.register_here_login);
@@ -216,8 +214,7 @@ public class LoginActivity extends Activity {
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest
-					.makePostRequest(LOGIN_URL, data);
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), LOGIN_URL_EXT, data);
 
 			return resultJson;
 		}

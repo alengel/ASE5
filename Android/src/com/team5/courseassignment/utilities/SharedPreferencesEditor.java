@@ -19,6 +19,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.team5.courseassignment.R;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -76,6 +78,17 @@ public class SharedPreferencesEditor {
 	public static String getKey() {
 		return key;
 	}
+	
+	public static String getBaseUrl(Context context)
+	{
+		return context.getResources().getString(R.string.backup_base_url);
+	}
+	
+	public static String getBackUpBaseUrl(Context context)
+	{
+		return context.getResources().getString(R.string.base_url);
+	}
+
 
 	@SuppressWarnings("unchecked")
 	public int getInterval() {

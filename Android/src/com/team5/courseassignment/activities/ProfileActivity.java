@@ -38,12 +38,7 @@ import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 public class ProfileActivity extends Activity implements OnItemClickListener {
 	// variables for the GET call
-	private static String RETRIEVE_PROFILE_URL;
 	private final static String RETRIEVE_PROFILE_URL_EXT = "profile";
-	@SuppressWarnings("unused")
-	private static String SET_PROFILE_URL;
-	private final static String SET_PROFILE_URL_EXT = "update";
-
 	// key of user for connecting to the server
 	private String kKey;
 	// variables for the POST call
@@ -80,11 +75,6 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 		firstNameKey = this.getIntent().getStringExtra(FIRSTNAME_KEY);
 		lastNameKey = this.getIntent().getStringExtra(LASTNAME_KEY);
 		imageKey = this.getIntent().getStringExtra(IMAGE);
-
-		// Get the base url
-		String baseUrl = getResources().getString(R.string.base_url);
-		RETRIEVE_PROFILE_URL = baseUrl + RETRIEVE_PROFILE_URL_EXT;
-		SET_PROFILE_URL = baseUrl + SET_PROFILE_URL_EXT;
 
 		// Setting up onEditButton.
 				Button editProfile = (Button) findViewById(R.id.editProfile);
@@ -160,8 +150,7 @@ public class ProfileActivity extends Activity implements OnItemClickListener {
 
 			data = params[0];
 
-			JSONObject resultJson = HttpRequest.makeGetRequest(
-					RETRIEVE_PROFILE_URL, data);
+			JSONObject resultJson = HttpRequest.makeGetRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), RETRIEVE_PROFILE_URL_EXT, data);
 
 			return resultJson;
 		}

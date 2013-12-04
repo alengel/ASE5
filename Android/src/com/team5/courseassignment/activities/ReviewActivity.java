@@ -41,7 +41,6 @@ import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 public class ReviewActivity extends Activity {
 
 	// variables for the POST call
-	private static String REVIEW_URL;
 	private static String REVIEW_URL_EXT = "review";
 
 	// key of user for connecting to the server
@@ -80,10 +79,6 @@ public class ReviewActivity extends Activity {
 		kKey = SharedPreferencesEditor.getKey();
 		venueName = this.getIntent().getStringExtra(VENUE_NAME);
 		venueId = this.getIntent().getStringExtra(VENUE_ID);
-
-		// get the base url
-		REVIEW_URL = getResources().getString(R.string.base_url)
-				+ REVIEW_URL_EXT;
 
 		// Set layout
 		setContentView(R.layout.review);
@@ -254,8 +249,7 @@ public class ReviewActivity extends Activity {
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(REVIEW_URL,
-					data);
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), REVIEW_URL_EXT, data);
 
 			return resultJson;
 		}

@@ -23,11 +23,11 @@ import android.widget.EditText;
 
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 public class ForgottenPasswordActivity extends Activity {
 
 	// variables for the POST call
-	private static String FORGOTTEN_PASSWORD_URL;
 	private final static String FORGOTTEN_PASSWORD_URL_EXT = "change-password/";
 	private final static String EMAIL_KEY = "email";
 
@@ -48,10 +48,6 @@ public class ForgottenPasswordActivity extends Activity {
 
 		// set layout
 		setContentView(R.layout.forgotten_password);
-
-		// get the base url
-		FORGOTTEN_PASSWORD_URL = getResources().getString(R.string.base_url)
-				+ FORGOTTEN_PASSWORD_URL_EXT;
 
 		// set button Actions
 		Button continueButton = (Button) findViewById(R.id.loginButtonForgottenPassword);
@@ -151,8 +147,7 @@ public class ForgottenPasswordActivity extends Activity {
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(
-					FORGOTTEN_PASSWORD_URL, data);
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), FORGOTTEN_PASSWORD_URL_EXT, data);
 
 			return resultJson;
 		}

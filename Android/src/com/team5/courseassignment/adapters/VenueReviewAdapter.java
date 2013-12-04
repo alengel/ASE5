@@ -49,7 +49,6 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 	private final static String SUCCESS_JSON = "success";
 
 	// variables for the POST call
-	private static String VOTE_URL;
 	private final static String VOTE_URL_EXT = "vote";
 
 	private final String REVIEW_ID = "review_id";
@@ -105,10 +104,6 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 			rating = (TextView) view.findViewById(R.id.rating);
 			review = (TextView) view.findViewById(R.id.review);
 			voteNumber = (TextView) view.findViewById(R.id.voteNumber);
-
-			String baseUrl = context.getResources()
-					.getString(R.string.base_url);
-			VOTE_URL = baseUrl + VOTE_URL_EXT;
 
 			Button ib = (Button) view.findViewById(R.id.followerCommentButton);
 			ib.setOnClickListener(new OnClickListener() {
@@ -330,7 +325,7 @@ public class VenueReviewAdapter extends ArrayAdapter<VenueReview> {
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(VOTE_URL, data);
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(context), VOTE_URL_EXT, data);
 
 			return resultJson;
 		}

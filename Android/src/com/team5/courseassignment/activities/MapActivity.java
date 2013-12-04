@@ -269,8 +269,7 @@ public class MapActivity extends Activity implements OnItemClickListener {
 
 			data = params[0];
 
-			JSONObject resultJson = HttpRequest.makeGetRequest(
-					RETRIEVE_VENUE_URL, data);
+			JSONObject resultJson = HttpRequest.makeGetRequest(RETRIEVE_VENUE_URL, data);
 
 			return resultJson;
 		}

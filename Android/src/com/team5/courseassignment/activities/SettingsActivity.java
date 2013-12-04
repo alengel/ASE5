@@ -33,7 +33,6 @@ public class SettingsActivity extends Activity {
 	private final static String KEY_JSON = "key";
 
 	// variables for the POST call
-	private static String LOGOUT_URL;
 	private static String LOGOUT_URL_EXT = "logout";
 
 	// variables for the POST answer
@@ -51,10 +50,6 @@ public class SettingsActivity extends Activity {
 
 		// get the key
 		kKey = SharedPreferencesEditor.getKey();
-
-		// get the base url
-		LOGOUT_URL = getResources().getString(R.string.base_url)
-				+ LOGOUT_URL_EXT;
 
 		// Display the fragment as the main content.
 		getFragmentManager().beginTransaction()
@@ -150,8 +145,7 @@ public class SettingsActivity extends Activity {
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(LOGOUT_URL,
-					data);
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), LOGOUT_URL_EXT, data);
 
 			return resultJson;
 		}

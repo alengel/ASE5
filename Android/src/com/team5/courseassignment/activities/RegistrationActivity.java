@@ -30,6 +30,7 @@ import android.widget.ImageView;
 
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.utilities.HttpRequest;
+import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 import com.team5.courseassignment.utilities.Utilities;
 
 /*
@@ -39,7 +40,6 @@ import com.team5.courseassignment.utilities.Utilities;
 public class RegistrationActivity extends Activity {
 
 	// variables for the POST call
-	private static String REGISTER_URL;
 	private static String REGISTER_URL_EXT = "register";
 	private final static String EMAIL_KEY = "email";
 	private final static String PASSWORD_KEY = "passwd";
@@ -67,10 +67,6 @@ public class RegistrationActivity extends Activity {
 
 		// set layout
 		setContentView(R.layout.registration);
-
-		// get the base url
-		REGISTER_URL = getResources().getString(R.string.base_url)
-				+ REGISTER_URL_EXT;
 
 		// set button actions
 		Button chooseExisting = (Button) findViewById(R.id.chooseExisting);
@@ -283,8 +279,7 @@ public class RegistrationActivity extends Activity {
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(REGISTER_URL,
-					data);
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), REGISTER_URL_EXT, data);
 
 			return resultJson;
 		}
