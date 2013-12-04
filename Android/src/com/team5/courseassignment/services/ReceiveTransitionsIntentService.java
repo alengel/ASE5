@@ -7,6 +7,11 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+/**
+ * this class responds to GeoFence transitions and stops the SearchService when the user left the GeoFence around the Venue
+ * 
+ *
+ */
 public class ReceiveTransitionsIntentService extends IntentService {
 
 	public ReceiveTransitionsIntentService() {

@@ -57,7 +57,7 @@ import android.widget.Toast;
 
 /**
  * this class checks periodically if there are other users nearby as long as the user in the area of the venue (checked by GeoFence, if the user has left the venue, the Service will automatically be stopped) 
- * @author Pascal
+ * 
  *
  */
 public class SearchService extends Service implements ConnectionCallbacks, OnConnectionFailedListener, OnAddGeofencesResultListener  {
