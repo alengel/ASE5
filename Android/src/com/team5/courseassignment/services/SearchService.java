@@ -17,6 +17,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,13 +31,20 @@ import com.google.android.gms.location.LocationClient.OnAddGeofencesResultListen
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationStatusCodes;
+import com.team5.courseassignment.activities.FollowerProfileActivity;
 import com.team5.courseassignment.activities.ProfileActivity;
+import com.team5.courseassignment.data.FollowerProfileInfo;
+import com.team5.courseassignment.data.FourSquareVenue;
+import com.team5.courseassignment.parsers.FollowerProfileInfoParser;
+import com.team5.courseassignment.parsers.FourSquareJsonParser;
+import com.team5.courseassignment.utilities.HttpRequest;
 import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
@@ -68,12 +76,14 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	private final static String KEY_JSON ="key";
 	
 	//variables for the POST call
-	private final static String PUSH_GEO_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/geo-push/";
-	private final static String REQUEST_KEY = "request";
-	private final static String REQUEST_VALUE = "put";
-	private final static String LATITUDE = "latitude";
-	private final static String LONGITUDE = "longitude";
+	private final static String RETRIEVE_USERS_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/find-user"; 
+	private final static String REQUEST_KEY = "key";
+	private final static String REQUEST_VENUE_ID = "venue_id";
+	private final static String REQUEST_TIMESTAMP = "timestamp";
+	private final String REVIEWER_ID = "reviewer_id";
 	
+	private String venueId;
+	private final static String VENUE_ID = "id";
 	private double venueLat;
 	private final static String VENUE_LAT = "lat";
 	private double venueLng;
@@ -122,9 +132,8 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 			kKey = intent.getStringExtra(KEY_JSON);
 			venueLat = intent.getDoubleExtra(VENUE_LAT, 0);
 			venueLng = intent.getDoubleExtra(VENUE_LNG, 0);
+			venueId = intent.getStringExtra(VENUE_ID);
 			kSharedPreferencesEditor = new SharedPreferencesEditor(this, kKey);
-			
-			showNotification();
 			
 			addGeofence();
 			
@@ -151,11 +160,14 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	 * ----------------------------------------------------------------------------
 	 */
 	
-	private void showNotification() {
+	@SuppressWarnings("deprecation")
+	private void showNotification(Intent notificationIntent) {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		
+		mNotificationManager.cancel(NOTIFICATION);
+		
 		int icon = R.drawable.ic_dialog_alert;  //TODO: wrong!
-		CharSequence tickerText = "SearchService Started";
+		CharSequence tickerText = "A new user has just arrived here!";
 		long when = System.currentTimeMillis();
 		
 		Notification noti = new Notification();
@@ -163,17 +175,36 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		noti.tickerText = tickerText;
 		noti.when = when;
 		
-		
-		CharSequence contentTitle = getText(R.string.cancel); //TODO: wrong!
-		CharSequence contentText = "Press to view more information!";
-		Intent notificationIntent = new Intent(this, ProfileActivity.class);
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent , 0);;
+		CharSequence contentTitle = "A new user has just arrived here!"; 
+		CharSequence contentText = "Press to view details about the user!";
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent , 0);
 		
 		noti.setLatestEventInfo(this, contentTitle, contentText, contentIntent);
 		mNotificationManager.notify(NOTIFICATION, noti);
 	}
 
-	
+	private void startSearching() {
+		
+		final Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				//periodically check for users nearby
+				String data = String.format("ll=%s,%s%s", kKey, venueId, System.currentTimeMillis());
+				new GetNearbyUsers().execute(data);
+				
+				try {
+					Thread.sleep(SLEEP_TIME);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		t.start();
+		
+	}
 	
 	
 	
@@ -212,7 +243,11 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		if (! (LocationStatusCodes.SUCCESS == statusCode)) {
             
 			stopSelf(); //TODO: find better solution
-        } 
+        } else {
+        	
+        	//start the periodically checking for nearby users
+        	startSearching();
+        }
         
 		// Turn off the in progress flag and disconnect the client
         kLocationRequestsRunning = false;
@@ -220,6 +255,7 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 
 		
 	}
+
 
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
@@ -262,6 +298,62 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	
 	
 	
+	
+	private class GetNearbyUsers extends
+			AsyncTask<String, Void, JSONObject> {
+
+		String data;
+
+		public GetNearbyUsers() {
+			
+		}
+
+		@Override
+		protected JSONObject doInBackground(String... params) {
+
+			data = params[0];
+
+			JSONObject resultJson = HttpRequest.makeGetRequest(
+					RETRIEVE_USERS_URL, data);
+
+			return resultJson;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+
+			if (result != null) {
+
+				if (result.has("data")) {
+
+					String userId;
+					try {
+						
+						JSONArray users = result
+								.getJSONArray("data");
+
+						if (users != null) {
+							userId = users.getString(0);
+							// launch ProfilePageActivity
+							Intent openProfile = new Intent(
+									getApplicationContext(),
+									FollowerProfileActivity.class);
+							openProfile.putExtra(
+									SharedPreferencesEditor.KEY_JSON, kKey);
+							openProfile.putExtra(REVIEWER_ID, userId);
+							showNotification(openProfile);
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+
+		}
+	}
 	
 	
 	
