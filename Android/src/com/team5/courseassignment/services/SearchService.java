@@ -70,6 +70,11 @@ public class SearchService extends Service  {
 	private final static String REQUEST_VALUE = "put";
 	private final static String LATITUDE = "latitude";
 	private final static String LONGITUDE = "longitude";
+	
+	private double venueLat;
+	private final static String VENUE_LAT = "lat";
+	private double venueLng;
+	private final static String VENUE_LNG = "lng";
 		
 		
 	//variables for the POST answer
@@ -118,6 +123,8 @@ public class SearchService extends Service  {
 		if(intent != null) {
 			
 			kKey = intent.getStringExtra(KEY_JSON);
+			venueLat = intent.getDoubleExtra(VENUE_LAT, 0);
+			venueLng = intent.getDoubleExtra(VENUE_LNG, 0);
 			kSharedPreferencesEditor = new SharedPreferencesEditor(this, kKey);
 			
 			showNotification();
