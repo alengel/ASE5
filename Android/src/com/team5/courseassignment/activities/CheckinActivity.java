@@ -378,6 +378,7 @@ public class CheckinActivity extends Activity {
 						Intent i = new Intent(getApplicationContext(), SearchService.class);
 						i.putExtra(VENUE_LAT, venueLat);
 						i.putExtra(VENUE_LNG, venueLng);
+						i.putExtra(VENUE_ID, venueId);
 						startService(i);
 						
 						// launch ReviewActivity
