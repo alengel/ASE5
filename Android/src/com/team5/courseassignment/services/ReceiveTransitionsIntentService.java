@@ -9,8 +9,8 @@ import android.util.Log;
 
 public class ReceiveTransitionsIntentService extends IntentService {
 
-	public ReceiveTransitionsIntentService(String name) {
-		super(name);
+	public ReceiveTransitionsIntentService() {
+		super("ReceiveTransitionsIntentService");
 		
 	}
 
