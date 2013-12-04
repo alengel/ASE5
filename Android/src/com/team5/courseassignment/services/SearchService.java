@@ -213,7 +213,7 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	 * ----------------------------------------------------------------------------
 	 */
 	/**
-	 * we want to create a geofence around us so that the service is stopeed automatically when the user has left the venue
+	 * we want to create a geofence around us so that the service is stopped automatically when the user has left the venue
 	 */
 	private void addGeofence() {
 		
@@ -275,7 +275,7 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	@Override
 	public void onConnected(Bundle arg0) {
 		
-		//we are conencted to the LocationService. Therefore, we can create the GeoFence
+		//we are connected to the LocationService. Therefore, we can create the GeoFence
 		//create the GeoFence
 		Geofence.Builder mGeofenceBuilder = new Geofence.Builder();
 		mGeofenceBuilder.setCircularRegion(venueLat, venueLng, GEOFENCE_RADIUS_IN_M).setExpirationDuration(GEOFENCE_EXPIRATION_TIME).setRequestId("1").setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT);
