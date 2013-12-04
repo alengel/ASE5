@@ -75,17 +75,13 @@ public class MapListViewAdapterTest extends AndroidTestCase {
 
         TextView distance1 = (TextView) parent
                 .findViewById(com.team5.courseassignment.R.id.distance);
-        
-        
-
        
         assertNotNull("View is null. ", parent);
         assertNotNull("LocationName TextView is null. ", name1);
         assertNotNull("Rating TextView is null. ", distance1);
-        
 
         assertEquals("Names doesn't match.", name.getName(),name1.getText());
-        assertEquals("locationName doesn't match.", distance.getDistance(), 0);
+        assertEquals("locationName doesn't match.", distance.getDistance(), 3);
         
     }
 }
