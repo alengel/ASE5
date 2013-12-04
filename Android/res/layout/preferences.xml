@@ -8,27 +8,31 @@
         android:title="@string/pref_general_title"
         android:key="pref_key_general_settings"
         android:textColor="@android:color/black" >
-        <com.team5.courseassignment.data.NumberPickerDialogPreference
-            android:key="pref_key_interval"
-            android:title="@string/pref_title_interval"
-	        android:summary="@string/pref_summary_interval"
-	        android:dialogMessage="@string/pref_summary_interval"
-	        custom:min="5" 
-	        android:defaultValue="30"
-	        android:max="300" />
-        <com.team5.courseassignment.data.NumberPickerDialogPreference
-            android:key="pref_key_logging_period"
-            android:summary="@string/pref_summary_logging_period"
-            android:title="@string/pref_title_logging_period"
-	        android:dialogMessage="@string/pref_summary_logging_period"
-	        custom:min="1" 
-	        android:defaultValue="30"
-	        android:max="120" />
+        
+        <PreferenceScreen
+            android:key="pref_key_my_account"
+            android:title="@string/pref_title_my_account"
+	        android:summary="@string/pref_summary_my_account"
+	        android:dialogMessage="@string/pref_summary_my_account">
+	        
+        
+        
+        </PreferenceScreen>
     </PreferenceCategory>
     
     <PreferenceCategory 
         android:title="@string/pref_advanced_title"
         android:key="pref_key_advanced_settings">
+        
+        <com.team5.courseassignment.data.NumberPickerDialogPreference
+            android:key="pref_key_request_interval"
+            android:summary="@string/pref_summary_request_interval"
+            android:title="@string/pref_title_request_interval"
+	        android:dialogMessage="@string/pref_summary_request_interval"
+	        custom:min="1" 
+	        android:defaultValue="30"
+	        android:max="120" />
+        
         <com.team5.courseassignment.data.NumberPickerDialogPreference
             android:key="pref_key_distance"
             android:summary="@string/pref_summary_distance"
