@@ -411,7 +411,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		adapter = new ProfileListAdapter(this, R.layout.follower_row, followers);
 		list.setAdapter(adapter);
 	}*/
-*/
+	
 	/**
 	 * This method fills all text views and image views. With list of data taken
 	 * from server.

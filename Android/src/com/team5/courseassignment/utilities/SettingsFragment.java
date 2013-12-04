@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.v4.app.Fragment;
 
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.activities.AccountActivity;
