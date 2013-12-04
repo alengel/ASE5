@@ -22,7 +22,10 @@ import org.json.JSONObject;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
+import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationClient.OnAddGeofencesResultListener;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.team5.courseassignment.activities.ProfileActivity;
@@ -47,7 +50,7 @@ import android.widget.Toast;
  * @author Pascal
  *
  */
-public class SearchService extends Service  {
+public class SearchService extends Service implements ConnectionCallbacks, OnConnectionFailedListener, OnAddGeofencesResultListener  {
 	
 	//for logic of behaviour
 	private int kInterval; //in seconds
@@ -171,6 +174,8 @@ public class SearchService extends Service  {
 		noti.setLatestEventInfo(this, contentTitle, contentText, contentIntent);
 		mNotificationManager.notify(NOTIFICATION, noti);
 	}
+
+	
 	
 	
 	
@@ -184,7 +189,29 @@ public class SearchService extends Service  {
 	 * ----------------------------------------------------------------------------
 	 */
 
-	
+	@Override
+	public void onAddGeofencesResult(int arg0, String[] arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnected(Bundle arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDisconnected() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
