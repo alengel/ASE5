@@ -56,7 +56,7 @@ import android.widget.Toast;
 
 
 /**
- * this class logs the position of the user automatically in the background and sends the data to the server (plus: stores it locally) 
+ * this class checks periodically if there are other users nearby as long as the user in the area of the venue (checked by GeoFence, if the user has left the venue, the Service will automatically be stopped) 
  * @author Pascal
  *
  */
@@ -77,9 +77,6 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	
 	//variables for the POST call
 	private final static String RETRIEVE_USERS_URL = "http://switchcodes.in/sandbox/projectpackets/t5/user/find-user"; 
-	private final static String REQUEST_KEY = "key";
-	private final static String REQUEST_VENUE_ID = "venue_id";
-	private final static String REQUEST_TIMESTAMP = "timestamp";
 	private final String REVIEWER_ID = "reviewer_id";
 	
 	private String venueId;
@@ -89,13 +86,6 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	private double venueLng;
 	private final static String VENUE_LNG = "lng";
 		
-		
-	//variables for the POST answer
-	private final static String SUCCESS_JSON = "success";
-	
-	
-	
-	private SharedPreferencesEditor kSharedPreferencesEditor;
 	
 	//id for the notification
 	private final static int NOTIFICATION = 99999;
@@ -133,7 +123,6 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 			venueLat = intent.getDoubleExtra(VENUE_LAT, 0);
 			venueLng = intent.getDoubleExtra(VENUE_LNG, 0);
 			venueId = intent.getStringExtra(VENUE_ID);
-			kSharedPreferencesEditor = new SharedPreferencesEditor(this, kKey);
 			
 			addGeofence();
 			
@@ -159,7 +148,10 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	 * logic methods
 	 * ----------------------------------------------------------------------------
 	 */
-	
+	/**
+	 * show a notification which gives the user the possibility to view the Profile of the user that has just arrived at the venue
+	 * @param notificationIntent
+	 */
 	@SuppressWarnings("deprecation")
 	private void showNotification(Intent notificationIntent) {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -183,6 +175,9 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		mNotificationManager.notify(NOTIFICATION, noti);
 	}
 
+	/**
+	 * search periodically for arriving users nearby
+	 */
 	private void startSearching() {
 		
 		final Thread t = new Thread(new Runnable() {
@@ -217,7 +212,9 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	 * methods beloging to Geofence implementation
 	 * ----------------------------------------------------------------------------
 	 */
-	
+	/**
+	 * we want to create a geofence around us so that the service is stopeed automatically when the user has left the venue
+	 */
 	private void addGeofence() {
 		
 		kLocationClient = new LocationClient(this, this, this);
@@ -237,6 +234,9 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		
 	}
 	
+	/**
+	 * called when a GeoFence result arrived
+	 */
 	@Override
 	public void onAddGeofencesResult(int statusCode, String[] geofenceRequestIds) {
 		
@@ -256,7 +256,9 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		
 	}
 
-
+	/**
+	 * called when unable to connect to LocationServices
+	 */
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
 		
@@ -267,6 +269,9 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		
 	}
 
+	/**
+	 * called when connect with LocationServices
+	 */
 	@Override
 	public void onConnected(Bundle arg0) {
 		
@@ -283,12 +288,19 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		
 	}
 	
+	/**
+	 * get the required PendingIntent for the GeoFence creation
+	 * @return
+	 */
 	private PendingIntent getTransitionPendingIntent() {
 		Intent intent = new Intent(this, ReceiveTransitionsIntentService.class);         
 		//Return the PendingIntent            
 		return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
+	/**
+	 * called when disconnected from LocationServices
+	 */
 	@Override
 	public void onDisconnected() {
 		
@@ -298,7 +310,11 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	
 	
 	
-	
+	/**
+	 * get the latest arrived users from the server
+	 * @author Pascal
+	 *
+	 */
 	private class GetNearbyUsers extends
 			AsyncTask<String, Void, JSONObject> {
 
