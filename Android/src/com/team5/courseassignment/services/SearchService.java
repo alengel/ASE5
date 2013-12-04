@@ -129,12 +129,6 @@ public class SearchService extends Service  {
 			
 			showNotification();
 			
-			
-			getSettings();
-			
-			
-			
-			
 		}
 		
 		
@@ -159,8 +153,8 @@ public class SearchService extends Service  {
 	private void showNotification() {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		
-		int icon = R.drawable.alert_dark_frame;  //TODO: wrong!
-		CharSequence tickerText = "LogService Started";
+		int icon = R.drawable.ic_dialog_alert;  //TODO: wrong!
+		CharSequence tickerText = "SearchService Started";
 		long when = System.currentTimeMillis();
 		
 		Notification noti = new Notification();
@@ -178,29 +172,7 @@ public class SearchService extends Service  {
 		mNotificationManager.notify(NOTIFICATION, noti);
 	}
 	
-	private void getSettings() {
-		
-		kDistance = kSharedPreferencesEditor.getDistance();
-		kInterval = kSharedPreferencesEditor.getInterval();
-//		kLocalStorageLimit = kSharedPreferencesEditor.getLocalStorageLimit();
-		kLoggingPeriod = kSharedPreferencesEditor.getLoggingPeriod();
 	
-		if(!kLocationRequestsRunning && kInterval != SharedPreferencesEditor.DEFAULT_VALUE && kLoggingPeriod != SharedPreferencesEditor.DEFAULT_VALUE) {
-			
-			kLocationRequest = LocationRequest.create();
-			kLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-			kLocationRequest.setInterval(1000 * kInterval);
-			kLocationRequest.setExpirationDuration(kLoggingPeriod * 1000);
-			
-			
-			kLocationClient.connect();
-			
-			
-		} else {
-			//TODO: error handling!
-		}
-	}
-
 	
 	
 	
