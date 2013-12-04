@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.team5.courseassignment.data.FourSquareVenue;
 
 public class FourSquareJsonParser {
@@ -34,15 +35,33 @@ public class FourSquareJsonParser {
 			JSONArray items = groups.getJSONObject(0).getJSONArray("items");
 
 			for (int i = 0, size = items.length(); i < size; i++) {
+				
 				JSONObject item = items.getJSONObject(i);
+				
+				//venue upper level
 				JSONObject venue = item.getJSONObject("venue");
 				String name = venue.getString("name");
 				String id = venue.getString("id");
+				
+				//location
 				JSONObject location = venue.getJSONObject("location");
 				Integer distance = location.getInt("distance");
+				double lat = location.getDouble("lat");
+				double lng = location.getDouble("lng");
+				LatLng latLng = new LatLng(lat, lng);
+				
+				//contact
+				JSONObject contact = venue.getJSONObject("contact");
+				String phonenumber = contact.optString("formattedPhone", "");
+				if(phonenumber.equals("")) {
+					phonenumber = contact.optString("phone", "");
+				}
+				
+				
+				String homepage = venue.optString("url", "");
 
 				FourSquareVenue fourSquareVenue = new FourSquareVenue(name, id,
-						distance);
+						distance, latLng, homepage, phonenumber);
 				venues.add(fourSquareVenue);
 			}
 

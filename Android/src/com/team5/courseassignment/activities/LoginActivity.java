@@ -23,6 +23,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.team5.courseassignment.R;
 import com.team5.courseassignment.utilities.HttpRequest;
 import com.team5.courseassignment.utilities.SharedPreferencesEditor;
@@ -54,66 +56,94 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Check that Google Play services is available
+        int resultCode =
+                GooglePlayServicesUtil.
+                        isGooglePlayServicesAvailable(this);
+        // If Google Play services is available
+        if (! (ConnectionResult.SUCCESS == resultCode)) {
+        	
+        	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    		alert.setTitle(getResources().getString(R.string.errorMessage));
+    		alert.setMessage(getResources().getString(R.string.errorMessage));
+    		alert.setPositiveButton(getResources().getString(R.string.ok),
+    				new DialogInterface.OnClickListener() {
 
-		// set layout
-		setContentView(R.layout.login);
-		LOGIN_URL = getResources().getString(R.string.base_url) + LOGIN_URL_EXT;
+    					@Override
+    					public void onClick(DialogInterface dialog, int which) {
+    						
+    						finish();
 
-		// set Button actions
-		TextView newToAppTextView = (TextView) findViewById(R.id.register_here_login);
-		newToAppTextView.setOnClickListener(new OnClickListener() {
+    					}
+    				});
+    		alert.show();
+        	
+        } else {
+        	
+        	// set layout
+    		setContentView(R.layout.login);
+    		LOGIN_URL = getResources().getString(R.string.base_url) + LOGIN_URL_EXT;
 
-			@Override
-			public void onClick(View v) {
+    		// set Button actions
+    		TextView newToAppTextView = (TextView) findViewById(R.id.register_here_login);
+    		newToAppTextView.setOnClickListener(new OnClickListener() {
 
-				Intent i = new Intent(getApplicationContext(),
-						RegistrationActivity.class);
-				startActivity(i);
+    			@Override
+    			public void onClick(View v) {
 
-			}
-		});
+    				Intent i = new Intent(getApplicationContext(),
+    						RegistrationActivity.class);
+    				startActivity(i);
 
-		Button loginButton = (Button) findViewById(R.id.login_button_login);
-		loginButton.setOnClickListener(new OnClickListener() {
+    			}
+    		});
 
-			@SuppressWarnings("unchecked")
-			@Override
-			public void onClick(View v) {
-				// get data for call
-				String email = ((EditText) findViewById(R.id.email_box_login))
-						.getEditableText().toString();
-				String password = ((EditText) findViewById(R.id.password_box_login))
-						.getEditableText().toString();
+    		Button loginButton = (Button) findViewById(R.id.login_button_login);
+    		loginButton.setOnClickListener(new OnClickListener() {
 
-	
+    			@SuppressWarnings("unchecked")
+    			@Override
+    			public void onClick(View v) {
+    				// get data for call
+    				String email = ((EditText) findViewById(R.id.email_box_login))
+    						.getEditableText().toString();
+    				String password = ((EditText) findViewById(R.id.password_box_login))
+    						.getEditableText().toString();
 
-				String encryptedPassword = Utilities.encryptString(password);
+    	
 
-				List<NameValuePair> data = new ArrayList<NameValuePair>(2);
-				data.add(new BasicNameValuePair(EMAIL_KEY, email));
-				data.add(new BasicNameValuePair(PASSWORD_KEY, encryptedPassword));
+    				String encryptedPassword = Utilities.encryptString(password);
 
-				// make POST call
+    				List<NameValuePair> data = new ArrayList<NameValuePair>(2);
+    				data.add(new BasicNameValuePair(EMAIL_KEY, email));
+    				data.add(new BasicNameValuePair(PASSWORD_KEY, encryptedPassword));
 
-				ProgressDialog progress = ProgressDialog.show(
-						LoginActivity.this, "Please wait", "Loading ...");
+    				// make POST call
 
-				new LoginAsyncTask(progress).execute(data);
-			}
-		});
+    				ProgressDialog progress = ProgressDialog.show(
+    						LoginActivity.this, "Please wait", "Loading ...");
 
-		TextView forgottenPassword = (TextView) findViewById(R.id.forgotten_password_login);
-		forgottenPassword.setOnClickListener(new OnClickListener() {
+    				new LoginAsyncTask(progress).execute(data);
+    			}
+    		});
 
-			@Override
-			public void onClick(View v) {
+    		TextView forgottenPassword = (TextView) findViewById(R.id.forgotten_password_login);
+    		forgottenPassword.setOnClickListener(new OnClickListener() {
 
-				Intent i = new Intent(getApplicationContext(),
-						ForgottenPasswordActivity.class);
-				startActivity(i);
+    			@Override
+    			public void onClick(View v) {
 
-			}
-		});
+    				Intent i = new Intent(getApplicationContext(),
+    						ForgottenPasswordActivity.class);
+    				startActivity(i);
+
+    			}
+    		});
+        	
+        }
+		
+		
 	}
 
 	/**

@@ -66,6 +66,12 @@ public class MapActivity extends Activity implements OnItemClickListener {
 
 	private final static String VENUE_NAME = "name";
 	private final static String VENUE_ID = "id";
+	private final static String VENUE_LAT = "lat";
+	private final static String VENUE_LNG = "lng";
+	private final static String VENUE_HOMEPAGE = "homepage";
+	private final static String VENUE_PHONE = "phone";
+	private final static String USER_LAT = "u_lat";
+	private final static String USER_LNG = "u_lng";
 
 	MapListViewAdapter adapter;
 
@@ -143,6 +149,13 @@ public class MapActivity extends Activity implements OnItemClickListener {
 		LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
 		mLocationManager.requestLocationUpdates(
+				LocationManager.GPS_PROVIDER, 5 * 1000, 0,
+				mLocationListener);
+
+		mLastLocation = mLocationManager
+				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		
+		mLocationManager.requestLocationUpdates(
 				LocationManager.NETWORK_PROVIDER, 5 * 1000, 0,
 				mLocationListener);
 
@@ -169,19 +182,23 @@ public class MapActivity extends Activity implements OnItemClickListener {
 	@SuppressLint("DefaultLocale")
 	private void onLocateMe() {
 		// get the new location
-		Double latitude = mLastLocation.getLatitude();
-		Double longitude = mLastLocation.getLongitude();
-		Integer zoom = 15;
-		String data = String.format("ll=%f,%f", latitude, longitude);
+		if(mLastLocation != null) {
+			
+			Double latitude = mLastLocation.getLatitude();
+			Double longitude = mLastLocation.getLongitude();
+			Integer zoom = 15;
+			String data = String.format("ll=%f,%f", latitude, longitude);
 
-		// zoom map into user's current location
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
-				longitude), zoom));
+			// zoom map into user's current location
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
+					longitude), zoom));
 
-		// make POST call to FourSquare API
-		ProgressDialog progress = ProgressDialog.show(MapActivity.this,
-				"Please wait", "Loading ...");
-		new GetFourSquareVenue(progress).execute(data);
+			// make POST call to FourSquare API
+			ProgressDialog progress = ProgressDialog.show(MapActivity.this,
+					"Please wait", "Loading ...");
+			new GetFourSquareVenue(progress).execute(data);
+		}
+		
 	}
 
 	/**
@@ -211,8 +228,14 @@ public class MapActivity extends Activity implements OnItemClickListener {
 				.getAdapter();
 		FourSquareVenue venue = adapter.getItem(position);
 
-		i.putExtra(VENUE_NAME, venue.name);
-		i.putExtra(VENUE_ID, venue.id);
+		i.putExtra(VENUE_NAME, venue.getName());
+		i.putExtra(VENUE_ID, venue.getId());
+		i.putExtra(VENUE_LAT, venue.getLocation().latitude);
+		i.putExtra(VENUE_LNG, venue.getLocation().longitude);
+		i.putExtra(VENUE_HOMEPAGE, venue.getHomepage());
+		i.putExtra(VENUE_PHONE, venue.getPhoneNumber());
+		i.putExtra(USER_LAT, mLastLocation.getLatitude());
+		i.putExtra(USER_LNG, mLastLocation.getLongitude());
 
 		startActivity(i);
 	}

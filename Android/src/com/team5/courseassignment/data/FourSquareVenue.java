@@ -1,25 +1,34 @@
 package com.team5.courseassignment.data;
 
-public class FourSquareVenue {
-	public String name;
-	public String id;
-	public int distance;
+import com.google.android.gms.maps.model.LatLng;
 
+public class FourSquareVenue {
+	private String name;
+	private String id;
+	private int distance;
+	private LatLng location;
+	private String homepage;
+	private String phoneNumber;
+
+	
+	
 	/**
-	 * Constructor method of foursquare venue. Info as follows
-	 * 
+	 * Constructor of FoursquareVenue
 	 * @param name
-	 *            - The name of the venue/location.
-	 * @param id
-	 *            - Given id of the venue/location.
-	 * @param distance
-	 *            - Distance to the venue/location.
+	 * @param id foursquare id of venue
+	 * @param distance Distance to the venue
+	 * @param location LatLng of the venue
+	 * @param homepage
+	 * @param phoneNumer
 	 */
-	public FourSquareVenue(String name, String id, int distance) {
+	public FourSquareVenue(String name, String id, int distance, LatLng location, String homepage, String phoneNumer) {
 
 		this.name = name;
 		this.id = id;
 		this.distance = distance;
+		this.location = location;
+		this.homepage = homepage;
+		this.phoneNumber = phoneNumer;
 	}
 
 	/**
@@ -67,4 +76,22 @@ public class FourSquareVenue {
 	public String toString() {
 		return name + ", " + distance + " m";
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public LatLng getLocation() {
+		return location;
+	}
+
+	public String getHomepage() {
+		return homepage;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	
+	
 }
