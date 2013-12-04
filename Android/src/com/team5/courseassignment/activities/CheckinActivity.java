@@ -20,7 +20,6 @@ import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -67,8 +66,12 @@ public class CheckinActivity extends Activity {
 
 	ListView list;
 	VenueReviewAdapter adapter;
-	ProgressDialog progress;
 	
+	ProgressDialog checkinAsyncTaskDialog;
+	ProgressDialog venueAsyncTaskDialog;
+	
+	CheckinAsyncTask checkinAsyncTask;
+	VenueReviewsAsyncTask venueAsyncTask;
 
 	/**
 	 * Called when the activity is first created. This is where we do all of our
@@ -114,10 +117,9 @@ public class CheckinActivity extends Activity {
 
 		// make GET request to retrieve existing user reviews for venue
 		String data = venueId + "/key/" + kKey;
-		ProgressDialog progress = ProgressDialog.show(CheckinActivity.this,
-				"Please wait", "Loading ...");
+		venueAsyncTaskDialog = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
 
-		new VenueReviewsAsyncTask(progress).execute(data);
+		venueAsyncTask = (VenueReviewsAsyncTask) new VenueReviewsAsyncTask(venueAsyncTaskDialog).execute(data);
 	}
 
 	private void defineExternalIntentButtonActions() {
@@ -201,9 +203,19 @@ public class CheckinActivity extends Activity {
 	    }
 	    super.onDestroy();
 	    
-	    if (progress!=null && progress.isShowing()){
-	    	progress.dismiss();
+	    if(checkinAsyncTask != null)
+	    {
+	    	checkinAsyncTask.cancel(true);
+		    if (checkinAsyncTaskDialog!=null && checkinAsyncTaskDialog.isShowing())
+		    	checkinAsyncTaskDialog.dismiss();
 	    }
+	    
+		if(venueAsyncTask != null)
+		{
+			venueAsyncTask.cancel(true);
+		    if (venueAsyncTaskDialog!=null && venueAsyncTaskDialog.isShowing())
+		    	venueAsyncTaskDialog.dismiss();
+		}
 	}
 	
 	
@@ -305,9 +317,8 @@ public class CheckinActivity extends Activity {
 		data.add(new BasicNameValuePair(VENUE_ID, venueId));
 
 		// make POST call
-		ProgressDialog progress = ProgressDialog.show(CheckinActivity.this,
-				"Please wait", "Loading ...");
-		new CheckinAsyncTask(progress).execute(data);
+		checkinAsyncTaskDialog = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
+		checkinAsyncTask = (CheckinAsyncTask) new CheckinAsyncTask(checkinAsyncTaskDialog).execute(data);
 	}
 	
 	/**
