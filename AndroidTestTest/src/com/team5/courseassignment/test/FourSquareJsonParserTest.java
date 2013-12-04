@@ -53,8 +53,13 @@ public class FourSquareJsonParserTest extends AndroidTestCase {
 											              " \"id\":\"430d0a00f964a5203e271fe3\","+
 											              " \"name\":\"Brooklyn Bridge Park\","+
 											              " \"location\":{" + 
-												              " \"distance\":3"+
-												            "}"+
+												              " \"distance\":3,"+
+												              " \"lat\":4,"+
+												              " \"lng\":3"+
+												            "},"+
+											              " \"contact\":{" + 
+											                  " \"formattedPhone\":\"formattedPhone\""+
+											            "}"+
 											            "}"+
 											         "}]"+
 											      "}]"+
@@ -66,6 +71,9 @@ public class FourSquareJsonParserTest extends AndroidTestCase {
 		assertEquals(1, venues.size());
 		assertEquals(venues.get(0).getName(), "Brooklyn Bridge Park");
 		assertEquals(venues.get(0).getId(), "430d0a00f964a5203e271fe3");
+		assertEquals(venues.get(0).getDistance(), 3);
+		assertEquals(venues.get(0).getPhoneNumber(), "formattedPhone");
+		assertEquals(venues.get(0).getHomepage(), "");
 	}
 	
 	@Test
@@ -78,16 +86,27 @@ public class FourSquareJsonParserTest extends AndroidTestCase {
 											              " \"id\":\"430d0a00f964a5203e271fe3\","+
 											              " \"name\":\"Brooklyn Bridge Park\","+
 											              " \"location\":{" + 
-												              " \"distance\":10"+
-												            "}"+
+												              " \"distance\":3,"+
+												              " \"lat\":4,"+
+												              " \"lng\":3"+
+												            "},"+
+											              " \"contact\":{" + 
+											                  " \"formattedPhone\":\"formattedPhone\""+
+											              "}"+
 											            "}},"+
 											            "{"+											                  
 											            "\"venue\":{" + 
 											              " \"id\":\"42377700f964a52024201fe3\","+
 											              " \"name\":\"Brooklyn Heights Promenade\","+
 											              " \"location\":{" + 
-												              " \"distance\":5"+
-												            "}"+
+												              " \"distance\":5,"+
+												              " \"lat\":4,"+
+												              " \"lng\":3"+
+												            "},"+
+											              " \"contact\":{" + 
+											                  " \"formattedPhone\":\"formattedPhone2\""+
+											              "},"+
+											              " \"url\":\"homepage\""+
 											            "}"+
 											         "}]"+
 											      "}]"+
@@ -101,9 +120,15 @@ public class FourSquareJsonParserTest extends AndroidTestCase {
 		
 		assertEquals(venues.get(0).getName(), "Brooklyn Bridge Park");
 		assertEquals(venues.get(0).getId(), "430d0a00f964a5203e271fe3");
+		assertEquals(venues.get(0).getDistance(), 3);
+		assertEquals(venues.get(0).getPhoneNumber(), "formattedPhone");
+		assertEquals(venues.get(0).getHomepage(), "");
 		
 		assertEquals(venues.get(1).getName(), "Brooklyn Heights Promenade");
 		assertEquals(venues.get(1).getId(), "42377700f964a52024201fe3");
+		assertEquals(venues.get(1).getDistance(), 5);
+		assertEquals(venues.get(1).getPhoneNumber(), "formattedPhone2");
+		assertEquals(venues.get(1).getHomepage(), "homepage");
 	}
 	
 	// Create a JSONObject from a string.
