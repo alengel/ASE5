@@ -24,10 +24,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
+import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationClient.OnAddGeofencesResultListener;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationStatusCodes;
 import com.team5.courseassignment.activities.ProfileActivity;
 import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
@@ -54,14 +56,12 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	
 	//for logic of behaviour
 	private int kInterval; //in seconds
-	private int kLoggingPeriod; //in seconds
-	private int kDistance; //in meters
-	private int kLocalStorageLimit; //in MB (MeBiByte)
-	private int startTime; //time when the service started logging
-	private LocationRequest kLocationRequest;
+	private LocationClient kLocationClient;
 	private boolean kLocationRequestsRunning; //are request running currently?
-	private Location kLastSentLocation;
 	private static int GEOFENCE_EXPIRATION_TIME = 12 * 60 * 60 * 1000;
+	private final static float GEOFENCE_RADIUS_IN_M = 700;
+	private static int SLEEP_TIME = 5000;
+	int kNumberOfTrials;
 	
 	//key of user for connecting to the Webserver
 	private String kKey;
@@ -84,8 +84,7 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	private final static String SUCCESS_JSON = "success";
 	
 	
-	//
-	private LocationClient kLocationClient;
+	
 	private SharedPreferencesEditor kSharedPreferencesEditor;
 	
 	//id for the notification
@@ -106,15 +105,10 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	@Override
 	public void onCreate() {
 		
-		
 		//initialize the variables
-		
-//		kLocationClient = new LocationClient(this, this, this);  //GooglePlayServices availability is already checked in MapActivity
-		
-//		kLocationRequestsRunning = false;
-		
-		
-		
+		kLocationRequestsRunning = false;
+		kNumberOfTrials = 0;
+				
 		
 	}
 
@@ -132,11 +126,15 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 			
 			showNotification();
 			
+			addGeofence();
+			
 		}
 		
 		
 		return START_REDELIVER_INTENT; 
 	}
+
+	
 
 	@Override
 	public void onDestroy() {
@@ -188,29 +186,78 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 	 * methods beloging to Geofence implementation
 	 * ----------------------------------------------------------------------------
 	 */
+	
+	private void addGeofence() {
+		
+		kLocationClient = new LocationClient(this, this, this);
+        // If a request is not already underway
+        if (!kLocationRequestsRunning) {
+            
+        	// Indicate that a request is underway
+            kLocationRequestsRunning = true;
+            // Request a connection from the client to Location Services
+            kLocationClient.connect();
+            
+        } else {
+        	
+        	kLocationClient.disconnect();
+        }
 
+		
+	}
+	
 	@Override
-	public void onAddGeofencesResult(int arg0, String[] arg1) {
-		// TODO Auto-generated method stub
+	public void onAddGeofencesResult(int statusCode, String[] geofenceRequestIds) {
+		
+		if (! (LocationStatusCodes.SUCCESS == statusCode)) {
+            
+			stopSelf(); //TODO: find better solution
+        } 
+        
+		// Turn off the in progress flag and disconnect the client
+        kLocationRequestsRunning = false;
+        kLocationClient.disconnect();
+
 		
 	}
 
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
-		// TODO Auto-generated method stub
+		
+		kLocationRequestsRunning = false;
+		if(kNumberOfTrials < 5) {
+			addGeofence();
+		}
 		
 	}
 
 	@Override
 	public void onConnected(Bundle arg0) {
-		// TODO Auto-generated method stub
 		
+		//we are conencted to the LocationService. Therefore, we can create the GeoFence
+		//create the GeoFence
+		Geofence.Builder mGeofenceBuilder = new Geofence.Builder();
+		mGeofenceBuilder.setCircularRegion(venueLat, venueLng, GEOFENCE_RADIUS_IN_M).setExpirationDuration(GEOFENCE_EXPIRATION_TIME).setRequestId("1").setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT);
+		Geofence myFence = mGeofenceBuilder.build();
+		List<Geofence> myFences = new ArrayList<Geofence>();
+		myFences.add(myFence);
+		
+		//add it to the LocationClient
+		kLocationClient.addGeofences(myFences, getTransitionPendingIntent(), this);
+		
+	}
+	
+	private PendingIntent getTransitionPendingIntent() {
+		Intent intent = new Intent(this, ReceiveTransitionsIntentService.class);         
+		//Return the PendingIntent            
+		return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
 	@Override
 	public void onDisconnected() {
-		// TODO Auto-generated method stub
 		
+		kLocationClient = null;
+		kLocationRequestsRunning = false;
 	}
 	
 	
