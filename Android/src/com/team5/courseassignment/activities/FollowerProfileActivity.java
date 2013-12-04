@@ -104,7 +104,7 @@ public class FollowerProfileActivity extends Activity implements
 		ListView listView;
 
 		listView = (ListView) findViewById(R.id.reviewerVenueList);
-		listView.setOnItemClickListener(this);
+		listView.setClickable(false);
 
 		// make GET request to retrieve existing user reviews for venue
 		String data = reviewerId + "/key/" + kKey;
