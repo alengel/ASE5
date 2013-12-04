@@ -21,7 +21,6 @@ import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -101,9 +100,12 @@ public class CheckinActivity extends Activity {
 		userLat = this.getIntent().getDoubleExtra(USER_LAT, 0);
 		userLng = this.getIntent().getDoubleExtra(USER_LNG, 0);
 		
-		// vote = this.getIntent().getStringExtra(TOTAL_UP);
+		// Set layout
+		setContentView(R.layout.checkin);
+		TextView name = (TextView) findViewById(R.id.venueName);
+		name.setText(venueName);
 		
-		defineExternalIntentButtonActions();
+		// vote = this.getIntent().getStringExtra(TOTAL_UP);
 
 		// Get the base url
 		String baseUrl = getResources().getString(R.string.base_url);
@@ -113,10 +115,7 @@ public class CheckinActivity extends Activity {
 		RETRIEVE_VENUE_REVIEW_URL = baseUrl + RETRIEVE_VENUE_REVIEW_URL_EXT;
 		RETRIEVE_VOTES_URL = baseUrl + RETRIEVE_VOTES_URL_EXT;
 
-		// Set layout
-		setContentView(R.layout.checkin);
-		TextView name = (TextView) findViewById(R.id.venueName);
-		name.setText(venueName);
+		defineExternalIntentButtonActions();
 
 		// Setting up check in button.
 		Button checkinButton = (Button) findViewById(R.id.checkInButton);

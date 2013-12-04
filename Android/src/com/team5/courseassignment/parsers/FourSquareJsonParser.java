@@ -52,19 +52,13 @@ public class FourSquareJsonParser {
 				
 				//contact
 				JSONObject contact = venue.getJSONObject("contact");
-				String phonenumber;
-				if(contact != null) {
-					phonenumber = contact.getString("formattedPhone");
-					if(phonenumber == null || phonenumber.equals("")) {
-						phonenumber = contact.getString(" phone");
-					}
-				} else {
-					phonenumber = "";
+				String phonenumber = contact.optString("formattedPhone", "");
+				if(phonenumber.equals("")) {
+					phonenumber = contact.optString("phone", "");
 				}
 				
-				//homepage
-				String homepage = venue.getString("url");
 				
+				String homepage = venue.optString("url", "");
 
 				FourSquareVenue fourSquareVenue = new FourSquareVenue(name, id,
 						distance, latLng, homepage, phonenumber);
