@@ -1,42 +1,20 @@
 package com.team5.courseassignment.services;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationClient.OnAddGeofencesResultListener;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationStatusCodes;
 import com.team5.courseassignment.activities.FollowerProfileActivity;
-import com.team5.courseassignment.activities.ProfileActivity;
-import com.team5.courseassignment.data.FollowerProfileInfo;
-import com.team5.courseassignment.data.FourSquareVenue;
-import com.team5.courseassignment.parsers.FollowerProfileInfoParser;
-import com.team5.courseassignment.parsers.FourSquareJsonParser;
 import com.team5.courseassignment.utilities.HttpRequest;
 import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
@@ -44,15 +22,11 @@ import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
-import android.widget.Toast;
 
 
 /**
@@ -62,8 +36,6 @@ import android.widget.Toast;
  */
 public class SearchService extends Service implements ConnectionCallbacks, OnConnectionFailedListener, OnAddGeofencesResultListener  {
 	
-	//for logic of behaviour
-	private int kInterval; //in seconds
 	private LocationClient kLocationClient;
 	private boolean kLocationRequestsRunning; //are request running currently?
 	private static int GEOFENCE_EXPIRATION_TIME = 12 * 60 * 60 * 1000;
@@ -186,7 +158,7 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 			public void run() {
 				
 				//periodically check for users nearby
-				String data = String.format("ll=%s,%s%s", kKey, venueId, System.currentTimeMillis());
+				String data = String.format("/key/" + kKey + "/venue_id/" + venueId + "/timestamp/" + System.currentTimeMillis());
 				new GetNearbyUsers().execute(data);
 				
 				try {
