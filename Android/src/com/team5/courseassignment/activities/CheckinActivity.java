@@ -370,8 +370,12 @@ public class CheckinActivity extends Activity {
 
 					if (success.equals("true")) {
 						
-						//lauch SearchService
+						//launch SearchService
 						Intent i = new Intent(getApplicationContext(), SearchService.class);
+						i.putExtra(KEY_JSON, kKey);
+						i.putExtra(VENUE_LAT, venueLat);
+						i.putExtra(VENUE_LNG, venueLng);
+						i.putExtra(VENUE_ID, venueId);
 						startService(i);
 						
 						// launch ReviewActivity
