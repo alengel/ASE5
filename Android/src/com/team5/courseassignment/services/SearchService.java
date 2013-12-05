@@ -14,11 +14,11 @@ import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationClient.OnAddGeofencesResultListener;
 import com.google.android.gms.location.LocationStatusCodes;
+import com.team5.courseassignment.R;
 import com.team5.courseassignment.activities.FollowerProfileActivity;
 import com.team5.courseassignment.utilities.HttpRequest;
 import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
-import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -130,7 +130,7 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		
 		mNotificationManager.cancel(NOTIFICATION);
 		
-		int icon = R.drawable.ic_dialog_alert;  //TODO: wrong!
+		int icon = R.drawable.ic_launcher;
 		CharSequence tickerText = "A new user has just arrived here!";
 		long when = System.currentTimeMillis();
 		
@@ -141,8 +141,8 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 		
 		CharSequence contentTitle = "A new user has just arrived here!"; 
 		CharSequence contentText = "Press to view details about the user!";
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent , 0);
-		
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent , Intent.FLAG_ACTIVITY_NEW_TASK);
+		noti.flags = Notification.FLAG_AUTO_CANCEL;
 		noti.setLatestEventInfo(this, contentTitle, contentText, contentIntent);
 		mNotificationManager.notify(NOTIFICATION, noti);
 	}
@@ -324,11 +324,8 @@ public class SearchService extends Service implements ConnectionCallbacks, OnCon
 						if (users != null) {
 							userId = users.getString(0);
 							// launch ProfilePageActivity
-							Intent openProfile = new Intent(
-									getApplicationContext(),
-									FollowerProfileActivity.class);
-							openProfile.putExtra(
-									SharedPreferencesEditor.KEY_JSON, kKey);
+							Intent openProfile = new Intent(getApplicationContext(), FollowerProfileActivity.class);
+							openProfile.putExtra(SharedPreferencesEditor.KEY_JSON, kKey);
 							openProfile.putExtra(REVIEWER_ID, userId);
 							showNotification(openProfile);
 						}
