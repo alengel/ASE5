@@ -38,11 +38,9 @@ import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 public class FollowerProfileActivity extends Activity implements
 		OnItemClickListener {
 	// variables for the GET call
-	private static String RETRIEVE_REVIEWER_PROFILE_URL;
 	private final static String RETRIEVE_REVIEWER_PROFILE_URL_EXT = "reviewer-profile/reviewer_id/";
 
 	// variables for POST call
-	private static String FOLLOW_URL;
 	private final static String FOLLOW_URL_EXT = "follow";
 	private final String REVIEWER_ID = "reviewer_id";
 	private final String FOLLOW = "follow";
@@ -75,12 +73,6 @@ public class FollowerProfileActivity extends Activity implements
 
 		// Set the reviewer_Id
 		reviewerId = this.getIntent().getStringExtra(REVIEWER_ID);
-
-		// Get the base url and set up Urls
-		String baseUrl = getResources().getString(R.string.base_url);
-		RETRIEVE_REVIEWER_PROFILE_URL = baseUrl
-				+ RETRIEVE_REVIEWER_PROFILE_URL_EXT;
-		FOLLOW_URL = baseUrl + FOLLOW_URL_EXT;
 
 		// Set layout
 		setContentView(R.layout.follower_profile);
@@ -168,8 +160,7 @@ public class FollowerProfileActivity extends Activity implements
 
 			data = params[0];
 
-			JSONObject resultJson = HttpRequest.makeGetRequest(
-					RETRIEVE_REVIEWER_PROFILE_URL, data);
+			JSONObject resultJson = HttpRequest.makeGetRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), RETRIEVE_REVIEWER_PROFILE_URL_EXT, data);
 
 			return resultJson;
 		}
@@ -269,8 +260,7 @@ public class FollowerProfileActivity extends Activity implements
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(FOLLOW_URL,
-					data);
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), FOLLOW_URL_EXT, data);
 
 			return resultJson;
 		}

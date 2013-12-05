@@ -14,6 +14,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +29,18 @@ import android.util.Log;
  * database.
  */
 public class HttpRequest {
+	
+	public static JSONObject makePostRequest(String baseUrl, String url, List<NameValuePair> data)
+	{
+		JSONObject obj = HttpRequest.makePostRequest(baseUrl + url, data);
+		if(obj == null)
+		{
+			String backupBaseUrl = SharedPreferencesEditor.getBackUpBaseUrl(PinMeApplication.getContext());
+			obj = HttpRequest.makePostRequest(backupBaseUrl + url, data);
+		}
+		return obj;
+	}
+	
 	/**
 	 * This method creates POST request
 	 * 
@@ -38,7 +53,10 @@ public class HttpRequest {
 	public static JSONObject makePostRequest(String url,
 			List<NameValuePair> data) {
 
-		HttpClient client = new DefaultHttpClient();
+		HttpParams httpParams = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
+		
+		HttpClient client = new DefaultHttpClient(httpParams);	
 		HttpPost post = new HttpPost(url);
 		HttpResponse response = null;
 
@@ -86,6 +104,17 @@ public class HttpRequest {
 
 		return resultJson;
 	}
+	
+	public static JSONObject makeGetRequest(String baseUrl, String url, String data)
+	{
+		JSONObject obj = HttpRequest.makeGetRequest(baseUrl + url, data);
+		if(obj == null)
+		{
+			String backupBaseUrl = SharedPreferencesEditor.getBackUpBaseUrl(PinMeApplication.getContext());
+			obj = HttpRequest.makeGetRequest(backupBaseUrl + url, data);
+		}
+		return obj;
+	}
 
 	/**
 	 * This method creates GET request.
@@ -98,7 +127,10 @@ public class HttpRequest {
 	 */
 	public static JSONObject makeGetRequest(String url, String data) {
 
-		HttpClient client = new DefaultHttpClient();
+		HttpParams httpParams = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
+		
+		HttpClient client = new DefaultHttpClient(httpParams);		
 		String createUrl = url + data;
 		HttpGet get = new HttpGet(createUrl);
 		HttpResponse response = null;

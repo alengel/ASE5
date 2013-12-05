@@ -36,17 +36,10 @@ import android.widget.TextView;
 public class CheckinActivity extends Activity {
 
 	// variables for the POST call
-	private static String CHECK_IN_URL;
 	private final static String CHECK_IN_URL_EXT = "check-in";
 
 	// variables for the GET call
-	private static String RETRIEVE_VENUE_REVIEW_URL;
 	private final static String RETRIEVE_VENUE_REVIEW_URL_EXT = "venue/venue_id/";
-
-	// variables for the GET call
-	@SuppressWarnings("unused")
-	private static String RETRIEVE_VOTES_URL;
-	private final static String RETRIEVE_VOTES_URL_EXT = "vote";
 
 	// key of user for connecting to the server
 	private String kKey;
@@ -73,8 +66,12 @@ public class CheckinActivity extends Activity {
 
 	ListView list;
 	VenueReviewAdapter adapter;
-	ProgressDialog progress;
 	
+	ProgressDialog checkinAsyncTaskDialog;
+	ProgressDialog venueAsyncTaskDialog;
+	
+	CheckinAsyncTask checkinAsyncTask;
+	VenueReviewsAsyncTask venueAsyncTask;
 
 	/**
 	 * Called when the activity is first created. This is where we do all of our
@@ -100,21 +97,13 @@ public class CheckinActivity extends Activity {
 		userLat = this.getIntent().getDoubleExtra(USER_LAT, 0);
 		userLng = this.getIntent().getDoubleExtra(USER_LNG, 0);
 		
+		// vote = this.getIntent().getStringExtra(TOTAL_UP);
+
 		// Set layout
 		setContentView(R.layout.checkin);
 		TextView name = (TextView) findViewById(R.id.venueName);
 		name.setText(venueName);
 		
-		// vote = this.getIntent().getStringExtra(TOTAL_UP);
-
-		// Get the base url
-		String baseUrl = getResources().getString(R.string.base_url);
-		// String baseUrl_location =
-		// getResources().getString(R.string.base_url_location);
-		CHECK_IN_URL = baseUrl + CHECK_IN_URL_EXT;
-		RETRIEVE_VENUE_REVIEW_URL = baseUrl + RETRIEVE_VENUE_REVIEW_URL_EXT;
-		RETRIEVE_VOTES_URL = baseUrl + RETRIEVE_VOTES_URL_EXT;
-
 		defineExternalIntentButtonActions();
 
 		// Setting up check in button.
@@ -128,10 +117,9 @@ public class CheckinActivity extends Activity {
 
 		// make GET request to retrieve existing user reviews for venue
 		String data = venueId + "/key/" + kKey;
-		ProgressDialog progress = ProgressDialog.show(CheckinActivity.this,
-				"Please wait", "Loading ...");
+		venueAsyncTaskDialog = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
 
-		new VenueReviewsAsyncTask(progress).execute(data);
+		venueAsyncTask = (VenueReviewsAsyncTask) new VenueReviewsAsyncTask(venueAsyncTaskDialog).execute(data);
 	}
 
 	private void defineExternalIntentButtonActions() {
@@ -215,9 +203,19 @@ public class CheckinActivity extends Activity {
 	    }
 	    super.onDestroy();
 	    
-	    if (progress!=null && progress.isShowing()){
-	    	progress.dismiss();
+	    if(checkinAsyncTask != null)
+	    {
+	    	checkinAsyncTask.cancel(true);
+		    if (checkinAsyncTaskDialog!=null && checkinAsyncTaskDialog.isShowing())
+		    	checkinAsyncTaskDialog.dismiss();
 	    }
+	    
+		if(venueAsyncTask != null)
+		{
+			venueAsyncTask.cancel(true);
+		    if (venueAsyncTaskDialog!=null && venueAsyncTaskDialog.isShowing())
+		    	venueAsyncTaskDialog.dismiss();
+		}
 	}
 	
 	
@@ -268,8 +266,7 @@ public class CheckinActivity extends Activity {
 
 			data = params[0];
 
-			JSONObject resultJson = HttpRequest.makeGetRequest(
-					RETRIEVE_VENUE_REVIEW_URL, data);
+			JSONObject resultJson = HttpRequest.makeGetRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), RETRIEVE_VENUE_REVIEW_URL_EXT, data);
 
 			return resultJson;
 		}
@@ -320,9 +317,8 @@ public class CheckinActivity extends Activity {
 		data.add(new BasicNameValuePair(VENUE_ID, venueId));
 
 		// make POST call
-		ProgressDialog progress = ProgressDialog.show(CheckinActivity.this,
-				"Please wait", "Loading ...");
-		new CheckinAsyncTask(progress).execute(data);
+		checkinAsyncTaskDialog = ProgressDialog.show(CheckinActivity.this, "Please wait", "Loading ...");
+		checkinAsyncTask = (CheckinAsyncTask) new CheckinAsyncTask(checkinAsyncTaskDialog).execute(data);
 	}
 	
 	/**
@@ -355,8 +351,8 @@ public class CheckinActivity extends Activity {
 
 			List<NameValuePair> data = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(CHECK_IN_URL,
-					data);
+			
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), CHECK_IN_URL_EXT, data);
 
 			return resultJson;
 		}

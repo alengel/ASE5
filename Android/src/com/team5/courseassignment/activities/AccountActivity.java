@@ -47,10 +47,9 @@ import com.team5.courseassignment.utilities.SharedPreferencesEditor;
 
 public class AccountActivity extends Activity implements OnItemClickListener {
 	// variables for the GET call
-	private static String RETRIEVE_PROFILE_URL;
 	private final static String RETRIEVE_PROFILE_URL_EXT = "profile";
 
-	private static String SET_PROFILE_URL;
+	//private static String SET_PROFILE_URL;
 	private final static String SET_PROFILE_URL_EXT = "update";
 
 	private final static String SUCCESS_JSON = "success";
@@ -99,11 +98,6 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 		firstNameKey = this.getIntent().getStringExtra(FIRSTNAME_KEY);
 		lastNameKey = this.getIntent().getStringExtra(LASTNAME_KEY);
 		imageKey = this.getIntent().getStringExtra(IMAGE);
-
-		// Get the base url
-		String baseUrl = getResources().getString(R.string.base_url);
-		RETRIEVE_PROFILE_URL = baseUrl + RETRIEVE_PROFILE_URL_EXT;
-		SET_PROFILE_URL = baseUrl + SET_PROFILE_URL_EXT;
 
 		ProgressDialog progress = ProgressDialog.show(AccountActivity.this,
 				"Please wait", "Loading ...");
@@ -261,8 +255,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 
 			List<NameValuePair> data1 = params[0];
 
-			JSONObject resultJson = HttpRequest.makePostRequest(
-					SET_PROFILE_URL, data1);
+			JSONObject resultJson = HttpRequest.makePostRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), SET_PROFILE_URL_EXT, data1);
 
 			return resultJson;
 		}
@@ -367,8 +360,7 @@ public class AccountActivity extends Activity implements OnItemClickListener {
 
 			data = params[0];
 
-			JSONObject resultJson = HttpRequest.makeGetRequest(
-					RETRIEVE_PROFILE_URL, data);
+			JSONObject resultJson = HttpRequest.makeGetRequest(SharedPreferencesEditor.getBaseUrl(getApplicationContext()), RETRIEVE_PROFILE_URL_EXT, data);
 
 			return resultJson;
 		}
