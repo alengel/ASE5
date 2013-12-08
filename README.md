@@ -1,4 +1,4 @@
-ASE Team 5 Group Project
+ASE Team 5 Android Application PinMe
 ====
 
 This is the repository for the Advanced Software Engineering module at University of Sussex, 2013/2014.
