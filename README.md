@@ -13,4 +13,4 @@ Steps to install and run:
 2. Open the Java Build Path on the Android project and link the Google Play Services as a dependent library.
 3. Open the Java Build Path on the AndroidTestTest project and link Android as a project.
 4. Run the Android project and install the .apk on a mobile phone for testing/using the PinMe app. Ensure the phone has debugging enabled.
-5.Run the AndroidTestTest project as an Android jUnit Test to see the test specifications pass/fail.
+5. Run the AndroidTestTest project as an Android jUnit Test to see the test specifications pass/fail.
